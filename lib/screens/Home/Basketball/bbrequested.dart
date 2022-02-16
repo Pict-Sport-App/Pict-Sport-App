@@ -65,8 +65,11 @@ class BBRequest extends StatefulWidget {
   late bool isAdmin;
   late bool requestScreen;
   late String uid;
+  late String image;
 
-  BBRequest({required this.uid,
+  BBRequest({
+    required this.image,
+    required this.uid,
     required this.requestScreen
     ,required this.timeOfReturn,
   required this.timeOfIssue,
