@@ -115,8 +115,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                       child: Row(
                         // crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          const Icon(
-                            Icons.menu,
+                          FaIcon(
+                            FontAwesomeIcons.bars,
+                            color: Colors.black,
                             size: 27,
                           ),
                           const Padding(

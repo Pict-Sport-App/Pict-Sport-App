@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/playing.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
@@ -109,7 +110,21 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
+          leading:  GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(left: 16.0, top: 12),
+              child: FaIcon(
+                FontAwesomeIcons.arrowLeft,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          ),
           centerTitle: true,
           title: const Text(
             ""
@@ -122,7 +137,12 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                   textSelectionColor: Colors.blue,
                   dividerColor: Colors.white),
               child: PopupMenuButton<int>(
-                  color: Colors.indigo,
+                color: Colors.indigo,
+                  icon:  const FaIcon(
+                  FontAwesomeIcons.ellipsisV,
+                  color: Colors.white,
+                  size: 25,
+                ),
                   onSelected: (item) => onSelected(context, item),
                   itemBuilder: (context) => [
                         const PopupMenuItem<int>(

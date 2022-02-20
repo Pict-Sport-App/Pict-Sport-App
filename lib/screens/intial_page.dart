@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/announcements/announcement_screen.dart';
@@ -10,7 +12,6 @@ import 'drawer/drawer.dart';
 
 class IntialScreen extends StatefulWidget {
   const IntialScreen({Key? key}) : super(key: key);
-
 
   @override
   _IntialScreenState createState() => _IntialScreenState();
@@ -47,9 +48,9 @@ class _IntialScreenState extends State<IntialScreen> {
   }
 
   ShapeBorder? bottomBarShape = const RoundedRectangleBorder(
-    /*borderRadius: BorderRadius.only(
+      /*borderRadius: BorderRadius.only(
         topLeft: Radius.circular(20), topRight: Radius.circular(20)),*/
-  );
+      );
   SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
   EdgeInsets padding = const EdgeInsets.all(0);
 
@@ -69,9 +70,7 @@ class _IntialScreenState extends State<IntialScreen> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: defaultBackgrdColor,
-      drawer:  const Drawer(
-        child: App_Drawer(),
-      ),
+      drawer: CollapsingNavigationDrawer(),
       /*appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color(0xFF9C27B0),
@@ -86,7 +85,8 @@ class _IntialScreenState extends State<IntialScreen> {
         shape: bottomBarShape,
         padding: padding,
         // backgroundColor: const Color(0xFF9C27B0),
-  backgroundColor:  Colors.white,
+        backgroundColor: Colors.white,
+
         ///configuration for SnakeNavigationBar.color
         snakeViewColor: selectedColor,
         // selectedItemColor: const Color(0xFF6A1B9A),
@@ -104,17 +104,42 @@ class _IntialScreenState extends State<IntialScreen> {
         }),
 
         items: [
-          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          const BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
-          const BottomNavigationBarItem(icon: Icon(Icons.notifications,), label: 'Notifi...'),
-          const BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined), label: 'Calendar'),
-          BottomNavigationBarItem(icon: Padding(
-            padding: const EdgeInsets.only(bottom: 1),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(UserDetails.photourl.toString(),),
-              radius: 11,
-            ),
-          ), label: 'Profile')
+          const BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.home,
+                size:   25,
+                color: Colors.black,
+              ),
+              label: 'Home'),
+          const BottomNavigationBarItem(icon: FaIcon(
+            FontAwesomeIcons.facebookMessenger,
+            size:   25,
+            color: Colors.black,
+          ), label: 'Chat'),
+          const BottomNavigationBarItem(
+              icon:  FaIcon(
+                FontAwesomeIcons.bell,
+                size:   25,
+                color: Colors.black,
+              ),
+              label: 'Notifi...'),
+          const BottomNavigationBarItem(
+              icon:  FaIcon(
+                FontAwesomeIcons.calendar,
+                size:   25,
+                color: Colors.black,
+              ), label: 'Calendar'),
+          BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: 1),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                    UserDetails.photourl.toString(),
+                  ),
+                  radius: 11,
+                ),
+              ),
+              label: 'Profile')
         ],
       ),
       body: Builder(

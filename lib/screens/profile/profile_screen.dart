@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/drawer/drawer.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
@@ -33,6 +34,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+
         body: SingleChildScrollView(
           // physics: const BouncingScrollPhysics(),
           child: Column(
@@ -215,7 +217,8 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                     ),
             ],
           ),
-        ));
+        ),
+        drawer: CollapsingNavigationDrawer());
   }
 }
 
