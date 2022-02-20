@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
-import 'package:psa/screens/Home/table_tennis/widget.dart';
 
 class Requested extends StatefulWidget {
   const Requested({Key? key}) : super(key: key);
@@ -36,19 +35,16 @@ class _RequestedState extends State<Requested> {
               physics: const BouncingScrollPhysics(),
               itemCount: reqMembers.length,
               itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
-                  ? RequestWidget(
-                returnTime: reqMembers[index]['timeOfReturn'],
-                requestScreen: true,
-                isAdmin: UserDetails.isAdmin ?? false,
-                isViewing: false,
-                name: reqMembers[index]['name'],
-                misId: reqMembers[index]['misId'],
-                image: reqMembers[index]['photourl'],
-                tableNumber: reqMembers[index]['tableNumber'],
-                racketNumber: reqMembers[index]['racketNumber'],
-                time: reqMembers[index]['timeOfIsuue'],
-                uid: reqMembers[index]['uid'],
-              )
+                  ? BBRequest(
+                isReturn: reqMembers[index]['isReturn'],
+                  image: reqMembers[index]['url'],
+                  uid: reqMembers[index]['uid'],
+                  timeOfReturn: reqMembers[index]['timeOfReturn'],
+                  timeOfIssue: reqMembers[index]['timeOfIssue'],
+                  noOfBall: reqMembers[index]['noOfBall'].toString(),
+                  name: reqMembers[index]['name'],
+                  isAdmin: UserDetails.isAdmin??false,
+                  ballNumber: reqMembers[index]['size'].toString())
                   : Container());
         },
       ),
@@ -63,14 +59,14 @@ class BBRequest extends StatefulWidget {
   late Timestamp timeOfIssue;
   late Timestamp timeOfReturn;
   late bool isAdmin;
-  late bool requestScreen;
   late String uid;
   late String image;
+  late bool isReturn;
 
   BBRequest({
+    required this.isReturn,
     required this.image,
-    required this.uid,
-    required this.requestScreen
+    required this.uid
     ,required this.timeOfReturn,
   required this.timeOfIssue,
   required this.noOfBall,
@@ -236,7 +232,7 @@ class _BBRequestState extends State<BBRequest> {
                         ],
                       ),
                     ),
-                    if (!widget.requestScreen)
+                    if (widget.isReturn)
                       Padding(
                         padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                         child: Row(

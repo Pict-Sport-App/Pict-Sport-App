@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'messages.dart';
 import 'newMessage.dart';
-import 'package:swipe_to/swipe_to.dart';
 
 class SportChatScreen extends StatefulWidget {
   const SportChatScreen({Key? key}) : super(key: key);
@@ -91,7 +90,8 @@ class _SportChatScreenState extends State<SportChatScreen> {
                       padding: const EdgeInsets.all(10.0),
                       child: GestureDetector(
                           onTap: (){
-                            Navigator.of(context).pushNamed(ChatMembers.routeName,arguments: _productId);
+                            Navigator.of(context).pushNamed(ChatMembers.routeName
+                                ,arguments: _productId);
                           },
                           child: const Icon(Icons.group_add_outlined,
                             size: 30,color: Colors.white,)),

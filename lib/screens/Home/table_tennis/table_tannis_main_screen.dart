@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/settings.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/playing.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
@@ -20,12 +21,14 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   bool _isFirstVisit = false;
   var _table, _noOfRacket;
   int racket1 = 0, racket2 = 0, racket3 = 0;
+  var _total1=0, _total2=0, _total3=0, _remain=0;
 
   Future TT_Logic() async {
     _isFirstVisit
-        ? Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const IssueTheRacket();
-          }))
+        ? Navigator.of(context).pushNamed(
+            IssueTheRacket.routeName,
+            arguments: [_total1, _total2, _total3,_remain],
+          )
         : _isRequested == 1
             ? showDialog(
                 context: context,
@@ -70,12 +73,40 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                             Navigator.pop(context);
                           });
                     })
-                : Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const IssueTheRacket();
-                  }));
+                : Navigator.of(context).pushNamed(
+                    IssueTheRacket.routeName,
+                    arguments: [_total1, _total2, _total3,_remain],
+                  );
   }
 
   Future<void> getStatus(BuildContext context) async {
+
+    var q = (int.parse(Equiment.tabletennis.toString()) / 4 ).round()-1;
+
+
+    var r = int.parse(Equiment.tabletennis.toString()) % 4;
+    print(q);print(r);
+    print('ll');
+    _total1 = 0;
+    _total2 = 0;
+    _total3 = 0;
+    _remain = 0;
+
+    if (q == 0) {
+      _total1 = r;
+    } else if (q == 1) {
+      _total2 = r;
+      _total1 = 4;
+    } else if (q == 2) {
+      _total1 = _total2 = 4;
+      _total3 = r;
+    } else if (q == 3 && r == 0) {
+      _total1 = _total2 = _total3 = 4;
+    } else {
+      _total1 = _total2 = _total3 = 4;
+      _remain = int.parse(Equiment.tabletennis.toString()) - 12;
+    }
+
     var v = await FirebaseFirestore.instance
         .collection('TTEquipment')
         .doc(UserDetails.uid)
@@ -152,7 +183,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
-                    const PopupMenuDivider(),
+                        const PopupMenuDivider(),
                         const PopupMenuItem<int>(
                           value: 1,
                           child: Text(
@@ -189,30 +220,22 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                 racket3 = 0;
                 racket2 = 0;
 
-                print('start');
                 for (int i = 0; i < usersnap.length; i++) {
                   if (usersnap[i]['tableNumber'] == 'Table 1') {
-                    print('racket 1');
+
                     if (usersnap[i]['isRequested'] == 2) {
                       racket1 += int.parse(usersnap[i]['racketNumber']);
                     }
-                    print(racket1);
                   } else if (usersnap[i]['tableNumber'] == 'Table 2') {
-                    print('racket 2 initial');
-                    print(racket2);
+
                     if (usersnap[i]['isRequested'] == 2) {
                       racket2 += int.parse(usersnap[i]['racketNumber']);
                     }
-                    print('racket 2 after');
-                    print(racket2);
+
                   } else if (usersnap[i]['tableNumber'] == 'Table 3') {
-                    print('racket 3 inital');
-                    print(racket3);
                     if (usersnap[i]['isRequested'] == 2) {
                       racket3 += int.parse(usersnap[i]['racketNumber']);
                     }
-                    print('racket 3 after');
-                    print(racket3);
                   }
                 }
                 if (racket1 < 0) {
@@ -224,10 +247,6 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                 if (racket3 < 0) {
                   racket3 = 0;
                 }
-                print(racket1);
-                print(racket2);
-                print(racket3);
-                print('end');
                 return SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -239,19 +258,19 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                           height: 10,
                         ),
                         table_image(
-                          totalseats: 4,
+                          totalseats: _total1,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '01',
                           enrolledSeats: racket1,
                         ),
                         table_image(
-                          totalseats: 4,
+                          totalseats: _total2,
                           image: "assets/table_tennis_11.png",
                           tableNumber: '02',
                           enrolledSeats: racket2,
                         ),
                         table_image(
-                          totalseats: 4,
+                          totalseats: _total3,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '03',
                           enrolledSeats: racket3,
@@ -326,7 +345,6 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 }
 
 class table_image extends StatelessWidget {
-
   late String tableNumber;
   late String image;
   late int enrolledSeats;
@@ -340,11 +358,11 @@ class table_image extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        height: height*0.23,
+        height: height * 0.23,
         child: Stack(
           children: <Widget>[
             Container(
@@ -391,7 +409,7 @@ class table_image extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: Container(
-                  child:  Text(
+                  child: Text(
                     "Available Rackets :  ${totalseats - enrolledSeats} (out of ${totalseats})",
                     style: const TextStyle(
                         color: Color(0xff004d00), fontWeight: FontWeight.w800),

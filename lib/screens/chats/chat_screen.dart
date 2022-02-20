@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
-import 'package:psa/screens/drawer/drawer.dart';
 
 class ChatScreen extends StatefulWidget {
 
@@ -20,16 +20,13 @@ class _ChatScreenState extends State<ChatScreen> {
     double width=MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: const Drawer(
-        child: App_Drawer(),
+        child: CollapsingNavigationDrawer(),
       ),
       appBar: AppBar(
-
         toolbarHeight: 65,
         automaticallyImplyLeading: false, // Used for removing back buttoon.
         elevation: 0.3,
         backgroundColor: Colors.white,
-
-        // centerTitle: true,
         title: const Text('Messaging ',style: TextStyle(
           color: Colors.black,
           fontSize: 20,

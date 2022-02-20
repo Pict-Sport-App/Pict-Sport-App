@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/drawer/drawer.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
 import 'package:psa/screens/profile/profile_edit_srcreen.dart';
-import 'package:psa/services/authentication.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helper/widget/StackConatiner2.dart';
 
@@ -34,7 +32,6 @@ class _Profile_ScreenState extends State<Profile_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-
         body: SingleChildScrollView(
           // physics: const BouncingScrollPhysics(),
           child: Column(

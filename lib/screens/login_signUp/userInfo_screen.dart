@@ -2,9 +2,6 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/intial_page.dart';
-import 'package:psa/services/UpdateUserInfo.dart';
 import 'package:psa/services/getUserData.dart';
 
 class UserInfo extends StatefulWidget {

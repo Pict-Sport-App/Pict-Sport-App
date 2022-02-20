@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/screens/Home/table_tennis/requests.dart';
-import 'package:psa/screens/announcements/announcement_screen.dart';
-import 'package:psa/screens/calender/calendar.dart';
-import 'package:psa/screens/drawer/users.dart';
+import 'package:psa/appdrawer/settings.dart';
+import 'package:psa/appdrawer/users.dart';
 import 'package:psa/services/authentication.dart';
 import '../thems.dart';
 
@@ -13,12 +11,11 @@ class CollapsingListTile extends StatefulWidget {
       required this.num,
       required this.animationController,
       required this.isSelected,
-      required this.onTap});
+      });
   final String title;
   final int num;
   final AnimationController animationController;
   final bool isSelected;
-  final Function onTap;
   @override
   _CollapsingListTileState createState() => _CollapsingListTileState();
 }
@@ -39,27 +36,27 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.num == 4
-            ? Authentication().signOut(context) // logout
-            : setState(() {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return widget.num == 1
-                      ? const AllUsers()
-                      : widget.num == 2
-                          ? const Request()
-                          : widget.num == 3
-                              ? const Announcement_Screen() // notification
-                              : widget.num == 4
-                                  ? const CalendarScreen() // calender
-                                  : const Request();
-                }));
-              });
+        widget.num == 1
+            ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const AllUsers();
+              }))
+            : widget.num == 2
+                ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const Seting();
+                  }))
+                : widget.num == 3
+                    ? Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                        return const AllUsers();
+                      }))
+                    : widget.num == 4
+                        ? Authentication().signOut(context)
+                        : Container();
       },
       child: Container(
-        padding: EdgeInsets.only(left: 6, top: 5, bottom: 5),
+        padding: const EdgeInsets.only(left: 6, top: 5, bottom: 5),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
           color: widget.isSelected
               ? Colors.transparent.withOpacity(0.3)
               : Colors.transparent,
@@ -77,11 +74,9 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                   : widget.num == 2
                       ? FontAwesomeIcons.hammer
                       : widget.num == 3
-                          ? FontAwesomeIcons.bell
+                          ? FontAwesomeIcons.dev
                           : widget.num == 4
-                              ? FontAwesomeIcons.calendar
-                              : widget.num == 5
-                                  ? FontAwesomeIcons.arrowAltCircleRight
+                              ? FontAwesomeIcons.arrowAltCircleRight
                                   : FontAwesomeIcons.bars,
               color: Colors.white70,
               size: 26,

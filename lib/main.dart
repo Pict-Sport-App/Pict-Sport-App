@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:psa/screens/Home/Basketball/sizeNo.dart';
+import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
+import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/services/getUserData.dart';
 
@@ -27,8 +30,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: GetUserData(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>ChatMembers(),
+          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
+          ChatMembers.routeName: (ctx)=>const ChatMembers(),
+          SixNo.routeName: (ctx)=>const SixNo(),
+          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
         },
       );
     }else{
@@ -37,8 +42,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Signup(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>ChatMembers(),
+          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
+          ChatMembers.routeName: (ctx)=>const ChatMembers(),
+          SixNo.routeName: (ctx)=>const SixNo(),
+          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
         },
       );
     }
