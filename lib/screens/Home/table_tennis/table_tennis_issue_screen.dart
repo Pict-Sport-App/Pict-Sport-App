@@ -3,8 +3,10 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
@@ -179,6 +181,11 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                 ),
                                 Center(
                                   child: DateTimeField(
+                                    resetIcon:  const Icon(
+                                      Icons.close,
+                                      color:Colors.blue,
+                                      size: 35,
+                                    ),
                                     initialValue: DateTime.now(),
                                     style: const TextStyle(
                                       color: Colors.black,
@@ -187,7 +194,14 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                     enabled: true,
                                     enableInteractiveSelection: true,
                                     decoration: const InputDecoration(
-                                      icon: Icon(Icons.date_range_outlined,color: Colors.blue,size: 35,),
+                                      icon: Padding(
+                                        padding: EdgeInsets.only(left: 6.0),
+                                        child: FaIcon(
+                                          FontAwesomeIcons.calendar,
+                                          color:Colors.redAccent,
+                                          size: 35,
+                                        ),
+                                      ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(Radius.circular(20)),
                                         borderSide: BorderSide(color: Colors.black12,width: 2),
@@ -196,6 +210,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                     format: formatYMDHM,
                                     onShowPicker: (context, currentValue) async {
                                       final date = await showDatePicker(
+
                                         context: context,
                                         firstDate: DateTime.now(),
                                         initialDate: currentValue ?? DateTime.now(),
@@ -285,10 +300,10 @@ class _DropDownState extends State<DropDown> {
       isExpanded: true,
       hint: Row(
         children: [
-          const Icon(
-            Icons.list,
-            size: 16,
+          const FaIcon(
+            FontAwesomeIcons.bars,
             color: Colors.yellow,
+            size: 16,
           ),
           const SizedBox(
             width: 4,
@@ -329,8 +344,13 @@ class _DropDownState extends State<DropDown> {
           value = null;
         });
       },
-      icon: const Icon(
-        Icons.arrow_drop_down_rounded,
+      icon:   const Padding(
+        padding: EdgeInsets.only(bottom: 9.0),
+        child: FaIcon(
+          FontAwesomeIcons.sortDown,
+          color: Colors.yellow,
+          size: 20,
+        ),
       ),
       iconSize: 34,
       iconEnabledColor: Colors.yellow,

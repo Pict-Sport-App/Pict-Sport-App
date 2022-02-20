@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/widget.dart';
 
@@ -18,6 +19,19 @@ class _RequestState extends State<Request> {
         child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading:  GestureDetector(
+          onTap: (){
+            Navigator.pop(context);
+          },
+          child: const Padding(
+            padding: EdgeInsets.only(left: 16.0, top: 12),
+            child: FaIcon(
+              FontAwesomeIcons.arrowLeft,
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
+        ),
         centerTitle: true,
         title: const Text('Table Tennis Requests'),
       ),

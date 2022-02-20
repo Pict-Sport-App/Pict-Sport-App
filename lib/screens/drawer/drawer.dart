@@ -44,7 +44,8 @@ class _App_DrawerState extends State<App_Drawer> {
           ),
           Column(
             children: [
-              DrawerRefactor(onTap: (){
+              DrawerRefactor(
+                onTap: (){
                 Authentication().signOut(context);
               },text: 'Logout',Icon:
               const Icon(

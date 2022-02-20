@@ -118,10 +118,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               print("Form is being submitted");
               _onSubmit();
             },
-            child: const Icon(
-              Icons.done_rounded,
-              size: 38,
-              color: Colors.lightBlue,
+            child: const FaIcon(
+              FontAwesomeIcons.check,
+              color: Colors.blueAccent,
+              size: 28,
+
             ),
           )
         ],
@@ -208,9 +209,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         print(dob);
                       },
                       child: Container(
+                        padding: EdgeInsets.all(5.0),
                         alignment: Alignment.center,
-                        height: 25,
-                        width: 90,
+
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(17),
                           color: Colors.blue,
@@ -218,7 +219,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: const Text(
                           "Change",
                           style: TextStyle(
-                              fontSize: 20, color: Colors.white),
+                              fontSize: 17, color: Colors.white),
                         ),
                       ),
                     ),
