@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 
-
 class AllUsers extends StatefulWidget {
   const AllUsers({Key? key}) : super(key: key);
 

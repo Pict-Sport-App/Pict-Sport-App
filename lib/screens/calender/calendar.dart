@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
-import 'package:psa/screens/calender/table_tennis/table_tannis_main_screen.dart';
-import 'package:psa/screens/calender/table_tennis/table_tennis_issue_screen.dart';
-import 'package:psa/screens/drawer/drawer.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({Key? key}) : super(key: key);
@@ -17,7 +15,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        child: App_Drawer(),
+        child: CollapsingNavigationDrawer(),
       ),
       appBar: AppBar(
           elevation: 0.3,
@@ -43,10 +41,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
           color: Colors.red,
           onPressed: ()
           {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
-                  return TabletannisScreen();
-                }));
           },
           child: const Text('Calendar',style: TextStyle(
             color: Colors.white,

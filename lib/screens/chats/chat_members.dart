@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:psa/screens/drawer/users.dart';
+import 'package:psa/appdrawer/users.dart';
 
 class ChatMembers extends StatefulWidget {
   static const routeName = '/chat_members';

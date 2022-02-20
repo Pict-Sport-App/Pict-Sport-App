@@ -6,21 +6,18 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
-//bool requested=false;
-
 class IssueTheRacket extends StatefulWidget {
   const IssueTheRacket({Key? key}) : super(key: key);
+  static const routeName='/tt';
 
   @override
   State<IssueTheRacket> createState() => _IssueTheRacketState();
 }
 
 class _IssueTheRacketState extends State<IssueTheRacket> {
-
   final _name = UserDetails.name;
   String? choosedTable;
   String? choosedRacket;
@@ -31,65 +28,203 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
-  
-  Future Submit(BuildContext context)async{
-    if (choosedTable==null && choosedRacket==null){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(
+
+  Future Submit(BuildContext context) async {
+    if (choosedTable == null && choosedRacket == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
-          'Please enter the Table Number and Number of Racket you want to issue',style: TextStyle(
-          color: Colors.red,
-          fontSize: 15,
-        ),
+          'Please enter the Table Number and Number of Racket you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
         ),
       ));
-    } else if (choosedTable==null){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(
+    } else if (choosedTable == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
-          'Please enter the Table Number',style: TextStyle(
-          color: Colors.red,
-          fontSize: 15,
-        ),
+          'Please enter the Table Number',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
         ),
       ));
-    } else if (choosedRacket==null){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(
+    } else if (choosedRacket == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
-          'Please enter the Number of Racket you want to issue',style: TextStyle(
-          color: Colors.red,
-          fontSize: 15,
-        ),
+          'Please enter the Number of Racket you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
         ),
       ));
-    }else{
-      FirebaseFirestore.instance.collection('TTEquipment')
-      //.doc('TT').collection('Equipment')
-      .doc(UserDetails.uid).set({
+    }else if (choosedTable=='Table 1'){
+      if ((int.parse(_t1.toString())-int.parse(choosedRacket.toString()))<0){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'Oops!! All Rackets are occupied at table 1 .Try another table',style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+          ),
+        ));
+      }else{
+        FirebaseFirestore.instance
+            .collection('TTEquipment')
+        //.doc('TT').collection('Equipment')
+            .doc(UserDetails.uid)
+            .set({
+          'tableNumber': choosedTable,
+          'racketNumber': choosedRacket,
+          'timeOfIsuue': eventDate,
+          'name': UserDetails.name,
+          'misId': UserDetails.misId,
+          'photourl': UserDetails.photourl,
+          'isRequested': 1,
+          'isReturn': false,
+          'timeOfReturn': Timestamp.now(),
+          'uid': UserDetails.uid,
+        });
+
+        setState(() {
+          //requested=true;
+        });
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+          return TabletannisScreen();
+        }));
+      }
+    }else if (choosedTable=='Table 2'){
+      var b=int.parse(_t2.toString())-int.parse(choosedRacket.toString());
+      if (b<0){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'Oops!! All Rackets are occupied at table 2 .Try another table',style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+          ),
+        ));
+      }else{
+        FirebaseFirestore.instance
+            .collection('TTEquipment')
+        //.doc('TT').collection('Equipment')
+            .doc(UserDetails.uid)
+            .set({
+          'tableNumber': choosedTable,
+          'racketNumber': choosedRacket,
+          'timeOfIsuue': eventDate,
+          'name': UserDetails.name,
+          'misId': UserDetails.misId,
+          'photourl': UserDetails.photourl,
+          'isRequested': 1,
+          'isReturn': false,
+          'timeOfReturn': Timestamp.now(),
+          'uid': UserDetails.uid,
+        });
+
+        setState(() {
+          //requested=true;
+        });
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+          return TabletannisScreen();
+        }));
+      }
+    }else if (choosedTable=='Table 3'){
+      int h=int.parse(_t3.toString())-int.parse(choosedRacket.toString());
+      if (h<0){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'Oops!! All Rackets are occupied at table 3 .Try another table',style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+          ),
+        ));
+      }else{
+        FirebaseFirestore.instance
+            .collection('TTEquipment')
+        //.doc('TT').collection('Equipment')
+            .doc(UserDetails.uid)
+            .set({
+          'tableNumber': choosedTable,
+          'racketNumber': choosedRacket,
+          'timeOfIsuue': eventDate,
+          'name': UserDetails.name,
+          'misId': UserDetails.misId,
+          'photourl': UserDetails.photourl,
+          'isRequested': 1,
+          'isReturn': false,
+          'timeOfReturn': Timestamp.now(),
+          'uid': UserDetails.uid,
+        });
+
+        setState(() {
+          //requested=true;
+        });
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+          return TabletannisScreen();
+        }));
+      }
+    }else {
+      FirebaseFirestore.instance
+          .collection('TTEquipment')
+          //.doc('TT').collection('Equipment')
+          .doc(UserDetails.uid)
+          .set({
         'tableNumber': choosedTable,
-        'racketNumber':choosedRacket,
+        'racketNumber': choosedRacket,
         'timeOfIsuue': eventDate,
         'name': UserDetails.name,
-        'misId':UserDetails.misId,
-        'photourl':UserDetails.photourl,
-        'isRequested':1,
-        'isReturn':false,
-        'timeOfReturn':Timestamp.now(),
+        'misId': UserDetails.misId,
+        'photourl': UserDetails.photourl,
+        'isRequested': 1,
+        'isReturn': false,
+        'timeOfReturn': Timestamp.now(),
         'uid': UserDetails.uid,
       });
 
       setState(() {
         //requested=true;
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return TabletannisScreen();
       }));
     }
     return;
+  }
+
+  bool _isInit=true; var  _productId;
+  var _t1,_t2,_t3,_tremain;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_isInit){
+      _productId = ModalRoute.of(context)!.settings.arguments as List<int>;
+      _t1=_productId[0];
+      _t2=_productId[1];
+      _t3=_productId[2];
+      _tremain=_productId[3];
+    }
+    _isInit = false;
   }
 
   @override
@@ -188,8 +323,8 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                     ),
                                     initialValue: DateTime.now(),
                                     style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold
                                     ),
                                     enabled: true,
                                     enableInteractiveSelection: true,
@@ -252,7 +387,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                     shape: const StadiumBorder(),
                     child: const Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                         child: Text('SEND THE REQUEST')),
                   ),
                 ),

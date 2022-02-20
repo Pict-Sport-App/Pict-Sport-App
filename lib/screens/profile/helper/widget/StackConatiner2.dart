@@ -71,18 +71,7 @@ class StackContainer2 extends StatelessWidget {
                   color: Colors.white,
                 ),
                 onPressed: () {
-
-                  // App_Drawer(
-                  //
-                  // );
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return const App_Drawer();
-                  //     },
-                  //   ),
-                  // );
+                  Scaffold.of(context).openDrawer();
                 },
               ),
             ),

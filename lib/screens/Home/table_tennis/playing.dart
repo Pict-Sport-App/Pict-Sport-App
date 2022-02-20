@@ -34,7 +34,8 @@ class Playing extends StatelessWidget {
                 .collection('TTEquipment')
                 .snapshots(),
             builder: (ctx, equimentSnapshot) {
-              if (equimentSnapshot.connectionState == ConnectionState.waiting) {
+              if (equimentSnapshot.connectionState
+                  == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );

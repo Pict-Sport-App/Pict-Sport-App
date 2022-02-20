@@ -1,7 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:psa/models/settings.dart';
+import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/Home/Basketball/bbissued.dart';
+import 'package:psa/screens/Home/Basketball/bbrequested.dart';
+import 'package:psa/screens/Home/Basketball/bbreturn.dart';
 import 'package:psa/screens/Home/Basketball/sizeNo.dart';
+import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
 class BasketBall_screen extends StatefulWidget {
@@ -12,90 +20,278 @@ class BasketBall_screen extends StatefulWidget {
 }
 
 class _BasketBall_screenState extends State<BasketBall_screen> {
+  bool _isFirstView = false;
+  var _noOfBallSix;
+  var _size;
+  int _isRequested = 0;
+
+
+  final _totalBallSix = int.parse(Equiment.basketball_Six.toString());
+  final _totalBallSeven = int.parse(Equiment.basketball_Seven.toString());
+
+  late var _size_six, _size_seven;
+
+  Future getStatus() async {
+    var v = await FirebaseFirestore.instance
+        .collection('BBEquipment')
+        .doc(UserDetails.uid)
+        .get();
+    if (v.exists) {
+      _isRequested = v.get('isRequested');
+      _noOfBallSix = v.get('noOfBall');
+      _size = v.get('size');
+      if (_isRequested == 3 || _isRequested == 5) {
+        setState(() {
+          _isFirstView = true;
+        });
+      } else {
+        setState(() {
+          _isFirstView = false;
+        });
+      }
+    } else {
+      setState(() {
+        _isFirstView = true;
+      });
+    }
+  }
+
+  void BB_Six_Logic(String six, String seven) {
+    List? l;
+    l?.clear();
+    l?.add(six);l?.add(seven);
+    _isFirstView
+        ? Navigator.of(context).pushNamed(
+            SixNo.routeName,
+            arguments: [six,seven],
+          )
+        : _isRequested == 1
+            ? showDialog(
+                context: context,
+                builder: (context) {
+                  return PopUpRequest(
+                      onTap: () {
+                        FirebaseFirestore.instance
+                            .collection('BBEquipment')
+                            .doc(UserDetails.uid)
+                            .update({
+                          'isRequested': 3,
+                        });
+                        setState(() {
+                          _isFirstView = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      text: 'Want to cancel the request');
+                  //---------
+                })
+            : _isRequested == 2
+                ? showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BBSixReturn(
+                        onTap: () async {
+                          print('return');
+                          await FirebaseFirestore.instance
+                              .collection('BBEquipment')
+                              .doc(UserDetails.uid)
+                              .update({
+                            'isRequested': 4,
+                            'isReturn': true,
+                            'timeOfReturn': Timestamp.now(),
+                          });
+                          setState(() {
+                            _isFirstView = true;
+                          });
+                          Navigator.pop(context);
+                        },
+                        size: _size,
+                        noOfBall: _noOfBallSix,
+                      );
+                    })
+                : Navigator.of(context).pushNamed(
+                    SixNo.routeName,
+                    arguments: [six,seven],
+                  );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     double weight = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        width: weight,
-        height: height,
-        child: Column(
-          children: [
-            StackContainer(),
-            const Text(
-              'Select Ball Size you want to issue',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: height * 0.07,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (context){
-                       return const SixNo();
-                     }));
-                    },
-                    child: Container(
-                      height: height * 0.3,
-                      width: weight * 0.4,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                          border: Border(
-                            top: BorderSide(color: Colors.black),
-                            bottom: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black),
-                            right: BorderSide(color: Colors.black),
-                          ),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                'assets/6bb.jpg',
-                              ),
-                              fit: BoxFit.fill)),
+      body: StreamBuilder<QuerySnapshot>(
+          stream:
+              FirebaseFirestore.instance.collection('BBEquipment').snapshots(),
+          builder: (ctx, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final usersnap = userSnapshot.data!.docs;
+            _size_six = 0;
+            _size_seven = 0;
+            for (int i = 0; i < usersnap.length; i++) {
+              if (usersnap[i]['size'] == "6") {
+                if (usersnap[i]['isRequested'] == 2) {
+                  _size_six += int.parse(usersnap[i]['noOfBall']);
+                }
+              }
+              if (usersnap[i]['size'] == "7") {
+                if (usersnap[i]['isRequested'] == 2) {
+                  _size_seven += int.parse(usersnap[i]['noOfBall']);
+                }
+              }
+            }
+            print(_size_seven);
+            print(_size_six);
+
+            return Container(
+              width: weight,
+              height: height,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StackContainer(),
+                    GestureDetector(
+                      onTap: () {
+                        BB_Six_Logic((_totalBallSix - _size_six).toString(),
+                            (_totalBallSeven - _size_seven).toString());
+                      },
+                      child: Container(
+                        height: height * 0.4,
+                        width: weight * 0.8,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
+                            border: Border.all(color: Colors.black12, width: 5),
+                            image: const DecorationImage(
+                                image: AssetImage('assets/fbb.png'),
+                                fit: BoxFit.fill)),
+                        child: Transform(
+                          transform: Matrix4.identity()
+                            ..translate(height * 0.11, weight * 0.24),
+                          child: _isFirstView
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      // color: Colors.greenAccent,
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: const Text(
+                                    'Issue Ball',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                )
+                              : _isRequested == 1
+                                  ? const Text(
+                                      'Cancel Request',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
+                                    )
+                                  : _isRequested == 2
+                                      ? const Text(
+                                          'Return Ball',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                        )
+                                      : _isRequested == 4
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                  //color: Colors.greenAccent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: const Text(
+                                                'Issue',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 30,
+                                                ),
+                                              ),
+                                            )
+                                          : Container(),
+                        ),
+                      ),
                     ),
-                  ),
+                    Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'No of Balls Left of size 6:-',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            (_totalBallSix - _size_six).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'No of Balls Left of size 7:-',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            (_totalBallSeven - _size_seven).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      height: height * 0.3,
-                      width: weight * 0.4,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(30)),
-                          border: Border(
-                            top: BorderSide(color: Colors.black),
-                            bottom: BorderSide(color: Colors.black),
-                            left: BorderSide(color: Colors.black),
-                            right: BorderSide(color: Colors.black),
-                          ),
-                          image: DecorationImage(
-                              image: AssetImage(
-                                'assets/7bb.jpg',
-                              ),
-                              fit: BoxFit.fill)),
-                    ),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 }
-
 
 class StackContainer extends StatelessWidget {
   StackContainer();
@@ -122,12 +318,6 @@ class StackContainer extends StatelessWidget {
                     offset: const Offset(6, 3), // changes position of shadow
                   ),
                 ],
-                //BoxShadow
-                /*image: const DecorationImage(
-                  image: NetworkImage("https://media.istockphoto.com/photos/sports-equipment"
-                      "-on-green-grass-top-view-picture-id905105146?k=20&m=905105146&s=612x612&w=0&h=c-PRgfs29opGsRl_vOnVxZVGnR5YsZyOJ-RPo_gVW7o="),
-                  fit: BoxFit.cover,
-                ),*/
               ),
             ),
           ),
@@ -136,7 +326,11 @@ class StackContainer extends StatelessWidget {
             //left: double.infinity-10,
             right: width * 0.06,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const Requested();
+                }));
+              },
               child: Container(
                 height: 50,
                 width: 50,
@@ -144,10 +338,168 @@ class StackContainer extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
+                child: Center(
+                  child: PopupMenuButton<int>(
+                      color: Colors.indigo,
+                      onSelected: (item) => onSelected(context, item),
+                      itemBuilder: (context) => [
+                            const PopupMenuItem<int>(
+                              value: 0,
+                              child: Text(
+                                "Requested",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            const PopupMenuDivider(),
+                            const PopupMenuItem<int>(
+                              value: 1,
+                              child: Text(
+                                "Issued",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            const PopupMenuDivider(),
+                            const PopupMenuItem<int>(
+                              value: 2,
+                              child: Text(
+                                " Returned ",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ]) /*FaIcon(
+                    FontAwesomeIcons.ellipsisV,
+                    color: Colors.black,
+                    size: 20,
+                  )*/
+                  ,
+                ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  onSelected(BuildContext context, int item) {
+    switch (item) {
+      case 0:
+        print("First button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const Requested();
+        }));
+        break;
+      case 1:
+        print("second button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const BBIssued();
+        }));
+        break;
+      case 2:
+        print("second button is pressed");
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const BBReturn();
+        }));
+        break;
+    }
+  }
+}
+
+class BBSixReturn extends StatelessWidget {
+  String size;
+  VoidCallback onTap;
+  String noOfBall;
+  BBSixReturn({
+    required this.noOfBall,
+    required this.onTap,
+    required this.size,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      backgroundColor: Colors.transparent,
+      child: Container(
+        height: 150,
+        width: 150,
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Text(
+                    'Ball Size',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    size,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Text(
+                    'Number Of Ball',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    noOfBall,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: onTap,
+                  child: const Icon(
+                    Icons.check_circle,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child:
+                      const Icon(Icons.cancel, size: 40, color: Colors.white),
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

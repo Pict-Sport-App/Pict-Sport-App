@@ -1,9 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
-import 'package:psa/screens/drawer/drawer.dart';
+import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
+
 
 class Announcement_Screen extends StatefulWidget {
   const Announcement_Screen({Key? key}) : super(key: key);
@@ -17,7 +15,7 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const Drawer(
-        child: App_Drawer(),
+        child: CollapsingNavigationDrawer(),
       ),
       appBar: AppBar(
           elevation: 0.3,

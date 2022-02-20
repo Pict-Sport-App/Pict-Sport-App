@@ -8,7 +8,6 @@ import 'package:psa/screens/announcements/announcement_screen.dart';
 import 'package:psa/screens/chats/chat_screen.dart';
 import 'package:psa/screens/profile/profile_screen.dart';
 import 'calender/calendar.dart';
-import 'drawer/drawer.dart';
 
 class IntialScreen extends StatefulWidget {
   const IntialScreen({Key? key}) : super(key: key);

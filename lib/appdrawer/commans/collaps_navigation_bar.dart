@@ -1,9 +1,6 @@
-// import 'package:drawer/model/navigation_model.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/appdrawer/model/navigation_model.dart';
-import 'package:psa/screens/Home/table_tennis/requests.dart';
-import 'package:psa/screens/announcements/announcement_screen.dart';
-// import '../dashboard_screen.dart';
+import 'package:psa/models/userDetails.dart';
 import '../thems.dart';
 import 'collapsing_list_tile.dart';
 
@@ -23,7 +20,7 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   bool isCollapsed = false;
   late AnimationController _animationController;
   late Animation<double> widthAnimation;
-  @override
+
   @override
   void initState() {
 
@@ -57,47 +54,47 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
             ),
             widthAnimation.value >= 250
                 ? Column(
-                    children: const [
+                    children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "https://lh3.googleusercontent.com/a-/AOh14GiI2oRbxg9hBNUSaJE4WVIJMJpRrGHAubWB-BpTzw=s96-c"),
+                            UserDetails.photourl.toString()),
                         radius: 60,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(
-                        "Dhiraj Darker",
-                        style: TextStyle(
+                        UserDetails.name.toString(),
+                        style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        "C2K20106749@ms.pict.edu",
-                        style: TextStyle(
+                        UserDetails.misId.toString(),
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white70,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                     ],
                   )
                 : Column(
-                    children: const <Widget>[
+                    children: <Widget>[
                       CircleAvatar(
                         backgroundImage: NetworkImage(
-                            "https://lh3.googleusercontent.com/a-/AOh14GiI2oRbxg9hBNUSaJE4WVIJMJpRrGHAubWB-BpTzw=s96-c"),
+                            UserDetails.photourl.toString()),
                         radius: 20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -113,15 +110,6 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                   itemCount: navigationItems.length,
                   itemBuilder: (context, counter) {
                     return CollapsingListTile(
-                      onTap: () {
-                        setState(() {
-                          currentSelectedIndex = counter;
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const Request();
-                          }));
-                        });
-                      },
                       isSelected: currentSelectedIndex == counter,
                       animationController: _animationController,
                       title: navigationItems[counter].title,

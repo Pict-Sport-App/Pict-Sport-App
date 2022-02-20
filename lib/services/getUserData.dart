@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:psa/models/settings.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/intial_page.dart';
+import 'package:psa/services/getSettings.dart';
 
 import 'UpdateUserInfo.dart';
 
@@ -48,6 +49,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.linkedInUrl=data['linkedIn'].toString();
             UserDetails.whatAppNo=data['whatAppNo'].toString();
             UserDetails.birthday=data['dob'].toString();
+            GetEquiment();
             return IntialScreen();
           }
           return const Center(child: CircularProgressIndicator(),);
