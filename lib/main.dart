@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:psa/screens/Home/Basketball/sizeNo.dart';
+import 'package:psa/screens/Home/VolleyBall/issueBall.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           ChatMembers.routeName: (ctx)=>const ChatMembers(),
           SixNo.routeName: (ctx)=>const SixNo(),
           IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
+          Issue.routeName: (ctx)=>const Issue(),
         },
       );
     }else{
@@ -46,6 +48,7 @@ class MyApp extends StatelessWidget {
           ChatMembers.routeName: (ctx)=>const ChatMembers(),
           SixNo.routeName: (ctx)=>const SixNo(),
           IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
+          Issue.routeName: (ctx)=>const Issue(),
         },
       );
     }

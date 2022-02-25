@@ -15,6 +15,7 @@ class _SetingState extends State<Seting> {
   int? _bbSizeSix=Equiment.basketball_Six;
   int? _bbSizeSeven=Equiment.basketball_Seven;
   int? _tabletennis=Equiment.tabletennis;
+  int? _vollyball=Equiment.vollyball;
   final formkey = GlobalKey<FormState>();
   
   Future submit()async{
@@ -26,6 +27,7 @@ class _SetingState extends State<Seting> {
           'basketball_Size_Six': _bbSizeSix,
           'basketball_Size_Seven':_bbSizeSeven,
           'tabletennis': _tabletennis,
+          'vollyball': _vollyball,
         });
         Navigator.pop(context);
       }
@@ -39,7 +41,6 @@ class _SetingState extends State<Seting> {
   Widget build(BuildContext context) {
     double height=MediaQuery.of(context).size.height;
     double width=MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -179,7 +180,42 @@ class _SetingState extends State<Seting> {
                           _tabletennis = int.parse(value.toString());
                         },
                       ),
-                    )
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text('VollyBall',style: TextStyle(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30,right: 30),
+                      child: TextFormField(
+                        initialValue: Equiment.vollyball.toString(),
+                        keyboardType: TextInputType.number,
+                        validator: (val) {},
+                        onSaved: (inp){
+                          _vollyball=int.parse(inp.toString());
+                        },
+                        decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.sports_volleyball_outlined),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 10),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          border: OutlineInputBorder(
+                              borderSide:
+                              BorderSide(color: Color(0xFF1A237E))),
+                        ),
+                        onChanged: (value) {
+                          _vollyball = int.parse(value.toString());
+                        },
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20,),

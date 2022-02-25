@@ -8,40 +8,11 @@ Future GetEquiment()async{
 
   if (v.exists){
     Equiment.basketball_Six=v.get('basketball_Size_Six');
-    //print(Equiment.basketball_Six);
     Equiment.basketball_Seven=v.get('basketball_Size_Seven');
     Equiment.tabletennis=v.get('tabletennis');
+    Equiment.vollyball=v.get('vollyball');
   }else{
     return const CircularProgressIndicator();
   }
   return;
 }
-
-/*class GetSettings extends StatelessWidget {
-  
-  //String documentId='xx';
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FirebaseFirestore.instance.
-      collection('Settings').doc('xx').get(),
-        builder:
-    (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot){
-    if (snapshot.hasError) {
-    return const Center(child: CircularProgressIndicator());
-    }
-    if (snapshot.hasData && !snapshot.data!.exists) {
-    return const Center(child: CircularProgressIndicator());
-    }
-    if (snapshot.connectionState == ConnectionState.done){
-      Map<String, dynamic> data =
-      snapshot.data!.data() as Map<String, dynamic>;
-      Equiment.basketball_Six=data['basketball_Size_Six'];
-      Equiment.basketball_Seven=data['basketball_Size_Seven'];
-      Equiment.tabletennis=data['tabletennis'];
-    }
-    return null;
-    });
-  }
-}*/

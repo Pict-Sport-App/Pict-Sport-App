@@ -5,4 +5,5 @@ class Equiment
   static int? basketball_Six;
   static int? basketball_Seven;
   static int? tabletennis;
+  static int? vollyball;
 }
