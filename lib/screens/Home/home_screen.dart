@@ -7,6 +7,7 @@ import 'package:psa/screens/Home/sports_card.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
 import 'Basketball/basketball.dart';
+import 'VolleyBall/Volleyball.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -153,7 +154,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                   MaterialPageRoute(builder: (context) {
                                 return const BasketBall_screen();
                               }));
-                            } else {}
+                            } else if (sport.name=='Volleyball'){
+                              print('ii');
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return const VolleyBall_Screen();
+                              }));
+                            }
                           },
                           index,
                           sport,

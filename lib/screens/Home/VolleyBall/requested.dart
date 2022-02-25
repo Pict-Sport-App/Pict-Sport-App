@@ -2,28 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/Basketball/basketball.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
 
-class Requested extends StatefulWidget {
-  const Requested({Key? key}) : super(key: key);
+class RequestedVolly extends StatefulWidget {
+  const RequestedVolly({Key? key}) : super(key: key);
 
   @override
-  _RequestedState createState() => _RequestedState();
+  _RequestedVollyState createState() => _RequestedVollyState();
 }
 
-class _RequestedState extends State<Requested> {
-
+class _RequestedVollyState extends State<RequestedVolly> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('BasketBall Requests'),
+        title: const Text('Volleyball Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('BBEquipment')
+            .collection('VVEquipment')
             .snapshots(),
         builder: (ctx, equimentSnapshot){
           if (equimentSnapshot.connectionState == ConnectionState.waiting) {
@@ -36,16 +34,15 @@ class _RequestedState extends State<Requested> {
               physics: const BouncingScrollPhysics(),
               itemCount: reqMembers.length,
               itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
-                  ? BBRequest(
-                isReturn: reqMembers[index]['isReturn'],
+                  ? VVRequest(
+                  isReturn: reqMembers[index]['isReturn'],
                   image: reqMembers[index]['url'],
                   uid: reqMembers[index]['uid'],
                   timeOfReturn: reqMembers[index]['timeOfReturn'],
                   timeOfIssue: reqMembers[index]['timeOfIssue'],
                   noOfBall: reqMembers[index]['noOfBall'].toString(),
                   name: reqMembers[index]['name'],
-                  isAdmin: UserDetails.isAdmin??false,
-                  ballNumber: reqMembers[index]['size'].toString())
+                  isAdmin: UserDetails.isAdmin??false,)
                   : Container());
         },
       ),
@@ -53,9 +50,8 @@ class _RequestedState extends State<Requested> {
   }
 }
 
-class BBRequest extends StatefulWidget {
+class VVRequest extends StatefulWidget {
   late String name;
-  late String ballNumber;
   late String noOfBall;
   late Timestamp timeOfIssue;
   late Timestamp timeOfReturn;
@@ -64,22 +60,21 @@ class BBRequest extends StatefulWidget {
   late String image;
   late bool isReturn;
 
-  BBRequest({
+  VVRequest({
     required this.isReturn,
     required this.image,
     required this.uid
     ,required this.timeOfReturn,
-  required this.timeOfIssue,
-  required this.noOfBall,
-  required this.name,
-  required this.isAdmin,
-  required this.ballNumber});
+    required this.timeOfIssue,
+    required this.noOfBall,
+    required this.name,
+    required this.isAdmin,});
 
   @override
-  _BBRequestState createState() => _BBRequestState();
+  _VVRequestState createState() => _VVRequestState();
 }
 
-class _BBRequestState extends State<BBRequest> {
+class _VVRequestState extends State<VVRequest> {
   var hour, minute, gb = 'pm';
   var rHour,rMinute,rGb='pm';
   void cal() {
@@ -111,10 +106,9 @@ class _BBRequestState extends State<BBRequest> {
     cal();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return  Padding(
       padding: const EdgeInsets.only(
         left: 18,
         right: 15,
@@ -158,35 +152,9 @@ class _BBRequestState extends State<BBRequest> {
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                       child: Row(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          const Icon(
-                            Icons.menu,
-                            size: 27,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              "Ball Size            :",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              widget.ballNumber,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                      child: Row(
                         children: <Widget>[
                           const FaIcon(
-                            FontAwesomeIcons.tableTennis,
+                            FontAwesomeIcons.volleyballBall,
                             size: 26,
                           ),
                           const Padding(
@@ -279,7 +247,7 @@ class _BBRequestState extends State<BBRequest> {
                                       return PopUpRequest(
                                         onTap: () async {
                                           await FirebaseFirestore.instance
-                                              .collection('BBEquipment')
+                                              .collection('VVEquipment')
                                               .doc(widget.uid)
                                               .update({
                                             'isRequested': 2,
@@ -288,9 +256,7 @@ class _BBRequestState extends State<BBRequest> {
                                               content: Text(
                                                 'Request accepted ',
                                               )));
-                                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                                            return const BasketBall_screen();
-                                          }));
+                                          Navigator.pop(context);
                                         },
                                         text: 'Want to accept the Request',
                                       ); //---------

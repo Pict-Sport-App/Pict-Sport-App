@@ -418,13 +418,10 @@ class DropDown extends StatefulWidget {
 
 class _DropDownState extends State<DropDown> {
   String? selectedValue = "";
-  // String? trt;
-  // = widget.item1;
+
   @override
   void initState() {
     // TODO: implement initState
-    // trt = widget.item1;
-    // print("itrt = $trt");
     selectedValue = null;
     super.initState();
   }
@@ -467,7 +464,6 @@ class _DropDownState extends State<DropDown> {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-              // overflow: TextOverflow.ellipsis,
             ),
           )).toList(),
       value: selectedValue,

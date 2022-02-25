@@ -25,7 +25,6 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
   var _size;
   int _isRequested = 0;
 
-
   final _totalBallSix = int.parse(Equiment.basketball_Six.toString());
   final _totalBallSeven = int.parse(Equiment.basketball_Seven.toString());
 
@@ -59,11 +58,12 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
   void BB_Six_Logic(String six, String seven) {
     List? l;
     l?.clear();
-    l?.add(six);l?.add(seven);
+    l?.add(six);
+    l?.add(seven);
     _isFirstView
         ? Navigator.of(context).pushNamed(
             SixNo.routeName,
-            arguments: [six,seven],
+            arguments: [six, seven],
           )
         : _isRequested == 1
             ? showDialog(
@@ -111,7 +111,7 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                     })
                 : Navigator.of(context).pushNamed(
                     SixNo.routeName,
-                    arguments: [six,seven],
+                    arguments: [six, seven],
                   );
   }
 
@@ -152,137 +152,259 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                 }
               }
             }
-            print(_size_seven);
-            print(_size_six);
-
             return Container(
               width: weight,
               height: height,
               child: SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     StackContainer(),
-                    GestureDetector(
-                      onTap: () {
-                        BB_Six_Logic((_totalBallSix - _size_six).toString(),
-                            (_totalBallSeven - _size_seven).toString());
-                      },
-                      child: Container(
-                        height: height * 0.4,
-                        width: weight * 0.8,
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(20)),
-                            border: Border.all(color: Colors.black12, width: 5),
-                            image: const DecorationImage(
-                                image: AssetImage('assets/fbb.png'),
-                                fit: BoxFit.fill)),
-                        child: Transform(
-                          transform: Matrix4.identity()
-                            ..translate(height * 0.11, weight * 0.24),
-                          child: _isFirstView
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      // color: Colors.greenAccent,
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: const Text(
-                                    'Issue Ball',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    ),
-                                  ),
-                                )
-                              : _isRequested == 1
-                                  ? const Text(
-                                      'Cancel Request',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Ball Info :-',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+                              child: Container(
+                                width: double.infinity,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  children: [
+                                    //SizedBox(width: weight*0.005,),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Ball Left of Size Six ',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w900,
+                                        ),
                                       ),
+                                    ),
+                                    SizedBox(
+                                      width: weight * 0.004,
+                                    ),
+                                    const FaIcon(
+                                      FontAwesomeIcons.arrowAltCircleRight,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      (_totalBallSix - _size_six).toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
                                     )
-                                  : _isRequested == 2
-                                      ? const Text(
-                                          'Return Ball',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                          ),
-                                        )
-                                      : _isRequested == 4
-                                          ? Container(
-                                              decoration: BoxDecoration(
-                                                  //color: Colors.greenAccent,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              child: const Text(
-                                                'Issue',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30,
-                                                ),
-                                              ),
-                                            )
-                                          : Container(),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+                              child: Container(
+                                width: double.infinity,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  children: [
+                                    //SizedBox(width: weight*0.005,),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
+                                      child: Text(
+                                        'Ball Left of Size Seven ',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: weight * 0.004,
+                                    ),
+                                    const FaIcon(
+                                      FontAwesomeIcons.arrowAltCircleRight,
+                                      color: Colors.black,
+                                      size: 20,
+                                    ),
+                                    const Spacer(),
+                                    Text(
+                                      (_totalBallSeven - _size_seven).toString(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20,),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(
+                        'Features :-',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'No of Balls Left of size 6:-',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 60,
+                        width: weight,
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[100],
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            (_totalBallSix - _size_six).toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Click to issue Ball',style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20
+                              ),),
                             ),
-                          ),
-                        )
-                      ],
+                            const Spacer(),
+                            RaisedButton(
+                              color: Colors.red.withOpacity(0.9),
+                              splashColor: Colors.red.withOpacity(0.5),
+                              elevation: 10.0,
+                              shape: const StadiumBorder(),
+                              onPressed: () {
+                                BB_Six_Logic((_totalBallSix - _size_six).toString(),
+                                    (_totalBallSeven - _size_seven).toString());
+                              },
+                              child: _isFirstView
+                                  ? const Center(
+                                child: Text(
+                                  'Issue Ball',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                                  : _isRequested == 1
+                                  ? const Center(
+                                child: Text(
+                                  'Cancel Request',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                                  : _isRequested == 2
+                                  ? const Center(
+                                child: Text(
+                                  'Return Ball',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                                  : _isRequested == 4
+                                  ? const Center(
+                                child: Text(
+                                  'Issue Ball',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              )
+                                  : Container(),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    Row(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'No of Balls Left of size 7:-',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 60,
+                        width: weight,
+                        decoration: BoxDecoration(
+                          color: Colors.yellow[100],
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            (_totalBallSeven - _size_seven).toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text('Count Match Score',style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20
+                              ),),
                             ),
-                          ),
-                        )
-                      ],
+                            const Spacer(),
+                            RaisedButton(
+                              color: Colors.red.withOpacity(0.9),
+                              splashColor: Colors.red.withOpacity(0.5),
+                              elevation: 10.0,
+                              shape: const StadiumBorder(),
+                              onPressed: () {},
+                              child: const Center(
+                                child: Text(
+                                  'Score Tracker',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -323,7 +445,6 @@ class StackContainer extends StatelessWidget {
           ),
           Positioned(
             top: height * 0.06,
-            //left: double.infinity-10,
             right: width * 0.06,
             child: GestureDetector(
               onTap: () {
@@ -366,12 +487,7 @@ class StackContainer extends StatelessWidget {
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
-                          ]) /*FaIcon(
-                    FontAwesomeIcons.ellipsisV,
-                    color: Colors.black,
-                    size: 20,
-                  )*/
-                  ,
+                          ]),
                 ),
               ),
             ),
