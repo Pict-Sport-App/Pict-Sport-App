@@ -3,15 +3,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/appdrawer/users.dart';
 import 'package:psa/services/authentication.dart';
+import '../main_settings.dart';
 import '../thems.dart';
 
 class CollapsingListTile extends StatefulWidget {
-  CollapsingListTile(
-      {required this.title,
-      required this.num,
-      required this.animationController,
-      required this.isSelected,
-      });
+  CollapsingListTile({
+    required this.title,
+    required this.num,
+    required this.animationController,
+    required this.isSelected,
+  });
   final String title;
   final int num;
   final AnimationController animationController;
@@ -42,7 +43,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
               }))
             : widget.num == 2
                 ? Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const Seting();
+                    return const MainSettings();
                   }))
                 : widget.num == 3
                     ? Navigator.push(context,
@@ -77,7 +78,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                           ? FontAwesomeIcons.dev
                           : widget.num == 4
                               ? FontAwesomeIcons.arrowAltCircleRight
-                                  : FontAwesomeIcons.bars,
+                              : FontAwesomeIcons.bars,
               color: Colors.white70,
               size: 26,
             ),
