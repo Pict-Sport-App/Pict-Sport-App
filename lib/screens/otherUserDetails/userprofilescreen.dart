@@ -158,6 +158,8 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                               ],
                             ),
                           ),
+
+
                         Padding(
                           padding: const EdgeInsets.only(left: 11.0, top: 2),
                           child: Column(

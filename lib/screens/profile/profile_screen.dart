@@ -6,6 +6,7 @@ import 'package:psa/screens/profile/helper/widget/sport_container.dart';
 import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helper/widget/StackConatiner2.dart';
+// import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Profile_Screen extends StatefulWidget {
   const Profile_Screen({Key? key}) : super(key: key);

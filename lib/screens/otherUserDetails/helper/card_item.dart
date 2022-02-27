@@ -44,37 +44,41 @@ class _CardItemState extends State<CardItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              widget.inputString1=='Achievement'?
-                  const Icon(Icons.leaderboard_sharp,size: 40,):
-              widget.inputString1 == 'About Myself'
+              widget.inputString1 == 'Achievement'
                   ? const Icon(
-                      Icons.account_circle_rounded,
+                      Icons.leaderboard_sharp,
                       size: 40,
                     )
-                  : widget.inputString1 == 'Sport '
+                  : widget.inputString1 == 'About Myself'
                       ? const Icon(
-                          Icons.sports_baseball_sharp,
-                          size: 35,
+                          Icons.account_circle_rounded,
+                          size: 40,
                         )
                       : widget.inputString1 == 'Sport '
                           ? const Icon(
                               Icons.sports_baseball_sharp,
                               size: 35,
                             )
-                          : widget.inputString1 == 'Date of Birth'
-                              ? const FaIcon(
-                                  FontAwesomeIcons.birthdayCake,
-                                  size: 32,
+                          : widget.inputString1 == 'Sport '
+                              ? const Icon(
+                                  Icons.sports_baseball_sharp,
+                                  size: 35,
                                 )
-                              : widget.inputString1 == 'Roll No'
+                              : widget.inputString1 == 'Date of Birth'
                                   ? const FaIcon(
-                                      Icons.double_arrow_rounded,
-                                      size: 40,
+                                      FontAwesomeIcons.birthdayCake,
+                                      size: 32,
                                     )
-                                  : const Icon(
-                                      Icons.mail,
-                                      size: 35,
-                                    ),
+                                  : widget.inputString1 == 'Roll No'
+                                      ? const FaIcon(
+                                          Icons.double_arrow_rounded,
+                                          size: 40,
+                                        )
+                                      : const FaIcon(
+                                          FontAwesomeIcons.envelope,
+                                          color: Color(0xFF272D34),
+                                          size: 25,
+                                        ),
               const SizedBox(width: 24.0),
               widget.inputString1 != 'MIS ID'
                   ? Column(

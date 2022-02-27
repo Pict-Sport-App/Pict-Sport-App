@@ -17,36 +17,32 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: CollapsingNavigationDrawer(),
       ),
       appBar: AppBar(
-          elevation: 0.3,
-          backgroundColor: Colors.white,
-
-          centerTitle: true,
-          title: const Text('Calender Screen',style: TextStyle(
+        elevation: 0.3,
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          'Calender Screen',
+          style: TextStyle(
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
-          ),),leading:  IconButton(
-        icon: const FaIcon(
-          FontAwesomeIcons.calendarDay,
-          size: 25,color: Colors.black,
+          ),
         ),
-        onPressed: () {
-          // do something
-        },
-      )
-      ),
-      body: Center(
-        child:FlatButton(
-          color: Colors.red,
-          onPressed: ()
-          {
-          },
-          child: const Text('Calendar',style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 17),
+          child: GestureDetector(
+            child: const FaIcon(
+              FontAwesomeIcons.bars,
+              color: const Color(0xFF272D34),
+              size: 25,
+            ),
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
         ),
       ),
+
     );
   }
 }

@@ -20,8 +20,9 @@ class StackContainer2 extends StatelessWidget {
               child: Container(
                 height: 300,
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20)),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
                   border: Border.all(color: Colors.black, width: 5),
                   boxShadow: [
                     BoxShadow(
@@ -64,15 +65,18 @@ class StackContainer2 extends StatelessWidget {
             Positioned(
               top: 8,
               left: 6,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  size: 29,
-                  color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15.0, top: 8),
+                child: GestureDetector(
+                  child: const FaIcon(
+                    FontAwesomeIcons.bars,
+                    color: Colors.white,
+                    size: 25,
+                  ),
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
                 ),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
               ),
             ),
             Positioned(
@@ -279,8 +283,7 @@ class StackContainer2 extends StatelessWidget {
                         fontStyle: FontStyle.italic,
                       ),
                     )
-                  : UserDetails.misId![0] == 'I' ||
-                          UserDetails.misId![0] == 'i'
+                  : UserDetails.misId![0] == 'I' || UserDetails.misId![0] == 'i'
                       ? const Text(
                           'Information Technology',
                           style: TextStyle(
