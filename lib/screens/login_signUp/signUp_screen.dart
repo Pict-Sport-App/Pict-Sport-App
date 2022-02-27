@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:psa/screens/login_signUp/login_screen.dart';
 import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
@@ -18,7 +19,19 @@ class _SignupState extends State<Signup> {
     double width=MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFC5CAE9),
+        appBar: AppBar(
+          toolbarHeight: 100,
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          title: const Text("WelCome PICT'ians",style: TextStyle(
+            color: Colors.black,fontSize: 28,
+            fontWeight: FontWeight.w600,
+          ),),
+          elevation: 0,
+        ),
+        // color: Colors.black,fontSize: 20,
+        // fontWeight: FontWeight.w100,
+        backgroundColor: Colors.white,
         body: Container(
           height: height,
           width: width,
@@ -32,16 +45,17 @@ class _SignupState extends State<Signup> {
                       image: DecorationImage(image: AssetImage('assets/logo1.png'),
                       )
                   ),),
-                const Text('Welcome to ',style: TextStyle(
-                  color: Color(0xFF303F9F),
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
-                ),),
-                const Text('PICT SPORT APP',style: TextStyle(
-                  color: Color(0xFF1A237E),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                ),),
+                // const Text('Welcome to ',style: TextStyle(
+                //   color: Color(0xFF303F9F),
+                //   fontSize: 30,
+                //   fontWeight: FontWeight.w900,
+                // ),),
+                // const Text('PICT SPORT APP',style: TextStyle(
+                //   color: Color(0xFF1A237E),
+                //   fontWeight: FontWeight.bold,
+                //   fontSize: 40,
+                // ),
+                // ),
                 const SizedBox(height: 30,),
                 GestureDetector(
                   onTap: (){
@@ -69,39 +83,52 @@ class _SignupState extends State<Signup> {
                       }
                     });
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30,right: 30),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
+                  // child: Padding(
+                  //   padding: const EdgeInsets.only(left: 30,right: 30),
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.white,
+                  //       borderRadius: BorderRadius.circular(20),
+                  //
+                  //     ),
+                      child: Container(
+                        height: 100,width: 300,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(23),
+                            border: Border.all(color: Colors.blueAccent),),
                         padding: const EdgeInsets.all(5.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                              height: 30,
-                              width: 30,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('assets/google.png'),
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                child:Lottie.network(
+                                'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
+                                // decoration: const BoxDecoration(
+                                //   image: DecorationImage(
+                                //     image: AssetImage('assets/google.png'),
+                                //   ),
+                                // ),
                               ),
                             ),
-                            const SizedBox(width: 5,),
-                            const Text('Sign In With Google',style: TextStyle(
-                              color: Color(0xFFCE93D8),
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),),
+                            const SizedBox(width: 25,),
+                            const Padding(
+                              padding: EdgeInsets.all(18.0),
+                              child: Text('Sign In ',style: TextStyle(
+                                color: Colors.lightBlue,
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                            ),
                           ],
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  // ),
+                // ),
               ],
             ),
           ),

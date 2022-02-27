@@ -1,7 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/screens/announcements/create_annoucement.dart';
+import 'package:psa/screens/announcements/single_announce_widget.dart';
 
 class Announcement_Screen extends StatefulWidget {
   const Announcement_Screen({Key? key}) : super(key: key);
@@ -14,42 +16,49 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(
-        child: CollapsingNavigationDrawer(),
-      ),
-      appBar: AppBar(
+        drawer: const Drawer(
+          child: CollapsingNavigationDrawer(),
+        ),
+        appBar: AppBar(
           elevation: 0.3,
           backgroundColor: Colors.white,
           centerTitle: true,
-          title: const Text(
-            'Announcements Screen',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          title: AnimatedTextKit(
+            animatedTexts: [
+              TyperAnimatedText('Announcement',
+                  textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                  )),
+            ],
           ),
-          leading: IconButton(
-            icon: const FaIcon(
-              FontAwesomeIcons.bullhorn,
-              size: 25,
-              color: Colors.black,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 15.0, top: 17),
+            child: GestureDetector(
+              child: const FaIcon(
+                FontAwesomeIcons.bars,
+                color: const Color(0xFF272D34),
+                size: 25,
+              ),
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
-            onPressed: () {
-              // do something
-            },
-          )),
-      body: Container(
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateAnnoucement()));
-            },
-            child: const Text('Create an annoucement'),
           ),
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Column(
+            children: const <Widget>[
+              SingleAnnouncement(),
+              SingleAnnouncement(),
+              // SingleAnnouncement(),
+              // SingleAnnouncement(),
+              // SingleAnnouncement(),
+              // SingleAnnouncement(),
+              // SingleAnnouncement(),
+              // SingleAnnouncement(),
+            ],
+          ),
+        ));
   }
 }

@@ -23,6 +23,19 @@ class _ChatScreenState extends State<ChatScreen> {
         child: CollapsingNavigationDrawer(),
       ),
       appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 15.0, top: 17),
+          child: GestureDetector(
+            child: const FaIcon(
+              FontAwesomeIcons.bars,
+              color:  const Color(0xFF272D34),
+              size: 25,
+            ),
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
         toolbarHeight: 65,
         automaticallyImplyLeading: false, // Used for removing back buttoon.
         elevation: 0.3,
