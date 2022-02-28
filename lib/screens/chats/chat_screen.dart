@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: GestureDetector(
             child: const FaIcon(
               FontAwesomeIcons.bars,
-              color:  const Color(0xFF272D34),
+              color:  Color(0xFF272D34),
               size: 25,
             ),
             onTap: () {

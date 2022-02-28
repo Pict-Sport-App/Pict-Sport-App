@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:psa/appdrawer/users.dart';
 
 class ChatMembers extends StatefulWidget {
@@ -101,11 +102,20 @@ class _ChatMembersState extends State<ChatMembers> {
                         itemCount: grpMembers.length,
                         itemBuilder: (ctx, index) => grpMembers[index]
                                 ['SportList'][_productId]
-                            ? UserWidget(
-                                onTap: () {},
-                                misId: grpMembers[index]['misId'],
-                                name: grpMembers[index]['name'],
-                                url: grpMembers[index]['photourl'])
+                            ? AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 905),
+                              child: SlideAnimation(
+                                verticalOffset: 50.0,
+                                child: FadeInAnimation(
+                                  child: UserWidget(
+                                      onTap: () {},
+                                      misId: grpMembers[index]['misId'],
+                                      name: grpMembers[index]['name'],
+                                      url: grpMembers[index]['photourl']),
+                                ),
+                              ),
+                            )
                             : Container()),
                   ),
                 ],

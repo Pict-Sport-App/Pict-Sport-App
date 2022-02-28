@@ -7,6 +7,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:psa/models/userDetails.dart';
 
 class CreateAnnoucement extends StatefulWidget {
   const CreateAnnoucement({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class CreateAnnoucement extends StatefulWidget {
 
 class _CreateAnnoucementState extends State<CreateAnnoucement> {
   final _formKey = GlobalKey<FormState>();
-  DateTime? dateTime = DateTime.now();
+  Timestamp? dateTime=Timestamp.now();
 
   bool inputLink = false;
   bool getImage = false;
@@ -27,9 +28,12 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
   String title = '';
   String description = '';
   String venue = '';
-  String number = '';
+  String number1 = '';
+  String number2='';
   File? _imageFile;
   String? _uploadedFileURL;
+  String _contactName1='';
+  String _contactName2='';
 
   Future getImageFromStorage() async {
     final picker = ImagePicker();
@@ -50,13 +54,6 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      print(title);
-      print(description);
-      print(venue);
-      print(number);
-      print(link);
-      print(dateTime);
-
       final storageRef = FirebaseStorage.instance
           .ref()
           .child('annoucements')
@@ -65,16 +62,19 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
       await storageRef.putFile(_imageFile!);
       _uploadedFileURL = await storageRef.getDownloadURL();
 
-      print(_uploadedFileURL);
       await FirebaseFirestore.instance.collection('Announcement').add({
         'title': title,
         'description': description,
         'venue': venue,
-        'number': number,
+        'number1': number1,
+        'number2': number2,
+        'contact1':_contactName1,
+        'contact2':_contactName2,
         'link': link,
         'dateTime': dateTime,
         'imageURL': _uploadedFileURL,
       });
+
       Navigator.pop(context);
     }
   }
@@ -184,10 +184,10 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                           currentValue ?? DateTime.now(),
                         ),
                       );
-                      dateTime = DateTimeField.combine(date, time);
+                      dateTime = DateTimeField.combine(date, time) as Timestamp?;
                       return DateTimeField.combine(date, time);
                     } else {
-                      dateTime = currentValue;
+                      dateTime = currentValue as Timestamp?;
                       return currentValue;
                     }
                   },
@@ -203,7 +203,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                 ),
                 Row(
                   children: [
-                    const Text('Add a regisration link'),
+                    const Text('Add a registration link'),
                     Switch(
                       value: inputLink,
                       onChanged: (value) {
@@ -263,7 +263,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         SizedBox(
                           width: 6,
                         ),
-                        Text('Uplaod an Image'),
+                        Text('Upload an Image'),
                       ],
                     ),
                   ),
@@ -273,6 +273,28 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         : Image.network(
                             'https://source.unsplash.com/user/c_v_r/1900x800') //TODO add default image link
                     : const SizedBox(),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Contact Name 1',
+                    hintText: 'Name of Contact to contact for queries',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    /*if (value!.isNotEmpty) {
+                      return 'Please enter Contact Name of first person';
+                    }*/
+                    _contactName1 = value!;
+                    return null;
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -291,7 +313,51 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     if (value!.length != 10 && value.isNotEmpty) {
                       return 'Please enter a valid phone number';
                     }
-                    number = value;
+                    number1 = value;
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Contact Name 2',
+                    hintText: 'Name of Contact to contact for queries',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  keyboardType: TextInputType.text,
+                  validator: (value) {
+                    /*if (value!.isNotEmpty) {
+                      return 'Please enter Contact Name of second person';
+                    }*/
+                    _contactName2 = value!;
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Phone number',
+                    hintText: 'Phone number to contact for queries',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.length != 10 && value.isNotEmpty) {
+                      return 'Please enter a valid phone number';
+                    }
+                    number2 = value;
                     return null;
                   },
                 ),

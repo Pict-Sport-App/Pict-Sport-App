@@ -62,7 +62,6 @@ class _SixNoState extends State<SixNo> {
       ));
     }else if (choisedSize=='6'){
       int f=int.parse(_left_six.toString())-int.parse(choosedBall.toString());
-
       if (f<0){
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(

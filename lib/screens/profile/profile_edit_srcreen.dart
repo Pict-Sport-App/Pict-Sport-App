@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
 
-
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
 
@@ -78,6 +77,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       print(e);
     }
   }
+
+
 
   final formkey = GlobalKey<FormState>();
   String? headline;
@@ -389,11 +390,69 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
+                const Text('Sports Interested',style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20
+                ),),
+                /*Padding(
+                  padding: const EdgeInsets.only(left: 50,right: 50),
+                  child: ListView.builder(
+
+                    itemCount: UserDetails.sportList?.length,
+                      itemBuilder: (context,index){
+                        var _lit=['BasketBall',
+                        'VolleyBall',
+                        ''];
+                        _lit.clear();
+                        for(int i=0;i<UserDetails.sportList!.length;i++){
+                          if (UserDetails.sportList['BasketBall']==)
+                        }
+
+                      return EditSportList(
+                          onCli: onCli,
+                          onTap: (){},
+                          name: UserDetails.sportList?.keys[index])
+                      }),
+                ),*/
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class EditSportList extends StatelessWidget {
+  late String name;
+  late VoidCallback onTap;
+  late bool onCli;
+  EditSportList({required this.onCli,
+  required this.onTap,
+  required this.name});
+
+
+  Widget onClick(bool onp){
+    return onp?const Icon(Icons.check_circle,
+      color: Colors.green,size: 30,
+    ):const Icon(Icons.cancel,color: Colors.red,size: 30,);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(name,style: const TextStyle(
+          color: Color(0xFFAFB42B),
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),),
+        GestureDetector(
+          onTap: onTap,
+          child: onClick(onCli),
+        )
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 
 class AllUsers extends StatefulWidget {
@@ -38,18 +39,27 @@ class _AllUsersState extends State<AllUsers> {
           return ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
-              itemBuilder: (ctx, index) => UserWidget(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return OtherUserProfileScreeen(
-                        uid: usersnap[index]['uid'],
-                      );
-                    }));
-                  },
-                  misId: usersnap[index]['misId'],
-                  name: usersnap[index]['name'],
-                  url: usersnap[index]['photourl']));
+              itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
+                position: index,
+                duration: const Duration(milliseconds: 905),
+                child: SlideAnimation(
+                  verticalOffset: 50.0,
+                  child: FadeInAnimation(
+                    child: UserWidget(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return OtherUserProfileScreeen(
+                              uid: usersnap[index]['uid'],
+                            );
+                          }));
+                        },
+                        misId: usersnap[index]['misId'],
+                        name: usersnap[index]['name'],
+                        url: usersnap[index]['photourl']),
+                  ),
+                ),
+              ));
         },
       ),
     );
