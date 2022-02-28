@@ -46,6 +46,9 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
               },
             ),
           ),
+          actions: const [
+            Icon(Icons.announcement_outlined,color: Colors.black,),
+          ],
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance

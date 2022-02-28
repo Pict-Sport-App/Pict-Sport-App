@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/services/getUserData.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -41,6 +42,42 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         if (link==hiddenInsta){link=null;}
         if (mobile==hiddenInsta){mobile=null;}
 
+        Map<String,bool>? m={
+          'BasketBall':false, //🏀 BB
+          'VolleyBall':false,//🏐 VB
+          'TableTennis':false,  //🎾 TT
+          'Badminton': false,//🏸  BT
+          'Cricket':false,//🏏  CR
+          'FootBall':false,//⚽ FB
+          'Chess':false,//♟️ CH
+          'Gym':false,//💪 GY
+        };
+
+        if (bb){
+          m.update('BasketBall', (value) => true);
+        }
+        if (fb){
+          m.update('FootBall', (value) => true);
+        }
+        if (vv){
+          m.update('VolleyBall', (value) => true);
+        }
+        if (cr){
+          m.update('Cricket', (value) => true);
+        }
+        if (ch){
+          m.update('Chess', (value) => true);
+        }
+        if (gy){
+          m.update('Gym', (value) => true);
+        }
+        if (tt){
+          m.update('TableTennis', (value) => true);
+        }
+        if (bd){
+          m.update('Badminton', (value) => true);
+        }
+
         FirebaseFirestore.instance
             .collection('User').doc(UserDetails.uid)
             .update({
@@ -54,8 +91,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'twitter':twit,
           'whatAppNo':mobile,
           'dob':UserDetails.birthday,
+          'SportList':m,
         });
-        setState(() {
+
+        Navigator.push(context, MaterialPageRoute(builder: (context){
+          return GetUserData();
+        }));
+        /*setState(() {
           UserDetails.headline=headline;
           UserDetails.rollNo=rollNo;
           UserDetails.location=location;
@@ -66,8 +108,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           UserDetails.twitterUrl=twit;
           UserDetails.whatAppNo=mobile;
           UserDetails.birthday=dob;
-        });
-        Navigator.pop(context);
+        });*/
+       // Navigator.pop(context);
 
       } else {
         print("null is being printed <=");
@@ -78,7 +120,37 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
+  bool bb=false,vv=false,tt=false,bd=false,cr=false,fb=false,ch=false,gy=false;
 
+  void c(){
+    for(var i=0;i<UserDetails.mySportsList!.length;i++){
+      if (UserDetails.mySportsList![i]=='BasketBall'){
+        bb=true;
+      }else if (UserDetails.mySportsList![i]=='FootBall'){
+        fb=true;
+      }else if (UserDetails.mySportsList![i]=='VolleyBall'){
+        vv=true;
+      }else if (UserDetails.mySportsList![i]=='TableTennis'){
+        tt=true;
+      }else if (UserDetails.mySportsList![i]=='Badminton'){
+        bd=true;
+      }else if (UserDetails.mySportsList![i]=='Cricket'){
+        cr=true;
+      }else if (UserDetails.mySportsList![i]=='Chess'){
+        ch=true;
+      }else if (UserDetails.mySportsList![i]=='Gym'){
+        gy=true;
+      }
+
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    c();
+  }
 
   final formkey = GlobalKey<FormState>();
   String? headline;
@@ -207,10 +279,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             UserDetails.birthday=dob;
                           });
                         });
-                        print(dob);
                       },
                       child: Container(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         alignment: Alignment.center,
 
                         decoration: BoxDecoration(
@@ -390,31 +461,157 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 20,),
                 const Text('Sports Interested',style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20
                 ),),
-                /*Padding(
-                  padding: const EdgeInsets.only(left: 50,right: 50),
-                  child: ListView.builder(
-
-                    itemCount: UserDetails.sportList?.length,
-                      itemBuilder: (context,index){
-                        var _lit=['BasketBall',
-                        'VolleyBall',
-                        ''];
-                        _lit.clear();
-                        for(int i=0;i<UserDetails.sportList!.length;i++){
-                          if (UserDetails.sportList['BasketBall']==)
-                        }
-
-                      return EditSportList(
-                          onCli: onCli,
-                          onTap: (){},
-                          name: UserDetails.sportList?.keys[index])
-                      }),
-                ),*/
+                const SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('BasketBall',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          bb==true? bb=false:bb=true;
+                        });
+                      },
+                      child: onClick(bb),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('VolleyBall',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          vv==true? vv=false:vv=true;
+                        });
+                      },
+                      child: onClick(vv),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('TableTennis',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          tt==true? tt=false:tt=true;
+                        });
+                      },
+                      child: onClick(tt),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Badminton',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          bd==true? bd=false:bd=true;
+                        });
+                      },
+                      child: onClick(bd),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Cricket',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          cr==true? cr=false:cr=true;
+                        });
+                      },
+                      child: onClick(cr),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('FootBall',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          fb==true? fb=false:fb=true;
+                        });
+                      },
+                      child: onClick(fb),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Chess',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          ch==true? ch=false:ch=true;
+                        });
+                      },
+                      child: onClick(ch),
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Gym',style: TextStyle(
+                      color: Color(0xFFAFB42B),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),),
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          gy==true? gy=false:gy=true;
+                        });
+                      },
+                      child: onClick(gy),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
@@ -422,37 +619,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
-}
-
-class EditSportList extends StatelessWidget {
-  late String name;
-  late VoidCallback onTap;
-  late bool onCli;
-  EditSportList({required this.onCli,
-  required this.onTap,
-  required this.name});
-
-
   Widget onClick(bool onp){
     return onp?const Icon(Icons.check_circle,
       color: Colors.green,size: 30,
     ):const Icon(Icons.cancel,color: Colors.red,size: 30,);
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(name,style: const TextStyle(
-          color: Color(0xFFAFB42B),
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),),
-        GestureDetector(
-          onTap: onTap,
-          child: onClick(onCli),
-        )
-      ],
-    );
-  }
 }
+
