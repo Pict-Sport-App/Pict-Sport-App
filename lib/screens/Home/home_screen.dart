@@ -5,6 +5,8 @@ import 'package:flutter/physics.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
+import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 import 'Basketball/basketball.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -99,10 +101,14 @@ class _HomeScreenState extends State<HomeScreen>
                             transform: Matrix4.identity()
                               ..translate(
                                 0.0,
-                                -height*0.07,
+                                -height*0.04,
                               ),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return const VolleyBall_Screen();
+                                }));
+                              },
                               text: 'VolleyBall',
                               image: 'assets/volleyball.jpg',
                             ),
@@ -126,10 +132,14 @@ class _HomeScreenState extends State<HomeScreen>
                             transform: Matrix4.identity()
                               ..translate(
                                 -width*0.01,
-                                -height*0.08,
+                                -height*0.06,
                               ),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return const BasketBall_screen();
+                                }));
+                              },
                               text: 'BasketBall',
                               image: 'assets/basketball.jpg',
                             ),
@@ -143,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.01, -height*0.08),
+                            transform: Matrix4.identity()..translate(width*0.01, -height*0.06),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Badminton',
@@ -166,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(-width*0.02, -height*0.14),
+                            transform: Matrix4.identity()..translate(-width*0.04, -height*0.07),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Chess',
@@ -176,89 +186,13 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    Transform(
-                      //chess
-                      transform: Matrix4.identity()..translate(0.0,-height*0.13),
-                        child: const Text('<---',style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),)),
-                    Column(
-                      children: [
-                        Transform(
-                            transform: Matrix4.identity()..translate(0.0,-height*0.11),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              //volleyball
-                              angle: 1.5,
-                              child: const Text('<---',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                        Transform(
-                          //basketball
-                            transform: Matrix4.identity()..translate(-width*0.15,-height*0.1),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              angle: 0.8,
-                              child: const Text('<---',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                        Transform(
-                          //badminton
-                            transform: Matrix4.identity()..translate(width*0.15,-height*0.12),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              angle: -4,
-                              child: const Text('<---',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                        Transform(transform: Matrix4.identity()
-                          ..translate(0.0,-height*0.14),
-                            child:SizedBox(
-                              height: 160,
-                              width: 100,
-                              child:  Lottie.asset('assets/sport.json',),
-                            )),
-                        Transform(
-                          //gym
-                            transform: Matrix4.identity()..translate(-width*0.1,-height*0.17),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              angle: -4,
-                              child: const Text('--->',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                        Transform(
-                          //cricket
-                            transform: Matrix4.identity()..translate(0.0,-height*0.12 ),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              angle: 1.5,
-                              child: const Text('--->',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                        Transform(
-                          //football
-                            transform: Matrix4.identity()..translate(width*0.1,-height*0.2),
-                            alignment: Alignment.topCenter,
-                            child: Transform.rotate(
-                              angle: 7,
-                              child: const Text('--->',style: TextStyle(
-                                  fontWeight: FontWeight.bold
-                              ),),
-                            )),
-                      ],
-                    ),
-                    Transform(
-                      //tabletennis
-                        transform: Matrix4.identity()..translate(0.0,-height*0.13),
-                        child: const Text('--->',style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),)),
+                    Transform(transform: Matrix4.identity()
+                      ..translate(0.0,-height*0.07),
+                        child:Container(
+                          height: 160,
+                          width: 100,
+                          child:  Lottie.asset('assets/sport.json',),
+                        )),
                     AnimationConfiguration.staggeredList(
                       position: 1,
                       duration: const Duration(milliseconds: 905),
@@ -266,8 +200,12 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.02,-height*0.14),
-                            child: MyCustomWidget(onTap: (){},
+                            transform: Matrix4.identity()..translate(width*0.04,-height*0.07),
+                            child: MyCustomWidget(onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return TabletannisScreen();
+                              }));
+                            },
                               text: 'Tabletennis',image: 'assets/TT.png',),
                           ),
                         ),
@@ -286,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(-width*0.01, -height*0.19),
+                            transform: Matrix4.identity()..translate(-width*0.01, -height*0.09),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Gym',
@@ -303,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.01,-height*0.19),
+                            transform: Matrix4.identity()..translate(width*0.01,-height*0.09),
                             child: MyCustomWidget(onTap: (){},
                               text: 'Football',image: 'assets/football.jpg',),
                           ),
@@ -323,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(0.0,-height*0.2),
+                            transform: Matrix4.identity()..translate(0.0,-height*0.1),
                             child: MyCustomWidget(onTap: (){}
                               ,text: 'Cricket',image: 'assets/cricket.jpg',),),
                         ),
