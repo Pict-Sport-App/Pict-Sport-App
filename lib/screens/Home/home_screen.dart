@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/physics.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'Basketball/basketball.dart';
@@ -88,16 +89,25 @@ class _HomeScreenState extends State<HomeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Transform(
-                      transform: Matrix4.identity()
-                        ..translate(
-                          0.0,
-                          -height*0.04,
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()
+                              ..translate(
+                                0.0,
+                                -height*0.07,
+                              ),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'VolleyBall',
+                              image: 'assets/volleyball.jpg',
+                            ),
+                          ),
                         ),
-                      child: MyCustomWidget(
-                        onTap: () {},
-                        text: 'VolleyBall',
-                        image: 'assets/volleyball.jpg',
                       ),
                     ),
                   ],
@@ -106,24 +116,41 @@ class _HomeScreenState extends State<HomeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Transform(
-                      transform: Matrix4.identity()
-                        ..translate(
-                          -width*0.01,
-                          -height*0.06,
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 1200),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()
+                              ..translate(
+                                -width*0.01,
+                                -height*0.08,
+                              ),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'BasketBall',
+                              image: 'assets/basketball.jpg',
+                            ),
+                          ),
                         ),
-                      child: MyCustomWidget(
-                        onTap: () {},
-                        text: 'BasketBall',
-                        image: 'assets/basketball.jpg',
                       ),
                     ),
-                    Transform(
-                      transform: Matrix4.identity()..translate(width*0.01, -height*0.06),
-                      child: MyCustomWidget(
-                        onTap: () {},
-                        text: 'Badminton',
-                        image: 'assets/badminton.jpg',
+                    AnimationConfiguration.staggeredList(position: 1,
+                    duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(width*0.01, -height*0.08),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'Badminton',
+                              image: 'assets/badminton.jpg',
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -132,25 +159,119 @@ class _HomeScreenState extends State<HomeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Transform(
-                      transform: Matrix4.identity()..translate(-width*0.04, -height*0.07),
-                      child: MyCustomWidget(
-                        onTap: () {},
-                        text: 'Chess',
-                        image: 'assets/chess.jpeg',
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 1500),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(-width*0.02, -height*0.14),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'Chess',
+                              image: 'assets/chess.jpeg',
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    Transform(transform: Matrix4.identity()
-                      ..translate(0.0,-height*0.07),
-                        child:Container(
-                          height: 160,
-                          width: 100,
-                          child:  Lottie.asset('assets/sport.json',),
-                        )),
                     Transform(
-                      transform: Matrix4.identity()..translate(width*0.04,-height*0.07),
-                      child: MyCustomWidget(onTap: (){},
-                        text: 'Tabletennis',image: 'assets/TT.png',),
+                      //chess
+                      transform: Matrix4.identity()..translate(0.0,-height*0.13),
+                        child: const Text('<---',style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),)),
+                    Column(
+                      children: [
+                        Transform(
+                            transform: Matrix4.identity()..translate(0.0,-height*0.11),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              //volleyball
+                              angle: 1.5,
+                              child: const Text('<---',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                        Transform(
+                          //basketball
+                            transform: Matrix4.identity()..translate(-width*0.15,-height*0.1),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              angle: 0.8,
+                              child: const Text('<---',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                        Transform(
+                          //badminton
+                            transform: Matrix4.identity()..translate(width*0.15,-height*0.12),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              angle: -4,
+                              child: const Text('<---',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                        Transform(transform: Matrix4.identity()
+                          ..translate(0.0,-height*0.14),
+                            child:SizedBox(
+                              height: 160,
+                              width: 100,
+                              child:  Lottie.asset('assets/sport.json',),
+                            )),
+                        Transform(
+                          //gym
+                            transform: Matrix4.identity()..translate(-width*0.1,-height*0.17),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              angle: -4,
+                              child: const Text('--->',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                        Transform(
+                          //cricket
+                            transform: Matrix4.identity()..translate(0.0,-height*0.12 ),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              angle: 1.5,
+                              child: const Text('--->',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                        Transform(
+                          //football
+                            transform: Matrix4.identity()..translate(width*0.1,-height*0.2),
+                            alignment: Alignment.topCenter,
+                            child: Transform.rotate(
+                              angle: 7,
+                              child: const Text('--->',style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),),
+                            )),
+                      ],
+                    ),
+                    Transform(
+                      //tabletennis
+                        transform: Matrix4.identity()..translate(0.0,-height*0.13),
+                        child: const Text('--->',style: TextStyle(
+                          fontWeight: FontWeight.bold
+                        ),)),
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(width*0.02,-height*0.14),
+                            child: MyCustomWidget(onTap: (){},
+                              text: 'Tabletennis',image: 'assets/TT.png',),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -158,18 +279,36 @@ class _HomeScreenState extends State<HomeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Transform(
-                      transform: Matrix4.identity()..translate(-width*0.01, -height*0.09),
-                      child: MyCustomWidget(
-                        onTap: () {},
-                        text: 'Gym',
-                        image: 'assets/gym.jpg',
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 1200),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(-width*0.01, -height*0.19),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'Gym',
+                              image: 'assets/gym.jpg',
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    Transform(
-                      transform: Matrix4.identity()..translate(width*0.01,-height*0.09),
-                      child: MyCustomWidget(onTap: (){},
-                        text: 'Football',image: 'assets/football.jpg',),
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(width*0.01,-height*0.19),
+                            child: MyCustomWidget(onTap: (){},
+                              text: 'Football',image: 'assets/football.jpg',),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -177,10 +316,19 @@ class _HomeScreenState extends State<HomeScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Transform(
-                      transform: Matrix4.identity()..translate(0.0,-height*0.1),
-                      child: MyCustomWidget(onTap: (){}
-                        ,text: 'Cricket',image: 'assets/cricket.jpg',),),
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        horizontalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: Transform(
+                            transform: Matrix4.identity()..translate(0.0,-height*0.2),
+                            child: MyCustomWidget(onTap: (){}
+                              ,text: 'Cricket',image: 'assets/cricket.jpg',),),
+                        ),
+                      ),
+                    ),
                   ],
                 )
               ],
@@ -390,7 +538,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
         child: Column(
           children: [
             Container(
-              height: height * 0.10,
+              height: height * 0.09,
               width: width * 0.22,
               decoration: BoxDecoration(
 
