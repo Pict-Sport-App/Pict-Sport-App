@@ -1,193 +1,10 @@
-/*
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/appdrFawer/commans/collaps_navigation_bar.dart';
-import 'package:psa/screens/Home/sport.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/sports_card.dart';
-import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
-
-import 'Basketball/basketball.dart';
-<<<<<<< Updated upstream
-import 'VolleyBall/Volleyball.dart';
-=======
-import 'dhiarjIssueWidget.dart';
->>>>>>> Stashed changes
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final scrollController = ScrollController();
-
-  void onListen() {
-    setState(() {});
-  }
-
-  List<Sport> myList = [];
-
-  void mySportList() {
-    myList.clear();
-    for (int i = 0; i < UserDetails.mySportsList!.length; i++) {
-      if (UserDetails.mySportsList![i] == 'BasketBall') {
-        myList.add(item4);
-      } else if (UserDetails.mySportsList![i] == 'VolleyBall') {
-        myList.add(item5);
-      } else if (UserDetails.mySportsList![i] == 'TableTennis') {
-        myList.add(item2);
-      } else if (UserDetails.mySportsList![i] == 'Badminton') {
-        myList.add(item6);
-      } else if (UserDetails.mySportsList![i] == 'Cricket') {
-        myList.add(item3);
-      } else if (UserDetails.mySportsList![i] == 'FootBall') {
-        myList.add(item1);
-      } else if (UserDetails.mySportsList![i] == 'Chess') {
-        myList.add(item7);
-      } else if (UserDetails.mySportsList![i] == 'Gym') {
-        myList.add(item8);
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    mySportList();
-    //myList.addAll(List.from(myList));
-    scrollController.addListener(onListen);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    scrollController.removeListener(onListen);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 0, right: 0, top: 0),
-        child: CustomScrollView(
-          controller: scrollController,
-          slivers: <Widget>[
-            SliverAppBar(
-              // centerTitle: true,
-              actions: [
-                Padding(
-                  padding:  EdgeInsets.only(left: 8.0,top: 12,right:  MediaQuery.of(context).size.width *0.9,),
-                  child: Container(
-                    child: GestureDetector(
-                      child: const FaIcon(
-                        FontAwesomeIcons.bars,
-                        color:  const Color(0xFF272D34),
-                        size: 25,
-                      ),
-                      onTap: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                    ),
-                  ),
-                ),
-
-              ],
-              pinned: true,
-              shape: const RoundedRectangleBorder(
-                  /*borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),*/
-                  ),
-              expandedHeight: MediaQuery.of(context).size.height * 0.35,
-              flexibleSpace: FlexibleSpaceBar(
-                // centerTitle: true,
-                title: const Text('PICT SPORTS'),
-                background: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(40),
-                      bottomRight: Radius.circular(40),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  const heightFactor = 1.0;
-                  final sport = myList[index];
-                  final itemPositionOffset = index * itemSize * heightFactor;
-                  final difference =
-                      scrollController.offset - itemPositionOffset;
-                  final percent =
-                      1.0 - (difference / (itemSize * heightFactor));
-                  double opacity = percent;
-                  double scale = percent;
-                  if (opacity > 1.0) opacity = 1.0;
-                  if (opacity < 0.0) opacity = 0.0;
-                  if (percent > 1.0) scale = 1.0;
-
-                  return Align(
-                    heightFactor: heightFactor,
-                    child: Opacity(
-                      opacity: opacity,
-                      child: Transform(
-                        alignment: Alignment.center,
-                        transform: Matrix4.identity()..scale(scale, 1.0),
-                        child: SportsCard(
-                          () {
-                            if (sport.name == 'Table Tennis') {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return TabletannisScreen();
-                              }));
-                            } else if (sport.name == 'Basketball') {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const BasketBall_screen();
-                              }));
-                            } else if (sport.name=='Volleyball'){
-                              print('ii');
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return const VolleyBall_Screen();
-                              }));
-                            }
-                          },
-                          index,
-                          sport,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                childCount: myList.length,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
- */
-
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/physics.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 import 'Basketball/basketball.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -216,14 +33,15 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body:
-          Stack(
+      body: Stack(
         children: [
-          Container(
+          SizedBox(
             height: 280,
             // color: Colors.red,
-            width: MediaQuery.of(context).size.width,
+            width: width,
             child: CustomPaint(
               painter: BackgroundPainter(
                 animation: _controller.view,
@@ -234,19 +52,17 @@ class _HomeScreenState extends State<HomeScreen>
             padding: EdgeInsets.only(
               left: 8.0,
               top: 20,
-              right: MediaQuery.of(context).size.width * 0.9,
+              right: width * 0.9,
             ),
-            child: Container(
-              child: GestureDetector(
-                child: const FaIcon(
-                  FontAwesomeIcons.bars,
-                  color: Colors.white,
-                  size: 25,
-                ),
-                onTap: () {
-                  Scaffold.of(context).openDrawer();
-                },
+            child: GestureDetector(
+              child: const FaIcon(
+                FontAwesomeIcons.bars,
+                color: Colors.white,
+                size: 25,
               ),
+              onTap: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
           ),
           const Padding(
@@ -256,85 +72,120 @@ class _HomeScreenState extends State<HomeScreen>
               child: Text(
                 "PICT SPORT",
                 style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500),
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontFamily: 'Lobster',
+                      fontWeight: FontWeight.w500),
               ),
             ),
           ),
           Positioned(
-            right: 12,
-            top: MediaQuery.of(context).size.height * 0.17,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
+            top: height * 0.2,
+            width: width,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform(
+                      transform: Matrix4.identity()
+                        ..translate(
+                          0.0,
+                          -height*0.04,
+                        ),
+                      child: MyCustomWidget(
+                        onTap: () {},
+                        text: 'VolleyBall',
+                        image: 'assets/volleyball.jpg',
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform(
+                      transform: Matrix4.identity()
+                        ..translate(
+                          -width*0.01,
+                          -height*0.06,
+                        ),
+                      child: MyCustomWidget(
+                        onTap: () {},
+                        text: 'BasketBall',
+                        image: 'assets/basketball.jpg',
+                      ),
+                    ),
+                    Transform(
+                      transform: Matrix4.identity()..translate(width*0.01, -height*0.06),
+                      child: MyCustomWidget(
+                        onTap: () {},
+                        text: 'Badminton',
+                        image: 'assets/badminton.jpg',
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform(
+                      transform: Matrix4.identity()..translate(-width*0.04, -height*0.07),
+                      child: MyCustomWidget(
+                        onTap: () {},
+                        text: 'Chess',
+                        image: 'assets/chess.jpeg',
+                      ),
+                    ),
+                    Transform(transform: Matrix4.identity()
+                      ..translate(0.0,-height*0.07),
+                        child:Container(
+                          height: 160,
+                          width: 100,
+                          child:  Lottie.asset('assets/sport.json',),
+                        )),
+                    Transform(
+                      transform: Matrix4.identity()..translate(width*0.04,-height*0.07),
+                      child: MyCustomWidget(onTap: (){},
+                        text: 'Tabletennis',image: 'assets/TT.png',),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform(
+                      transform: Matrix4.identity()..translate(-width*0.01, -height*0.09),
+                      child: MyCustomWidget(
+                        onTap: () {},
+                        text: 'Gym',
+                        image: 'assets/gym.jpg',
+                      ),
+                    ),
+                    Transform(
+                      transform: Matrix4.identity()..translate(width*0.01,-height*0.09),
+                      child: MyCustomWidget(onTap: (){},
+                        text: 'Football',image: 'assets/football.jpg',),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Transform(
+                      transform: Matrix4.identity()..translate(0.0,-height*0.1),
+                      child: MyCustomWidget(onTap: (){}
+                        ,text: 'Cricket',image: 'assets/cricket.jpg',),),
+                  ],
+                )
+              ],
+            ),
           ),
-          Positioned(
-            right: 12,
-            top: MediaQuery.of(context).size.height * 0.35,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            right: 12,
-            top: MediaQuery.of(context).size.height * 0.53,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            right: 12,
-            top: MediaQuery.of(context).size.height * 0.70,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            left: 12,
-            top: MediaQuery.of(context).size.height * 0.17,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            left: 12,
-            top: MediaQuery.of(context).size.height * 0.35,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            left: 12,
-            top: MediaQuery.of(context).size.height * 0.53,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-          Positioned(
-            left: 12,
-            top: MediaQuery.of(context).size.height * 0.70,
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.width * 0.4,
-                // color: Colors.red,
-                child: MyCustomWidget()),
-          ),
-
         ],
       ),
     );
@@ -518,6 +369,11 @@ class SpringCurve extends Curve {
 }
 
 class MyCustomWidget extends StatefulWidget {
+  late String image;
+  late String text;
+  late VoidCallback onTap;
+  MyCustomWidget(
+      {required this.onTap, required this.image, required this.text});
   @override
   _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
@@ -525,49 +381,95 @@ class MyCustomWidget extends StatefulWidget {
 class _MyCustomWidgetState extends State<MyCustomWidget> {
   @override
   Widget build(BuildContext context) {
-    return
-        // Scaffold(
-        // body:
-        DraggableCard(
-            child: GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const BasketBall_screen();
-        }));
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastLinearToSlowEaseIn,
-        height: 120,
-        width: 120,
-        decoration: BoxDecoration(
-          image: const DecorationImage(
-              image: AssetImage("assets/ball.png"), fit: BoxFit.fitWidth),
-          // color: const Color(0xff8639FB),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(5),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white.withOpacity(0.4),
-              blurRadius: 30,
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: Column(
+          children: [
+            Container(
+              height: height * 0.10,
+              width: width * 0.22,
+              decoration: BoxDecoration(
+
+                border:
+                Border.all(color: Colors.black12, width: 3),
+                image: DecorationImage(
+                    image: AssetImage(widget.image), fit: BoxFit.fill),
+                // color: const Color(0xff8639FB),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xFF8C9EFF),
+                    offset: Offset(
+                      5.0,
+                      5.0,
+                    ),
+                    blurRadius: 10.0,
+                    spreadRadius: 2.0,
+                  ), //BoxShadow
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 0.0,
+                    spreadRadius: 0.0,
+                  ), //BoxShadow
+                ],
+                /*boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.4),
+                    blurRadius: 30,
+                  ),
+                ],*/
+              ),
             ),
+            Container(
+              height: height * 0.03,
+              width: width * 0.22,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0xFF8C9EFF),
+                    offset: Offset(
+                      5.0,
+                      5.0,
+                    ),
+                    blurRadius: 10.0,
+                    spreadRadius: 2.0,
+                  ), //BoxShadow
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 0.0,
+                    spreadRadius: 0.0,
+                  ), //BoxShadow
+                ],
+                border:
+                Border.all(color: Colors.black12, width: 3),
+                color: Colors.grey[100],
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
+              ),
+              child: Center(
+                child: Text(
+                  widget.text,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
-        child: const Center(
-          child: Text(
-            '',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 25,
-            ),
-          ),
-        ),
       ),
-      // ),
-      // ),
-    ));
+    );
   }
 }
 

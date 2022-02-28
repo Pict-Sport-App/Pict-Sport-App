@@ -1,8 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
-import 'package:psa/screens/announcements/create_annoucement.dart';
 import 'package:psa/screens/announcements/single_announce_widget.dart';
 
 class Announcement_Screen extends StatefulWidget {
@@ -37,7 +38,7 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
             child: GestureDetector(
               child: const FaIcon(
                 FontAwesomeIcons.bars,
-                color: const Color(0xFF272D34),
+                color: Color(0xFF272D34),
                 size: 25,
               ),
               onTap: () {
@@ -46,19 +47,42 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: const <Widget>[
-              SingleAnnouncement(),
-              SingleAnnouncement(),
-              // SingleAnnouncement(),
-              // SingleAnnouncement(),
-              // SingleAnnouncement(),
-              // SingleAnnouncement(),
-              // SingleAnnouncement(),
-              // SingleAnnouncement(),
-            ],
-          ),
-        ));
+        body: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('Announcement')
+                .snapshots(),
+            builder: (ctx, AsyncSnapshot userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final usersnap = userSnapshot.data!.docs;
+              return ListView.builder(
+                  itemCount: usersnap.length,
+                  itemBuilder: (context, index) {
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 905),
+                      child: SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: SingleAnnouncement(
+                            imageUrl: usersnap[index]['imageURL'],
+                            title: usersnap[index]['title'],
+                            date: usersnap[index]['dateTime'],
+                            descrip: usersnap[index]['description'],
+                            venue: usersnap[index]['venue'],
+                            number1: usersnap[index]['number1'],
+                            number2: usersnap[index]['number2'],
+                            contactNo1: usersnap[index]['contact1'],
+                            contactNo2: usersnap[index]['contact2'],
+                            link: usersnap[index]['link'],
+                          ),
+                        ),
+                      ),
+                    );
+                  });
+            }));
   }
 }

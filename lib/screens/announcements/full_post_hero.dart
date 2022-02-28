@@ -1,8 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FullPost extends StatefulWidget {
-  const FullPost({Key? key}) : super(key: key);
+  late Timestamp date;
+  late String imageUrl;//
+  late String descrip;//
+  late String link;
+  late String number;
+  late String title;//
+  late String venue;//
+
+  FullPost(
+  {required this.descrip,
+    required this.imageUrl,
+    required this.venue,
+    required this.title,
+    required this.date,
+    required this.link,
+    required this.number});
 
   @override
   _FullPostState createState() => _FullPostState();
@@ -18,15 +34,15 @@ class _FullPostState extends State<FullPost> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 222,
                 width: double.infinity,
                 child: Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       child: Image.network(
-                        'https://cvshealth.com/sites/default/files/cvs-health-vaccine-information-1-16x9.jpg',
+                        widget.imageUrl,
                         width: double.infinity,
                         fit: BoxFit.fitWidth,
                       ),
@@ -47,9 +63,9 @@ class _FullPostState extends State<FullPost> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const Text(
-                                " 🏐 TABLE TENNIS",
-                                style: TextStyle(
+                              Text(
+                                widget.title,
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
@@ -80,8 +96,8 @@ class _FullPostState extends State<FullPost> {
                 padding: const EdgeInsets.all(14.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const <Widget>[
-                    Text(
+                  children: <Widget>[
+                    const Text(
                       "Update : ",
                       style: TextStyle(
                         color: Colors.white,
@@ -89,19 +105,16 @@ class _FullPostState extends State<FullPost> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(left: 20.0),
                       child: Text(
-                        " This is to inform all P.I.C.T. students that the Volleyball trials for Boys and Girls "
-                        "  \nStudents should come in Sports Tracks/Shorts and Sports Shoes only."
-                        " \nNote :- No one will be allowed to give the trials without sport shoes"
-                        "  \nFor more details interested students should contact the undersigned people.",
-                        style: TextStyle(
+                        widget.descrip,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 17,
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Link : ",
                       style: TextStyle(
                         color: Colors.white,
@@ -109,17 +122,17 @@ class _FullPostState extends State<FullPost> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(left: 20.0),
                       child:
                       Text(
-                        "https://www.youtube.com/",
-                        style: TextStyle(
+                        widget.link,
+                        style: const TextStyle(
                           color: Colors.pink,
                           fontSize: 17,
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Contact : ",
                       style: TextStyle(
                         color: Colors.white,
@@ -127,19 +140,16 @@ class _FullPostState extends State<FullPost> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(left: 20.0),
                       child: Text(
-                        "Ankit Kale:"
-                        "9890193219"
-                        "\nGauging :  9623608306"
-                        "\nPreeti :8668455295",
-                        style: TextStyle(
+                        widget.number,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 17,
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Venue : ",
                       style: TextStyle(
                         color: Colors.white,
@@ -147,10 +157,10 @@ class _FullPostState extends State<FullPost> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(left: 20.0),
                       child: Text(
-                        "will be conducted by the P.I.C.T. Volleyball Ground on 22nd February, Tuesday at  5:30 PM sharp.",
-                        style: TextStyle(
+                        widget.venue,
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 17,
                         ),

@@ -1,8 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:psa/screens/announcements/full_post_hero.dart';
+import 'package:psa/screens/announcements/announcement_page.dart';
 
 class SingleAnnouncement extends StatefulWidget {
-  const SingleAnnouncement({Key? key}) : super(key: key);
+  late Timestamp date;
+  late String imageUrl;
+  late String descrip;
+  late String link;
+  late String number1;
+  late String number2;
+  late String contactNo1;
+  late String contactNo2;
+  late String title;
+  late String venue;
+
+  SingleAnnouncement(
+      {required this.contactNo2,
+      required this.contactNo1,
+      required this.number2,
+      required this.number1,
+      required this.link,
+      required this.imageUrl,
+      required this.title,
+      required this.date,
+      required this.descrip,
+      required this.venue});
 
   @override
   _SingleAnnouncementState createState() => _SingleAnnouncementState();
@@ -11,15 +33,15 @@ class SingleAnnouncement extends StatefulWidget {
 class _SingleAnnouncementState extends State<SingleAnnouncement> {
   @override
   Widget build(BuildContext context) {
+    double width=MediaQuery.of(context).size.width;
+    double height=MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-            color: Colors.white38,
-            borderRadius: const BorderRadius.all(
-                Radius.circular(5.0) //                 <--- border radius here
-                ),
+            color: const Color(0xFFE0E0E0),
+            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
             border: Border.all(color: Colors.blueAccent)),
         child: Column(
           children: <Widget>[
@@ -28,20 +50,18 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
-                children: const <Widget>[
+                children: <Widget>[
                   CircleAvatar(
                     radius: 12,
-                    backgroundImage: NetworkImage(
-                        'https://cvshealth.com/sites/default/files/cvs-health-vaccine-information-1-16x9.jpg'),
+                    backgroundImage: NetworkImage(widget.imageUrl),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Text(
-                    "BasketBall",
-                    style: TextStyle(color: Colors.black, fontSize: 19),
+                    widget.title,
+                    style: const TextStyle(color: Colors.black, fontSize: 19),
                   ),
-                  Text(",  Pict Pune")
                 ],
               ),
             ),
@@ -49,8 +69,15 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
               height: 12,
             ),
             Stack(children: [
-              Image.network(
-                  'https://cvshealth.com/sites/default/files/cvs-health-vaccine-information-1-16x9.jpg'),
+              //Image.network(widget.imageUrl),
+              Container(
+                width: width,
+                height: 200,
+                decoration: BoxDecoration(
+                image: DecorationImage(image: NetworkImage(widget.imageUrl),
+                  fit: BoxFit.fill
+                )
+              ),),
               const Positioned(
                   right: 12,
                   top: 15,
@@ -58,13 +85,6 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                     Icons.download_for_offline,
                     size: 30,
                   )),
-              // const Positioned(
-              //     bottom: 39,
-              //     right: 12,
-              //     child: Icon(
-              //       Icons.share,
-              //       size: 30,
-              //     )),
               const Positioned(
                   bottom: 6,
                   right: 12,
@@ -84,32 +104,47 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => FullPost()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => announcement_page(
+                                    descrip: widget.descrip,
+                                    imageUrl: widget.imageUrl,
+                                    venue: widget.venue,
+                                    title: widget.title,
+                                    date: widget.date,
+                                    link: widget.link,
+                                    number1: widget.number1,
+                                    number2: widget.number2,
+                                    contactNo1: widget.contactNo1,
+                                    contactNo2: widget.contactNo2,
+                                  )));
                     },
-                    child: const Text(
-                      "See Post",
-                      style: TextStyle(color: Colors.lightBlue),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFFA726),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "See Post",
+                          style: TextStyle(fontSize: 17,color: Colors.white),
+                        ),
+                      ),
                     ),
                   )
                 ],
               ),
             ),
-            Container(
+            /*Container(
               padding: const EdgeInsets.only(left: 0.0, top: 0, right: 15),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    child: DescriptionTextWidget(
-                        text: "🏐🏐🏐🏐🏐🏐🏐🏐🏐\n"
-                            "  This is to inform all P.I.C.T. students that the Volleyball trials for  Boys and Girls will be conducted by the P.I.C.T. Volleyball Ground on 22nd February, Tuesday at  5:30 PM sharp."
-                            "  \nStudents should come in Sports Tracks/Shorts and Sports Shoes only."),
-                  ),
+                  DescriptionTextWidget(text: widget.descrip),
                 ],
               ),
-            ),
+            ),*/
           ],
         ),
       ),
@@ -120,7 +155,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
 
-  DescriptionTextWidget({required this.text});
+  const DescriptionTextWidget({required this.text});
 
   @override
   _DescriptionTextWidgetState createState() => _DescriptionTextWidgetState();
@@ -156,10 +191,7 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
                 Text(flag ? (firstHalf + "...") : (firstHalf + secondHalf)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
-                  // textBaseline: TextBaseline.alphabetic,
                   children: <Widget>[
-                    // Text(flag ? (firstHalf + "...") : (firstHalf + secondHalf)),
                     const Text(
                       "Posted on 21/feb/20121",
                       style: TextStyle(
