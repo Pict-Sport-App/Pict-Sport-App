@@ -41,7 +41,10 @@ dependencies:
   flutter_staggered_animations: ^1.0.0
   table_calendar: ^3.0.2
   flutter_spinkit: ^5.1.0
-
+  carousel_slider: ^4.0.0
+  flutter_svg: ^1.0.3
+  google_fonts: ^2.3.0
+  mailto: ^2.0.0
 
 #  material_design_icons_flutter: 5.0.6595
 

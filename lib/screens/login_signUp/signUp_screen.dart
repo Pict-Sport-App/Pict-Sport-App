@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/screens/login_signUp/login_screen.dart';
 import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
 import 'package:psa/services/getUserData.dart';
@@ -43,7 +42,6 @@ class _SignupState extends State<Signup> {
             child:
             Column(
               children: [
-
                 Container(
                   height: height * 0.45,
                   width: width,
