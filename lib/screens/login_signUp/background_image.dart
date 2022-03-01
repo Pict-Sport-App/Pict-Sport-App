@@ -15,30 +15,31 @@ class _BackgroundState extends State<Background> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    return Container(
-      width: double.infinity,
-      height: size.height,
+    double height= MediaQuery.of(context).size.height;
+    double width= MediaQuery.of(context).size.width;
+    return SizedBox(
+      width: width,
+      height: height,
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
             top: 0,
             right: 0,
-            child: Image.asset('assets/top1.png', width: size.width),
+            child: Image.asset('assets/top1.png', width: width),
           ),
           Positioned(
             top: 0,
             right: 0,
-            child: Image.asset("assets/top2.png", width: size.width),
+            child: Image.asset("assets/top2.png", width: width),
           ),
           Positioned(
             top: 6,
             right: 0,
-            child: Container(
+            child: SizedBox(
               // height: 35,width: 52,
-              height: MediaQuery.of(context).size.height * 0.21,
-              width: MediaQuery.of(context).size.height * 0.21,
+              height: height* 0.21,
+              width: height * 0.21,
               // child: Image.asset("assets/google.png",),
               child: Lottie.network(
                   'https://assets9.lottiefiles.com/packages/lf20_r7bfvyke.json'),
@@ -46,11 +47,11 @@ class _BackgroundState extends State<Background> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.102,
-            left: MediaQuery.of(context).size.height * 0.04,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.height * 0.3,
+            top: height * 0.102,
+            left: height * 0.04,
+            child: SizedBox(
+              height: height * 0.35,
+              width: height * 0.3,
               child: const Text(
                 "Welcome \tPict'ians",
                 style: TextStyle(
@@ -63,11 +64,11 @@ class _BackgroundState extends State<Background> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.15,
-            left: MediaQuery.of(context).size.width * 0.15,
+            top: height * 0.15,
+            left: width * 0.15,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.50,
-              width: MediaQuery.of(context).size.height * 0.34,
+              height: height * 0.50,
+              width: height * 0.34,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/logo1.png'),
@@ -76,8 +77,60 @@ class _BackgroundState extends State<Background> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.61,
-            left: MediaQuery.of(context).size.width * 0.19,
+              top: height * 0.61,
+              left: width * 0.19,
+              child: InkWell(
+                onTap: (){print('kkk');
+                Authentication().signInWithGoogle(context).then((result) {
+                  if (result == false) {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => GetUserData()));
+                  } else if (result == true) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserInfo()));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        result,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ));
+                  }
+                });
+                },child: Container(
+                height: height * 0.15,
+                width:height * 0.30,
+                decoration: BoxDecoration(
+                  // color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(23),
+                  border: Border.all(color: Colors.blueAccent, width: 3),
+                ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 80,
+                        width: 90,
+                        child: Lottie.network(
+                            'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
+                      ),
+                      const Text(
+                        "SIGN IN",
+                        style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontSize: 27,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  )
+              ),
+              )),
+          /*Positioned(
+            top: height * 0.61,
+            left: width * 0.19,
             child: GestureDetector(
               onTap: () async {
                 print("123");
@@ -113,7 +166,7 @@ class _BackgroundState extends State<Background> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () async {
-                          print("123");
+                          print("euu");
                           await Authentication()
                               .signInWithGoogle(context)
                               .then((result) {
@@ -138,19 +191,16 @@ class _BackgroundState extends State<Background> {
                             }
                           });
                         },
-                        child: Container(
+                        child: SizedBox(
                           height: 80,
                           width: 90,
-                          // child: Image.asset("assets/google.png",
-                          //     width: MediaQuery.of(context).size.width * 0.4),
                           child: Lottie.network(
                               'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
-                          // 'https://assets6.lottiefiles.com/private_files/lf30_dffnrlva.json'),
                         ),
                       ),
                       GestureDetector(
                         onTap: () async {
-                          print("123");
+                          print("yuu");
                           await Authentication()
                               .signInWithGoogle(context)
                               .then((result) {
@@ -175,21 +225,20 @@ class _BackgroundState extends State<Background> {
                             }
                           });
                         },
-                        child: Container(
-                          child: const Text(
-                            "SIGN IN",
-                            style: TextStyle(
-                              color: Colors.lightBlue,
-                              fontSize: 27,
-                              fontWeight: FontWeight.w600,
-                            ),
+                        child: const Text(
+                          "SIGN IN",
+                          style: TextStyle(
+                            color: Colors.lightBlue,
+                            fontSize: 27,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       )
                     ],
-                  )),
+                  )
+                  ),
             ),
-          ),
+          ),*/
           Positioned(
             bottom: 0,
             right: 0,

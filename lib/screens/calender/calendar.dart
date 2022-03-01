@@ -249,10 +249,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       physics: const BouncingScrollPhysics(),
                     itemCount: _calenderevents.length,
                       itemBuilder: (ctx,index){
-                        print('sss');
-                        print(_calenderevents.length);
-                        print(selectedDay);
-                        print('euu');
                     return Container(
                       child: (isSameDay(
                           selectedDay,
