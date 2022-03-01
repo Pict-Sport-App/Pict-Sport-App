@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/screens/announcements/announcement_page.dart';
+import 'package:psa/screens/announcements/poster.dart';
 
 class SingleAnnouncement extends StatefulWidget {
   late Timestamp date;
@@ -70,14 +71,19 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
             ),
             Stack(children: [
               //Image.network(widget.imageUrl),
-              Container(
-                width: width,
-                height: 200,
-                decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(widget.imageUrl),
-                  fit: BoxFit.fill
-                )
-              ),),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>photo(image: widget.imageUrl,)));
+                },
+                child: Container(
+                  width: width,
+                  height: 200,
+                  decoration: BoxDecoration(
+                  image: DecorationImage(image: NetworkImage(widget.imageUrl),
+                    fit: BoxFit.fill
+                  )
+                ),),
+              ),
               const Positioned(
                   right: 12,
                   top: 15,

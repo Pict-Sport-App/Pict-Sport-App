@@ -93,7 +93,7 @@ class SportGrpNameWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 55,
+          height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -103,7 +103,7 @@ class SportGrpNameWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       imag,
-                      style: const TextStyle(fontSize: 30),
+                      style: const TextStyle(fontSize: 25),
                     ),
                   ),
                   const SizedBox(width: 10,),

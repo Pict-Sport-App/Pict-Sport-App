@@ -53,6 +53,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
             },
           ),
         ),
+        actions:  [
+          Transform(
+            transform:Matrix4.identity()..translate(-10.0,10.0,40.0) ,
+            child: Transform.rotate(
+              angle: 0.0,
+              child: const FaIcon(
+                FontAwesomeIcons.solidCalendarAlt,
+                size: 35,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -170,8 +183,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             ),
                           ),
                           headerStyle: HeaderStyle(
-                            leftChevronIcon: const Icon(Icons.chevron_left,color: Colors.white,),
-                            rightChevronIcon: const Icon(Icons.chevron_right,color: Colors.white,),
+                            leftChevronIcon:   const FaIcon(
+                              FontAwesomeIcons.chevronLeft,
+                              color: Colors.white,
+                              size: 20,
+
+                            ),
+                            rightChevronIcon:  const FaIcon(
+                              FontAwesomeIcons.chevronRight,
+                              color: Colors.white,
+                              size: 20,
+
+                            ),
                             headerMargin: const EdgeInsets.only(bottom: 20),
                             decoration: BoxDecoration(
                               color: const Color(0xFFAB47BC).withOpacity(0.0),

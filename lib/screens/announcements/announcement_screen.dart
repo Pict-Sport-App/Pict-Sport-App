@@ -46,8 +46,18 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
               },
             ),
           ),
-          actions: const [
-            Icon(Icons.announcement_outlined,color: Colors.black,),
+          actions:  [
+            Transform(
+              transform:Matrix4.identity()..translate(-10.0,0.0,40.0) ,
+              child: Transform.rotate(
+                angle: 0.0,
+                child: const FaIcon(
+                  FontAwesomeIcons.bullhorn,
+                  size: 35,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
         body: StreamBuilder(
