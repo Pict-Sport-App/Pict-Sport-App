@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/services/getUserData.dart';
 
 class UserInfo extends StatefulWidget {
@@ -13,7 +14,7 @@ class UserInfo extends StatefulWidget {
 
 class _UserInfoState extends State<UserInfo> {
   bool _basketball=false,_cricket=false,_football=false,_badminton=false,
-  _volleyball=false,_chess=false,_gym=false,_tabletennis=false;
+      _volleyball=false,_chess=false,_gym=false,_tabletennis=false;
   String misId='';
   Map<String,bool>? m={
     'BasketBall':false, //🏀 BB
@@ -22,7 +23,7 @@ class _UserInfoState extends State<UserInfo> {
     'Badminton': false,//🏸  BT
     'Cricket':false,//🏏  CR
     'FootBall':false,//⚽ FB
-    'Chess':false,//♟️ CH
+    'Chess':false,//♟ CH
     'Gym':false,//💪 GY
   };
 
@@ -38,16 +39,10 @@ class _UserInfoState extends State<UserInfo> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        /*appBar: AppBar(
-          title: const Text(
-            'UserInfo Screen',
-            style: TextStyle(color: Colors.red),
-          ),
-        ),*/
         body: Container(
           height: height ,
           width: width ,
-          color: const Color(0xFFE3F2FD),
+          color: Colors.white,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -82,13 +77,19 @@ class _UserInfoState extends State<UserInfo> {
                           }else if (val.length>23){
                             return "MIS ID cannot be that long";
                           }else if(!val.endsWith('@ms.pict.edu')) {
-                              return "Please enter valid MIS ID";
-                            }
+                            return "Please enter valid MIS ID";
+                          }
                           return null;
                         },
                         //obscureText: true,
                         decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.email),
+                          prefixIcon: Padding(
+                            padding: EdgeInsets.only(left: 10.0,top: 8,bottom: 3),
+                            child: FaIcon(
+                              FontAwesomeIcons.solidEnvelope,
+                              size: 30,
+                            ),
+                          ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 0, horizontal: 10),
                           enabledBorder: OutlineInputBorder(
@@ -117,12 +118,12 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                     child: Column(
                       children: [
-                       const Text('Select the Sports ',style: TextStyle(
+                        const Text('Select the Sports ',style: TextStyle(
                           color: Color(0xFFFF9800),
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),),
-                       const Text('You are Intersected in ',style: TextStyle(
+                        const Text('You are Intersected in ',style: TextStyle(
                           color: Color(0xFFFF9800),
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -133,28 +134,33 @@ class _UserInfoState extends State<UserInfo> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                             const Text('BasketBall',style: TextStyle(
+                              const Text('BasketBall',style: TextStyle(
                                 color: Color(0xFFAFB42B),
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_basketball==true) {
-                                      _basketball=false;
-                                    } else {
-                                      _basketball=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_basketball),
-                              )
+                              Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _basketball,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _basketball= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -169,23 +175,28 @@ class _UserInfoState extends State<UserInfo> {
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_tabletennis==true) {
-                                      _tabletennis=false;
-                                    } else {
-                                      _tabletennis=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_tabletennis),
-                              )
+                              Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _tabletennis,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _tabletennis= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -199,24 +210,27 @@ class _UserInfoState extends State<UserInfo> {
                                 color: Color(0xFFAFB42B),
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                              ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_cricket==true) {
-                                      _cricket=false;
-                                    } else {
-                                      _cricket=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_cricket),
-                              )
+                              ),),  Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _cricket,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _cricket= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -230,24 +244,28 @@ class _UserInfoState extends State<UserInfo> {
                                 color: Color(0xFFAFB42B),
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                              ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_badminton==true) {
-                                      _badminton=false;
-                                    } else {
-                                      _badminton=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_badminton),
-                              )
+                              ),),Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _badminton,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _badminton= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -261,24 +279,29 @@ class _UserInfoState extends State<UserInfo> {
                                 color: Color(0xFFAFB42B),
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                              ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_volleyball==true) {
-                                      _volleyball=false;
-                                    } else {
-                                      _volleyball=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_volleyball),
-                              )
+                              ),),Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _volleyball,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _volleyball= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
+
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -292,24 +315,28 @@ class _UserInfoState extends State<UserInfo> {
                                 color: Color(0xFFAFB42B),
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
-                              ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_chess==true) {
-                                      _chess=false;
-                                    } else {
-                                      _chess=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_chess),
-                              )
+                              ),),Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _chess,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _chess= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
+
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -324,23 +351,27 @@ class _UserInfoState extends State<UserInfo> {
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_gym==true) {
-                                      _gym=false;
-                                    } else {
-                                      _gym=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_gym),
-                              )
+                              Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _gym,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _gym= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -355,18 +386,22 @@ class _UserInfoState extends State<UserInfo> {
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),),
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    if (_football==true) {
-                                      _football=false;
-                                    } else {
-                                      _football=true;
-                                    }
-                                  });
-                                },
-                                child: onClick(_football),
-                              )
+                              Row(
+                                children: [
+                                  const Text(''),
+                                  Switch(
+                                    splashRadius: 30,
+                                    activeColor: Colors.green,
+                                    inactiveThumbColor: Colors.red,
+                                    value: _football,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _football= value;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -381,7 +416,7 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                 ),
                 const SizedBox(height: 20,),
-                Padding(
+             /*   Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
                     onTap: (){
@@ -418,9 +453,9 @@ class _UserInfoState extends State<UserInfo> {
                         User? user = FirebaseAuth.instance.currentUser;
                         var uid=user?.uid;
                         FirebaseFirestore.instance
-                        .collection('User')
-                        .doc(uid)
-                        .set({
+                            .collection('User')
+                            .doc(uid)
+                            .set({
                           'name':user?.displayName,
                           'photourl':user?.photoURL,
                           'email':user?.email,
@@ -430,7 +465,7 @@ class _UserInfoState extends State<UserInfo> {
                           'isAdmin':false,
                         });
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                         return GetUserData();
+                          return GetUserData();
                         }));
                       }
                     },
@@ -442,14 +477,82 @@ class _UserInfoState extends State<UserInfo> {
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text('SUBMIT',style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
                         ),),
                       ),
                     ),
                   ),
-                )
+                ),*/
+            Container(
+              height: 70,
+              child: RaisedButton(
+                onPressed: (){
+                  if (misId.length<23){
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that small')));
+                  }else if (misId.length>23){
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that long')));
+                  }else{
+                    //print(UserDetails.sportList?.update(key, (value) => false));
+                    if (_basketball){
+                      m?.update('BasketBall', (value) => true);
+                    }
+                    if (_football){
+                      m?.update('FootBall', (value) => true);
+                    }
+                    if (_volleyball){
+                      m?.update('VolleyBall', (value) => true);
+                    }
+                    if (_cricket){
+                      m?.update('Cricket', (value) => true);
+                    }
+                    if (_chess){
+                      m?.update('Chess', (value) => true);
+                    }
+                    if (_gym){
+                      m?.update('Gym', (value) => true);
+                    }
+                    if (_tabletennis){
+                      m?.update('TableTennis', (value) => true);
+                    }
+                    if (_badminton){
+                      m?.update('Badminton', (value) => true);
+                    }
+                    User? user = FirebaseAuth.instance.currentUser;
+                    var uid=user?.uid;
+                    FirebaseFirestore.instance
+                        .collection('User')
+                        .doc(uid)
+                        .set({
+                      'name':user?.displayName,
+                      'photourl':user?.photoURL,
+                      'email':user?.email,
+                      'uid':user?.uid,
+                      'misId':misId,
+                      'SportList': m,
+                      'isAdmin':false,
+                    });
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                      return GetUserData();
+                    }));
+                  }
+                },
+                // onPressed: snapshot?.data == false
+                //     ? _sendPasswordResetEmail
+                //     : null,
+                shape: StadiumBorder(),
+                color: Colors.redAccent,
+                child: Text(
+                  'SUBMIT',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+                const SizedBox(height: 20,),
               ],
             ),
           ),

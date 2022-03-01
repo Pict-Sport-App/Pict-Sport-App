@@ -111,6 +111,7 @@ class _announcement_pageState extends State<announcement_page> {
                           photo(image: widget.imageUrl,)))
                 },
                 child: SizedBox(
+                  height: MediaQuery.of(context).size.height*0.6,
                   width: double.infinity,
                   child: Image(
                     image: NetworkImage(widget.imageUrl),

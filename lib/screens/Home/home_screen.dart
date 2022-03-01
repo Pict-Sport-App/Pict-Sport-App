@@ -476,7 +476,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
         child: Column(
           children: [
             Container(
-              height: height * 0.09,
+              height: height * 0.1,
               width: width * 0.22,
               decoration: BoxDecoration(
 
@@ -485,9 +485,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                 image: DecorationImage(
                     image: AssetImage(widget.image), fit: BoxFit.fill),
                 // color: const Color(0xff8639FB),
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [
                   BoxShadow(
                     color: Color(0xFF8C9EFF),
@@ -513,42 +511,13 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                 ],*/
               ),
             ),
-            Container(
-              height: height * 0.03,
-              width: width * 0.22,
-              decoration: BoxDecoration(
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0xFF8C9EFF),
-                    offset: Offset(
-                      5.0,
-                      5.0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 2.0,
-                  ), //BoxShadow
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ), //BoxShadow
-                ],
-                border:
-                Border.all(color: Colors.black12, width: 3),
-                color: Colors.grey[100],
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-              ),
-              child: Center(
-                child: Text(
-                  widget.text,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+            Center(
+              child: Text(
+                widget.text,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             )
