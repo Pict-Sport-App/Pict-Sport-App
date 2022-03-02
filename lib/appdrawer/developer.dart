@@ -1,8 +1,20 @@
+
 import 'dart:math';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+
+
+
+void main(){
+  runApp(MaterialApp(
+    home: Scaffold(
+      body: Frame1Widget()
+    )
+  ));
+}
 
 class Frame1Widget extends StatefulWidget {
   @override
@@ -14,141 +26,151 @@ class _Frame1WidgetState extends State<Frame1Widget> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     return SafeArea(
-        child: Container(
-          width: width,
-          height: height,
-          color: Colors.white,
-          child: Column(children: <Widget>[
-      Container(
-          alignment: Alignment.center,
-          child: const Text(
-            'Developers',
-            style: TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          height: height * 0.12,
-          width: width,
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(0),
-                topRight: Radius.circular(0),
-                bottomLeft: Radius.circular(55),
-                bottomRight: Radius.circular(55),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              
+              child: Row(
+                children: [
+                  IconButton(onPressed: ()=>{Navigator.pop(context)}, icon:Icon(Icons.arrow_back)),
+                  SizedBox(width: width*0.28,),
+                  Text('Developers',style: TextStyle(fontSize: 18,color: Colors.white),),
+                  
+                ],
               ),
-              color: Colors.indigo[400]),
-      ),
-      const Expanded(
-          child: page(),
-      )
-    ]),
-        ));
-  }
-}
+              height: height*0.12,
+              width:width,
+              decoration: BoxDecoration(
+                borderRadius : BorderRadius.only(
+                  topLeft: Radius.circular(0),
+                  topRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(55),
+                  bottomRight: Radius.circular(55),
+                ),
+                color: Colors.indigo[400]
+      
+              ),
+         
+            ),
+            Expanded(
 
-class page extends StatefulWidget {
-  const page({Key? key}) : super(key: key);
+              child: page(),
+            )
 
-  @override
-  _pageState createState() => _pageState();
-}
 
-class _pageState extends State<page> {
-  PageController _pageController = PageController();
-  double view = 0.8;
-  double offset1 = 0;
-  final _pageNotifier = ValueNotifier(0.0);
+          ]
+          
+          ))
+      
+    ); }}
 
-  void _Listener() {
+    class page extends StatefulWidget {
+      const page({ Key? key }) : super(key: key);
+    
+      @override
+      _pageState createState() => _pageState();
+    }
+    
+    class _pageState extends State<page> {
+
+      PageController _pageController=new PageController();
+      double view=0.8;
+      double offset1=0;
+        final _pageNotifier = ValueNotifier(0.0);
+
+  void _Listener(){
     setState(() {
-      offset1 = _pageController.page!;
+      offset1=_pageController.page!;
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: 0, viewportFraction: view);
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+     
+
+      @override
+      void initState(){
+        super.initState();
+        _pageController=PageController(initialPage: 0,viewportFraction: view);
+        WidgetsBinding.instance!.addPostFrameCallback((_) {
       _pageController.addListener(_Listener);
     });
-  }
+        
+        
+      }
 
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+       Widget build(BuildContext context) {
+            double height = MediaQuery.of(context).size.height;
+            double width = MediaQuery.of(context).size.width;
+        return PageView.builder(itemCount:dev_list.length ,controller: _pageController,itemBuilder:(context,index){
+           double scale=max(view,1-(offset1-index).abs()+view);
+           double angle=(offset1-index).abs();
+               double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return PageView.builder(
-        itemCount: dev_list.length,
-        controller: _pageController,
-        itemBuilder: (context, index) {
-          double scale = max(view, 1 - (offset1 - index).abs() + view);
-          double angle = (offset1 - index).abs();
-          if (angle > 0.5) {
-            angle = 1 - angle;
-          }
+           if (angle>0.5){
+             angle=1-angle;
+           }
 
+          
           return Container(
-            padding: EdgeInsets.only(
-                right: 10, left: 10, bottom: 100, top: 100 - scale * 25),
+            padding:EdgeInsets.only(
+              right: width*0.04,
+              left: width*0.04,
+              bottom: height*0.18,
+              top:(height*0.158)-scale*25
+            ),
+            
             child: Transform(
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateY(angle),
+              transform: Matrix4.identity()..setEntry(3, 2, 0.001)..rotateY(angle),
               alignment: Alignment.center,
               child: Material(
                 elevation: 22,
                 borderRadius: BorderRadius.circular(25),
                 child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25),
-                        bottomLeft: Radius.circular(25),
-                        bottomRight: Radius.circular(25),
-                      ),
-                      color: Colors.deepPurple[200]),
+                        
+                  
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),),
+                  color: Colors.deepPurple[200]),
+                        
                   child: Padding(
-                    padding: EdgeInsets.all(width),
+                    padding: const EdgeInsets.all(25.0),
                     child: Column(
                       children: <Widget>[
-                        const SizedBox(
+                        SizedBox(
                           height: 35,
                         ),
                         CircleAvatar(
                           backgroundColor: Colors.orangeAccent,
                           radius: 75,
-                          backgroundImage: AssetImage(dev_list[index].img),
+                          backgroundImage:AssetImage(dev_list[index].img),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 20,
                         ),
-                        Text(
-                          dev_list[index].name,
-                          style: const TextStyle(fontSize: 22),
+                        Text(dev_list[index].name,
+                          style: TextStyle(fontSize: 22),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            IconButton(
-                                onPressed: () =>
-                                    {launchMailto(dev_list[index].gmailurl)},
-                                icon: const Icon(Icons.email)),
-                            IconButton(
-                                onPressed: () =>
-                                    {_launchURL(dev_list[index].githuburl)},
-                                icon: const Icon(FontAwesomeIcons.github)),
-                            IconButton(
-                                onPressed: () =>
-                                    {_launchURL(dev_list[index].instaurl)},
-                                icon: const Icon(FontAwesomeIcons.instagram)),
-                            IconButton(
-                                onPressed: () =>
-                                    {_launchURL(dev_list[index].linkedinurl)},
-                                icon: const Icon(FontAwesomeIcons.linkedin)),
+                            IconButton(onPressed: () => {launchMailto(dev_list[index].gmailurl)}, icon: Icon(Icons.email)),
+                            IconButton(onPressed: () => {_launchURL(dev_list[index].githuburl)}, icon: Icon(FontAwesomeIcons.github)),
+                            IconButton(onPressed: () => {_launchURL(dev_list[index].instaurl)}, icon: Icon(FontAwesomeIcons.instagram)),
+                            IconButton(onPressed: () => {_launchURL(dev_list[index].linkedinurl)}, icon: Icon(FontAwesomeIcons.linkedin)),
+                        
+                        
                           ],
+                        
                         )
                       ],
                     ),
@@ -157,27 +179,34 @@ class _pageState extends State<page> {
               ),
             ),
           );
+
         });
-  }
-}
+      }
+    }
 
-_launchURL(String url) async {
-  try {
-    await launch(url);
-  } catch (e) {
-   print(e);
+  _launchURL(String url) async {
+    try{
+      await launch(url);
+       }
+       catch(e) {
+      print(e);
+      print(url);
+    }
   }
-}
 
-launchMailto(String email) async {
-  final mailtoLink = Mailto(
-    to: [email],
-    cc: ['omkar.awaje1012002@gmail.com'],
-    subject: 'App Review',
-    body: "Just saw the Sports App app.\nMy reviews are\n ",
-  );
-  await launch('$mailtoLink');
-}
+  launchMailto(String email) async {
+    final mailtoLink = Mailto(
+      to: [email],
+      cc: ['omkar.awaje1012002@gmail.com'],
+      subject: 'App Review',
+      body: "Just saw the Sports App app.\nMy reviews are\n ",
+    );
+    await launch('$mailtoLink');
+  }
+
+
+    
+    
 
 class devs {
   String name;
