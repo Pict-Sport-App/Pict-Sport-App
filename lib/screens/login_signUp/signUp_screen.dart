@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
-import 'package:psa/services/getUserData.dart';
+import 'package:psa/services/get_user_data.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -16,8 +16,8 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double height= MediaQuery.of(context).size.height;
-    double width= MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: SizedBox(
@@ -41,7 +41,7 @@ class _SignupState extends State<Signup> {
                 right: 0,
                 child: SizedBox(
                   // height: 35,width: 52,
-                  height: height* 0.21,
+                  height: height * 0.21,
                   width: height * 0.21,
                   // child: Image.asset("assets/google.png",),
                   child: Lottie.network(
@@ -83,11 +83,15 @@ class _SignupState extends State<Signup> {
                   top: height * 0.61,
                   left: width * 0.19,
                   child: InkWell(
-                    onTap: ()async{
-                      await Authentication().signInWithGoogle(context).then((result) {
+                    onTap: () async {
+                      await Authentication()
+                          .signInWithGoogle(context)
+                          .then((result) {
                         if (result == false) {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => GetUserData()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => GetUserData()));
                         } else if (result == true) {
                           Navigator.pushReplacement(
                               context,
@@ -102,34 +106,35 @@ class _SignupState extends State<Signup> {
                           ));
                         }
                       });
-                    },child: Container(
-                      height: height * 0.15,
-                      width:height * 0.30,
-                      decoration: BoxDecoration(
-                        // color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(23),
-                        border: Border.all(color: Colors.blueAccent, width: 3),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          SizedBox(
-                            height: 80,
-                            width: 90,
-                            child: Lottie.network(
-                                'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
-                          ),
-                          const Text(
-                            "SIGN IN",
-                            style: TextStyle(
-                              color: Colors.lightBlue,
-                              fontSize: 27,
-                              fontWeight: FontWeight.w600,
+                    },
+                    child: Container(
+                        height: height * 0.15,
+                        width: height * 0.30,
+                        decoration: BoxDecoration(
+                          // color: Colors.grey[200],
+                          borderRadius: BorderRadius.circular(23),
+                          border:
+                              Border.all(color: Colors.blueAccent, width: 3),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            SizedBox(
+                              height: 80,
+                              width: 90,
+                              child: Lottie.network(
+                                  'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
                             ),
-                          )
-                        ],
-                      )
-                  ),
+                            const Text(
+                              "SIGN IN",
+                              style: TextStyle(
+                                color: Colors.lightBlue,
+                                fontSize: 27,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
+                        )),
                   )),
               Positioned(
                 bottom: 0,

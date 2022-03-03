@@ -7,12 +7,13 @@ import '../main_settings.dart';
 import '../thems.dart';
 
 class CollapsingListTile extends StatefulWidget {
-  CollapsingListTile({
+  const CollapsingListTile({
+    Key? key,
     required this.title,
     required this.num,
     required this.animationController,
     required this.isSelected,
-  });
+  }) : super(key: key);
   final String title;
   final int num;
   final AnimationController animationController;
@@ -25,7 +26,6 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   late Animation<double> _widthAnimation, sizedBoxAnimation;
   @override
   void initState() {
-
     super.initState();
     _widthAnimation =
         Tween<double>(begin: 250, end: 90).animate(widget.animationController);

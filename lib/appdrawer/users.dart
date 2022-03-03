@@ -39,7 +39,6 @@ class _AllUsersState extends State<AllUsers> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('User').snapshots(),
-
         builder: (ctx, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -51,26 +50,26 @@ class _AllUsersState extends State<AllUsers> {
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
               itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
-                position: index,
-                duration: const Duration(milliseconds: 905),
-                child: SlideAnimation(
-                  verticalOffset: 50.0,
-                  child: FadeInAnimation(
-                    child: UserWidget(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return OtherUserProfileScreeen(
-                              uid: usersnap[index]['uid'],
-                            );
-                          }));
-                        },
-                        misId: usersnap[index]['misId'],
-                        name: usersnap[index]['name'],
-                        url: usersnap[index]['photourl']),
-                  ),
-                ),
-              ));
+                    position: index,
+                    duration: const Duration(milliseconds: 905),
+                    child: SlideAnimation(
+                      verticalOffset: 50.0,
+                      child: FadeInAnimation(
+                        child: UserWidget(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return OtherUserProfileScreeen(
+                                  uid: usersnap[index]['uid'],
+                                );
+                              }));
+                            },
+                            misId: usersnap[index]['misId'],
+                            name: usersnap[index]['name'],
+                            url: usersnap[index]['photourl']),
+                      ),
+                    ),
+                  ));
         },
       ),
     );
@@ -81,10 +80,12 @@ class UserWidget extends StatelessWidget {
   late String name, misId, url;
   VoidCallback onTap;
   UserWidget(
-      {required this.onTap,
+      {Key? key,
+      required this.onTap,
       required this.misId,
       required this.name,
-      required this.url});
+      required this.url})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

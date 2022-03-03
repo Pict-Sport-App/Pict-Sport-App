@@ -1,25 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/settings.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/Basketball/bbissued.dart';
 import 'package:psa/screens/Home/Basketball/bbrequested.dart';
 import 'package:psa/screens/Home/Basketball/bbreturn.dart';
-import 'package:psa/screens/Home/Basketball/sizeNo.dart';
-import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/screens/Home/Basketball/size_no.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
-class BasketBall_screen extends StatefulWidget {
-  const BasketBall_screen({Key? key}) : super(key: key);
+class BasketBallScreen extends StatefulWidget {
+  const BasketBallScreen({Key? key}) : super(key: key);
 
   @override
-  _BasketBall_screenState createState() => _BasketBall_screenState();
+  _BasketBallScreenState createState() => _BasketBallScreenState();
 }
 
-class _BasketBall_screenState extends State<BasketBall_screen> {
+class _BasketBallScreenState extends State<BasketBallScreen> {
   bool _isFirstView = false;
   var _noOfBallSix;
   var _size;
@@ -28,7 +27,7 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
   final _totalBallSix = int.parse(Equipment.basketballsix.toString());
   final _totalBallSeven = int.parse(Equipment.basketballseven.toString());
 
-  late var _size_six, _size_seven;
+  late var _sizeSix, _sizeSeven;
 
   Future getStatus() async {
     var v = await FirebaseFirestore.instance
@@ -55,7 +54,7 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
     }
   }
 
-  void BB_Six_Logic(String six, String seven) {
+  void bbSixLogic(String six, String seven) {
     List? l;
     l?.clear();
     l?.add(six);
@@ -91,7 +90,6 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                     builder: (context) {
                       return BBSixReturn(
                         onTap: () async {
-                          print('return');
                           await FirebaseFirestore.instance
                               .collection('BBEquipment')
                               .doc(UserDetails.uid)
@@ -138,28 +136,28 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
               );
             }
             final usersnap = userSnapshot.data!.docs;
-            _size_six = 0;
-            _size_seven = 0;
+            _sizeSix = 0;
+            _sizeSeven = 0;
             for (int i = 0; i < usersnap.length; i++) {
               if (usersnap[i]['size'] == "6") {
                 if (usersnap[i]['isRequested'] == 2) {
-                  _size_six += int.parse(usersnap[i]['noOfBall']);
+                  _sizeSix += int.parse(usersnap[i]['noOfBall']);
                 }
               }
               if (usersnap[i]['size'] == "7") {
                 if (usersnap[i]['isRequested'] == 2) {
-                  _size_seven += int.parse(usersnap[i]['noOfBall']);
+                  _sizeSeven += int.parse(usersnap[i]['noOfBall']);
                 }
               }
             }
-            return Container(
+            return SizedBox(
               width: weight,
               height: height,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    StackContainer(),
+                    const StackContainer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -177,7 +175,8 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                         Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 10),
                               child: Container(
                                 width: double.infinity,
                                 height: 60,
@@ -209,7 +208,7 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                                     ),
                                     const Spacer(),
                                     Text(
-                                      (_totalBallSix - _size_six).toString(),
+                                      (_totalBallSix - _sizeSix).toString(),
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -224,7 +223,8 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+                              padding: const EdgeInsets.only(
+                                  left: 20, right: 20, top: 10),
                               child: Container(
                                 width: double.infinity,
                                 height: 60,
@@ -256,7 +256,7 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                                     ),
                                     const Spacer(),
                                     Text(
-                                      (_totalBallSeven - _size_seven).toString(),
+                                      (_totalBallSeven - _sizeSeven).toString(),
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -274,7 +274,9 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     const Padding(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
@@ -299,11 +301,13 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                           children: [
                             const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text('Click to issue Ball',style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20
-                              ),),
+                              child: Text(
+                                'Click to issue Ball',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20),
+                              ),
                             ),
                             const Spacer(),
                             RaisedButton(
@@ -312,54 +316,56 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                               elevation: 10.0,
                               shape: const StadiumBorder(),
                               onPressed: () {
-                                BB_Six_Logic((_totalBallSix - _size_six).toString(),
-                                    (_totalBallSeven - _size_seven).toString());
+                                bbSixLogic(
+                                    (_totalBallSix - _sizeSix).toString(),
+                                    (_totalBallSeven - _sizeSeven).toString());
                               },
                               child: _isFirstView
                                   ? const Center(
-                                child: Text(
-                                  'Issue Ball',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              )
+                                      child: Text(
+                                        'Issue Ball',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    )
                                   : _isRequested == 1
-                                  ? const Center(
-                                child: Text(
-                                  'Cancel Request',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              )
-                                  : _isRequested == 2
-                                  ? const Center(
-                                child: Text(
-                                  'Return Ball',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              )
-                                  : _isRequested == 4
-                                  ? const Center(
-                                child: Text(
-                                  'Issue Ball',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              )
-                                  : Container(),
+                                      ? const Center(
+                                          child: Text(
+                                            'Cancel Request',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        )
+                                      : _isRequested == 2
+                                          ? const Center(
+                                              child: Text(
+                                                'Return Ball',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17,
+                                                ),
+                                              ),
+                                            )
+                                          : _isRequested == 4
+                                              ? const Center(
+                                                  child: Text(
+                                                    'Issue Ball',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 17,
+                                                    ),
+                                                  ),
+                                                )
+                                              : Container(),
                             ),
                           ],
                         ),
@@ -378,11 +384,13 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                           children: [
                             const Padding(
                               padding: EdgeInsets.all(8.0),
-                              child: Text('Count Match Score',style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20
-                              ),),
+                              child: Text(
+                                'Count Match Score',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20),
+                              ),
                             ),
                             const Spacer(),
                             RaisedButton(
@@ -395,10 +403,9 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
                                 child: Text(
                                   'Score Tracker',
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15
-                                  ),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15),
                                 ),
                               ),
                             ),
@@ -416,12 +423,12 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
 }
 
 class StackContainer extends StatelessWidget {
-  StackContainer();
+  const StackContainer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       height: 390.0,
       child: Stack(
         children: <Widget>[
@@ -500,19 +507,19 @@ class StackContainer extends StatelessWidget {
   onSelected(BuildContext context, int item) {
     switch (item) {
       case 0:
-        print("First button is pressed");
+        // print("First button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Requested();
         }));
         break;
       case 1:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const BBIssued();
         }));
         break;
       case 2:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const BBReturn();
         }));
@@ -526,10 +533,11 @@ class BBSixReturn extends StatelessWidget {
   VoidCallback onTap;
   String noOfBall;
   BBSixReturn({
+    Key? key,
     required this.noOfBall,
     required this.onTap,
     required this.size,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

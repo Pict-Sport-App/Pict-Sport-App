@@ -5,7 +5,7 @@ import 'package:flutter/physics.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
+import 'package:psa/screens/Home/VolleyBall/volleyball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 import 'Basketball/basketball.dart';
 
@@ -57,9 +57,7 @@ class _HomeScreenState extends State<HomeScreen>
             constraints: const BoxConstraints.expand(),
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage(
-                        'assets/back.jpg'),
-                    fit: BoxFit.cover)),
+                    image: AssetImage('assets/back.jpg'), fit: BoxFit.cover)),
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -117,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const VolleyBall_Screen();
+                                  return const VolleyBallScreen();
                                 }));
                               },
                               text: 'VolleyBall',
@@ -149,7 +147,7 @@ class _HomeScreenState extends State<HomeScreen>
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const BasketBall_screen();
+                                  return const BasketBallScreen();
                                 }));
                               },
                               text: 'BasketBall',
@@ -204,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Transform(
                         transform: Matrix4.identity()
                           ..translate(0.0, -height * 0.07),
-                        child: Container(
+                        child: SizedBox(
                           height: 160,
                           width: 100,
                           child: Lottie.asset(
@@ -224,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen>
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return TabletannisScreen();
+                                  return const TabletannisScreen();
                                 }));
                               },
                               text: 'Tabletennis',
@@ -314,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen>
 class BackgroundPainter extends CustomPainter {
   BackgroundPainter({
     required Animation<double> animation,
-  })
+  })  
 
   /// it just colour we defined
 
@@ -492,7 +490,8 @@ class MyCustomWidget extends StatefulWidget {
   late String text;
   late VoidCallback onTap;
   MyCustomWidget(
-      {required this.onTap, required this.image, required this.text});
+      {Key? key, required this.onTap, required this.image, required this.text})
+      : super(key: key);
   @override
   _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
@@ -556,7 +555,7 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
 class DraggableCard extends StatefulWidget {
   final Widget child;
 
-  DraggableCard({required this.child});
+  const DraggableCard({Key? key, required this.child}) : super(key: key);
 
   @override
   _DraggableCardState createState() => _DraggableCardState();

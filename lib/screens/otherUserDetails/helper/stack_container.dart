@@ -7,7 +7,11 @@ class StackContainer extends StatelessWidget {
   String? name;
   String? misId;
   StackContainer(
-      {Key? key, required this.misId, required this.imageUrl, required this.name}) : super(key: key);
+      {Key? key,
+      required this.misId,
+      required this.imageUrl,
+      required this.name})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -110,7 +114,7 @@ class StackContainer extends StatelessWidget {
               ],
             ),
           ),
-          TopBar(),
+          const TopBar(),
         ],
       ),
     );

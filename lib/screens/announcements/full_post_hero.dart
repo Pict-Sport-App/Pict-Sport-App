@@ -12,13 +12,15 @@ class FullPost extends StatefulWidget {
   late String venue;
 
   FullPost(
-  {required this.descrip,
-    required this.imageUrl,
-    required this.venue,
-    required this.title,
-    required this.date,
-    required this.link,
-    required this.number});
+      {Key? key,
+      required this.descrip,
+      required this.imageUrl,
+      required this.venue,
+      required this.title,
+      required this.date,
+      required this.link,
+      required this.number})
+      : super(key: key);
 
   @override
   _FullPostState createState() => _FullPostState();
@@ -77,9 +79,7 @@ class _FullPostState extends State<FullPost> {
                                     FontAwesomeIcons.share,
                                     size: 30,
                                   ),
-                                  onPressed: () {
-
-                                  },
+                                  onPressed: () {},
                                 ),
                               ),
                             ],
@@ -125,8 +125,7 @@ class _FullPostState extends State<FullPost> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0),
-                      child:
-                      Text(
+                      child: Text(
                         widget.link,
                         style: const TextStyle(
                           color: Colors.pink,

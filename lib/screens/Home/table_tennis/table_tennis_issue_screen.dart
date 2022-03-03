@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
 class IssueTheRacket extends StatefulWidget {
   const IssueTheRacket({Key? key}) : super(key: key);
-  static const routeName='/tt';
+  static const routeName = '/tt';
 
   @override
   State<IssueTheRacket> createState() => _IssueTheRacketState();
@@ -22,14 +21,14 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
   String? choosedTable;
   String? choosedRacket;
 
-  void _selected_table(String table) => choosedTable = table;
-  void _selected_Racket(String racket) => choosedRacket = racket;
+  void _selectedTable(String table) => choosedTable = table;
+  void _selectedRacket(String racket) => choosedRacket = racket;
 
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
 
-  Future Submit(BuildContext context) async {
+  Future submit(BuildContext context) async {
     if (choosedTable == null && choosedRacket == null) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
@@ -63,22 +62,23 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           ),
         ),
       ));
-    }else if (choosedTable=='Table 1'){
-      if ((int.parse(_t1.toString())-int.parse(choosedRacket.toString()))<0){
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(
+    } else if (choosedTable == 'Table 1') {
+      if ((int.parse(_t1.toString()) - int.parse(choosedRacket.toString())) <
+          0) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 2),
           content: Text(
-            'Oops!! All Rackets are occupied at table 1 .Try another table',style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-          ),
+            'Oops!! All Rackets are occupied at table 1 .Try another table',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
           ),
         ));
-      }else{
+      } else {
         FirebaseFirestore.instance
             .collection('TTEquipment')
-        //.doc('TT').collection('Equipment')
+            //.doc('TT').collection('Equipment')
             .doc(UserDetails.uid)
             .set({
           'tableNumber': choosedTable,
@@ -93,26 +93,26 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           'uid': UserDetails.uid,
         });
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return TabletannisScreen();
+          return const TabletannisScreen();
         }));
       }
-    }else if (choosedTable=='Table 2'){
-      var b=int.parse(_t2.toString())-int.parse(choosedRacket.toString());
-      if (b<0){
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(
+    } else if (choosedTable == 'Table 2') {
+      var b = int.parse(_t2.toString()) - int.parse(choosedRacket.toString());
+      if (b < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 2),
           content: Text(
-            'Oops!! All Rackets are occupied at table 2 .Try another table',style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-          ),
+            'Oops!! All Rackets are occupied at table 2 .Try another table',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
           ),
         ));
-      }else{
+      } else {
         FirebaseFirestore.instance
             .collection('TTEquipment')
-        //.doc('TT').collection('Equipment')
+            //.doc('TT').collection('Equipment')
             .doc(UserDetails.uid)
             .set({
           'tableNumber': choosedTable,
@@ -130,27 +130,28 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         setState(() {
           //requested=true;
         });
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return TabletannisScreen();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return const TabletannisScreen();
         }));
       }
-    }else if (choosedTable=='Table 3'){
-      int h=int.parse(_t3.toString())-int.parse(choosedRacket.toString());
-      if (h<0){
-        ScaffoldMessenger.of(context)
-            .showSnackBar(const SnackBar(
+    } else if (choosedTable == 'Table 3') {
+      int h = int.parse(_t3.toString()) - int.parse(choosedRacket.toString());
+      if (h < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 2),
           content: Text(
-            'Oops!! All Rackets are occupied at table 3 .Try another table',style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-          ),
+            'Oops!! All Rackets are occupied at table 3 .Try another table',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
           ),
         ));
-      }else{
+      } else {
         FirebaseFirestore.instance
             .collection('TTEquipment')
-        //.doc('TT').collection('Equipment')
+            //.doc('TT').collection('Equipment')
             .doc(UserDetails.uid)
             .set({
           'tableNumber': choosedTable,
@@ -168,11 +169,12 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         setState(() {
           //requested=true;
         });
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-          return TabletannisScreen();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return const TabletannisScreen();
         }));
       }
-    }else {
+    } else {
       FirebaseFirestore.instance
           .collection('TTEquipment')
           //.doc('TT').collection('Equipment')
@@ -194,31 +196,31 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         //requested=true;
       });
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return TabletannisScreen();
+        return const TabletannisScreen();
       }));
     }
     return;
   }
 
-  bool _isInit=true; var  _productId;
-  var _t1,_t2,_t3,_tremain;
+  bool _isInit = true;
+  var _productId;
+  var _t1, _t2, _t3, _tremain;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
 
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    if (_isInit){
+    if (_isInit) {
       _productId = ModalRoute.of(context)!.settings.arguments as List<int>;
-      _t1=_productId[0];
-      _t2=_productId[1];
-      _t3=_productId[2];
-      _tremain=_productId[3];
+      _t1 = _productId[0];
+      _t2 = _productId[1];
+      _t3 = _productId[2];
+      _tremain = _productId[3];
     }
     _isInit = false;
   }
@@ -274,13 +276,13 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                             children: <Widget>[
                               const Text("Select The Table"),
                               DropDown(
-                                ItemList: const [
+                                itemList: const [
                                   'Table 1',
                                   'Table 2',
                                   'Table 3',
                                 ],
                                 item1: 'Table',
-                                submitFn: _selected_table,
+                                submitFn: _selectedTable,
                               ),
                             ],
                           ),
@@ -292,9 +294,9 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                             children: <Widget>[
                               const Text("No. of Racket  "),
                               DropDown(
-                                  ItemList: const ['1', '2', '3', '4'],
+                                  itemList: const ['1', '2', '3', '4'],
                                   item1: 'Racket',
-                                  submitFn: _selected_Racket),
+                                  submitFn: _selectedRacket),
                             ],
                           ),
                           const SizedBox(
@@ -308,20 +310,22 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                               children: [
                                 const Padding(
                                   padding: EdgeInsets.all(8.0),
-                                  child: Text('Time Of Issuement', style: TextStyle(fontSize: 15,)),
+                                  child: Text('Time Of Issuement',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                      )),
                                 ),
                                 Center(
                                   child: DateTimeField(
-                                    resetIcon:  const Icon(
+                                    resetIcon: const Icon(
                                       Icons.close,
-                                      color:Colors.blue,
+                                      color: Colors.blue,
                                       size: 35,
                                     ),
                                     initialValue: DateTime.now(),
                                     style: const TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.bold
-                                    ),
+                                        fontWeight: FontWeight.bold),
                                     enabled: true,
                                     enableInteractiveSelection: true,
                                     decoration: const InputDecoration(
@@ -329,22 +333,25 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                         padding: EdgeInsets.only(left: 6.0),
                                         child: FaIcon(
                                           FontAwesomeIcons.calendar,
-                                          color:Colors.redAccent,
+                                          color: Colors.redAccent,
                                           size: 35,
                                         ),
                                       ),
                                       border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                                        borderSide: BorderSide(color: Colors.black12,width: 2),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                        borderSide: BorderSide(
+                                            color: Colors.black12, width: 2),
                                       ),
                                     ),
                                     format: formatYMDHM,
-                                    onShowPicker: (context, currentValue) async {
+                                    onShowPicker:
+                                        (context, currentValue) async {
                                       final date = await showDatePicker(
-
                                         context: context,
                                         firstDate: DateTime.now(),
-                                        initialDate: currentValue ?? DateTime.now(),
+                                        initialDate:
+                                            currentValue ?? DateTime.now(),
                                         lastDate: DateTime(2100),
                                       );
                                       if (date != null) {
@@ -354,8 +361,10 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                                             currentValue ?? DateTime.now(),
                                           ),
                                         );
-                                        eventDate =DateTimeField.combine(date, time);
-                                        return DateTimeField.combine(date, time);
+                                        eventDate =
+                                            DateTimeField.combine(date, time);
+                                        return DateTimeField.combine(
+                                            date, time);
                                       } else {
                                         eventDate = currentValue;
                                         return currentValue;
@@ -375,7 +384,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                 Center(
                   child: RaisedButton(
                     onPressed: () {
-                      Submit(context);
+                      submit(context);
                     },
                     color: Colors.white,
                     splashColor: Colors.lightBlueAccent,
@@ -383,7 +392,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
                     shape: const StadiumBorder(),
                     child: const Padding(
                         padding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                            EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                         child: Text('SEND THE REQUEST')),
                   ),
                 ),
@@ -403,11 +412,15 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
 }
 
 class DropDown extends StatefulWidget {
-  final List ItemList;
+  final List itemList;
   final String item1;
   final void Function(String selectedValue) submitFn;
-  DropDown(
-      {required this.ItemList, required this.item1, required this.submitFn});
+  const DropDown(
+      {Key? key,
+      required this.itemList,
+      required this.item1,
+      required this.submitFn})
+      : super(key: key);
   @override
   State<DropDown> createState() => _DropDownState();
 }
@@ -451,17 +464,19 @@ class _DropDownState extends State<DropDown> {
           ),
         ],
       ),
-      items: widget.ItemList.map((item) => DropdownMenuItem<String>(
-            value: item,
-            child: Text(
-              item,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          )).toList(),
+      items: widget.itemList
+          .map((item) => DropdownMenuItem<String>(
+                value: item,
+                child: Text(
+                  item,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ))
+          .toList(),
       value: selectedValue,
       onChanged: (value) {
         setState(() {
@@ -471,7 +486,7 @@ class _DropDownState extends State<DropDown> {
           value = null;
         });
       },
-      icon:   const Padding(
+      icon: const Padding(
         padding: EdgeInsets.only(bottom: 9.0),
         child: FaIcon(
           FontAwesomeIcons.sortDown,

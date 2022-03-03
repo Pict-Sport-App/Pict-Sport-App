@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:psa/screens/Home/Basketball/sizeNo.dart';
-import 'package:psa/screens/Home/VolleyBall/issueBall.dart';
+import 'package:psa/screens/Home/Basketball/size_no.dart';
+import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
-import 'package:psa/screens/chats/SportChatScreen.dart';
+import 'package:psa/screens/chats/sport_chat_screen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
-import 'package:psa/services/getUserData.dart';
+import 'package:psa/services/get_user_data.dart';
 
-Future main()async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -21,33 +21,34 @@ Future isLoggedIn() async {
 
 class MyApp extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
+
+  MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    if (user!=null){
+    if (user != null) {
       return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         home: GetUserData(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>const ChatMembers(),
-          SixNo.routeName: (ctx)=>const SixNo(),
-          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
-          Issue.routeName: (ctx)=>const Issue(),
+          SportChatScreen.routeName: (ctx) => const SportChatScreen(),
+          ChatMembers.routeName: (ctx) => const ChatMembers(),
+          SixNo.routeName: (ctx) => const SixNo(),
+          IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
+          Issue.routeName: (ctx) => const Issue(),
         },
       );
-    }else{
+    } else {
       return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        home: Signup(),
+        home: const Signup(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>const ChatMembers(),
-          SixNo.routeName: (ctx)=>const SixNo(),
-          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
-          Issue.routeName: (ctx)=>const Issue(),
+          SportChatScreen.routeName: (ctx) => const SportChatScreen(),
+          ChatMembers.routeName: (ctx) => const ChatMembers(),
+          SixNo.routeName: (ctx) => const SixNo(),
+          IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
+          Issue.routeName: (ctx) => const Issue(),
         },
       );
     }

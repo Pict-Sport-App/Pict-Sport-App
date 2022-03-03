@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TableStatusPopup extends StatefulWidget {
-  TableStatusPopup({required this.tableno, required this.unEnrollSeats});
+  const TableStatusPopup(
+      {Key? key, required this.tableno, required this.unEnrollSeats})
+      : super(key: key);
   final String tableno;
   final int unEnrollSeats;
   @override
@@ -27,46 +29,36 @@ class _TableStatusPopupState extends State<TableStatusPopup> {
               height: 20,
             ),
             Row(
-              children: <Widget>[
-                Container(
-                  child: const Text(
-                    'Total seats',
-                    style: TextStyle(fontSize: 21),
-                  ),
+              children: const <Widget>[
+                Text(
+                  'Total seats',
+                  style: TextStyle(fontSize: 21),
                 ),
-                Container(
-                  child: const Text(
-                    '            = 4',
-                    style: TextStyle(fontSize: 21),
-                  ),
+                Text(
+                  '            = 4',
+                  style: TextStyle(fontSize: 21),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
-                Container(
-                  child: const Text(
-                    'Remains seats',
-                    style: TextStyle(fontSize: 21),
-                  ),
+                const Text(
+                  'Remains seats',
+                  style: TextStyle(fontSize: 21),
                 ),
-                Container(
-                  child:  Text(
-                    '   = ${widget.unEnrollSeats}',
-                    style: const TextStyle(fontSize: 21),
-                  ),
+                Text(
+                  '   = ${widget.unEnrollSeats}',
+                  style: const TextStyle(fontSize: 21),
                 ),
               ],
             ),
             if (4 <= widget.unEnrollSeats)
               Row(
-                children: <Widget>[
-                  Container(
-                    child: const Center(
-                      child: Text(
-                        '\n🥺   Sorry Seats are\n not Available',
-                        style: TextStyle(fontSize: 21),
-                      ),
+                children: const <Widget>[
+                  Center(
+                    child: Text(
+                      '\n🥺   Sorry Seats are\n not Available',
+                      style: TextStyle(fontSize: 21),
                     ),
                   ),
                 ],
@@ -85,7 +77,8 @@ class _TableStatusPopupState extends State<TableStatusPopup> {
                       'You Can Enroll for remaining seats',
                       style: TextStyle(fontSize: 21),
                     ),
-                  ),),
+                  ),
+                ),
               ),
             // )
           ],

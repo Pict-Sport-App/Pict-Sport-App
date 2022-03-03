@@ -4,7 +4,6 @@ import 'package:flutter_share/flutter_share.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/announcements/announcement_page.dart';
 import 'package:psa/screens/announcements/poster.dart';
-import 'package:http/http.dart' as http;
 
 class SingleAnnouncement extends StatefulWidget {
   late Timestamp date;
@@ -19,7 +18,8 @@ class SingleAnnouncement extends StatefulWidget {
   late String venue;
 
   SingleAnnouncement(
-      {Key? key, required this.contactNo2,
+      {Key? key,
+      required this.contactNo2,
       required this.contactNo1,
       required this.number2,
       required this.number1,
@@ -28,20 +28,20 @@ class SingleAnnouncement extends StatefulWidget {
       required this.title,
       required this.date,
       required this.descrip,
-      required this.venue}) : super(key: key);
+      required this.venue})
+      : super(key: key);
 
   @override
   _SingleAnnouncementState createState() => _SingleAnnouncementState();
 }
 
 class _SingleAnnouncementState extends State<SingleAnnouncement> {
-
-
-  Future share(dynamic link,String title,String msg)async{
-    await FlutterShare.share(title: title,
-    text: msg,
-    linkUrl: link,
-    chooserTitle: 'Where You want to share');
+  Future share(dynamic link, String title, String msg) async {
+    await FlutterShare.share(
+        title: title,
+        text: msg,
+        linkUrl: link,
+        chooserTitle: 'Where You want to share');
   }
 
   @override
@@ -76,8 +76,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                 ],
               ),
               child: Padding(
-                padding:
-                    const EdgeInsets.only(top: 50.0, right: 14, left: 14),
+                padding: const EdgeInsets.only(top: 50.0, right: 14, left: 14),
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -87,7 +86,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Announcement_page(
+                                  builder: (context) => AnnouncementPage(
                                         descrip: widget.descrip,
                                         imageUrl: widget.imageUrl,
                                         venue: widget.venue,
@@ -174,8 +173,8 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
             right: 5,
             top: 30,
             child: IconButton(
-              onPressed: () async{
-               /* print("Share the post");
+              onPressed: () async {
+                /* print("Share the post");
                 final url=Uri.parse(widget.imageUrl);
                 final response=await http.get(url);
                 final bytes=response.bodyBytes;
@@ -183,9 +182,9 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                 final path='${temp.path}/image.jpg';
                 File(path).writeAsBytes(bytes);*/
 
-               // await Share.share(widget.descrip);
+                // await Share.share(widget.descrip);
                 //share(context, 1);
-                share(widget.link,widget.title,widget.descrip);
+                share(widget.link, widget.title, widget.descrip);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.paperPlane,
@@ -220,7 +219,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
 class DescriptionTextWidget extends StatefulWidget {
   final String text;
 
-  const DescriptionTextWidget({required this.text});
+  const DescriptionTextWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   _DescriptionTextWidgetState createState() => _DescriptionTextWidgetState();

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 
 class RequestedVolly extends StatefulWidget {
   const RequestedVolly({Key? key}) : super(key: key);
@@ -14,16 +14,16 @@ class RequestedVolly extends StatefulWidget {
 class _RequestedVollyState extends State<RequestedVolly> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Volleyball Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('VVEquipment')
-            .snapshots(),
-        builder: (ctx, equimentSnapshot){
+        stream:
+            FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
+        builder: (ctx, equimentSnapshot) {
           if (equimentSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -35,14 +35,15 @@ class _RequestedVollyState extends State<RequestedVolly> {
               itemCount: reqMembers.length,
               itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
                   ? VVRequest(
-                  isReturn: reqMembers[index]['isReturn'],
-                  image: reqMembers[index]['url'],
-                  uid: reqMembers[index]['uid'],
-                  timeOfReturn: reqMembers[index]['timeOfReturn'],
-                  timeOfIssue: reqMembers[index]['timeOfIssue'],
-                  noOfBall: reqMembers[index]['noOfBall'].toString(),
-                  name: reqMembers[index]['name'],
-                  isAdmin: UserDetails.isAdmin??false,)
+                      isReturn: reqMembers[index]['isReturn'],
+                      image: reqMembers[index]['url'],
+                      uid: reqMembers[index]['uid'],
+                      timeOfReturn: reqMembers[index]['timeOfReturn'],
+                      timeOfIssue: reqMembers[index]['timeOfIssue'],
+                      noOfBall: reqMembers[index]['noOfBall'].toString(),
+                      name: reqMembers[index]['name'],
+                      isAdmin: UserDetails.isAdmin ?? false,
+                    )
                   : Container());
         },
       ),
@@ -61,14 +62,16 @@ class VVRequest extends StatefulWidget {
   late bool isReturn;
 
   VVRequest({
+    Key? key,
     required this.isReturn,
     required this.image,
-    required this.uid
-    ,required this.timeOfReturn,
+    required this.uid,
+    required this.timeOfReturn,
     required this.timeOfIssue,
     required this.noOfBall,
     required this.name,
-    required this.isAdmin,});
+    required this.isAdmin,
+  }) : super(key: key);
 
   @override
   _VVRequestState createState() => _VVRequestState();
@@ -76,12 +79,12 @@ class VVRequest extends StatefulWidget {
 
 class _VVRequestState extends State<VVRequest> {
   var hour, minute, gb = 'pm';
-  var rHour,rMinute,rGb='pm';
+  var rHour, rMinute, rGb = 'pm';
   void cal() {
     hour = widget.timeOfIssue.toDate().hour;
     minute = widget.timeOfIssue.toDate().minute;
-    rHour=widget.timeOfReturn.toDate().hour;
-    rMinute=widget.timeOfReturn.toDate().minute;
+    rHour = widget.timeOfReturn.toDate().hour;
+    rMinute = widget.timeOfReturn.toDate().minute;
     if (hour >= 0 && hour <= 11) {
       gb = 'am';
     }
@@ -106,235 +109,234 @@ class _VVRequestState extends State<VVRequest> {
     cal();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.only(
         left: 18,
         right: 15,
         top: 12,
       ),
-      child: Container(
-        child: Stack(
-          children: [
-            Padding(
-              // top: 2,
-              padding: const EdgeInsets.only(top: 11, left: 5),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white54,
-                  border: Border.all(
-                    color: Colors.lightBlue,
-                    width: 3,
-                  ), //Border.all
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    // boxShadow: [
-                    BoxShadow(
-                      color: Colors.white54,
-                      blurRadius: 5.0,
-                      offset: Offset(4.0, 2.0),
-                    )
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 98.0, top: 12, bottom: 17),
-                      child: Text(
-                        widget.name,
-                        style: const TextStyle(fontSize: 19),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                      child: Row(
-                        children: <Widget>[
-                          const FaIcon(
-                            FontAwesomeIcons.volleyballBall,
-                            size: 26,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              "Total Balls      :",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              widget.noOfBall.toString(),
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                      child: Row(
-                        children: <Widget>[
-                          const FaIcon(
-                            FontAwesomeIcons.hourglassStart,
-                            size: 26,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              "Issuing Time :",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(
-                              minute < 10
-                                  ? '$hour:0$minute $gb'
-                                  : '$hour:$minute $gb',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    if (widget.isReturn)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                        child: Row(
-                          children: <Widget>[
-                            const FaIcon(
-                              FontAwesomeIcons.hourglassEnd,
-                              size: 26,
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 18.0),
-                              child: Text(
-                                "Returning Time  : ",
-                                style: TextStyle(
-                                    fontSize: 16),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 18.0),
-                              child: Text(
-                                rMinute < 10
-                                    ? '$rHour:0$rMinute $rGb'
-                                    : '$rHour:$rMinute $rGb',
-                                style: const TextStyle(
-                                    fontSize: 16),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    if (widget.isAdmin)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            RaisedButton(
-                              onPressed: () {
-                                // Submit(context);
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return PopUpRequest(
-                                        onTap: () async {
-                                          await FirebaseFirestore.instance
-                                              .collection('VVEquipment')
-                                              .doc(widget.uid)
-                                              .update({
-                                            'isRequested': 2,
-                                          });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request accepted ',
-                                              )));
-                                          Navigator.pop(context);
-                                        },
-                                        text: 'Want to accept the Request',
-                                      ); //---------
-                                    });
-                              },
-                              color: const Color(0xffc3f7ab),
-                              splashColor: Colors.lightBlueAccent,
-                              elevation: 10.0,
-                              shape: const StadiumBorder(),
-                              child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  child: Text('Accept')),
-                            ),
-                            RaisedButton(
-                              onPressed: () {
-                                // Submit(context);
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return PopUpRequest(
-                                        onTap: () async {
-                                          await FirebaseFirestore.instance
-                                              .collection('BBEquipment')
-                                              .doc(widget.uid)
-                                              .update({
-                                            'isRequested': 5,
-                                          });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request rejected',
-                                              )));
-                                          Navigator.pop(context);
-                                        },
-                                        text: 'Want to Reject the Request?',
-                                      ); //---------
-                                    });
-                              },
-                              color: const Color(0xfff76463),
-                              splashColor: Colors.lightBlueAccent,
-                              elevation: 10.0,
-                              shape: const StadiumBorder(),
-                              child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 10),
-                                  child: Text('Reject')),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-                margin: const EdgeInsets.only(top: 16.0),
+      child: Stack(
+        children: [
+          Padding(
+            // top: 2,
+            padding: const EdgeInsets.only(top: 11, left: 5),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white54,
+                border: Border.all(
+                  color: Colors.lightBlue,
+                  width: 3,
+                ), //Border.all
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: const [
+                  // boxShadow: [
+                  BoxShadow(
+                    color: Colors.white54,
+                    blurRadius: 5.0,
+                    offset: Offset(4.0, 2.0),
+                  )
+                ],
               ),
-            ),
-            // widget.isViewing?Container():widget.isAdmin?onClick():Container(),
-            Positioned(
-              top: 1,
-              child: CircleAvatar(
-                radius: 38,
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  radius: 34,
-                  backgroundColor: Colors.blue,
-                  child: CircleAvatar(
-                    radius: 32,
-                    backgroundColor: Colors.white,
-                    child: CircleAvatar(
-                      radius: 28,
-                      backgroundImage: NetworkImage(widget.image),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 98.0, top: 12, bottom: 17),
+                    child: Text(
+                      widget.name,
+                      style: const TextStyle(fontSize: 19),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.volleyballBall,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            "Total Balls      :",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            widget.noOfBall.toString(),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.hourglassStart,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            "Issuing Time :",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            minute < 10
+                                ? '$hour:0$minute $gb'
+                                : '$hour:$minute $gb',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  if (widget.isReturn)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                      child: Row(
+                        children: <Widget>[
+                          const FaIcon(
+                            FontAwesomeIcons.hourglassEnd,
+                            size: 26,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 18.0),
+                            child: Text(
+                              "Returning Time  : ",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Text(
+                              rMinute < 10
+                                  ? '$rHour:0$rMinute $rGb'
+                                  : '$rHour:$rMinute $rGb',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  if (widget.isAdmin)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          RaisedButton(
+                            onPressed: () {
+                              // Submit(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return PopUpRequest(
+                                      onTap: () async {
+                                        await FirebaseFirestore.instance
+                                            .collection('VVEquipment')
+                                            .doc(widget.uid)
+                                            .update({
+                                          'isRequested': 2,
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                          'Request accepted ',
+                                        )));
+                                        Navigator.pop(context);
+                                      },
+                                      text: 'Want to accept the Request',
+                                    ); //---------
+                                  });
+                            },
+                            color: const Color(0xffc3f7ab),
+                            splashColor: Colors.lightBlueAccent,
+                            elevation: 10.0,
+                            shape: const StadiumBorder(),
+                            child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Text('Accept')),
+                          ),
+                          RaisedButton(
+                            onPressed: () {
+                              // Submit(context);
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return PopUpRequest(
+                                      onTap: () async {
+                                        await FirebaseFirestore.instance
+                                            .collection('BBEquipment')
+                                            .doc(widget.uid)
+                                            .update({
+                                          'isRequested': 5,
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text(
+                                          'Request rejected',
+                                        )));
+                                        Navigator.pop(context);
+                                      },
+                                      text: 'Want to Reject the Request?',
+                                    ); //---------
+                                  });
+                            },
+                            color: const Color(0xfff76463),
+                            splashColor: Colors.lightBlueAccent,
+                            elevation: 10.0,
+                            shape: const StadiumBorder(),
+                            child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Text('Reject')),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+              margin: const EdgeInsets.only(top: 16.0),
+            ),
+          ),
+          // widget.isViewing?Container():widget.isAdmin?onClick():Container(),
+          Positioned(
+            top: 1,
+            child: CircleAvatar(
+              radius: 38,
+              backgroundColor: Colors.white,
+              child: CircleAvatar(
+                radius: 34,
+                backgroundColor: Colors.blue,
+                child: CircleAvatar(
+                  radius: 32,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 28,
+                    backgroundImage: NetworkImage(widget.image),
                   ),
                 ),
               ),
             ),
-            // widget.isViewing?Container():widget.isAdmin?onClick():Container(),
-          ],
-        ),
+          ),
+          // widget.isViewing?Container():widget.isAdmin?onClick():Container(),
+        ],
       ),
     );
   }
