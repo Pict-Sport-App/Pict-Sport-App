@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'background_image.dart';
+import 'package:lottie/lottie.dart';
+import 'package:psa/screens/login_signUp/userInfo_screen.dart';
+import 'package:psa/services/authentication.dart';
+import 'package:psa/services/getUserData.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -13,118 +15,135 @@ class _SignupState extends State<Signup> {
   String misId = '';
   @override
   Widget build(BuildContext context) {
-    /*
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    */
+    Size size = MediaQuery.of(context).size;
+    double height= MediaQuery.of(context).size.height;
+    double width= MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        body: Background(),
-        /*
-        appBar: AppBar(
-          toolbarHeight: 100,
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: const Text("WelCome PICT'ians",style: TextStyle(
-            color: Colors.black,fontSize: 28,
-            fontWeight: FontWeight.w600,
-          ),),
-          elevation: 0,
-        ),
-        color: Colors.black,fontSize: 20,
-        fontWeight: FontWeight.w100,
-        backgroundColor: Colors.white,
-
-          SingleChildScrollView(
-            child:
-            Column(
-              children: [
-                Container(
-                  height: height * 0.45,
-                  width: width,
+        body: SizedBox(
+          width: width,
+          height: height,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Image.asset('assets/top1.png', width: width),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Image.asset("assets/top2.png", width: width),
+              ),
+              Positioned(
+                top: 6,
+                right: 0,
+                child: SizedBox(
+                  // height: 35,width: 52,
+                  height: height* 0.21,
+                  width: height * 0.21,
+                  // child: Image.asset("assets/google.png",),
+                  child: Lottie.network(
+                      'https://assets9.lottiefiles.com/packages/lf20_r7bfvyke.json'),
+                  //
+                ),
+              ),
+              Positioned(
+                top: height * 0.102,
+                left: height * 0.04,
+                child: SizedBox(
+                  height: height * 0.35,
+                  width: height * 0.3,
+                  child: const Text(
+                    "Welcome \tPict'ians",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 28,
+                      fontFamily: 'Lobster',
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: height * 0.15,
+                left: width * 0.15,
+                child: Container(
+                  height: height * 0.50,
+                  width: height * 0.34,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/logo1.png'),
                     ),
                   ),
                 ),
-                const Text('Welcome to ',style: TextStyle(
-                  color: Color(0xFF303F9F),
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
-                ),),
-                const Text('PICT SPORT APP',style: TextStyle(
-                  color: Color(0xFF1A237E),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
-                ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Authentication().signInWithGoogle(context).then((result) {
-                      if (result == false) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => GetUserData()));
-                      } else if (result == true) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserInfo()));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                            result,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        ));
-                      }
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 30,right: 30),
-                    child: Container(
+              ),
+              Positioned(
+                  top: height * 0.61,
+                  left: width * 0.19,
+                  child: InkWell(
+                    onTap: ()async{
+                      await Authentication().signInWithGoogle(context).then((result) {
+                        if (result == false) {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => GetUserData()));
+                        } else if (result == true) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const UserInfo()));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                              result,
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                          ));
+                        }
+                      });
+                    },child: Container(
+                      height: height * 0.15,
+                      width:height * 0.30,
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-
+                        // color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(23),
+                        border: Border.all(color: Colors.blueAccent, width: 3),
                       ),
-                  child: Container(
-                    height: 100,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23),
-                      border: Border.all(color: Colors.blueAccent),
-                    ),
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Padding(
-                        //   padding: const EdgeInsets.all(18.0),
-                        //   child: Container(
-                        //     height: 90,
-                        //     width: 90,
-                        //     child: Lottie.network(
-                        //         'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
-                        //   ),
-                        // ),
-                        // const SizedBox(width: 15,),
-
-                      ],
-                    ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 80,
+                            width: 90,
+                            child: Lottie.network(
+                                'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
+                          ),
+                          const Text(
+                            "SIGN IN",
+                            style: TextStyle(
+                              color: Colors.lightBlue,
+                              fontSize: 27,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      )
                   ),
-                ),
-                ),
-                ),
-              ],
-            ),
+                  )),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Image.asset("assets/bottom1.png", width: size.width),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Image.asset("assets/bottom2.png", width: size.width),
+              ),
+            ],
           ),
-          */
+        ),
       ),
     );
   }
