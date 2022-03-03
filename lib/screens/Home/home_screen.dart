@@ -41,16 +41,6 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       body: Stack(
         children: [
-          /* SizedBox(
-            height: 280,
-            // color: Colors.red,
-            width: width,
-            child: CustomPaint(
-              painter: BackgroundPainter(
-                animation: _controller.view,
-              ),
-            ),
-          ),*/
           Container(
             width: width,
             height: height,
@@ -58,6 +48,17 @@ class _HomeScreenState extends State<HomeScreen>
             decoration: const BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/back.jpg'), fit: BoxFit.cover)),
+          ),
+          Transform.rotate(
+            angle: 0.82,
+            child: Container(
+              width: width,
+              height: height,
+              constraints: const BoxConstraints.expand(),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/back.jpg'), fit: BoxFit.cover)),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(
