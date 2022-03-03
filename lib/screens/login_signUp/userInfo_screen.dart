@@ -416,76 +416,7 @@ class _UserInfoState extends State<UserInfo> {
                   ),
                 ),
                 const SizedBox(height: 20,),
-             /*   Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: (){
-                      if (misId.length<23){
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that small')));
-                      }else if (misId.length>23){
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that long')));
-                      }else{
-                        //print(UserDetails.sportList?.update(key, (value) => false));
-                        if (_basketball){
-                          m?.update('BasketBall', (value) => true);
-                        }
-                        if (_football){
-                          m?.update('FootBall', (value) => true);
-                        }
-                        if (_volleyball){
-                          m?.update('VolleyBall', (value) => true);
-                        }
-                        if (_cricket){
-                          m?.update('Cricket', (value) => true);
-                        }
-                        if (_chess){
-                          m?.update('Chess', (value) => true);
-                        }
-                        if (_gym){
-                          m?.update('Gym', (value) => true);
-                        }
-                        if (_tabletennis){
-                          m?.update('TableTennis', (value) => true);
-                        }
-                        if (_badminton){
-                          m?.update('Badminton', (value) => true);
-                        }
-                        User? user = FirebaseAuth.instance.currentUser;
-                        var uid=user?.uid;
-                        FirebaseFirestore.instance
-                            .collection('User')
-                            .doc(uid)
-                            .set({
-                          'name':user?.displayName,
-                          'photourl':user?.photoURL,
-                          'email':user?.email,
-                          'uid':user?.uid,
-                          'misId':misId,
-                          'SportList': m,
-                          'isAdmin':false,
-                        });
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                          return GetUserData();
-                        }));
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('SUBMIT',style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold
-                        ),),
-                      ),
-                    ),
-                  ),
-                ),*/
-            Container(
+            SizedBox(
               height: 70,
               child: RaisedButton(
                 onPressed: (){
@@ -538,10 +469,7 @@ class _UserInfoState extends State<UserInfo> {
                     }));
                   }
                 },
-                // onPressed: snapshot?.data == false
-                //     ? _sendPasswordResetEmail
-                //     : null,
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
                 color: Colors.redAccent,
                 child: Text(
                   'SUBMIT',

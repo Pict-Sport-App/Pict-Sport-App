@@ -24,7 +24,7 @@ class _VolleyBall_ScreenState extends State<VolleyBall_Screen> {
   int _isRequested = 0;
   late var _n;
 
-  final _totalBall = int.parse(Equiment.vollyball.toString());
+  final _totalBall = int.parse(Equipment.vollyball.toString());
 
   void Logic_VV(){
     _isFirstView

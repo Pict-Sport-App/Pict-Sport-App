@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
@@ -80,7 +79,7 @@ class _BackgroundState extends State<Background> {
               top: height * 0.61,
               left: width * 0.19,
               child: InkWell(
-                onTap: (){print('kkk');
+                onTap: (){
                 Authentication().signInWithGoogle(context).then((result) {
                   if (result == false) {
                     Navigator.pushReplacement(context,

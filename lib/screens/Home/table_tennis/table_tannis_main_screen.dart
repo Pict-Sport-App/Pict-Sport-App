@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/userDetails.dart';
+import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/Home/table_tennis/playing.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
 import 'package:psa/screens/Home/table_tennis/requests.dart';
@@ -81,12 +82,9 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 
   Future<void> getStatus(BuildContext context) async {
 
-    var q = (int.parse(Equiment.tabletennis.toString()) / 4 ).round()-1;
+    var q = (int.parse(Equipment.tabletennis.toString()) / 4 ).round()-1;
+    var r = int.parse(Equipment.tabletennis.toString()) % 4;
 
-
-    var r = int.parse(Equiment.tabletennis.toString()) % 4;
-    print(q);print(r);
-    print('ll');
     _total1 = 0;
     _total2 = 0;
     _total3 = 0;
@@ -104,7 +102,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
       _total1 = _total2 = _total3 = 4;
     } else {
       _total1 = _total2 = _total3 = 4;
-      _remain = int.parse(Equiment.tabletennis.toString()) - 12;
+      _remain = int.parse(Equipment.tabletennis.toString()) - 12;
     }
 
     var v = await FirebaseFirestore.instance
@@ -141,11 +139,12 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         appBar: AppBar(
           leading:  GestureDetector(
             onTap: (){
-              Navigator.pop(context);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                return const HomeScreen();
+              }));
             },
             child: const Padding(
               padding: EdgeInsets.only(left: 16.0, top: 12),

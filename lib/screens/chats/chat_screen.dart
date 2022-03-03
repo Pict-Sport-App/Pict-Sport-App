@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
@@ -16,8 +17,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
-    double width=MediaQuery.of(context).size.width;
+
     return Scaffold(
       drawer: const Drawer(
         child: CollapsingNavigationDrawer(),
@@ -40,11 +40,15 @@ class _ChatScreenState extends State<ChatScreen> {
         automaticallyImplyLeading: false, // Used for removing back buttoon.
         elevation: 0.3,
         backgroundColor: Colors.white,
-        title: const Text('Messaging ',style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
-        ),),
+        title: AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText('Messaging',
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                )),
+          ],
+        ),
         actions: <Widget>[
           IconButton(
             icon: const FaIcon(
@@ -71,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       arguments: UserDetails.mySportsList![index],);
                   },
                   name: UserDetails.mySportsList![index],
-                  imag: UserDetails.mySportEmoji![index],
+                  image: UserDetails.mySportEmoji![index],
                 )),
           ),
         ],
@@ -82,9 +86,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
 class SportGrpNameWidget extends StatelessWidget {
-  late String name,imag,lastMsg;
+  late String name,image,lastMsg;
   VoidCallback onTap;
-  SportGrpNameWidget({required this.lastMsg,required this.onTap,required this.name,required this.imag});
+  SportGrpNameWidget({Key? key, required this.lastMsg,required this.onTap,required this.name,required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +106,7 @@ class SportGrpNameWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      imag,
+                      image,
                       style: const TextStyle(fontSize: 25),
                     ),
                   ),

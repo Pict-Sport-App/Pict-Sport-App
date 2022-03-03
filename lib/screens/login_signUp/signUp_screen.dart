@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:psa/screens/login_signUp/userInfo_screen.dart';
-import 'package:psa/services/authentication.dart';
-import 'package:psa/services/getUserData.dart';
 
 import 'background_image.dart';
 
 class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
+
   @override
   _SignupState createState() => _SignupState();
 }

@@ -6,7 +6,6 @@ import 'package:psa/screens/Home/VolleyBall/issueBall.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/chats/SportChatScreen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
-import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/services/getUserData.dart';
 

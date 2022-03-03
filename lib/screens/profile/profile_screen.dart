@@ -6,16 +6,15 @@ import 'package:psa/screens/profile/helper/widget/sport_container.dart';
 import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helper/widget/StackConatiner2.dart';
-// import 'package:animated_text_kit/animated_text_kit.dart';
 
-class Profile_Screen extends StatefulWidget {
-  const Profile_Screen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  _Profile_ScreenState createState() => _Profile_ScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _Profile_ScreenState extends State<Profile_Screen> {
+class _ProfileScreenState extends State<ProfileScreen> {
 
 
   Future<void> _launchedInBrowser(String url) async {
@@ -56,7 +55,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
                               DifferentPlatformWidget(onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return EditProfileScreen();
+                                  return const EditProfileScreen();
                                 }));
                               }, name: 'Instagram',)));
                             }
@@ -79,7 +78,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
                               DifferentPlatformWidget(onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return EditProfileScreen();
+                                  return const EditProfileScreen();
                                 }));
                               }, name: 'Twitter',)));
                             }
@@ -101,7 +100,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
                               DifferentPlatformWidget(onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return EditProfileScreen();
+                                  return const EditProfileScreen();
                                 }));
                               }, name: 'LinkedIn',)));
                             }
@@ -123,7 +122,7 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                               showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
                               DifferentPlatformWidget(onTap: (){
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return EditProfileScreen();
+                                  return const EditProfileScreen();
                                 }));
                               }, name: 'WhatApp Number',)));
                             }
@@ -146,10 +145,10 @@ class _Profile_ScreenState extends State<Profile_Screen> {
               UserDetails.achivement == null || UserDetails.achivement == 'null'
                   ? Container()
                   : Padding(
-                      child: sportContainer(
+                      child: SportContainer(
                           fondSize: 17,
                           headline: "Achievement in sport",
-                          Discription: UserDetails.achivement),
+                          discription: UserDetails.achivement),
                       padding: const EdgeInsets.only(
                           left: 11.0, right: 11, bottom: 15),
                     ),
@@ -207,27 +206,27 @@ class _Profile_ScreenState extends State<Profile_Screen> {
                   : Padding(
                       padding: const EdgeInsets.only(
                           left: 11.0, right: 11, bottom: 15),
-                      child: sportContainer(
+                      child: SportContainer(
                         headline: "About myself ",
-                        Discription: UserDetails.aboutMe,
+                        discription: UserDetails.aboutMe,
                         fondSize: 17,
                       ),
                     ),
             ],
           ),
         ),
-        drawer: CollapsingNavigationDrawer());
+        drawer: const CollapsingNavigationDrawer());
   }
 }
 
 class DifferentPlatformWidget extends StatelessWidget {
   late String name;
   VoidCallback onTap;
-  DifferentPlatformWidget({required this.name,required this.onTap});
+  DifferentPlatformWidget({Key? key, required this.name,required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 90,
       //color: Colors.black,
       child: Column(
@@ -256,10 +255,3 @@ class DifferentPlatformWidget extends StatelessWidget {
     );
   }
 }
-
-//
-// onTap: (){
-//
-// },
-// text: 'Logout',Icon:
-// const

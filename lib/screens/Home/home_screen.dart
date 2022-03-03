@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen>
                 "PICT SPORT",
                 style: TextStyle(
                     fontSize: 30.0,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontFamily: 'Lobster',
                     fontWeight: FontWeight.w400),
               ),

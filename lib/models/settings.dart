@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
-class Equiment
+class Equipment
 {
-  static int? basketball_Six;
-  static int? basketball_Seven;
+  static int? basketballsix;
+  static int? basketballseven;
   static int? tabletennis;
   static int? vollyball;
 }

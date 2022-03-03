@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/developer.dart';
-import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/appdrawer/users.dart';
 import 'package:psa/services/authentication.dart';
 import '../main_settings.dart';
@@ -26,7 +25,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   late Animation<double> _widthAnimation, sizedBoxAnimation;
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     _widthAnimation =
         Tween<double>(begin: 250, end: 90).animate(widget.animationController);
@@ -49,7 +48,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                 : widget.num == 3
                     ? Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                        return Frame1Widget();
+                        return const Frame1Widget();
                       }))
                     : widget.num == 4
                         ? Authentication().signOut(context)

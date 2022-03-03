@@ -12,7 +12,7 @@ class ChatMembers extends StatefulWidget {
 }
 
 class _ChatMembersState extends State<ChatMembers> {
-  var _productId, _key;
+  dynamic _productId;
   bool _isInit = true;
 
   @override
@@ -20,21 +20,13 @@ class _ChatMembersState extends State<ChatMembers> {
     if (_isInit) {
       _productId = ModalRoute.of(context)!.settings.arguments as String;
       if (_productId == 'BasketBall') {
-        _key = 'BB';
       } else if (_productId == 'VolleyBall') {
-        _key = 'VB';
       } else if (_productId == 'TableTennis') {
-        _key = 'TT';
       } else if (_productId == 'Badminton') {
-        _key = 'BT';
       } else if (_productId == 'Cricket') {
-        _key = 'CR';
       } else if (_productId == 'FootBall') {
-        _key = 'FB';
       } else if (_productId == 'Chess') {
-        _key = 'CH';
       } else if (_productId == 'Gym') {
-        _key = 'GY';
       }
     }
     _isInit = false;

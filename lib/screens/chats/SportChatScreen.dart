@@ -16,7 +16,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
   bool _isInit=true;
   final focusNode=FocusNode();
   Messages? replyMessage;
-  var _productId,_key;
+  dynamic _productId,_key;
 
   void replyToMessage(Messages message) {
     setState(() {

@@ -92,14 +92,10 @@ class UserWidget extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Row(
             children: [
-              // CircleAvatar(
-              //   backgroundImage: NetworkImage(url.toString()),
-              //   radius: 25,
-              // ),
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Align(
@@ -147,6 +143,5 @@ class UserWidget extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

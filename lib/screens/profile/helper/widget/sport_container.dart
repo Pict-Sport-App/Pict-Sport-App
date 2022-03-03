@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
+class SportContainer extends StatefulWidget {
 
-class sportContainer extends StatefulWidget {
-
-  sportContainer({required this.Discription,
+  SportContainer({Key? key, required this.discription,
     required this.headline,
-    required this.fondSize});
+    required this.fondSize}) : super(key: key);
   String? headline;
-  String? Discription;
+  String? discription;
   double fondSize;
 
   @override
-  _sportContainerState createState() => _sportContainerState();
+  _SportContainerState createState() => _SportContainerState();
 }
 
-class _sportContainerState extends State<sportContainer> {
+class _SportContainerState extends State<SportContainer> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -40,12 +39,12 @@ ${widget.headline} ''',
           ),
           child: Padding(
             padding: const EdgeInsets.all(19.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  '${widget.Discription}',
+                  '${widget.discription}',
                   style:
                        TextStyle(fontSize: widget.fondSize,
                            fontFamily: "Poppins"),

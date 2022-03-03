@@ -7,8 +7,8 @@ import 'messageBubble.dart';
 
 class Messages extends StatelessWidget {
 
-  var uniqueValue;
-  Messages({required this.uniqueValue});
+  dynamic uniqueValue;
+  Messages({Key? key, required this.uniqueValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
