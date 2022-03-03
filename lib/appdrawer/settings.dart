@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/settings.dart';
 
@@ -11,10 +12,10 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-  int? _bbSizeSix = Equiment.basketball_Six;
-  int? _bbSizeSeven = Equiment.basketball_Seven;
-  int? _tabletennis = Equiment.tabletennis;
-  int? _vollyball = Equiment.vollyball;
+  int? _bbSizeSix = Equipment.basketballsix;
+  int? _bbSizeSeven = Equipment.basketballseven;
+  int? _tabletennis = Equipment.tabletennis;
+  int? _vollyball = Equipment.vollyball;
   final formkey = GlobalKey<FormState>();
 
   Future submit() async {
@@ -29,7 +30,9 @@ class _SettingState extends State<Setting> {
         Navigator.pop(context);
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -86,7 +89,7 @@ class _SettingState extends State<Setting> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
-                          initialValue: Equiment.basketball_Six.toString(),
+                          initialValue: Equipment.basketballsix.toString(),
                           onSaved: (input) {
                             _bbSizeSix = int.parse(input.toString());
                           },
@@ -125,7 +128,7 @@ class _SettingState extends State<Setting> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
-                          initialValue: Equiment.basketball_Seven.toString(),
+                          initialValue: Equipment.basketballseven.toString(),
                           onSaved: (input) {
                             _bbSizeSeven = int.parse(input.toString());
                           },
@@ -164,7 +167,7 @@ class _SettingState extends State<Setting> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
-                          initialValue: Equiment.tabletennis.toString(),
+                          initialValue: Equipment.tabletennis.toString(),
                           keyboardType: TextInputType.number,
                           validator: (val) {},
                           onSaved: (inp) {
@@ -203,7 +206,7 @@ class _SettingState extends State<Setting> {
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
-                          initialValue: Equiment.vollyball.toString(),
+                          initialValue: Equipment.vollyball.toString(),
                           keyboardType: TextInputType.number,
                           validator: (val) {},
                           onSaved: (inp) {

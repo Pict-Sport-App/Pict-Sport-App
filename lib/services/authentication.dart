@@ -15,8 +15,6 @@ class Authentication
   Future signOut(context) async {
     await GoogleSignIn().disconnect();
     FirebaseAuth.instance.signOut();
-    //await _auth.signOut();
-    print('signout');
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (BuildContext context) => Signup()),
@@ -25,8 +23,7 @@ class Authentication
 
   //google sign in
   Future signInWithGoogle(context) async {
-    print('starting');
-    late final isuser;
+    late final bool isuser;
     try {
       UserCredential userCredential;
       if (kIsWeb) {
@@ -122,13 +119,13 @@ class Authentication
       String creationTime = user.metadata.creationTime.toString();
       lastSignInTime = lastSignInTime.substring(0, lastSignInTime.length - 7);
       creationTime = creationTime.substring(0, creationTime.length - 7);
-       print(lastSignInTime);
+
       if (lastSignInTime == creationTime) {
         isNewUser = true;
       }
       return isNewUser;
     } on PlatformException catch (error) {
-      print(error);
+
       return error;
     }
   }

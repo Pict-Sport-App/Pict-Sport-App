@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/announcements/poster.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class announcement_page extends StatefulWidget {
+class Announcement_page extends StatefulWidget {
   late Timestamp date; //
   late String imageUrl; //
   late String descrip; //
@@ -15,8 +15,8 @@ class announcement_page extends StatefulWidget {
   late String contactNo2; //
   late String title; //
   late String venue; //
-  announcement_page(
-      {required this.descrip,
+  Announcement_page(
+      {Key? key, required this.descrip,
       required this.imageUrl,
       required this.venue,
       required this.title,
@@ -25,14 +25,14 @@ class announcement_page extends StatefulWidget {
       required this.number1,
       required this.number2,
       required this.contactNo1,
-      required this.contactNo2});
+      required this.contactNo2}) : super(key: key);
 
   @override
-  _announcement_pageState createState() => _announcement_pageState();
+  _Announcement_pageState createState() => _Announcement_pageState();
 }
 
-class _announcement_pageState extends State<announcement_page> {
-  var day, month, year, hour, min, gb = 'pm', w;
+class _Announcement_pageState extends State<Announcement_page> {
+  dynamic day, month, year, hour, min, gb = 'pm', w;
 
   Future<void> _launchedInBrowser(String url) async {
     if (await canLaunch(url)) {
@@ -110,7 +110,7 @@ class _announcement_pageState extends State<announcement_page> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => photo(
+                          builder: (context) => Photo(
                                 image: widget.imageUrl,
                               )))
                 },

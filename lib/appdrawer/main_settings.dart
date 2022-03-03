@@ -100,7 +100,7 @@ class MainSettings extends StatelessWidget {
                 ),
               ),
             ),
-            RaisedButton(onPressed: (){},
+            ElevatedButton(onPressed: (){},
             child: const Text('Request for Admin access'),)
           ],
         ),

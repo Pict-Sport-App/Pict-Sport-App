@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class photo extends StatefulWidget {
+class Photo extends StatefulWidget {
   late String image;
-  photo({required this.image});
+  Photo({Key? key, required this.image}) : super(key: key);
 
   @override
-  _photoState createState() => _photoState();
+  _PhotoState createState() => _PhotoState();
 }
 
-class _photoState extends State<photo> {
+class _PhotoState extends State<Photo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

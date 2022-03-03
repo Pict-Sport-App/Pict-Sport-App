@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewMessage extends StatefulWidget {
-  var keyies;
-  NewMessage({required this.keyies});
+  dynamic keyies;
+  NewMessage({Key? key, required this.keyies}) : super(key: key);
   @override
   _NewMessageState createState() => _NewMessageState();
 }
@@ -14,7 +14,7 @@ class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
 
   void _sendMessage() async{
-    FocusScope.of(context).unfocus();
+
     final user=FirebaseAuth.instance.currentUser;
     final userData=await FirebaseFirestore.
     instance.
@@ -66,6 +66,7 @@ class _NewMessageState extends State<NewMessage> {
                   _enteredMessage = value;
 
                 });
+
               },
             ),
           ),

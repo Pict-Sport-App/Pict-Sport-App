@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/intial_page.dart';
 import 'package:psa/services/getSettings.dart';
@@ -38,7 +37,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.uid=data['uid'].toString();
             UserDetails.isAdmin=data['isAdmin'];
             UserDetails.sportList=Map<String, bool?>.from(data['SportList']).cast<String, bool>();
-            CheckMySportList();
+            checkmysportlist();
             UserDetails.location=data['location'].toString();
             UserDetails.headline=data['headLine'].toString();
             UserDetails.rollNo=data['rollNo'].toString();
@@ -49,7 +48,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.linkedInUrl=data['linkedIn'].toString();
             UserDetails.whatAppNo=data['whatAppNo'].toString();
             UserDetails.birthday=data['dob'].toString();
-            GetEquiment();
+            getequiment();
             return const IntialScreen();
           }
           return const Loading();

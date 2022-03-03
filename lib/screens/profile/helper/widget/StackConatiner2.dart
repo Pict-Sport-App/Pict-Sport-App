@@ -5,11 +5,11 @@ import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
 import '../../profile_edit_srcreen.dart';
 
 class StackContainer2 extends StatelessWidget {
-  StackContainer2();
+  const StackContainer2();
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -50,7 +50,6 @@ class StackContainer2 extends StatelessWidget {
                   color: Colors.black87,
                 ),
                 onPressed: () {
-                  print(UserDetails.birthday);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -105,119 +104,6 @@ class StackContainer2 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // IconButton(
-                  //   icon: const FaIcon(
-                  //     FontAwesomeIcons.rocketchat,
-                  //     size: 30,color: Colors.black,
-                  //   ),
-                  //   onPressed: () {
-                  //     print('do something');
-                  //   },
-                  // ),
-                  // const SizedBox(height: 10.0),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 8.0),
-                  //   child: Text(
-                  //     UserDetails.name.toString(),
-                  //     style: const TextStyle(
-                  //       fontSize: 18.0,
-                  //       color: Colors.black,
-                  //       fontWeight: FontWeight.bold,
-                  //     ),
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 8.0, top: 2),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       UserDetails.headline == null ||
-                  //               UserDetails.headline == 'null'
-                  //           ? Container()
-                  //           : Text(
-                  //               UserDetails.headline.toString(),
-                  //               style: const TextStyle(
-                  //                   fontSize: 14.0, color: Colors.black),
-                  //             ),
-                  //       UserDetails.rollNo == null || UserDetails.rollNo == 'null'
-                  //           ? Container()
-                  //           : Text(
-                  //               UserDetails.rollNo.toString(),
-                  //               style: const TextStyle(
-                  //                   fontSize: 14.0, color: Colors.black),
-                  //             ),
-                  //     ],
-                  //   ),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 8.0, top: 11),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       const Text(
-                  //         "Pune Institute of Computer Technology, Pune.",
-                  //         style: TextStyle(
-                  //           fontSize: 14.0,
-                  //           color: Colors.grey,
-                  //           fontStyle: FontStyle.italic,
-                  //         ),
-                  //       ),
-                  //       UserDetails.misId![0].toString() == 'C' ||
-                  //               UserDetails.misId![0].toString() == 'c'
-                  //           ? const Text(
-                  //               'Computer',
-                  //               style: TextStyle(
-                  //                 fontSize: 14.0,
-                  //                 color: Colors.grey,
-                  //                 fontStyle: FontStyle.italic,
-                  //               ),
-                  //             )
-                  //           : UserDetails.misId![0] == 'I' ||
-                  //                   UserDetails.misId![0] == 'i'
-                  //               ? const Text(
-                  //                   'Information Technology',
-                  //                   style: TextStyle(
-                  //                     fontSize: 14.0,
-                  //                     color: Colors.grey,
-                  //                     fontStyle: FontStyle.italic,
-                  //                   ),
-                  //                 )
-                  //               : UserDetails.misId![0] == 'E' ||
-                  //                       UserDetails.misId![0] == 'e'
-                  //                   ? const Text(
-                  //                       'Electronics',
-                  //                       style: TextStyle(
-                  //                         fontSize: 14.0,
-                  //                         color: Colors.grey,
-                  //                         fontStyle: FontStyle.italic,
-                  //                       ),
-                  //                     )
-                  //                   : Container(),
-                  //       UserDetails.birthday == 'null' ||
-                  //               UserDetails.birthday == null
-                  //           ? Container()
-                  //           : Text(
-                  //               UserDetails.birthday.toString(),
-                  //               style: const TextStyle(
-                  //                 fontSize: 14.0,
-                  //                 color: Colors.grey,
-                  //                 fontStyle: FontStyle.italic,
-                  //               ),
-                  //             ),
-                  //       UserDetails.location == null ||
-                  //               UserDetails.location == 'null'
-                  //           ? Container()
-                  //           : Text(
-                  //               UserDetails.location.toString(),
-                  //               style: const TextStyle(
-                  //                 fontSize: 14.0,
-                  //                 color: Colors.grey,
-                  //                 fontStyle: FontStyle.italic,
-                  //               ),
-                  //             ),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -334,7 +220,7 @@ class StackContainer2 extends StatelessWidget {
 class EmailORMisId2 extends StatefulWidget {
   String? mail;
   String? misid;
-  EmailORMisId2({required this.mail, required this.misid});
+  EmailORMisId2({Key? key, required this.mail, required this.misid}) : super(key: key);
   @override
   _EmailORMisId2State createState() => _EmailORMisId2State();
 }
@@ -380,10 +266,6 @@ class _EmailORMisId2State extends State<EmailORMisId2> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  // Icon(
-                  //   Icons.mail,
-                  //   size: 35,
-                  // ),
                   Row(
                     children: <Widget>[
                       GestureDetector(

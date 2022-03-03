@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/screens/profile/profile_screen.dart';
 import 'helper/card_item.dart';
 import 'helper/stack_container.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -11,8 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 class OtherUserProfileScreeen extends StatefulWidget {
   late String uid;
   OtherUserProfileScreeen(
-  {required this.uid}
-      );
+  {Key? key, required this.uid}
+      ) : super(key: key);
 
   @override
   State<OtherUserProfileScreeen> createState() =>
@@ -141,13 +139,13 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                         const SizedBox(
                           height: 18.0,
                         ),
-                        if (headline != null )
+                        if (headline !='null' )
                           Padding(
                             padding: const EdgeInsets.only(left: 11.0, top: 2),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                headline == null || headline == 'null'
+                                headline == 'null'
                                     ? Container()
                                     : Text(
                                   headline.toString(),
@@ -165,7 +163,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              location == null || location == 'null'
+                              location == 'null'
                                   ? Container()
                                   : Text(
                                 '${location.toString()} ',
@@ -209,7 +207,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                                               size: 35,
                                             ),
                                             onPressed: () {
-                                              if (insta=='null' || insta==null){
+                                              if (insta=='null'){
                                                 ScaffoldMessenger.of(context).
                                                 showSnackBar(const SnackBar(duration: Duration(seconds: 2),content:Text(
                                                     'Oops!! User have not provided Insta Url..'
@@ -247,7 +245,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                                               size: 35,
                                             ),
                                             onPressed: () {
-                                              if (linkedIn=='null' || linkedIn==null){
+                                              if (linkedIn=='null'){
                                                 ScaffoldMessenger.of(context).
                                                 showSnackBar(const SnackBar(duration: Duration(seconds: 2),content:Text(
                                                     'Oops!! User have not provided LinkedIn Url..'
@@ -285,7 +283,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                                               size: 35,
                                             ),
                                             onPressed: () {
-                                              if (twitter=='null' || twitter==null){
+                                              if (twitter=='null'){
                                                 ScaffoldMessenger.of(context).
                                                 showSnackBar(const SnackBar(duration: Duration(seconds: 2),content:Text(
                                                     'Oops!! User have not provided Twitter Url..'
@@ -323,7 +321,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                                               size: 35,
                                             ),
                                             onPressed: () {
-                                              if (whatappNo=='null' || whatappNo==null){
+                                              if (whatappNo=='null'){
                                                 ScaffoldMessenger.of(context).
                                                 showSnackBar(const SnackBar(duration: Duration(seconds: 2),content:Text(
                                                     'Oops!! User have not provided Mobile Number..'
@@ -430,21 +428,21 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                             ),
                           ):
                         /// && roll_no != null;
-                         rollNo=='null' || rollNo==null?Container():
+                         rollNo=='null'?Container():
                          CardItem(inputString1: 'Roll No', inputString2: rollNo),
                         if (_showData == true)
                         /// &&  dob != null;
-                         dob=='null' || dob==null?Container(): CardItem(
+                         dob=='null'?Container(): CardItem(
                               inputString1: 'Date of Birth',
                               inputString2: dob),
                         if (_showData == true)
                         /// &&  about_my_self != null;
-                         aboutMe=='null' || aboutMe==null? Container():CardItem(
+                         aboutMe=='null'? Container():CardItem(
                               inputString1: 'About Myself',
                               inputString2:aboutMe),
                         if (_showData == true)
                         /// &&  about_my_self != null;
-                          achivement=='null' || achivement==null? Container():CardItem(
+                          achivement=='null'? Container():CardItem(
                               inputString1: 'Achievement',
                               inputString2:achivement),
                       ],

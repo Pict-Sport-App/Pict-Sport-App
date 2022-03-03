@@ -1,6 +1,6 @@
 import 'package:psa/models/userDetails.dart';
 
-void CheckMySportList()
+void checkmysportlist()
 {
   UserDetails.mySportsList!.clear();
   UserDetails.mySportEmoji!.clear();

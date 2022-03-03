@@ -4,12 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FullPost extends StatefulWidget {
   late Timestamp date;
-  late String imageUrl;//
-  late String descrip;//
+  late String imageUrl;
+  late String descrip;
   late String link;
   late String number;
-  late String title;//
-  late String venue;//
+  late String title;
+  late String venue;
 
   FullPost(
   {required this.descrip,
@@ -77,7 +77,9 @@ class _FullPostState extends State<FullPost> {
                                     FontAwesomeIcons.share,
                                     size: 30,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+
+                                  },
                                 ),
                               ),
                             ],

@@ -29,7 +29,7 @@ class _IntialScreenState extends State<IntialScreen> {
     });
   }
 
-  Widget BuildPageConnector() {
+  Widget buildpageconnector() {
     return PageView(
       controller: pageController,
       onPageChanged: (index) {
@@ -41,7 +41,7 @@ class _IntialScreenState extends State<IntialScreen> {
         ChatScreen(),
         Announcement_Screen(),
         CalendarScreen(),
-        Profile_Screen(),
+        ProfileScreen(),
       ],
     );
   }
@@ -69,7 +69,7 @@ class _IntialScreenState extends State<IntialScreen> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: defaultBackgrdColor,
-      drawer: CollapsingNavigationDrawer(),
+      drawer: const CollapsingNavigationDrawer(),
       /*appBar: AppBar(
         centerTitle: true,
         backgroundColor: const Color(0xFF9C27B0),
@@ -149,7 +149,7 @@ class _IntialScreenState extends State<IntialScreen> {
                 height: deviceHeight,
                 width: deviceWidth,
                 color: defaultBackgrdColor,
-                child: BuildPageConnector(),
+                child: buildpageconnector(),
               ),
               /*Container(
                 height: 70,

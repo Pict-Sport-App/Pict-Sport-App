@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,13 +32,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
         elevation: 0.3,
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: const Text(
-          'Calender Screen',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
+        title:AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText('Calender Screen',
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 22,
+                )),
+          ],
         ),
         leading: Padding(
           padding: const EdgeInsets.only(left: 15.0, top: 17),

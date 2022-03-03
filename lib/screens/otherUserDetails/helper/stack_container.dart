@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 import 'top_bar.dart';
 
@@ -8,10 +7,10 @@ class StackContainer extends StatelessWidget {
   String? name;
   String? misId;
   StackContainer(
-      {required this.misId, required this.imageUrl, required this.name});
+      {Key? key, required this.misId, required this.imageUrl, required this.name}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 390.0,
       child: Stack(
         children: <Widget>[

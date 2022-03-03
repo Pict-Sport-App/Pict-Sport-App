@@ -25,8 +25,8 @@ class _BasketBall_screenState extends State<BasketBall_screen> {
   var _size;
   int _isRequested = 0;
 
-  final _totalBallSix = int.parse(Equiment.basketball_Six.toString());
-  final _totalBallSeven = int.parse(Equiment.basketball_Seven.toString());
+  final _totalBallSix = int.parse(Equipment.basketballsix.toString());
+  final _totalBallSeven = int.parse(Equipment.basketballseven.toString());
 
   late var _size_six, _size_seven;
 

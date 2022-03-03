@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 import 'package:psa/models/userDetails.dart';
@@ -21,7 +20,7 @@ class MessageBubble extends StatefulWidget {
 
 class _MessageBubbleState extends State<MessageBubble> {
 
-  var hour,minute,gb='pm';
+  dynamic hour,minute,gb='pm';
   void cal()
   {
     hour=widget.time.toDate().hour;
@@ -125,36 +124,36 @@ class _MessageBubbleState extends State<MessageBubble> {
 
 class MessageTile extends StatelessWidget {
   MessageTile({required this.message, required this.isSendByMe});
-  final message;
+  dynamic message;
   final bool isSendByMe;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
           left: isSendByMe ? 0 : 24, right: isSendByMe ? 24 : 0),
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
       width: MediaQuery.of(context).size.height,
       child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 17),
           decoration: BoxDecoration(
               borderRadius: isSendByMe
-                  ? BorderRadius.only(
+                  ? const BorderRadius.only(
                 topLeft: Radius.circular(23),
                 topRight: Radius.circular(23),
                 bottomLeft: Radius.circular(23),
               )
-                  : BorderRadius.only(
+                  : const BorderRadius.only(
                 topLeft: Radius.circular(23),
                 topRight: Radius.circular(23),
                 bottomRight: Radius.circular(23),
               ),
               gradient:
-              isSendByMe ?  LinearGradient(
+              isSendByMe ?  const LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [Colors.purple, Colors.purple]) :
-              LinearGradient(
+              const LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [Colors.lightGreen, Colors.lightGreen])
@@ -163,7 +162,7 @@ class MessageTile extends StatelessWidget {
           ),
           child: Text(
             message,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 17,
             ),

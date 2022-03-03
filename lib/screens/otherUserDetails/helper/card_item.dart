@@ -132,7 +132,7 @@ size: 25,
 class EmailORMisId extends StatefulWidget {
   String? mail;
   String? misid;
-  EmailORMisId({required this.mail, required this.misid});
+  EmailORMisId({Key? key, required this.mail, required this.misid}) : super(key: key);
   @override
   _EmailORMisIdState createState() => _EmailORMisIdState();
 }

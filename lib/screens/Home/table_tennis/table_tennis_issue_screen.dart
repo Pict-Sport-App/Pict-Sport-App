@@ -92,11 +92,7 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           'timeOfReturn': Timestamp.now(),
           'uid': UserDetails.uid,
         });
-
-        setState(() {
-          //requested=true;
-        });
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
           return TabletannisScreen();
         }));
       }

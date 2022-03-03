@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/userDetails.dart';
@@ -21,17 +21,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   static String hiddenAboutMe="Minimum 10 words required";
   static String hiddenInsta="";
 
-  var _day,_month,_year;
+  dynamic _day,_month,_year;
 
   Future _onSubmit() async{
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
-        if (dob==UserDetails.birthday){
-          print('euu');
-          print(dob);
-          print(UserDetails.birthday);
-        }
         if (headline==hiddenHeadLine){headline=null;}
         if (rollNo==hiddenRollNo){rollNo=null;}
         if (location==hiddenLocation){location=null;}
@@ -97,26 +92,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
           return GetUserData();
         }));
-        /*setState(() {
-          UserDetails.headline=headline;
-          UserDetails.rollNo=rollNo;
-          UserDetails.location=location;
-          UserDetails.achivement=achivement;
-          UserDetails.aboutMe=aboutUrSelf;
-          UserDetails.instaUrl=insta;
-          UserDetails.linkedInUrl=link;
-          UserDetails.twitterUrl=twit;
-          UserDetails.whatAppNo=mobile;
-          UserDetails.birthday=dob;
-        });*/
-       // Navigator.pop(context);
-
       } else {
-        print("null is being printed <=");
+        if (kDebugMode) {
+          print("null is being printed <=");
+        }
       }
     } catch (e) {
-      print("Error caught while summiting the form");
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -188,7 +172,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         actions: <Widget>[
           TextButton(
             onPressed: () {
-              print("Form is being submitted");
               _onSubmit();
             },
             child: const FaIcon(
@@ -267,14 +250,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             lastDate: DateTime.now())
                             .then((value) {
                           setState(() {
-
-                            print('start');
                             _day=value?.day;
-                            print(_day);
                             _month=value?.month;
-                            print(_month);
                             _year=value?.year;
-                            print(_year);
                             dob=(_day.toString()+'/'+_month.toString()+'/'+_year.toString());
                             UserDetails.birthday=dob;
                           });
@@ -283,7 +261,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Container(
                         padding: const EdgeInsets.all(5.0),
                         alignment: Alignment.center,
-
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(17),
                           color: Colors.blue,
@@ -476,14 +453,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: bb,
+                      onChanged: (value) {
                         setState(() {
-                          bb==true? bb=false:bb=true;
+                          bb= value;
                         });
                       },
-                      child: onClick(bb),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -494,14 +474,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: vv,
+                      onChanged: (value) {
                         setState(() {
-                          vv==true? vv=false:vv=true;
+                          vv= value;
                         });
                       },
-                      child: onClick(vv),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -512,14 +495,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: tt,
+                      onChanged: (value) {
                         setState(() {
-                          tt==true? tt=false:tt=true;
+                          tt= value;
                         });
                       },
-                      child: onClick(tt),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -530,14 +516,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: bd,
+                      onChanged: (value) {
                         setState(() {
-                          bd==true? bd=false:bd=true;
+                          bd= value;
                         });
                       },
-                      child: onClick(bd),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -548,14 +537,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: cr,
+                      onChanged: (value) {
                         setState(() {
-                          cr==true? cr=false:cr=true;
+                          cr= value;
                         });
                       },
-                      child: onClick(cr),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -566,14 +558,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: fb,
+                      onChanged: (value) {
                         setState(() {
-                          fb==true? fb=false:fb=true;
+                          fb= value;
                         });
                       },
-                      child: onClick(fb),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -584,14 +579,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: ch,
+                      onChanged: (value) {
                         setState(() {
-                          ch==true? ch=false:ch=true;
+                          ch= value;
                         });
                       },
-                      child: onClick(ch),
-                    )
+                    ),
                   ],
                 ),
                 Row(
@@ -602,14 +600,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),),
-                    GestureDetector(
-                      onTap: (){
+                    Switch(
+                      splashRadius: 30,
+                      activeColor: Colors.green,
+                      inactiveThumbColor: Colors.red,
+                      value: gy,
+                      onChanged: (value) {
                         setState(() {
-                          gy==true? gy=false:gy=true;
+                          gy= value;
                         });
                       },
-                      child: onClick(gy),
-                    )
+                    ),
                   ],
                 ),
               ],
