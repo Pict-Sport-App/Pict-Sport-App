@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'messages.dart';
 import 'newMessage.dart';
@@ -67,13 +68,27 @@ class _SportChatScreenState extends State<SportChatScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          /*
+                          IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 25,
+          ),
+                           */
+                          padding: const EdgeInsets.all(15.0),
                           child: GestureDetector(
                             onTap: (){
                               Navigator.of(context).pop();
                             },
-                              child: const Icon(Icons.arrow_back,
-                                size: 30,color: Colors.white,)),
+                              child: const FaIcon(
+                                FontAwesomeIcons.arrowCircleLeft,
+                                color: Colors.white,
+                                size: 28,
+                              ),),
                         ),
                         const SizedBox(width: 10,),
                         Text(
@@ -86,15 +101,21 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         ),
                       ],
                     ),
+                    /*
+
+                     */
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.only(right: 25.0),
                       child: GestureDetector(
                           onTap: (){
                             Navigator.of(context).pushNamed(ChatMembers.routeName
                                 ,arguments: _productId);
                           },
-                          child: const Icon(Icons.group_add_outlined,
-                            size: 30,color: Colors.white,)),
+                          child: const  FaIcon(
+                            FontAwesomeIcons.users,
+                            color: Colors.white,
+                            size: 28,
+                          ),),
                     ),
                   ],
                 ),

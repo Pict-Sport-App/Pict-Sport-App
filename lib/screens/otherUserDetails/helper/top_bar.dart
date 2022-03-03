@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TopBar extends StatelessWidget {
 
@@ -12,10 +13,10 @@ class TopBar extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(
-              Icons.arrow_back,
+            icon: const FaIcon(
+              FontAwesomeIcons.arrowCircleLeft,
               color: Colors.white,
-              size: 30,
+              size: 28,
             ),
           ),
           // IconButton(

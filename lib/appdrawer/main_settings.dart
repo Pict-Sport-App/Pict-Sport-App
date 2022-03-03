@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/models/userDetails.dart';
 import 'package:psa/screens/announcements/create_annoucement.dart';
@@ -11,6 +12,16 @@ class MainSettings extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 25,
+          ),
+        ),
       ),
       body: UserDetails.isAdmin==true? Padding(
         padding: const EdgeInsets.all(20),

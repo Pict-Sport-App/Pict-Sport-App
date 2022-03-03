@@ -365,10 +365,11 @@ class _EmailORMisId2State extends State<EmailORMisId2> {
                 horizontal: 16.0,
                 vertical: 15.0,
               ),
-              child: Icon(
-                Icons.mail,
-                size: 35,
-              ),
+              child: FaIcon(
+                FontAwesomeIcons.envelope,
+                color: Colors.black,
+                size: 25,
+              )
             ),
             Padding(
               padding: const EdgeInsets.symmetric(

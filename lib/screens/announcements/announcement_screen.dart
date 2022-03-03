@@ -46,18 +46,22 @@ class _Announcement_ScreenState extends State<Announcement_Screen> {
               },
             ),
           ),
-          actions:  [
-            Transform(
-              transform:Matrix4.identity()..translate(-10.0,0.0,40.0) ,
-              child: Transform.rotate(
-                angle: 0.0,
-                child: const FaIcon(
-                  FontAwesomeIcons.bullhorn,
-                  size: 35,
-                  color: Colors.black,
+          actions:  const [
+            // Transform(
+            //   transform:Matrix4.identity()..translate(-10.0,0.0,40.0) ,
+            //   child: Transform.rotate(
+            //     angle: 0.0,
+            //     child: const
+                Padding(
+                  padding: EdgeInsets.only(right: 8.0,top: 17),
+                  child: FaIcon(
+                    FontAwesomeIcons.bullhorn,
+                    size: 25,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            ),
+            //   ),
+            // ),
           ],
         ),
         body: StreamBuilder(

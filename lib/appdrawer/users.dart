@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 
 class AllUsers extends StatefulWidget {
@@ -16,6 +17,16 @@ class _AllUsersState extends State<AllUsers> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 25,
+          ),
+        ),
         backgroundColor: Colors.blue,
         title: const Text(
           'App Users',
