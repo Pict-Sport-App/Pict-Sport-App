@@ -5,7 +5,7 @@ import 'package:flutter/physics.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
+import 'package:psa/screens/Home/VolleyBall/volleyball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 import 'Basketball/basketball.dart';
 

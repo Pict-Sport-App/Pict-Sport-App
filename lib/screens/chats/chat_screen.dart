@@ -2,11 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/chats/SportChatScreen.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/screens/chats/sport_chat_screen.dart';
 
 class ChatScreen extends StatefulWidget {
-
   const ChatScreen({Key? key}) : super(key: key);
 
   @override
@@ -14,10 +13,8 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       drawer: const Drawer(
         child: CollapsingNavigationDrawer(),
@@ -28,7 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
           child: GestureDetector(
             child: const FaIcon(
               FontAwesomeIcons.bars,
-              color:  Color(0xFF272D34),
+              color: Color(0xFF272D34),
               size: 25,
             ),
             onTap: () {
@@ -53,7 +50,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const FaIcon(
               FontAwesomeIcons.rocketchat,
-              size: 30,color: Colors.black,
+              size: 30,
+              color: Colors.black,
             ),
             onPressed: () {
               // do something
@@ -63,20 +61,23 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Expanded(
             child: ListView.builder(
                 itemCount: UserDetails.mySportsList!.length,
                 itemBuilder: (ctx, index) => SportGrpNameWidget(
-                  lastMsg: '3:22 PM   ',
-                  onTap: (){
-                    Navigator.of(context)
-                        .pushNamed(SportChatScreen.routeName,
-                      arguments: UserDetails.mySportsList![index],);
-                  },
-                  name: UserDetails.mySportsList![index],
-                  image: UserDetails.mySportEmoji![index],
-                )),
+                      lastMsg: '3:22 PM   ',
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          SportChatScreen.routeName,
+                          arguments: UserDetails.mySportsList![index],
+                        );
+                      },
+                      name: UserDetails.mySportsList![index],
+                      image: UserDetails.mySportEmoji![index],
+                    )),
           ),
         ],
       ),
@@ -84,16 +85,21 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
-
 class SportGrpNameWidget extends StatelessWidget {
-  late String name,image,lastMsg;
+  late String name, image, lastMsg;
   VoidCallback onTap;
-  SportGrpNameWidget({Key? key, required this.lastMsg,required this.onTap,required this.name,required this.image}) : super(key: key);
+  SportGrpNameWidget(
+      {Key? key,
+      required this.lastMsg,
+      required this.onTap,
+      required this.name,
+      required this.image})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10,left: 10,right: 10),
+      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
@@ -110,21 +116,29 @@ class SportGrpNameWidget extends StatelessWidget {
                       style: const TextStyle(fontSize: 25),
                     ),
                   ),
-                  const SizedBox(width: 10,),
-                  Text(name,style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(),
-                child: Text(lastMsg,style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),),
+                child: Text(
+                  lastMsg,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ],
           ),

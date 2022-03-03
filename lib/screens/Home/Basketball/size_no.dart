@@ -3,62 +3,140 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/screens/Home/Basketball/basketball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 
-class Issue extends StatefulWidget {
-  const Issue({Key? key}) : super(key: key);
-  static const routeName = '/vv';
+class SixNo extends StatefulWidget {
+  const SixNo({Key? key}) : super(key: key);
+  static const routeName = '/bb';
 
   @override
-  _IssueState createState() => _IssueState();
+  _SixNoState createState() => _SixNoState();
 }
 
-class _IssueState extends State<Issue> {
-  String? chossed;
+class _SixNoState extends State<SixNo> {
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
-  void _selectedBall(String ball) => chossed = ball;
+
+  String? choosedBall;
+  String? choisedSize;
+  void _selectedBall(String ball) => choosedBall = ball;
+  void _selectedSize(String size) => choisedSize = size;
 
   Future _submit() async {
-    var v = 0;
-    if (chossed != null) {
-      v = int.parse(_productId.toString()) - int.parse(chossed.toString());
-    }
+    if (choosedBall == null && choisedSize == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Ball Numbers and Ball Size you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    } else if (choisedSize == null && choosedBall != null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Ball Size you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    } else if (choosedBall == null && choisedSize != null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Ball Number you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    } else if (choisedSize == '6') {
+      int f =
+          int.parse(_leftSix.toString()) - int.parse(choosedBall.toString());
+      if (f < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'Oops!! All Balls of size Six are occupied',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
+          ),
+        ));
+      } else {
+        await FirebaseFirestore.instance
+            .collection('BBEquipment')
+            .doc(UserDetails.uid)
+            .set({
+          'size': choisedSize,
+          'timeOfIssue': Timestamp.now(),
+          'timeOfReturn': Timestamp.now(),
+          'isRequested': 1,
+          'isReturn': false,
+          'noOfBall': choosedBall,
+          'name': UserDetails.name,
+          'misId': UserDetails.misId,
+          'url': UserDetails.photourl,
+          'uid': UserDetails.uid,
+        });
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const BasketBallScreen();
+        }));
+      }
+    } else if (choisedSize == '7') {
+      int f =
+          int.parse(_leftSeven.toString()) - int.parse(choosedBall.toString());
 
-    if (chossed == null) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        duration: Duration(seconds: 2),
-        content: Text(
-          'Please enter the Ball Numbers you want to issue',
-          style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
+      if (f < 0) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 2),
+          content: Text(
+            'Oops!! All Balls of size Seven are occupied',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 15,
+            ),
           ),
-        ),
-      ));
-    } else if (v < 0) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        duration: Duration(seconds: 2),
-        content: Text(
-          'Oops!!! The number of balls requested are not available',
-          style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-          ),
-        ),
-      ));
-    } else if (v >= 0) {
-      var v = await FirebaseFirestore.instance
-          .collection('VVEquipment')
+        ));
+      } else {
+        await FirebaseFirestore.instance
+            .collection('BBEquipment')
+            .doc(UserDetails.uid)
+            .set({
+          'size': choisedSize,
+          'timeOfIssue': Timestamp.now(),
+          'timeOfReturn': Timestamp.now(),
+          'isRequested': 1,
+          'isReturn': false,
+          'noOfBall': choosedBall,
+          'name': UserDetails.name,
+          'misId': UserDetails.misId,
+          'url': UserDetails.photourl,
+          'uid': UserDetails.uid,
+        });
+        Navigator.pop(context);
+      }
+    } else {
+      await FirebaseFirestore.instance
+          .collection('BBEquipment')
           .doc(UserDetails.uid)
           .set({
-        'noOfBall': chossed,
+        'size': choisedSize,
         'timeOfIssue': Timestamp.now(),
         'timeOfReturn': Timestamp.now(),
         'isRequested': 1,
         'isReturn': false,
+        'noOfBall': choosedBall,
         'name': UserDetails.name,
         'misId': UserDetails.misId,
         'url': UserDetails.photourl,
@@ -70,6 +148,7 @@ class _IssueState extends State<Issue> {
 
   bool _isInit = true;
   var _productId;
+  var _leftSix, _leftSeven;
   @override
   void initState() {
     // TODO: implement initState
@@ -81,31 +160,34 @@ class _IssueState extends State<Issue> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (_isInit) {
-      _productId = ModalRoute.of(context)!.settings.arguments as int;
+      _productId = ModalRoute.of(context)!.settings.arguments as List<String>;
+      setState(() {
+        _leftSix = _productId[0];
+        _leftSeven = _productId[1];
+      });
     }
     _isInit = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    double hei = MediaQuery.of(context).size.height;
+    double wei = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         height: double.infinity,
-        width: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/vv.jpg'),
+          image: AssetImage('assets/bn.jpg'),
           fit: BoxFit.fill,
           opacity: 20,
         )),
+        width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: width * 0.8,
-              height: height * 0.5,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   blurRadius: 24,
@@ -121,18 +203,37 @@ class _IssueState extends State<Issue> {
                     sigmaX: 16,
                   ),
                   child: Container(
-                    height: height * 0.5,
-                    width: width * 0.9,
+                    height: hei * 0.5,
+                    width: wei * 0.9,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
-                          image: AssetImage('assets/vv.jpg'), fit: BoxFit.fill),
+                          image: AssetImage('assets/bn.jpg'), fit: BoxFit.fill),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Text(
+                              'Ball Size',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
+                            DropDown(
+                                itemList: const ['6', '7'],
+                                item1: 'Size',
+                                submitFn: _selectedSize),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,

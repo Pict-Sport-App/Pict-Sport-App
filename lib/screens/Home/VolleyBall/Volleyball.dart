@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/settings.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/screens/Home/VolleyBall/issueBall.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
 import 'package:psa/screens/Home/VolleyBall/playing.dart';
 import 'package:psa/screens/Home/VolleyBall/requested.dart';
 import 'package:psa/screens/Home/VolleyBall/returned.dart';
-import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
 class VolleyBallScreen extends StatefulWidget {

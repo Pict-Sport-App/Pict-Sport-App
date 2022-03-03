@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/settings.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/Basketball/bbissued.dart';
 import 'package:psa/screens/Home/Basketball/bbrequested.dart';
 import 'package:psa/screens/Home/Basketball/bbreturn.dart';
-import 'package:psa/screens/Home/Basketball/sizeNo.dart';
-import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/screens/Home/Basketball/size_no.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
 class BasketBallScreen extends StatefulWidget {
@@ -54,7 +54,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
     }
   }
 
-  void BB_Six_Logic(String six, String seven) {
+  void bbSixLogic(String six, String seven) {
     List? l;
     l?.clear();
     l?.add(six);
@@ -316,7 +316,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               elevation: 10.0,
                               shape: const StadiumBorder(),
                               onPressed: () {
-                                BB_Six_Logic(
+                                bbSixLogic(
                                     (_totalBallSix - _sizeSix).toString(),
                                     (_totalBallSeven - _sizeSeven).toString());
                               },

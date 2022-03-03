@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/services/getUserData.dart';
+import 'package:psa/services/get_user_data.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -13,25 +13,40 @@ class UserInfo extends StatefulWidget {
 }
 
 class _UserInfoState extends State<UserInfo> {
-  bool _basketball=false,_cricket=false,_football=false,_badminton=false,
-      _volleyball=false,_chess=false,_gym=false,_tabletennis=false;
-  String misId='';
-  Map<String,bool>? m={
-    'BasketBall':false, //🏀 BB
-    'VolleyBall':false,//🏐 VB
-    'TableTennis':false,  //🎾 TT
-    'Badminton': false,//🏸  BT
-    'Cricket':false,//🏏  CR
-    'FootBall':false,//⚽ FB
-    'Chess':false,//♟ CH
-    'Gym':false,//💪 GY
+  bool _basketball = false,
+      _cricket = false,
+      _football = false,
+      _badminton = false,
+      _volleyball = false,
+      _chess = false,
+      _gym = false,
+      _tabletennis = false;
+  String misId = '';
+  Map<String, bool>? m = {
+    'BasketBall': false, //🏀 BB
+    'VolleyBall': false, //🏐 VB
+    'TableTennis': false, //🎾 TT
+    'Badminton': false, //🏸  BT
+    'Cricket': false, //🏏  CR
+    'FootBall': false, //⚽ FB
+    'Chess': false, //♟ CH
+    'Gym': false, //💪 GY
   };
 
-  Widget onClick(bool onp){
-    return onp?const Icon(Icons.check_circle,
-      color: Colors.green,size: 30,
-    ):const Icon(Icons.cancel,color: Colors.red,size: 30,);
+  Widget onClick(bool onp) {
+    return onp
+        ? const Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 30,
+          )
+        : const Icon(
+            Icons.cancel,
+            color: Colors.red,
+            size: 30,
+          );
   }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -40,43 +55,58 @@ class _UserInfoState extends State<UserInfo> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-          height: height ,
-          width: width ,
+          height: height,
+          width: width,
           color: Colors.white,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(height: 20,),
-                const Text('Please Complete The',style: TextStyle(
-                  color: Color(0xFF283593),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),),
-                const Text('SignUp Process',style: TextStyle(
-                  color: Color(0xFF283593),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  'Please Complete The',
+                  style: TextStyle(
+                    color: Color(0xFF283593),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'SignUp Process',
+                  style: TextStyle(
+                    color: Color(0xFF283593),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(left: 30,right: 30),
-                      child: Text('MIS-ID',style: TextStyle(color: Color(0xFF0D47A1),
-                          fontSize: 17),),
+                      padding: EdgeInsets.only(left: 30, right: 30),
+                      child: Text(
+                        'MIS-ID',
+                        style:
+                            TextStyle(color: Color(0xFF0D47A1), fontSize: 17),
+                      ),
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30,right: 30),
+                      padding: const EdgeInsets.only(left: 30, right: 30),
                       child: TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         validator: (val) {
-                          if (val!.length <23) {
+                          if (val!.length < 23) {
                             return "MIS ID cannot be too short";
-                          }else if (val.length>23){
+                          } else if (val.length > 23) {
                             return "MIS ID cannot be that long";
-                          }else if(!val.endsWith('@ms.pict.edu')) {
+                          } else if (!val.endsWith('@ms.pict.edu')) {
                             return "Please enter valid MIS ID";
                           }
                           return null;
@@ -84,22 +114,22 @@ class _UserInfoState extends State<UserInfo> {
                         //obscureText: true,
                         decoration: const InputDecoration(
                           prefixIcon: Padding(
-                            padding: EdgeInsets.only(left: 10.0,top: 8,bottom: 3),
+                            padding:
+                                EdgeInsets.only(left: 10.0, top: 8, bottom: 3),
                             child: FaIcon(
                               FontAwesomeIcons.solidEnvelope,
                               size: 30,
                             ),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 10),
+                          contentPadding:
+                              EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Colors.grey,
                             ),
                           ),
                           border: OutlineInputBorder(
-                              borderSide:
-                              BorderSide(color: Color(0xFF1A237E))),
+                              borderSide: BorderSide(color: Color(0xFF1A237E))),
                         ),
                         onChanged: (value) {
                           misId = value;
@@ -108,7 +138,9 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: BackdropFilter(
@@ -118,27 +150,38 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                     child: Column(
                       children: [
-                        const Text('Select the Sports ',style: TextStyle(
-                          color: Color(0xFFFF9800),
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        const Text('You are Intersected in ',style: TextStyle(
-                          color: Color(0xFFFF9800),
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                        const SizedBox(height: 20,),
+                        const Text(
+                          'Select the Sports ',
+                          style: TextStyle(
+                            color: Color(0xFFFF9800),
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Text(
+                          'You are Intersected in ',
+                          style: TextStyle(
+                            color: Color(0xFFFF9800),
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('BasketBall',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),
+                              const Text(
+                                'BasketBall',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               Row(
                                 children: [
                                   const Text(''),
@@ -149,32 +192,34 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _basketball,
                                     onChanged: (value) {
                                       setState(() {
-                                        _basketball= value;
+                                        _basketball = value;
                                       });
                                     },
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Table Tennis',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),
+                              const Text(
+                                'Table Tennis',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               Row(
                                 children: [
                                   const Text(''),
@@ -185,32 +230,35 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _tabletennis,
                                     onChanged: (value) {
                                       setState(() {
-                                        _tabletennis= value;
+                                        _tabletennis = value;
                                       });
                                     },
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Cricket',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),  Row(
+                              const Text(
+                                'Cricket',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
                                 children: [
                                   const Text(''),
                                   Switch(
@@ -220,7 +268,7 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _cricket,
                                     onChanged: (value) {
                                       setState(() {
-                                        _cricket= value;
+                                        _cricket = value;
                                       });
                                     },
                                   ),
@@ -230,21 +278,25 @@ class _UserInfoState extends State<UserInfo> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Badminton',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),Row(
+                              const Text(
+                                'Badminton',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
                                 children: [
                                   const Text(''),
                                   Switch(
@@ -254,32 +306,35 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _badminton,
                                     onChanged: (value) {
                                       setState(() {
-                                        _badminton= value;
+                                        _badminton = value;
                                       });
                                     },
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('VolleyBall',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),Row(
+                              const Text(
+                                'VolleyBall',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
                                 children: [
                                   const Text(''),
                                   Switch(
@@ -289,33 +344,35 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _volleyball,
                                     onChanged: (value) {
                                       setState(() {
-                                        _volleyball= value;
+                                        _volleyball = value;
                                       });
                                     },
                                   ),
                                 ],
                               ),
-
-
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Chess',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),Row(
+                              const Text(
+                                'Chess',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Row(
                                 children: [
                                   const Text(''),
                                   Switch(
@@ -325,32 +382,34 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _chess,
                                     onChanged: (value) {
                                       setState(() {
-                                        _chess= value;
+                                        _chess = value;
                                       });
                                     },
                                   ),
                                 ],
                               ),
-
                             ],
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Gym',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),
+                              const Text(
+                                'Gym',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               Row(
                                 children: [
                                   const Text(''),
@@ -361,7 +420,7 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _gym,
                                     onChanged: (value) {
                                       setState(() {
-                                        _gym= value;
+                                        _gym = value;
                                       });
                                     },
                                   ),
@@ -371,21 +430,24 @@ class _UserInfoState extends State<UserInfo> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 0),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 0),
                           child: Divider(
                             thickness: 1,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 50,right: 50),
+                          padding: const EdgeInsets.only(left: 50, right: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Football',style: TextStyle(
-                                color: Color(0xFFAFB42B),
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),),
+                              const Text(
+                                'Football',
+                                style: TextStyle(
+                                  color: Color(0xFFAFB42B),
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               Row(
                                 children: [
                                   const Text(''),
@@ -396,7 +458,7 @@ class _UserInfoState extends State<UserInfo> {
                                     value: _football,
                                     onChanged: (value) {
                                       setState(() {
-                                        _football= value;
+                                        _football = value;
                                       });
                                     },
                                   ),
@@ -406,7 +468,7 @@ class _UserInfoState extends State<UserInfo> {
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 50,right: 50,top: 5),
+                          padding: EdgeInsets.only(left: 50, right: 50, top: 5),
                           child: Divider(
                             thickness: 1,
                           ),
@@ -415,72 +477,81 @@ class _UserInfoState extends State<UserInfo> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
-            SizedBox(
-              height: 70,
-              child: RaisedButton(
-                onPressed: (){
-                  if (misId.length<23){
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that small')));
-                  }else if (misId.length>23){
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('MIS ID cannot be that long')));
-                  }else{
-                    //print(UserDetails.sportList?.update(key, (value) => false));
-                    if (_basketball){
-                      m?.update('BasketBall', (value) => true);
-                    }
-                    if (_football){
-                      m?.update('FootBall', (value) => true);
-                    }
-                    if (_volleyball){
-                      m?.update('VolleyBall', (value) => true);
-                    }
-                    if (_cricket){
-                      m?.update('Cricket', (value) => true);
-                    }
-                    if (_chess){
-                      m?.update('Chess', (value) => true);
-                    }
-                    if (_gym){
-                      m?.update('Gym', (value) => true);
-                    }
-                    if (_tabletennis){
-                      m?.update('TableTennis', (value) => true);
-                    }
-                    if (_badminton){
-                      m?.update('Badminton', (value) => true);
-                    }
-                    User? user = FirebaseAuth.instance.currentUser;
-                    var uid=user?.uid;
-                    FirebaseFirestore.instance
-                        .collection('User')
-                        .doc(uid)
-                        .set({
-                      'name':user?.displayName,
-                      'photourl':user?.photoURL,
-                      'email':user?.email,
-                      'uid':user?.uid,
-                      'misId':misId,
-                      'SportList': m,
-                      'isAdmin':false,
-                    });
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                      return GetUserData();
-                    }));
-                  }
-                },
-                shape: const StadiumBorder(),
-                color: Colors.redAccent,
-                child: Text(
-                  'SUBMIT',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontSize: 20,
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 70,
+                  child: RaisedButton(
+                    onPressed: () {
+                      if (misId.length < 23) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('MIS ID cannot be that small')));
+                      } else if (misId.length > 23) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('MIS ID cannot be that long')));
+                      } else {
+                        //print(UserDetails.sportList?.update(key, (value) => false));
+                        if (_basketball) {
+                          m?.update('BasketBall', (value) => true);
+                        }
+                        if (_football) {
+                          m?.update('FootBall', (value) => true);
+                        }
+                        if (_volleyball) {
+                          m?.update('VolleyBall', (value) => true);
+                        }
+                        if (_cricket) {
+                          m?.update('Cricket', (value) => true);
+                        }
+                        if (_chess) {
+                          m?.update('Chess', (value) => true);
+                        }
+                        if (_gym) {
+                          m?.update('Gym', (value) => true);
+                        }
+                        if (_tabletennis) {
+                          m?.update('TableTennis', (value) => true);
+                        }
+                        if (_badminton) {
+                          m?.update('Badminton', (value) => true);
+                        }
+                        User? user = FirebaseAuth.instance.currentUser;
+                        var uid = user?.uid;
+                        FirebaseFirestore.instance
+                            .collection('User')
+                            .doc(uid)
+                            .set({
+                          'name': user?.displayName,
+                          'photourl': user?.photoURL,
+                          'email': user?.email,
+                          'uid': user?.uid,
+                          'misId': misId,
+                          'SportList': m,
+                          'isAdmin': false,
+                        });
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) {
+                          return GetUserData();
+                        }));
+                      }
+                    },
+                    shape: const StadiumBorder(),
+                    color: Colors.redAccent,
+                    child: Text(
+                      'SUBMIT',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),

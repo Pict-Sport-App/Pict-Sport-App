@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:psa/appdrawer/model/navigation_model.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import '../thems.dart';
 import 'collapsing_list_tile.dart';
 
@@ -23,22 +23,21 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
 
   @override
   void initState() {
-
     super.initState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 260));
     widthAnimation = Tween<double>(begin: maxWidth, end: minWidth)
         .animate(_animationController);
-
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, widget) => getWidget(context, widget),
     );
   }
+
   Widget getWidget(context, widget) {
     return Container(
       width: widthAnimation.value,
@@ -56,8 +55,8 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 ? Column(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            UserDetails.photourl.toString()),
+                        backgroundImage:
+                            NetworkImage(UserDetails.photourl.toString()),
                         radius: 60,
                       ),
                       const SizedBox(
@@ -90,8 +89,8 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 : Column(
                     children: <Widget>[
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            UserDetails.photourl.toString()),
+                        backgroundImage:
+                            NetworkImage(UserDetails.photourl.toString()),
                         radius: 20,
                       ),
                       const SizedBox(
@@ -107,15 +106,16 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: navigationItems.length,
-                  itemBuilder: (context, counter) {
-                    return CollapsingListTile(
-                      isSelected: currentSelectedIndex == counter,
-                      animationController: _animationController,
-                      title: navigationItems[counter].title,
-                      num : navigationItems[counter].num,
-                    );
-                  },),
+                itemCount: navigationItems.length,
+                itemBuilder: (context, counter) {
+                  return CollapsingListTile(
+                    isSelected: currentSelectedIndex == counter,
+                    animationController: _animationController,
+                    title: navigationItems[counter].title,
+                    num: navigationItems[counter].num,
+                  );
+                },
+              ),
             ),
             const Divider(),
             InkWell(

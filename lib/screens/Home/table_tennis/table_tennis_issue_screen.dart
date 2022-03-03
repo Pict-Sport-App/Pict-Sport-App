@@ -5,7 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 
 class IssueTheRacket extends StatefulWidget {

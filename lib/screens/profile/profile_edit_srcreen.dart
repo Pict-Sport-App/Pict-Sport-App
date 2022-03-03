@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/models/userDetails.dart';
-import 'package:psa/services/getUserData.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/services/get_user_data.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -13,83 +13,102 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  static String hiddenHeadLine = "Ex: BasketBall Player";
+  static String hiddenRollNo = "00000";
+  static String hiddenLocation = "Ex:Aurangabad,Maharashtra";
+  static String hiddenAchivement = "Ex: State Level BasketBall Player";
+  static String hiddenAboutMe = "Minimum 10 words required";
+  static String hiddenInsta = "";
 
-  static String hiddenHeadLine="Ex: BasketBall Player";
-  static String hiddenRollNo="00000";
-  static String hiddenLocation="Ex:Aurangabad,Maharashtra";
-  static String hiddenAchivement="Ex: State Level BasketBall Player";
-  static String hiddenAboutMe="Minimum 10 words required";
-  static String hiddenInsta="";
+  dynamic _day, _month, _year;
 
-  dynamic _day,_month,_year;
-
-  Future _onSubmit() async{
+  Future _onSubmit() async {
     try {
       if (formkey.currentState!.validate()) {
         formkey.currentState!.save();
-        if (headline==hiddenHeadLine){headline=null;}
-        if (rollNo==hiddenRollNo){rollNo=null;}
-        if (location==hiddenLocation){location=null;}
-        if (achivement==hiddenAchivement){achivement=null;}
-        if (aboutUrSelf==hiddenAboutMe){aboutUrSelf=null;}
-        if (insta==hiddenInsta){insta=null;}
-        if (twit==hiddenInsta){twit=null;}
-        if (link==hiddenInsta){link=null;}
-        if (mobile==hiddenInsta){mobile=null;}
+        if (headline == hiddenHeadLine) {
+          headline = null;
+        }
+        if (rollNo == hiddenRollNo) {
+          rollNo = null;
+        }
+        if (location == hiddenLocation) {
+          location = null;
+        }
+        if (achivement == hiddenAchivement) {
+          achivement = null;
+        }
+        if (aboutUrSelf == hiddenAboutMe) {
+          aboutUrSelf = null;
+        }
+        if (insta == hiddenInsta) {
+          insta = null;
+        }
+        if (twit == hiddenInsta) {
+          twit = null;
+        }
+        if (link == hiddenInsta) {
+          link = null;
+        }
+        if (mobile == hiddenInsta) {
+          mobile = null;
+        }
 
-        Map<String,bool>? m={
-          'BasketBall':false, //🏀 BB
-          'VolleyBall':false,//🏐 VB
-          'TableTennis':false,  //🎾 TT
-          'Badminton': false,//🏸  BT
-          'Cricket':false,//🏏  CR
-          'FootBall':false,//⚽ FB
-          'Chess':false,//♟️ CH
-          'Gym':false,//💪 GY
+        Map<String, bool>? m = {
+          'BasketBall': false, //🏀 BB
+          'VolleyBall': false, //🏐 VB
+          'TableTennis': false, //🎾 TT
+          'Badminton': false, //🏸  BT
+          'Cricket': false, //🏏  CR
+          'FootBall': false, //⚽ FB
+          'Chess': false, //♟️ CH
+          'Gym': false, //💪 GY
         };
 
-        if (bb){
+        if (bb) {
           m.update('BasketBall', (value) => true);
         }
-        if (fb){
+        if (fb) {
           m.update('FootBall', (value) => true);
         }
-        if (vv){
+        if (vv) {
           m.update('VolleyBall', (value) => true);
         }
-        if (cr){
+        if (cr) {
           m.update('Cricket', (value) => true);
         }
-        if (ch){
+        if (ch) {
           m.update('Chess', (value) => true);
         }
-        if (gy){
+        if (gy) {
           m.update('Gym', (value) => true);
         }
-        if (tt){
+        if (tt) {
           m.update('TableTennis', (value) => true);
         }
-        if (bd){
+        if (bd) {
           m.update('Badminton', (value) => true);
         }
 
         FirebaseFirestore.instance
-            .collection('User').doc(UserDetails.uid)
+            .collection('User')
+            .doc(UserDetails.uid)
             .update({
-          'headLine':headline,
-          'rollNo':rollNo,
-          'location':location,
-          'achievement':achivement,
-          'aboutMe':aboutUrSelf,
-          'insta':insta,
-          'linkedIn':link,
-          'twitter':twit,
-          'whatAppNo':mobile,
-          'dob':UserDetails.birthday,
-          'SportList':m,
+          'headLine': headline,
+          'rollNo': rollNo,
+          'location': location,
+          'achievement': achivement,
+          'aboutMe': aboutUrSelf,
+          'insta': insta,
+          'linkedIn': link,
+          'twitter': twit,
+          'whatAppNo': mobile,
+          'dob': UserDetails.birthday,
+          'SportList': m,
         });
 
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
           return GetUserData();
         }));
       } else {
@@ -104,28 +123,34 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  bool bb=false,vv=false,tt=false,bd=false,cr=false,fb=false,ch=false,gy=false;
+  bool bb = false,
+      vv = false,
+      tt = false,
+      bd = false,
+      cr = false,
+      fb = false,
+      ch = false,
+      gy = false;
 
-  void c(){
-    for(var i=0;i<UserDetails.mySportsList!.length;i++){
-      if (UserDetails.mySportsList![i]=='BasketBall'){
-        bb=true;
-      }else if (UserDetails.mySportsList![i]=='FootBall'){
-        fb=true;
-      }else if (UserDetails.mySportsList![i]=='VolleyBall'){
-        vv=true;
-      }else if (UserDetails.mySportsList![i]=='TableTennis'){
-        tt=true;
-      }else if (UserDetails.mySportsList![i]=='Badminton'){
-        bd=true;
-      }else if (UserDetails.mySportsList![i]=='Cricket'){
-        cr=true;
-      }else if (UserDetails.mySportsList![i]=='Chess'){
-        ch=true;
-      }else if (UserDetails.mySportsList![i]=='Gym'){
-        gy=true;
+  void c() {
+    for (var i = 0; i < UserDetails.mySportsList!.length; i++) {
+      if (UserDetails.mySportsList![i] == 'BasketBall') {
+        bb = true;
+      } else if (UserDetails.mySportsList![i] == 'FootBall') {
+        fb = true;
+      } else if (UserDetails.mySportsList![i] == 'VolleyBall') {
+        vv = true;
+      } else if (UserDetails.mySportsList![i] == 'TableTennis') {
+        tt = true;
+      } else if (UserDetails.mySportsList![i] == 'Badminton') {
+        bd = true;
+      } else if (UserDetails.mySportsList![i] == 'Cricket') {
+        cr = true;
+      } else if (UserDetails.mySportsList![i] == 'Chess') {
+        ch = true;
+      } else if (UserDetails.mySportsList![i] == 'Gym') {
+        gy = true;
       }
-
     }
   }
 
@@ -178,7 +203,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               FontAwesomeIcons.check,
               color: Colors.blueAccent,
               size: 28,
-
             ),
           )
         ],
@@ -198,7 +222,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  initialValue: UserDetails.headline=='null' || UserDetails.headline==null? hiddenHeadLine:UserDetails.headline,
+                  initialValue: UserDetails.headline == 'null' ||
+                          UserDetails.headline == null
+                      ? hiddenHeadLine
+                      : UserDetails.headline,
                   obscureText: false,
                   decoration: const InputDecoration(labelText: "Headline"),
                   onSaved: (input) {
@@ -207,10 +234,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   validator: (input) => input!.length > 4 && input.isNotEmpty
                       ? null
                       : "Should be at least 4 char ",
-
                 ),
                 TextFormField(
-                  initialValue: UserDetails.rollNo=='null' || UserDetails.rollNo==null?hiddenRollNo:UserDetails.rollNo,
+                  initialValue:
+                      UserDetails.rollNo == 'null' || UserDetails.rollNo == null
+                          ? hiddenRollNo
+                          : UserDetails.rollNo,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(labelText: "Roll No"),
                   onSaved: (input) {
@@ -220,7 +249,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ? null
                       : "Should be 5 char ",
                 ),
-                const SizedBox(height: 15,),
+                const SizedBox(
+                  height: 15,
+                ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -232,7 +263,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     Text(
-                      UserDetails.birthday==null || UserDetails.birthday=='null'?''
+                      UserDetails.birthday == null ||
+                              UserDetails.birthday == 'null'
+                          ? ''
                           : UserDetails.birthday.toString(),
                       style: const TextStyle(
                         fontSize: 18,
@@ -244,17 +277,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     GestureDetector(
                       onTap: () {
                         showDatePicker(
-                            context: context,
-                            initialDate: DateTime(1995),
-                            firstDate: DateTime(1995),
-                            lastDate: DateTime.now())
+                                context: context,
+                                initialDate: DateTime(1995),
+                                firstDate: DateTime(1995),
+                                lastDate: DateTime.now())
                             .then((value) {
                           setState(() {
-                            _day=value?.day;
-                            _month=value?.month;
-                            _year=value?.year;
-                            dob=(_day.toString()+'/'+_month.toString()+'/'+_year.toString());
-                            UserDetails.birthday=dob;
+                            _day = value?.day;
+                            _month = value?.month;
+                            _year = value?.year;
+                            dob = (_day.toString() +
+                                '/' +
+                                _month.toString() +
+                                '/' +
+                                _year.toString());
+                            UserDetails.birthday = dob;
                           });
                         });
                       },
@@ -267,15 +304,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         child: const Text(
                           "Change",
-                          style: TextStyle(
-                              fontSize: 17, color: Colors.white),
+                          style: TextStyle(fontSize: 17, color: Colors.white),
                         ),
                       ),
                     ),
                   ],
                 ),
                 TextFormField(
-                  initialValue: UserDetails.location=='null' || UserDetails.location==null?hiddenLocation:UserDetails.location,
+                  initialValue: UserDetails.location == 'null' ||
+                          UserDetails.location == null
+                      ? hiddenLocation
+                      : UserDetails.location,
                   decoration: const InputDecoration(labelText: "Location"),
                   onSaved: (input) {
                     location = input;
@@ -294,26 +333,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0),
                       child: TextFormField(
-                        initialValue: UserDetails.achivement=='null' || UserDetails.achivement==null?hiddenAchivement:UserDetails.achivement,
+                        initialValue: UserDetails.achivement == 'null' ||
+                                UserDetails.achivement == null
+                            ? hiddenAchivement
+                            : UserDetails.achivement,
                         decoration:
-                        const InputDecoration(labelText: "Achivement"),
+                            const InputDecoration(labelText: "Achivement"),
                         onSaved: (input) {
                           achivement = input;
                         },
                         validator: (input) =>
-                        input!.length > 10 && input.isNotEmpty
-                            ? null
-                            : "Should be at least 10 char ",
+                            input!.length > 10 && input.isNotEmpty
+                                ? null
+                                : "Should be at least 10 char ",
                       ),
                     ),
                   ],
                 ),
                 TextFormField(
-                  initialValue: UserDetails.aboutMe=='null' || UserDetails.aboutMe==null?hiddenAboutMe:UserDetails.aboutMe,
+                  initialValue: UserDetails.aboutMe == 'null' ||
+                          UserDetails.aboutMe == null
+                      ? hiddenAboutMe
+                      : UserDetails.aboutMe,
                   maxLines: 2,
                   keyboardType: TextInputType.multiline,
                   decoration:
-                  const InputDecoration(labelText: "About Your self"),
+                      const InputDecoration(labelText: "About Your self"),
                   onSaved: (input) {
                     aboutUrSelf = input;
                   },
@@ -344,13 +389,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            initialValue: UserDetails.instaUrl=='null'?hiddenInsta:UserDetails.instaUrl,
+                            initialValue: UserDetails.instaUrl == 'null'
+                                ? hiddenInsta
+                                : UserDetails.instaUrl,
                             onSaved: (input) {
                               insta = input;
                             },
                             validator: (input) => input!.startsWith(
-                                // "https://www.instagram.com/in/") || input.isEmpty
-                                "https://www.instagram.com/") || input.isEmpty
+                                    // "https://www.instagram.com/in/") || input.isEmpty
+                                    "https://www.instagram.com/") || input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -370,7 +417,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            initialValue: UserDetails.twitterUrl=='null'?hiddenInsta:UserDetails.twitterUrl,
+                            initialValue: UserDetails.twitterUrl == 'null'
+                                ? hiddenInsta
+                                : UserDetails.twitterUrl,
                             onSaved: (input) {
                               twit = input;
                             },
@@ -394,13 +443,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            initialValue: UserDetails.linkedInUrl=='null'?hiddenInsta:UserDetails.linkedInUrl,
+                            initialValue: UserDetails.linkedInUrl == 'null'
+                                ? hiddenInsta
+                                : UserDetails.linkedInUrl,
                             onSaved: (input) {
                               link = input;
                             },
                             validator: (input) => input!.startsWith(
-                                "https://www.linkedin.com/in/") ||
-                                input.isEmpty
+                                        "https://www.linkedin.com/in/") ||
+                                    input.isEmpty
                                 ? null
                                 : "Enter valid URL",
                           ),
@@ -420,7 +471,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            initialValue: UserDetails.whatAppNo=='null'?hiddenInsta:UserDetails.whatAppNo,
+                            initialValue: UserDetails.whatAppNo == 'null'
+                                ? hiddenInsta
+                                : UserDetails.whatAppNo,
                             keyboardType: TextInputType.number,
                             onFieldSubmitted: (_) {
                               _onSubmit();
@@ -429,30 +482,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               mobile = input;
                             },
                             validator: (input) =>
-                            input!.length == 10 || input.isEmpty
-                                ? null
-                                : "Enter valid mobile number",
+                                input!.length == 10 || input.isEmpty
+                                    ? null
+                                    : "Enter valid mobile number",
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 20,),
-                const Text('Sports Interested',style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20
-                ),),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  'Sports Interested',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('BasketBall',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'BasketBall',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -460,7 +522,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: bb,
                       onChanged: (value) {
                         setState(() {
-                          bb= value;
+                          bb = value;
                         });
                       },
                     ),
@@ -469,11 +531,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('VolleyBall',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'VolleyBall',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -481,7 +546,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: vv,
                       onChanged: (value) {
                         setState(() {
-                          vv= value;
+                          vv = value;
                         });
                       },
                     ),
@@ -490,11 +555,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('TableTennis',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'TableTennis',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -502,7 +570,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: tt,
                       onChanged: (value) {
                         setState(() {
-                          tt= value;
+                          tt = value;
                         });
                       },
                     ),
@@ -511,11 +579,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Badminton',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'Badminton',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -523,7 +594,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: bd,
                       onChanged: (value) {
                         setState(() {
-                          bd= value;
+                          bd = value;
                         });
                       },
                     ),
@@ -532,11 +603,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Cricket',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'Cricket',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -544,7 +618,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: cr,
                       onChanged: (value) {
                         setState(() {
-                          cr= value;
+                          cr = value;
                         });
                       },
                     ),
@@ -553,11 +627,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('FootBall',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'FootBall',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -565,7 +642,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: fb,
                       onChanged: (value) {
                         setState(() {
-                          fb= value;
+                          fb = value;
                         });
                       },
                     ),
@@ -574,11 +651,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Chess',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'Chess',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -586,7 +666,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: ch,
                       onChanged: (value) {
                         setState(() {
-                          ch= value;
+                          ch = value;
                         });
                       },
                     ),
@@ -595,11 +675,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Gym',style: TextStyle(
-                      color: Color(0xFFAFB42B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),),
+                    const Text(
+                      'Gym',
+                      style: TextStyle(
+                        color: Color(0xFFAFB42B),
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Switch(
                       splashRadius: 30,
                       activeColor: Colors.green,
@@ -607,7 +690,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       value: gy,
                       onChanged: (value) {
                         setState(() {
-                          gy= value;
+                          gy = value;
                         });
                       },
                     ),
@@ -620,10 +703,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
-  Widget onClick(bool onp){
-    return onp?const Icon(Icons.check_circle,
-      color: Colors.green,size: 30,
-    ):const Icon(Icons.cancel,color: Colors.red,size: 30,);
+
+  Widget onClick(bool onp) {
+    return onp
+        ? const Icon(
+            Icons.check_circle,
+            color: Colors.green,
+            size: 30,
+          )
+        : const Icon(
+            Icons.cancel,
+            color: Colors.red,
+            size: 30,
+          );
   }
 }
-

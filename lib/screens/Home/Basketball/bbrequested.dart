@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/Basketball/basketball.dart';
-import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 
 class Requested extends StatefulWidget {
   const Requested({Key? key}) : super(key: key);

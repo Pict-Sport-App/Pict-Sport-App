@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/profile/helper/widget/sport_container.dart';
 import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'helper/widget/StackConatiner2.dart';
+import 'helper/widget/stack_conatiner_2.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
-import 'package:psa/models/userDetails.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/announcements/announcement_screen.dart';
 import 'package:psa/screens/chats/chat_screen.dart';
