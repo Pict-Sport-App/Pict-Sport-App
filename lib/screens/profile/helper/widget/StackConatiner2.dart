@@ -5,11 +5,10 @@ import 'package:psa/screens/profile/helper/widget/custom_clipper2.dart';
 import '../../profile_edit_srcreen.dart';
 
 class StackContainer2 extends StatelessWidget {
-  const StackContainer2();
+  const StackContainer2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -220,7 +219,8 @@ class StackContainer2 extends StatelessWidget {
 class EmailORMisId2 extends StatefulWidget {
   String? mail;
   String? misid;
-  EmailORMisId2({Key? key, required this.mail, required this.misid}) : super(key: key);
+  EmailORMisId2({Key? key, required this.mail, required this.misid})
+      : super(key: key);
   @override
   _EmailORMisId2State createState() => _EmailORMisId2State();
 }
@@ -247,16 +247,15 @@ class _EmailORMisId2State extends State<EmailORMisId2> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16.0,
-                vertical: 15.0,
-              ),
-              child: FaIcon(
-                FontAwesomeIcons.envelope,
-                color: Colors.black,
-                size: 25,
-              )
-            ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 15.0,
+                ),
+                child: FaIcon(
+                  FontAwesomeIcons.envelope,
+                  color: Colors.black,
+                  size: 25,
+                )),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 6.0,

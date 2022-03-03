@@ -6,8 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 
-class Authentication
-{
+class Authentication {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   get user => _auth.currentUser;
 
@@ -17,8 +16,8 @@ class Authentication
     FirebaseAuth.instance.signOut();
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (BuildContext context) => Signup()),
-            (route) => false);
+        MaterialPageRoute(builder: (BuildContext context) => const Signup()),
+        (route) => false);
   }
 
   //google sign in
@@ -32,7 +31,7 @@ class Authentication
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
         final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+            await googleUser!.authentication;
         final googleAuthCredential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
@@ -125,10 +124,7 @@ class Authentication
       }
       return isNewUser;
     } on PlatformException catch (error) {
-
       return error;
     }
   }
-
-
 }

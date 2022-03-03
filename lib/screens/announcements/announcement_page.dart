@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/announcements/poster.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Announcement_page extends StatefulWidget {
+class AnnouncementPage extends StatefulWidget {
   late Timestamp date; //
   late String imageUrl; //
   late String descrip; //
@@ -15,8 +15,9 @@ class Announcement_page extends StatefulWidget {
   late String contactNo2; //
   late String title; //
   late String venue; //
-  Announcement_page(
-      {Key? key, required this.descrip,
+  AnnouncementPage(
+      {Key? key,
+      required this.descrip,
       required this.imageUrl,
       required this.venue,
       required this.title,
@@ -25,13 +26,14 @@ class Announcement_page extends StatefulWidget {
       required this.number1,
       required this.number2,
       required this.contactNo1,
-      required this.contactNo2}) : super(key: key);
+      required this.contactNo2})
+      : super(key: key);
 
   @override
-  _Announcement_pageState createState() => _Announcement_pageState();
+  _AnnouncementPageState createState() => _AnnouncementPageState();
 }
 
-class _Announcement_pageState extends State<Announcement_page> {
+class _AnnouncementPageState extends State<AnnouncementPage> {
   dynamic day, month, year, hour, min, gb = 'pm', w;
 
   Future<void> _launchedInBrowser(String url) async {
@@ -249,11 +251,11 @@ class _Announcement_pageState extends State<Announcement_page> {
                                 ),
                               ),
                         Row(
-                          children:  const <Widget>[
+                          children: const <Widget>[
                             SizedBox(
                               width: 10,
                             ),
-                             FaIcon(
+                            FaIcon(
                               FontAwesomeIcons.phoneAlt,
                               color: Colors.black,
                               size: 25,

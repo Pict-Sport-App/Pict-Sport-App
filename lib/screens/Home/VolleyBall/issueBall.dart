@@ -15,60 +15,60 @@ class Issue extends StatefulWidget {
 }
 
 class _IssueState extends State<Issue> {
-
   String? chossed;
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
-  void _selected_Ball(String ball) => chossed = ball;
-  
-  Future _submit() async{
-    var v=0;
-    if (chossed!=null){
-      v=int.parse(_productId.toString())-int.parse(chossed.toString());
+  void _selectedBall(String ball) => chossed = ball;
+
+  Future _submit() async {
+    var v = 0;
+    if (chossed != null) {
+      v = int.parse(_productId.toString()) - int.parse(chossed.toString());
     }
 
-    if (chossed==null){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(
+    if (chossed == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
-          'Please enter the Ball Numbers you want to issue',style: TextStyle(
-          color: Colors.red,
-          fontSize: 15,
-        ),
+          'Please enter the Ball Numbers you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
         ),
       ));
-    }else if (v<0){
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(
+    } else if (v < 0) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
-          'Oops!!! The number of balls requested are not available',style: TextStyle(
-          color: Colors.red,
-          fontSize: 15,
-        ),
+          'Oops!!! The number of balls requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
         ),
       ));
-    } else if (v>=0){
-      var v=await FirebaseFirestore.instance
-          .collection('VVEquipment').
-      doc(UserDetails.uid).set({
-        'noOfBall':chossed,
-        'timeOfIssue':Timestamp.now(),
-        'timeOfReturn':Timestamp.now(),
-        'isRequested':1,
-        'isReturn':false,
-        'name':UserDetails.name,
-        'misId':UserDetails.misId,
-        'url':UserDetails.photourl,
-        'uid':UserDetails.uid,
+    } else if (v >= 0) {
+      var v = await FirebaseFirestore.instance
+          .collection('VVEquipment')
+          .doc(UserDetails.uid)
+          .set({
+        'noOfBall': chossed,
+        'timeOfIssue': Timestamp.now(),
+        'timeOfReturn': Timestamp.now(),
+        'isRequested': 1,
+        'isReturn': false,
+        'name': UserDetails.name,
+        'misId': UserDetails.misId,
+        'url': UserDetails.photourl,
+        'uid': UserDetails.uid,
       });
       Navigator.pop(context);
     }
-
   }
-  bool _isInit=true;
+
+  bool _isInit = true;
   var _productId;
   @override
   void initState() {
@@ -80,43 +80,39 @@ class _IssueState extends State<Issue> {
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    if (_isInit){
+    if (_isInit) {
       _productId = ModalRoute.of(context)!.settings.arguments as int;
     }
     _isInit = false;
   }
 
-
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
-    double height=MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/vv.jpg'),
-              fit: BoxFit.fill,
-              opacity: 20,
-            )
-        ),
+          image: AssetImage('assets/vv.jpg'),
+          fit: BoxFit.fill,
+          opacity: 20,
+        )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              width: width*0.8,
-              height: height*0.5,
-              decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 24,
-                      spreadRadius: 16,
-                      color: const Color(0XFF4527A0).withOpacity(0.2),
-                    )
-                  ]
-              ),
+              width: width * 0.8,
+              height: height * 0.5,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                  blurRadius: 24,
+                  spreadRadius: 16,
+                  color: const Color(0XFF4527A0).withOpacity(0.2),
+                )
+              ]),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: BackdropFilter(
@@ -125,14 +121,12 @@ class _IssueState extends State<Issue> {
                     sigmaX: 16,
                   ),
                   child: Container(
-                    height: height*0.5,
-                    width: width*0.9,
+                    height: height * 0.5,
+                    width: width * 0.9,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
-                          image: AssetImage('assets/vv.jpg'),
-                          fit: BoxFit.fill
-                      ),
+                          image: AssetImage('assets/vv.jpg'), fit: BoxFit.fill),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
@@ -143,18 +137,22 @@ class _IssueState extends State<Issue> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            const Text('Number of Balls',style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
-                            ),),
+                            const Text(
+                              'Number of Balls',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
                             DropDown(
-                                ItemList: const ['1','2'],
+                                itemList: const ['1', '2'],
                                 item1: 'Ball',
-                                submitFn: _selected_Ball),
+                                submitFn: _selectedBall),
                           ],
                         ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Container(
                           margin: const EdgeInsets.only(left: 10, right: 10),
                           child: Column(
@@ -163,28 +161,40 @@ class _IssueState extends State<Issue> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.all(8.0),
-                                child: Text('Time Of Issuement', style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20
-                                ),),
+                                child: Text(
+                                  'Time Of Issuement',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
                               ),
-                              const SizedBox(height: 10,),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               Center(
                                 child: DateTimeField(
-                                  resetIcon: const Icon(Icons.close,color: Colors.white,),
+                                  resetIcon: const Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                  ),
                                   initialValue: DateTime.now(),
                                   style: const TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold
-                                  ),
+                                      fontWeight: FontWeight.bold),
                                   enabled: true,
                                   enableInteractiveSelection: true,
                                   decoration: const InputDecoration(
-                                    icon: Icon(Icons.date_range_outlined,color: Colors.white,size: 35,),
+                                    icon: Icon(
+                                      Icons.date_range_outlined,
+                                      color: Colors.white,
+                                      size: 35,
+                                    ),
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      borderSide: BorderSide(color: Colors.white,width: 2),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 2),
                                     ),
                                   ),
                                   format: formatYMDHM,
@@ -192,7 +202,8 @@ class _IssueState extends State<Issue> {
                                     final date = await showDatePicker(
                                       context: context,
                                       firstDate: DateTime.now(),
-                                      initialDate: currentValue ?? DateTime.now(),
+                                      initialDate:
+                                          currentValue ?? DateTime.now(),
                                       lastDate: DateTime(2100),
                                     );
                                     if (date != null) {
@@ -202,7 +213,8 @@ class _IssueState extends State<Issue> {
                                           currentValue ?? DateTime.now(),
                                         ),
                                       );
-                                      eventDate =DateTimeField.combine(date, time);
+                                      eventDate =
+                                          DateTimeField.combine(date, time);
                                       return DateTimeField.combine(date, time);
                                     } else {
                                       eventDate = currentValue;
@@ -220,9 +232,11 @@ class _IssueState extends State<Issue> {
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 _submit();
               },
               child: Container(
@@ -231,11 +245,14 @@ class _IssueState extends State<Issue> {
                     borderRadius: BorderRadius.circular(20)),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: Text('Submit',style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),),
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
             )

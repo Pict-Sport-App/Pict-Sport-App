@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
@@ -13,6 +12,8 @@ import 'package:psa/screens/Home/table_tennis/table_status_popup.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 
 class TabletannisScreen extends StatefulWidget {
+  const TabletannisScreen({Key? key}) : super(key: key);
+
   @override
   State<TabletannisScreen> createState() => _TabletannisScreenState();
 }
@@ -22,13 +23,13 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   bool _isFirstVisit = false;
   var _table, _noOfRacket;
   int racket1 = 0, racket2 = 0, racket3 = 0;
-  var _total1=0, _total2=0, _total3=0, _remain=0;
+  var _total1 = 0, _total2 = 0, _total3 = 0, _remain = 0;
 
   Future TT_Logic() async {
     _isFirstVisit
         ? Navigator.of(context).pushNamed(
             IssueTheRacket.routeName,
-            arguments: [_total1, _total2, _total3,_remain],
+            arguments: [_total1, _total2, _total3, _remain],
           )
         : _isRequested == 1
             ? showDialog(
@@ -76,13 +77,12 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                     })
                 : Navigator.of(context).pushNamed(
                     IssueTheRacket.routeName,
-                    arguments: [_total1, _total2, _total3,_remain],
+                    arguments: [_total1, _total2, _total3, _remain],
                   );
   }
 
   Future<void> getStatus(BuildContext context) async {
-
-    var q = (int.parse(Equipment.tabletennis.toString()) / 4 ).round()-1;
+    var q = (int.parse(Equipment.tabletennis.toString()) / 4).round() - 1;
     var r = int.parse(Equipment.tabletennis.toString()) % 4;
 
     _total1 = 0;
@@ -140,9 +140,10 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading:  GestureDetector(
-            onTap: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) {
                 return const HomeScreen();
               }));
             },
@@ -167,12 +168,12 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                   textSelectionColor: Colors.blue,
                   dividerColor: Colors.white),
               child: PopupMenuButton<int>(
-                color: Colors.indigo,
-                  icon:  const FaIcon(
-                  FontAwesomeIcons.ellipsisV,
-                  color: Colors.white,
-                  size: 25,
-                ),
+                  color: Colors.indigo,
+                  icon: const FaIcon(
+                    FontAwesomeIcons.ellipsisV,
+                    color: Colors.white,
+                    size: 25,
+                  ),
                   onSelected: (item) => onSelected(context, item),
                   itemBuilder: (context) => [
                         const PopupMenuItem<int>(
@@ -221,16 +222,13 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 
                 for (int i = 0; i < usersnap.length; i++) {
                   if (usersnap[i]['tableNumber'] == 'Table 1') {
-
                     if (usersnap[i]['isRequested'] == 2) {
                       racket1 += int.parse(usersnap[i]['racketNumber']);
                     }
                   } else if (usersnap[i]['tableNumber'] == 'Table 2') {
-
                     if (usersnap[i]['isRequested'] == 2) {
                       racket2 += int.parse(usersnap[i]['racketNumber']);
                     }
-
                   } else if (usersnap[i]['tableNumber'] == 'Table 3') {
                     if (usersnap[i]['isRequested'] == 2) {
                       racket3 += int.parse(usersnap[i]['racketNumber']);
@@ -256,19 +254,19 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        table_image(
+                        TableImage(
                           totalseats: _total1,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '01',
                           enrolledSeats: racket1,
                         ),
-                        table_image(
+                        TableImage(
                           totalseats: _total2,
                           image: "assets/table_tennis_11.png",
                           tableNumber: '02',
                           enrolledSeats: racket2,
                         ),
-                        table_image(
+                        TableImage(
                           totalseats: _total3,
                           image: "assets/table_tennis_22.png",
                           tableNumber: '03',
@@ -277,7 +275,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                         const SizedBox(
                           height: 12,
                         ),
-                        Container(
+                        SizedBox(
                           width: 200,
                           height: 60,
                           // margin: const EdgeInsets.all(12.0),
@@ -322,19 +320,19 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   void onSelected(BuildContext context, int item) {
     switch (item) {
       case 0:
-        print("First button is pressed");
+        // print("First button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Request();
         }));
         break;
       case 1:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const Playing();
         }));
         break;
       case 2:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const ReturnScreen();
         }));
@@ -343,24 +341,25 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
   }
 }
 
-class table_image extends StatelessWidget {
+class TableImage extends StatelessWidget {
   late String tableNumber;
   late String image;
   late int enrolledSeats;
   late int totalseats;
 
-  table_image({
+  TableImage({
+    Key? key,
     required this.image,
     required this.enrolledSeats,
     required this.tableNumber,
     required this.totalseats,
-  });
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Container(
+      child: SizedBox(
         height: height * 0.23,
         child: Stack(
           children: <Widget>[
@@ -394,12 +393,10 @@ class table_image extends StatelessWidget {
               alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 38.0),
-                child: Container(
-                  child: Text(
-                    "TABLE NO ${tableNumber}",
-                    style: const TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+                child: Text(
+                  "TABLE NO $tableNumber",
+                  style: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -407,12 +404,10 @@ class table_image extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
-                child: Container(
-                  child: Text(
-                    "Available Rackets :  ${totalseats - enrolledSeats} (out of ${totalseats})",
-                    style: const TextStyle(
-                        color: Color(0xff004d00), fontWeight: FontWeight.w800),
-                  ),
+                child: Text(
+                  "Available Rackets :  ${totalseats - enrolledSeats} (out of $totalseats)",
+                  style: const TextStyle(
+                      color: Color(0xff004d00), fontWeight: FontWeight.w800),
                 ),
               ),
             )
@@ -428,9 +423,11 @@ class TTWidget extends StatelessWidget {
   late String image;
   late int enrolledSeats;
   TTWidget(
-      {required this.image,
+      {Key? key,
+      required this.image,
       required this.enrolledSeats,
-      required this.tableNumber});
+      required this.tableNumber})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -14,16 +14,16 @@ class RequestedVolly extends StatefulWidget {
 class _RequestedVollyState extends State<RequestedVolly> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+        child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Volleyball Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('VVEquipment')
-            .snapshots(),
-        builder: (ctx, equimentSnapshot){
+        stream:
+            FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
+        builder: (ctx, equimentSnapshot) {
           if (equimentSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -35,14 +35,15 @@ class _RequestedVollyState extends State<RequestedVolly> {
               itemCount: reqMembers.length,
               itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
                   ? VVRequest(
-                  isReturn: reqMembers[index]['isReturn'],
-                  image: reqMembers[index]['url'],
-                  uid: reqMembers[index]['uid'],
-                  timeOfReturn: reqMembers[index]['timeOfReturn'],
-                  timeOfIssue: reqMembers[index]['timeOfIssue'],
-                  noOfBall: reqMembers[index]['noOfBall'].toString(),
-                  name: reqMembers[index]['name'],
-                  isAdmin: UserDetails.isAdmin??false,)
+                      isReturn: reqMembers[index]['isReturn'],
+                      image: reqMembers[index]['url'],
+                      uid: reqMembers[index]['uid'],
+                      timeOfReturn: reqMembers[index]['timeOfReturn'],
+                      timeOfIssue: reqMembers[index]['timeOfIssue'],
+                      noOfBall: reqMembers[index]['noOfBall'].toString(),
+                      name: reqMembers[index]['name'],
+                      isAdmin: UserDetails.isAdmin ?? false,
+                    )
                   : Container());
         },
       ),
@@ -61,14 +62,16 @@ class VVRequest extends StatefulWidget {
   late bool isReturn;
 
   VVRequest({
+    Key? key,
     required this.isReturn,
     required this.image,
-    required this.uid
-    ,required this.timeOfReturn,
+    required this.uid,
+    required this.timeOfReturn,
     required this.timeOfIssue,
     required this.noOfBall,
     required this.name,
-    required this.isAdmin,});
+    required this.isAdmin,
+  }) : super(key: key);
 
   @override
   _VVRequestState createState() => _VVRequestState();
@@ -76,12 +79,12 @@ class VVRequest extends StatefulWidget {
 
 class _VVRequestState extends State<VVRequest> {
   var hour, minute, gb = 'pm';
-  var rHour,rMinute,rGb='pm';
+  var rHour, rMinute, rGb = 'pm';
   void cal() {
     hour = widget.timeOfIssue.toDate().hour;
     minute = widget.timeOfIssue.toDate().minute;
-    rHour=widget.timeOfReturn.toDate().hour;
-    rMinute=widget.timeOfReturn.toDate().minute;
+    rHour = widget.timeOfReturn.toDate().hour;
+    rMinute = widget.timeOfReturn.toDate().minute;
     if (hour >= 0 && hour <= 11) {
       gb = 'am';
     }
@@ -106,9 +109,10 @@ class _VVRequestState extends State<VVRequest> {
     cal();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.only(
         left: 18,
         right: 15,
@@ -214,8 +218,7 @@ class _VVRequestState extends State<VVRequest> {
                               padding: EdgeInsets.only(left: 18.0),
                               child: Text(
                                 "Returning Time  : ",
-                                style: TextStyle(
-                                    fontSize: 16),
+                                style: TextStyle(fontSize: 16),
                               ),
                             ),
                             Padding(
@@ -224,8 +227,7 @@ class _VVRequestState extends State<VVRequest> {
                                 rMinute < 10
                                     ? '$rHour:0$rMinute $rGb'
                                     : '$rHour:$rMinute $rGb',
-                                style: const TextStyle(
-                                    fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             )
                           ],
@@ -252,10 +254,11 @@ class _VVRequestState extends State<VVRequest> {
                                               .update({
                                             'isRequested': 2,
                                           });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request accepted ',
-                                              )));
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                            'Request accepted ',
+                                          )));
                                           Navigator.pop(context);
                                         },
                                         text: 'Want to accept the Request',
@@ -285,10 +288,11 @@ class _VVRequestState extends State<VVRequest> {
                                               .update({
                                             'isRequested': 5,
                                           });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request rejected',
-                                              )));
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                            'Request rejected',
+                                          )));
                                           Navigator.pop(context);
                                         },
                                         text: 'Want to Reject the Request?',

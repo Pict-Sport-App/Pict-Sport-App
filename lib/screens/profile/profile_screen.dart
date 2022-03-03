@@ -15,8 +15,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
-
   Future<void> _launchedInBrowser(String url) async {
     if (await canLaunch(url)) {
       await launch(url,
@@ -36,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // physics: const BouncingScrollPhysics(),
           child: Column(
             children: <Widget>[
-              StackContainer2(),
+              const StackContainer2(),
               Padding(
                 padding:
                     const EdgeInsets.only(left: 11.0, right: 11, bottom: 15),
@@ -50,19 +48,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 35,
                           ),
                           onPressed: () {
-                            if (UserDetails.instaUrl=='null' || UserDetails.instaUrl==null){
-                              ScaffoldMessenger.of(context).
-                              showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
-                              DifferentPlatformWidget(onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return const EditProfileScreen();
-                                }));
-                              }, name: 'Instagram',)));
+                            if (UserDetails.instaUrl == 'null' ||
+                                UserDetails.instaUrl == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      duration: const Duration(seconds: 1),
+                                      content: DifferentPlatformWidget(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return const EditProfileScreen();
+                                          }));
+                                        },
+                                        name: 'Instagram',
+                                      )));
+                            } else {
+                              _launchedInBrowser(
+                                  UserDetails.instaUrl.toString());
                             }
-                           else{
-                              _launchedInBrowser(UserDetails.instaUrl.toString());
-                            }
-
                           }),
                     ),
                     Padding(
@@ -73,17 +77,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 35,
                           ),
                           onPressed: () {
-                            if (UserDetails.twitterUrl=='null' || UserDetails.twitterUrl==null){
-                              ScaffoldMessenger.of(context).
-                              showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
-                              DifferentPlatformWidget(onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return const EditProfileScreen();
-                                }));
-                              }, name: 'Twitter',)));
-                            }
-                            else{
-                              _launchedInBrowser(UserDetails.twitterUrl.toString());
+                            if (UserDetails.twitterUrl == 'null' ||
+                                UserDetails.twitterUrl == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      duration: const Duration(seconds: 1),
+                                      content: DifferentPlatformWidget(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return const EditProfileScreen();
+                                          }));
+                                        },
+                                        name: 'Twitter',
+                                      )));
+                            } else {
+                              _launchedInBrowser(
+                                  UserDetails.twitterUrl.toString());
                             }
                           }),
                     ),
@@ -95,17 +106,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 35,
                           ),
                           onPressed: () {
-                            if (UserDetails.linkedInUrl=='null' || UserDetails.linkedInUrl==null){
-                              ScaffoldMessenger.of(context).
-                              showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
-                              DifferentPlatformWidget(onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return const EditProfileScreen();
-                                }));
-                              }, name: 'LinkedIn',)));
-                            }
-                            else{
-                              _launchedInBrowser(UserDetails.linkedInUrl.toString());
+                            if (UserDetails.linkedInUrl == 'null' ||
+                                UserDetails.linkedInUrl == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      duration: const Duration(seconds: 1),
+                                      content: DifferentPlatformWidget(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return const EditProfileScreen();
+                                          }));
+                                        },
+                                        name: 'LinkedIn',
+                                      )));
+                            } else {
+                              _launchedInBrowser(
+                                  UserDetails.linkedInUrl.toString());
                             }
                           }),
                     ),
@@ -117,17 +135,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             size: 30,
                           ),
                           onPressed: () {
-                            if (UserDetails.whatAppNo=='null' || UserDetails.whatAppNo==null){
-                              ScaffoldMessenger.of(context).
-                              showSnackBar(SnackBar(duration: const Duration(seconds: 1),content:
-                              DifferentPlatformWidget(onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return const EditProfileScreen();
-                                }));
-                              }, name: 'WhatApp Number',)));
-                            }
-                            else{
-                              _launchedInBrowser('tel://${UserDetails.whatAppNo}');
+                            if (UserDetails.whatAppNo == 'null' ||
+                                UserDetails.whatAppNo == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                      duration: const Duration(seconds: 1),
+                                      content: DifferentPlatformWidget(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return const EditProfileScreen();
+                                          }));
+                                        },
+                                        name: 'WhatApp Number',
+                                      )));
+                            } else {
+                              _launchedInBrowser(
+                                  'tel://${UserDetails.whatAppNo}');
                             }
                           }),
                     ),
@@ -222,7 +247,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 class DifferentPlatformWidget extends StatelessWidget {
   late String name;
   VoidCallback onTap;
-  DifferentPlatformWidget({Key? key, required this.name,required this.onTap}) : super(key: key);
+  DifferentPlatformWidget({Key? key, required this.name, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -234,17 +260,18 @@ class DifferentPlatformWidget extends StatelessWidget {
           SizedBox(
             height: 50,
             width: double.infinity,
-            child: Text('$name url not provided.',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w900
-            ),),
+            child: Text(
+              '$name url not provided.',
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900),
+            ),
           ),
           GestureDetector(
             onTap: onTap,
             child: Container(
-              color: Colors.redAccent,
+                color: Colors.redAccent,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Fill url'),

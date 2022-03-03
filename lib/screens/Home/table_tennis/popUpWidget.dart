@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PopUpRequest extends StatelessWidget {
   late VoidCallback onTap;
   late String text;
-  PopUpRequest({required this.onTap, required this.text});
+  PopUpRequest({Key? key, required this.onTap, required this.text})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class PopUpRequest extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child:
-                  const Icon(Icons.cancel, size: 40, color: Colors.white),
+                      const Icon(Icons.cancel, size: 40, color: Colors.white),
                 )
               ],
             )
@@ -61,13 +61,16 @@ class PopUpRequest extends StatelessWidget {
   }
 }
 
-
 class ReturnPopUpWidget extends StatelessWidget {
   late String table;
   late String noOfRacket;
   VoidCallback onTap;
-  ReturnPopUpWidget({required this.noOfRacket,
-    required this.table,required this.onTap});
+  ReturnPopUpWidget(
+      {Key? key,
+      required this.noOfRacket,
+      required this.table,
+      required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,11 +88,14 @@ class ReturnPopUpWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(table,style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),),
+              child: Text(
+                table,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -97,17 +103,25 @@ class ReturnPopUpWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('No of Racket ',style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),),
-                  const SizedBox(width: 10,),
-                  Text(noOfRacket,style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),),
+                  const Text(
+                    'No of Racket ',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    noOfRacket,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -130,7 +144,7 @@ class ReturnPopUpWidget extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child:
-                  const Icon(Icons.cancel, size: 40, color: Colors.white),
+                      const Icon(Icons.cancel, size: 40, color: Colors.white),
                 )
               ],
             )

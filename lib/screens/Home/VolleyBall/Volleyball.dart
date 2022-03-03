@@ -11,14 +11,14 @@ import 'package:psa/screens/Home/VolleyBall/returned.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
-class VolleyBall_Screen extends StatefulWidget {
-  const VolleyBall_Screen({Key? key}) : super(key: key);
+class VolleyBallScreen extends StatefulWidget {
+  const VolleyBallScreen({Key? key}) : super(key: key);
 
   @override
-  _VolleyBall_ScreenState createState() => _VolleyBall_ScreenState();
+  _VolleyBallScreenState createState() => _VolleyBallScreenState();
 }
 
-class _VolleyBall_ScreenState extends State<VolleyBall_Screen> {
+class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
   var _noOfBall;
   int _isRequested = 0;
@@ -26,61 +26,59 @@ class _VolleyBall_ScreenState extends State<VolleyBall_Screen> {
 
   final _totalBall = int.parse(Equipment.vollyball.toString());
 
-  void Logic_VV(){
+  void logicVV() {
     _isFirstView
         ? Navigator.of(context).pushNamed(
-      Issue.routeName,
-      arguments: _totalBall-_n,
-    )
+            Issue.routeName,
+            arguments: _totalBall - _n,
+          )
         : _isRequested == 1
-        ? showDialog(
-        context: context,
-        builder: (context) {
-          return PopUpRequest(
-              onTap: () {
-                FirebaseFirestore.instance
-                    .collection('VVEquipment')
-                    .doc(UserDetails.uid)
-                    .update({
-                  'isRequested': 3,
-                });
-                setState(() {
-                  _isFirstView = true;
-                });
-                Navigator.pop(context);
-              },
-              text: 'Want to cancel the request');
-          //---------
-        })
-        : _isRequested == 2
-        ? showDialog(
-        context: context,
-        builder: (context) {
-          return VVReturn(
-            onTap: () async {
-              print('return');
-              await FirebaseFirestore.instance
-                  .collection('VVEquipment')
-                  .doc(UserDetails.uid)
-                  .update({
-                'isRequested': 4,
-                'isReturn': true,
-                'timeOfReturn': Timestamp.now(),
-              });
-              setState(() {
-                _isFirstView = true;
-              });
-              Navigator.pop(context);
-            },
-            noOfBall: _noOfBall,
-          );
-        })
-        : Navigator.of(context).pushNamed(
-      Issue.routeName,
-      arguments: _totalBall-_n,
-    );
+            ? showDialog(
+                context: context,
+                builder: (context) {
+                  return PopUpRequest(
+                      onTap: () {
+                        FirebaseFirestore.instance
+                            .collection('VVEquipment')
+                            .doc(UserDetails.uid)
+                            .update({
+                          'isRequested': 3,
+                        });
+                        setState(() {
+                          _isFirstView = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      text: 'Want to cancel the request');
+                  //---------
+                })
+            : _isRequested == 2
+                ? showDialog(
+                    context: context,
+                    builder: (context) {
+                      return VVReturn(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection('VVEquipment')
+                              .doc(UserDetails.uid)
+                              .update({
+                            'isRequested': 4,
+                            'isReturn': true,
+                            'timeOfReturn': Timestamp.now(),
+                          });
+                          setState(() {
+                            _isFirstView = true;
+                          });
+                          Navigator.pop(context);
+                        },
+                        noOfBall: _noOfBall,
+                      );
+                    })
+                : Navigator.of(context).pushNamed(
+                    Issue.routeName,
+                    arguments: _totalBall - _n,
+                  );
   }
-
 
   Future getStatus() async {
     var v = await FirebaseFirestore.instance
@@ -112,137 +110,142 @@ class _VolleyBall_ScreenState extends State<VolleyBall_Screen> {
     super.initState();
     getStatus();
   }
+
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
-    double height=MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
-        builder:(ctx, userSnapshot){
-          if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+          stream:
+              FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
+          builder: (ctx, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-          final usersnap = userSnapshot.data!.docs;
-          _n=0;
-          for (int i = 0; i < usersnap.length; i++) {
+            final usersnap = userSnapshot.data!.docs;
+            _n = 0;
+            for (int i = 0; i < usersnap.length; i++) {
               if (usersnap[i]['isRequested'] == 2) {
                 _n += int.parse(usersnap[i]['noOfBall']);
               }
-          }
-          return Column(
-            children: [
-              const UpperVolly(),
-              Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-                child: Container(
-                  width: double.infinity,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    children: [
-                      //SizedBox(width: weight*0.005,),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Ball Left of Size Six ',
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w900,
+            }
+            return Column(
+              children: [
+                const UpperVolly(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        //SizedBox(width: weight*0.005,),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Ball Left of Size Six ',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w900,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: width * 0.004,
-                      ),
-                      const FaIcon(
-                        FontAwesomeIcons.arrowAltCircleRight,
-                        color: Colors.black,
-                        size: 20,
-                      ),
-                      const Spacer(),
-                      Text(
-                        (_totalBall - _n).toString(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(
+                          width: width * 0.004,
                         ),
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      )
-                    ],
+                        const FaIcon(
+                          FontAwesomeIcons.arrowAltCircleRight,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        const Spacer(),
+                        Text(
+                          (_totalBall - _n).toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 10,),
-              Container(
-                width: width*0.4,
-                //color: Colors.red,
-                child: RaisedButton(onPressed: (){
-                 Logic_VV();
-                },
-                  child: Center(
-                    child: _isFirstView
-                        ? const Center(
-                      child: Text(
-                        'Issue Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                    )
-                        : _isRequested == 1
-                        ? const Center(
-                      child: Text(
-                        'Cancel Request',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                    )
-                        : _isRequested == 2
-                        ? const Center(
-                      child: Text(
-                        'Return Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                    )
-                        : _isRequested == 4
-                        ? const Center(
-                      child: Text(
-                        'Issue Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                    )
-                        : Container(),
-                  ),),
-              ),
-            ],
-          );
-        }
-      ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: width * 0.4,
+                  //color: Colors.red,
+                  child: RaisedButton(
+                    onPressed: () {
+                      logicVV();
+                    },
+                    child: Center(
+                      child: _isFirstView
+                          ? const Center(
+                              child: Text(
+                                'Issue Ball',
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            )
+                          : _isRequested == 1
+                              ? const Center(
+                                  child: Text(
+                                    'Cancel Request',
+                                    style: TextStyle(
+                                      color: Colors.redAccent,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                )
+                              : _isRequested == 2
+                                  ? const Center(
+                                      child: Text(
+                                        'Return Ball',
+                                        style: TextStyle(
+                                          color: Colors.redAccent,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    )
+                                  : _isRequested == 4
+                                      ? const Center(
+                                          child: Text(
+                                            'Issue Ball',
+                                            style: TextStyle(
+                                              color: Colors.redAccent,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 17,
+                                            ),
+                                          ),
+                                        )
+                                      : Container(),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
     );
   }
 }
@@ -257,9 +260,9 @@ class UpperVolly extends StatefulWidget {
 class _UpperVollyState extends State<UpperVolly> {
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
-    double width=MediaQuery.of(context).size.width;
-    return Container(
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return SizedBox(
       height: 390.0,
       child: Stack(
         children: <Widget>[
@@ -285,9 +288,7 @@ class _UpperVollyState extends State<UpperVolly> {
             top: height * 0.06,
             right: width * 0.06,
             child: GestureDetector(
-              onTap: () {
-
-              },
+              onTap: () {},
               child: Container(
                 height: 50,
                 width: 50,
@@ -300,30 +301,30 @@ class _UpperVollyState extends State<UpperVolly> {
                       color: Colors.indigo,
                       onSelected: (item) => onSelected(context, item),
                       itemBuilder: (context) => [
-                        const PopupMenuItem<int>(
-                          value: 0,
-                          child: Text(
-                            "Requested",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const PopupMenuDivider(),
-                        const PopupMenuItem<int>(
-                          value: 1,
-                          child: Text(
-                            "Issued",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        const PopupMenuDivider(),
-                        const PopupMenuItem<int>(
-                          value: 2,
-                          child: Text(
-                            " Returned ",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ]),
+                            const PopupMenuItem<int>(
+                              value: 0,
+                              child: Text(
+                                "Requested",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            const PopupMenuDivider(),
+                            const PopupMenuItem<int>(
+                              value: 1,
+                              child: Text(
+                                "Issued",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            const PopupMenuDivider(),
+                            const PopupMenuItem<int>(
+                              value: 2,
+                              child: Text(
+                                " Returned ",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ]),
                 ),
               ),
             ),
@@ -336,19 +337,19 @@ class _UpperVollyState extends State<UpperVolly> {
   onSelected(BuildContext context, int item) {
     switch (item) {
       case 0:
-        print("First button is pressed");
+        // print("First button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const RequestedVolly();
         }));
         break;
       case 1:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const PlayingVolly();
         }));
         break;
       case 2:
-        print("second button is pressed");
+        // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return const ReturnVolly();
         }));
@@ -358,10 +359,10 @@ class _UpperVollyState extends State<UpperVolly> {
 }
 
 class VVReturn extends StatelessWidget {
-
   late String noOfBall;
   late VoidCallback onTap;
-  VVReturn({required this.noOfBall,required this.onTap});
+  VVReturn({Key? key, required this.noOfBall, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -419,7 +420,7 @@ class VVReturn extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child:
-                  const Icon(Icons.cancel, size: 40, color: Colors.white),
+                      const Icon(Icons.cancel, size: 40, color: Colors.white),
                 )
               ],
             )

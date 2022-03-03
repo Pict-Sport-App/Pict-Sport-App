@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/Home/table_tennis/popUpWidget.dart';
@@ -18,17 +17,19 @@ class RequestWidget extends StatefulWidget {
   late String uid;
 
   RequestWidget(
-      {required this.uid,
-        required this.returnTime,
-        required this.requestScreen,
-        required this.isAdmin,
-        required this.isViewing,
-        required this.name,
-        required this.tableNumber,
-        required this.image,
-        required this.misId,
-        required this.time,
-        required this.racketNumber});
+      {Key? key,
+      required this.uid,
+      required this.returnTime,
+      required this.requestScreen,
+      required this.isAdmin,
+      required this.isViewing,
+      required this.name,
+      required this.tableNumber,
+      required this.image,
+      required this.misId,
+      required this.time,
+      required this.racketNumber})
+      : super(key: key);
 
   @override
   _RequestWidgetState createState() => _RequestWidgetState();
@@ -36,12 +37,12 @@ class RequestWidget extends StatefulWidget {
 
 class _RequestWidgetState extends State<RequestWidget> {
   var hour, minute, gb = 'pm';
-  var rHour,rMinute,rGb='pm';
+  var rHour, rMinute, rGb = 'pm';
   void cal() {
     hour = widget.time.toDate().hour;
     minute = widget.time.toDate().minute;
-    rHour=widget.returnTime.toDate().hour;
-    rMinute=widget.returnTime.toDate().minute;
+    rHour = widget.returnTime.toDate().hour;
+    rMinute = widget.returnTime.toDate().minute;
     if (hour >= 0 && hour <= 11) {
       gb = 'am';
     }
@@ -202,18 +203,16 @@ class _RequestWidgetState extends State<RequestWidget> {
                               padding: EdgeInsets.only(left: 18.0),
                               child: Text(
                                 "Returning Time  : ",
-                                style: TextStyle(
-                                    fontSize: 16),
+                                style: TextStyle(fontSize: 16),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 18.0),
                               child: Text(
-                                  rMinute < 10
-                                      ? '$rHour:0$rMinute $rGb'
-                                      : '$rHour:$rMinute $rGb',
-                                style: const TextStyle(
-                                    fontSize: 16),
+                                rMinute < 10
+                                    ? '$rHour:0$rMinute $rGb'
+                                    : '$rHour:$rMinute $rGb',
+                                style: const TextStyle(fontSize: 16),
                               ),
                             )
                           ],
@@ -240,10 +239,11 @@ class _RequestWidgetState extends State<RequestWidget> {
                                               .update({
                                             'isRequested': 2,
                                           });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request accepted ',
-                                              )));
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                            'Request accepted ',
+                                          )));
                                           Navigator.pop(context);
                                         },
                                         text: 'Want to accept the Request',
@@ -273,10 +273,11 @@ class _RequestWidgetState extends State<RequestWidget> {
                                               .update({
                                             'isRequested': 5,
                                           });
-                                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                                              content: Text(
-                                                'Request rejected',
-                                              )));
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text(
+                                            'Request rejected',
+                                          )));
                                           Navigator.pop(context);
                                         },
                                         text: 'Want to Reject the Request?',

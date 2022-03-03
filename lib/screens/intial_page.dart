@@ -39,7 +39,7 @@ class _IntialScreenState extends State<IntialScreen> {
         // Profile_Screen(),
         HomeScreen(),
         ChatScreen(),
-        Announcement_Screen(),
+        AnnouncementScreen(),
         CalendarScreen(),
         ProfileScreen(),
       ],
@@ -106,28 +106,31 @@ class _IntialScreenState extends State<IntialScreen> {
           const BottomNavigationBarItem(
               icon: FaIcon(
                 FontAwesomeIcons.home,
-                size:   25,
+                size: 25,
                 color: Colors.black,
               ),
               label: 'Home'),
-          const BottomNavigationBarItem(icon: FaIcon(
-            FontAwesomeIcons.facebookMessenger,
-            size:   25,
-            color: Colors.black,
-          ), label: 'Chat'),
           const BottomNavigationBarItem(
-              icon:  FaIcon(
+              icon: FaIcon(
+                FontAwesomeIcons.facebookMessenger,
+                size: 25,
+                color: Colors.black,
+              ),
+              label: 'Chat'),
+          const BottomNavigationBarItem(
+              icon: FaIcon(
                 FontAwesomeIcons.bell,
-                size:   25,
+                size: 25,
                 color: Colors.black,
               ),
               label: 'Notifi...'),
           const BottomNavigationBarItem(
-              icon:  FaIcon(
+              icon: FaIcon(
                 FontAwesomeIcons.calendar,
-                size:   25,
+                size: 25,
                 color: Colors.black,
-              ), label: 'Calendar'),
+              ),
+              label: 'Calendar'),
           BottomNavigationBarItem(
               icon: Padding(
                 padding: const EdgeInsets.only(bottom: 1),

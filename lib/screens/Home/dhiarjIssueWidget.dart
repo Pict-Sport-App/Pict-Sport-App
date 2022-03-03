@@ -1,5 +1,3 @@
-
-
 /// unuseful file
 
 import 'dart:ui';
@@ -7,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class MyCustomWidget extends StatefulWidget {
+  const MyCustomWidget({Key? key}) : super(key: key);
+
   @override
-  _MyCustomWidgetState createState() => new _MyCustomWidgetState();
+  _MyCustomWidgetState createState() => _MyCustomWidgetState();
 }
 
 class _MyCustomWidgetState extends State<MyCustomWidget> {
@@ -78,12 +78,12 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
             ),
             Positioned.fill(
               child: PageView.builder(
-                physics: BouncingScrollPhysics(
+                physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics()),
                 itemCount: 11,
                 controller: pageController,
                 itemBuilder: (context, index) {
-                  return SizedBox();
+                  return const SizedBox();
                 },
               ),
             ),

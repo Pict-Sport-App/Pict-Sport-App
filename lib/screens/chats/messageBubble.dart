@@ -4,8 +4,10 @@ import 'package:bubble/bubble.dart';
 import 'package:psa/models/userDetails.dart';
 
 class MessageBubble extends StatefulWidget {
-  MessageBubble(this.message, this.time,this.isMe, this.username, this.userImage,
-      {required this.key});
+  const MessageBubble(
+      this.message, this.time, this.isMe, this.username, this.userImage,
+      {required this.key})
+      : super(key: key);
   final String username;
   final Key key;
   final Timestamp time;
@@ -13,25 +15,22 @@ class MessageBubble extends StatefulWidget {
   final bool isMe;
   final String userImage;
 
-
   @override
   _MessageBubbleState createState() => _MessageBubbleState();
 }
 
 class _MessageBubbleState extends State<MessageBubble> {
-
-  dynamic hour,minute,gb='pm';
-  void cal()
-  {
-    hour=widget.time.toDate().hour;
-    minute=widget.time.toDate().minute;
-    if (hour>=0 && hour<=11){
-      gb='am';
+  dynamic hour, minute, gb = 'pm';
+  void cal() {
+    hour = widget.time.toDate().hour;
+    minute = widget.time.toDate().minute;
+    if (hour >= 0 && hour <= 11) {
+      gb = 'am';
     }
-    if (hour>12 && hour<=23){
-      hour=hour-12;
-    }else if (hour==0){
-      hour=12;
+    if (hour > 12 && hour <= 23) {
+      hour = hour - 12;
+    } else if (hour == 0) {
+      hour = 12;
     }
   }
 
@@ -44,26 +43,28 @@ class _MessageBubbleState extends State<MessageBubble> {
 
   @override
   Widget build(BuildContext context) {
-    double width=MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(left: 8,right: 8),
+      padding: const EdgeInsets.only(left: 8, right: 8),
       child: Row(
         mainAxisAlignment:
-        widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+            widget.isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          widget.isMe?Container():CircleAvatar(
-            backgroundImage: NetworkImage(widget.userImage),
-          ),
+          widget.isMe
+              ? Container()
+              : CircleAvatar(
+                  backgroundImage: NetworkImage(widget.userImage),
+                ),
           Bubble(
             stick: true,
-            nip: widget.isMe? BubbleNip.rightTop:BubbleNip.leftTop,
-            margin: const BubbleEdges.only(top: 15,left: 6,right: 6),
+            nip: widget.isMe ? BubbleNip.rightTop : BubbleNip.leftTop,
+            margin: const BubbleEdges.only(top: 15, left: 6, right: 6),
             color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
             child: Container(
-              width: widget.message.length<width-350? null:width-130,
+              width: widget.message.length < width - 350 ? null : width - 130,
               decoration: BoxDecoration(
-               // color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
+                // color: widget.isMe ? Colors.grey[300] : Colors.orangeAccent,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(12),
                   topRight: const Radius.circular(12),
@@ -76,34 +77,43 @@ class _MessageBubbleState extends State<MessageBubble> {
                 ),
               ),
               child: Column(
-                crossAxisAlignment:widget.isMe? CrossAxisAlignment.start:CrossAxisAlignment.end,
+                crossAxisAlignment: widget.isMe
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.end,
                 children: [
                   Column(
-                    crossAxisAlignment:
-                    widget.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    crossAxisAlignment: widget.isMe
+                        ? CrossAxisAlignment.end
+                        : CrossAxisAlignment.start,
                     //crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     widget.isMe?Container(): Text(
-                        widget.username,
-                        //textAlign: widget.isMe?TextAlign.start:TextAlign.start,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: widget.isMe ? Colors.blue : Colors.brown.withOpacity(0.7),
-                        ),
-                      ),
+                      widget.isMe
+                          ? Container()
+                          : Text(
+                              widget.username,
+                              //textAlign: widget.isMe?TextAlign.start:TextAlign.start,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: widget.isMe
+                                    ? Colors.blue
+                                    : Colors.brown.withOpacity(0.7),
+                              ),
+                            ),
                       Text(
                         widget.message,
-                        textAlign: widget.isMe ? TextAlign.start : TextAlign.start,
+                        textAlign:
+                            widget.isMe ? TextAlign.start : TextAlign.start,
                         style: TextStyle(
                           color: widget.isMe ? Colors.blue : Colors.white,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 2,),
+                  const SizedBox(
+                    height: 2,
+                  ),
                   Text(
-                    minute<10?'$hour:0$minute $gb':
-                    '$hour:$minute $gb',
+                    minute < 10 ? '$hour:0$minute $gb' : '$hour:$minute $gb',
                     //textAlign: widget.isMe?TextAlign.end:TextAlign.end,
                     style: TextStyle(
                       color: Colors.black.withOpacity(0.5),
@@ -113,9 +123,12 @@ class _MessageBubbleState extends State<MessageBubble> {
               ),
             ),
           ),
-          widget.isMe?CircleAvatar(
-            backgroundImage: NetworkImage(UserDetails.photourl.toString()),
-          ):Container(),
+          widget.isMe
+              ? CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(UserDetails.photourl.toString()),
+                )
+              : Container(),
         ],
       ),
     );
@@ -123,7 +136,8 @@ class _MessageBubbleState extends State<MessageBubble> {
 }
 
 class MessageTile extends StatelessWidget {
-  MessageTile({required this.message, required this.isSendByMe});
+  MessageTile({Key? key, required this.message, required this.isSendByMe})
+      : super(key: key);
   dynamic message;
   final bool isSendByMe;
   @override
@@ -139,27 +153,27 @@ class MessageTile extends StatelessWidget {
           decoration: BoxDecoration(
               borderRadius: isSendByMe
                   ? const BorderRadius.only(
-                topLeft: Radius.circular(23),
-                topRight: Radius.circular(23),
-                bottomLeft: Radius.circular(23),
-              )
+                      topLeft: Radius.circular(23),
+                      topRight: Radius.circular(23),
+                      bottomLeft: Radius.circular(23),
+                    )
                   : const BorderRadius.only(
-                topLeft: Radius.circular(23),
-                topRight: Radius.circular(23),
-                bottomRight: Radius.circular(23),
+                      topLeft: Radius.circular(23),
+                      topRight: Radius.circular(23),
+                      bottomRight: Radius.circular(23),
+                    ),
+              gradient: isSendByMe
+                  ? const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Colors.purple, Colors.purple])
+                  : const LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [Colors.lightGreen, Colors.lightGreen])
+              // LinearGradient(
+              //     colors: isSendByMe ? [Colors.red] [Colors.red] : [Colors.blue][Colors.blue])
               ),
-              gradient:
-              isSendByMe ?  const LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [Colors.purple, Colors.purple]) :
-              const LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [Colors.lightGreen, Colors.lightGreen])
-            // LinearGradient(
-            //     colors: isSendByMe ? [Colors.red] [Colors.red] : [Colors.blue][Colors.blue])
-          ),
           child: Text(
             message,
             style: const TextStyle(

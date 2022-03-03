@@ -9,7 +9,7 @@ import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/screens/login_signUp/signUp_screen.dart';
 import 'package:psa/services/getUserData.dart';
 
-Future main()async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -21,33 +21,34 @@ Future isLoggedIn() async {
 
 class MyApp extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
+
+  MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-
-    if (user!=null){
+    if (user != null) {
       return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         home: GetUserData(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>const ChatMembers(),
-          SixNo.routeName: (ctx)=>const SixNo(),
-          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
-          Issue.routeName: (ctx)=>const Issue(),
+          SportChatScreen.routeName: (ctx) => const SportChatScreen(),
+          ChatMembers.routeName: (ctx) => const ChatMembers(),
+          SixNo.routeName: (ctx) => const SixNo(),
+          IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
+          Issue.routeName: (ctx) => const Issue(),
         },
       );
-    }else{
+    } else {
       return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        home: Signup(),
+        home: const Signup(),
         routes: {
-          SportChatScreen.routeName: (ctx)=>const SportChatScreen(),
-          ChatMembers.routeName: (ctx)=>const ChatMembers(),
-          SixNo.routeName: (ctx)=>const SixNo(),
-          IssueTheRacket.routeName:(ctx)=>const IssueTheRacket(),
-          Issue.routeName: (ctx)=>const Issue(),
+          SportChatScreen.routeName: (ctx) => const SportChatScreen(),
+          ChatMembers.routeName: (ctx) => const ChatMembers(),
+          SixNo.routeName: (ctx) => const SixNo(),
+          IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
+          Issue.routeName: (ctx) => const Issue(),
         },
       );
     }
