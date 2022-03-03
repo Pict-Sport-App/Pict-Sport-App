@@ -22,8 +22,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height=MediaQuery.of(context).size.height;
-    double width=MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: const Drawer(
         child: CollapsingNavigationDrawer(),
@@ -32,7 +32,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         elevation: 0.3,
         backgroundColor: Colors.white,
         centerTitle: true,
-        title:AnimatedTextKit(
+        title: AnimatedTextKit(
           animatedTexts: [
             TyperAnimatedText('Calender Screen',
                 textStyle: const TextStyle(
@@ -54,9 +54,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
             },
           ),
         ),
-        actions:  [
+        actions: [
           Transform(
-            transform:Matrix4.identity()..translate(-10.0,10.0,40.0) ,
+            transform: Matrix4.identity()..translate(-10.0, 10.0, 40.0),
             child: Transform.rotate(
               angle: 0.0,
               child: const FaIcon(
@@ -73,31 +73,29 @@ class _CalendarScreenState extends State<CalendarScreen> {
         height: double.infinity,
         decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.bottomRight,
-              end: Alignment.topRight,
-              colors: [
-                // Color(0xFF4527A0),
-                Color(0xffD3D3D3),
-                Color(0xFF5E35B1),
-                Color(0xFF9575CD),
-                Color(0xFFD1C4E9)],
-            )
-        ),
+          begin: Alignment.bottomRight,
+          end: Alignment.topRight,
+          colors: [
+            // Color(0xFF4527A0),
+            //Color(0xffD3D3D3),
+            Color(0xFFFFB300),
+            Color(0xFFFFA000),
+            Color(0xFFFF8F00),
+          ],
+        )),
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(
                   left: 15, right: 15, top: 10, bottom: 2),
               child: Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 24,
-                        spreadRadius: 16,
-                        color: const Color(0XFF4527A0).withOpacity(0.2),
-                      )
-                    ]
-                ),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    blurRadius: 24,
+                    spreadRadius: 16,
+                    color: const Color(0XFF4527A0).withOpacity(0.2),
+                  )
+                ]),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
                   child: BackdropFilter(
@@ -106,7 +104,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       sigmaX: 16,
                     ),
                     child: Container(
-                      height: height*0.52,
+                      height: height * 0.52,
                       width: width,
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.2),
@@ -114,10 +112,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           border: Border.all(
                             width: 1.5,
                             color: Colors.white.withOpacity(0.2),
-                          )
-                      ),
+                          )),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 0,right: 10,left: 10,bottom: 0),
+                        padding: const EdgeInsets.only(
+                            top: 0, right: 10, left: 10, bottom: 0),
                         child: TableCalendar(
                           pageAnimationEnabled: true,
                           availableCalendarFormats: const {
@@ -135,8 +133,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           },
                           startingDayOfWeek: StartingDayOfWeek.sunday,
                           daysOfWeekVisible: true,
-                          onDayLongPressed: (DateTime selectedDay, DateTime focusDay) {},
-                          onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                          onDayLongPressed:
+                              (DateTime selectedDay, DateTime focusDay) {},
+                          onDaySelected:
+                              (DateTime selectDay, DateTime focusDay) {
                             setState(() {
                               selectedDay = selectDay;
                               focusedDay = focusDay;
@@ -184,17 +184,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             ),
                           ),
                           headerStyle: HeaderStyle(
-                            leftChevronIcon:   const FaIcon(
+                            leftChevronIcon: const FaIcon(
                               FontAwesomeIcons.chevronLeft,
                               color: Colors.white,
                               size: 20,
-
                             ),
-                            rightChevronIcon:  const FaIcon(
+                            rightChevronIcon: const FaIcon(
                               FontAwesomeIcons.chevronRight,
                               color: Colors.white,
                               size: 20,
-
                             ),
                             headerMargin: const EdgeInsets.only(bottom: 20),
                             decoration: BoxDecoration(
@@ -226,19 +224,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
             ),
             const Padding(
-              padding:
-              EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 2),
+              padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 2),
               child: Divider(
                 color: Colors.white,
               ),
             ),
             Expanded(
               child: StreamBuilder(
-                stream: FirebaseFirestore.instance.
-                collection('Announcement')
-                  .orderBy('dateTime', descending: true).
-                snapshots(),
-                builder: (ctx,AsyncSnapshot calendereventSnapshots){
+                stream: FirebaseFirestore.instance
+                    .collection('Announcement')
+                    .orderBy('dateTime', descending: true)
+                    .snapshots(),
+                builder: (ctx, AsyncSnapshot calendereventSnapshots) {
                   if (calendereventSnapshots.connectionState ==
                       ConnectionState.waiting) {
                     return const Center(
@@ -248,25 +245,28 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   final _calenderevents = calendereventSnapshots.data.docs;
                   return ListView.builder(
                       physics: const BouncingScrollPhysics(),
-                    itemCount: _calenderevents.length,
-                      itemBuilder: (ctx,index){
-                    return Container(
-                      child: (isSameDay(
-                          selectedDay,
-                          _calenderevents[index]['dateTime']
-                              .toDate()))? SingleAnnouncement(
-                          contactNo2: _calenderevents[index]['contact2'],
-                          contactNo1: _calenderevents[index]['contact1'],
-                          number2: _calenderevents[index]['number2'],
-                          number1: _calenderevents[index]['number1'],
-                          link: _calenderevents[index]['link'],
-                          imageUrl: _calenderevents[index]['imageURL'],
-                          title: _calenderevents[index]['title'],
-                          date: _calenderevents[index]['dateTime'],
-                          descrip: _calenderevents[index]['description'],
-                          venue: _calenderevents[index]['venue']):null,
-                    );
-                  });
+                      itemCount: _calenderevents.length,
+                      itemBuilder: (ctx, index) {
+                        return Container(
+                          child: (isSameDay(selectedDay,
+                                  _calenderevents[index]['dateTime'].toDate()))
+                              ? SingleAnnouncement(
+                                  contactNo2: _calenderevents[index]
+                                      ['contact2'],
+                                  contactNo1: _calenderevents[index]
+                                      ['contact1'],
+                                  number2: _calenderevents[index]['number2'],
+                                  number1: _calenderevents[index]['number1'],
+                                  link: _calenderevents[index]['link'],
+                                  imageUrl: _calenderevents[index]['imageURL'],
+                                  title: _calenderevents[index]['title'],
+                                  date: _calenderevents[index]['dateTime'],
+                                  descrip: _calenderevents[index]
+                                      ['description'],
+                                  venue: _calenderevents[index]['venue'])
+                              : null,
+                        );
+                      });
                 },
               ),
             )
