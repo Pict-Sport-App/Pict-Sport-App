@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     if (user != null) {
       return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Pict Sports App',
         debugShowCheckedModeBanner: false,
         home: GetUserData(),
         routes: {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       );
     } else {
       return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Pict Sports App',
         debugShowCheckedModeBanner: false,
         home: const Signup(),
         routes: {
