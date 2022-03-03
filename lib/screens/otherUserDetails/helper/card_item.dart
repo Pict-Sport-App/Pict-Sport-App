@@ -45,14 +45,23 @@ class _CardItemState extends State<CardItem> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               widget.inputString1 == 'Achievement'
-                  ? const Icon(
-                      Icons.leaderboard_sharp,
-                      size: 40,
+                  ? const FaIcon(
+                      FontAwesomeIcons.shieldAlt,
+                      color: Colors.black,
+                      size: 25,
                     )
+                  /*
+              const FaIcon(
+FontAwesomeIcons.arrowCircleLeft,
+color: Colors.white,
+size: 25,
+),
+               */
                   : widget.inputString1 == 'About Myself'
-                      ? const Icon(
-                          Icons.account_circle_rounded,
-                          size: 40,
+                      ? const FaIcon(
+                          FontAwesomeIcons.addressCard,
+                          color: Colors.black,
+                          size: 25,
                         )
                       : widget.inputString1 == 'Sport '
                           ? const Icon(
@@ -60,19 +69,21 @@ class _CardItemState extends State<CardItem> {
                               size: 35,
                             )
                           : widget.inputString1 == 'Sport '
-                              ? const Icon(
-                                  Icons.sports_baseball_sharp,
-                                  size: 35,
+                              ? const FaIcon(
+                                  FontAwesomeIcons.baseballBall,
+                                  color: Colors.black,
+                                  size: 25,
                                 )
                               : widget.inputString1 == 'Date of Birth'
                                   ? const FaIcon(
                                       FontAwesomeIcons.birthdayCake,
-                                      size: 32,
+                                      size: 27,
                                     )
                                   : widget.inputString1 == 'Roll No'
                                       ? const FaIcon(
-                                          Icons.double_arrow_rounded,
-                                          size: 40,
+                                          FontAwesomeIcons.listOl,
+                                          color: Colors.black,
+                                          size: 25,
                                         )
                                       : const FaIcon(
                                           FontAwesomeIcons.envelope,

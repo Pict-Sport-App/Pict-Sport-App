@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen>
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
+          /* SizedBox(
             height: 280,
             // color: Colors.red,
             width: width,
@@ -50,6 +50,16 @@ class _HomeScreenState extends State<HomeScreen>
                 animation: _controller.view,
               ),
             ),
+          ),*/
+          Container(
+            width: width,
+            height: height,
+            constraints: const BoxConstraints.expand(),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                        'assets/back.jpg'),
+                    fit: BoxFit.cover)),
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -75,10 +85,10 @@ class _HomeScreenState extends State<HomeScreen>
               child: Text(
                 "PICT SPORT",
                 style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.white,
-                      fontFamily: 'Lobster',
-                      fontWeight: FontWeight.w500),
+                    fontSize: 30.0,
+                    color: Colors.black,
+                    fontFamily: 'Lobster',
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ),
@@ -101,11 +111,12 @@ class _HomeScreenState extends State<HomeScreen>
                             transform: Matrix4.identity()
                               ..translate(
                                 0.0,
-                                -height*0.04,
+                                -height * 0.04,
                               ),
                             child: MyCustomWidget(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
                                   return const VolleyBall_Screen();
                                 }));
                               },
@@ -131,12 +142,13 @@ class _HomeScreenState extends State<HomeScreen>
                           child: Transform(
                             transform: Matrix4.identity()
                               ..translate(
-                                -width*0.01,
-                                -height*0.06,
+                                -width * 0.01,
+                                -height * 0.06,
                               ),
                             child: MyCustomWidget(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
                                   return const BasketBall_screen();
                                 }));
                               },
@@ -147,13 +159,15 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    AnimationConfiguration.staggeredList(position: 1,
-                    duration: const Duration(milliseconds: 905),
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 905),
                       child: SlideAnimation(
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.01, -height*0.06),
+                            transform: Matrix4.identity()
+                              ..translate(width * 0.01, -height * 0.06),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Badminton',
@@ -176,7 +190,8 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(-width*0.04, -height*0.07),
+                            transform: Matrix4.identity()
+                              ..translate(-width * 0.04, -height * 0.07),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Chess',
@@ -186,12 +201,15 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
-                    Transform(transform: Matrix4.identity()
-                      ..translate(0.0,-height*0.07),
-                        child:Container(
+                    Transform(
+                        transform: Matrix4.identity()
+                          ..translate(0.0, -height * 0.07),
+                        child: Container(
                           height: 160,
                           width: 100,
-                          child:  Lottie.asset('assets/sport.json',),
+                          child: Lottie.asset(
+                            'assets/sport.json',
+                          ),
                         )),
                     AnimationConfiguration.staggeredList(
                       position: 1,
@@ -200,13 +218,18 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.04,-height*0.07),
-                            child: MyCustomWidget(onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return TabletannisScreen();
-                              }));
-                            },
-                              text: 'Tabletennis',image: 'assets/TT.png',),
+                            transform: Matrix4.identity()
+                              ..translate(width * 0.04, -height * 0.07),
+                            child: MyCustomWidget(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return TabletannisScreen();
+                                }));
+                              },
+                              text: 'Tabletennis',
+                              image: 'assets/TT.png',
+                            ),
                           ),
                         ),
                       ),
@@ -224,7 +247,8 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(-width*0.01, -height*0.09),
+                            transform: Matrix4.identity()
+                              ..translate(-width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
                               onTap: () {},
                               text: 'Gym',
@@ -241,9 +265,13 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(width*0.01,-height*0.09),
-                            child: MyCustomWidget(onTap: (){},
-                              text: 'Football',image: 'assets/football.jpg',),
+                            transform: Matrix4.identity()
+                              ..translate(width * 0.01, -height * 0.09),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'Football',
+                              image: 'assets/football.jpg',
+                            ),
                           ),
                         ),
                       ),
@@ -261,9 +289,14 @@ class _HomeScreenState extends State<HomeScreen>
                         horizontalOffset: 50.0,
                         child: FadeInAnimation(
                           child: Transform(
-                            transform: Matrix4.identity()..translate(0.0,-height*0.1),
-                            child: MyCustomWidget(onTap: (){}
-                              ,text: 'Cricket',image: 'assets/cricket.jpg',),),
+                            transform: Matrix4.identity()
+                              ..translate(0.0, -height * 0.1),
+                            child: MyCustomWidget(
+                              onTap: () {},
+                              text: 'Cricket',
+                              image: 'assets/cricket.jpg',
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -479,22 +512,20 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
               height: height * 0.1,
               width: width * 0.22,
               decoration: BoxDecoration(
-
-                border:
-                Border.all(color: Colors.black12, width: 3),
+                border: Border.all(color: Colors.black12, width: 3),
                 image: DecorationImage(
                     image: AssetImage(widget.image), fit: BoxFit.fill),
                 // color: const Color(0xff8639FB),
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0xFF8C9EFF),
+                    color: Colors.grey,
                     offset: Offset(
-                      5.0,
-                      5.0,
+                      0,
+                      0,
                     ),
                     blurRadius: 10.0,
-                    spreadRadius: 2.0,
+                    spreadRadius: 3.0,
                   ), //BoxShadow
                   BoxShadow(
                     color: Colors.white,
@@ -503,12 +534,6 @@ class _MyCustomWidgetState extends State<MyCustomWidget> {
                     spreadRadius: 0.0,
                   ), //BoxShadow
                 ],
-                /*boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.4),
-                    blurRadius: 30,
-                  ),
-                ],*/
               ),
             ),
             Center(
