@@ -225,7 +225,7 @@ final devList = [
       'assets/Harshw.jpeg',
       'https://www.instagram.com/atkareharsh/ ',
       'https://github.com/Harshwardhan431 ',
-      'atkareharsh@gmail.com ',
+      'atkareharsh@gmail.com',
       'https://www.linkedin.com/in/harshwardhan-atkare-49a9961bb/'),
   Devs(
       'Dhiraj Darakhe',

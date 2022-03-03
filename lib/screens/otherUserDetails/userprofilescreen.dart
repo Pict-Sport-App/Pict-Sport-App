@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/services/loading.dart';
 import 'helper/card_item.dart';
 import 'helper/stack_container.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -165,7 +166,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  headline == 'null'
+                                  headline == 'null' || headline==null
                                       ? Container()
                                       : Text(
                                           headline.toString(),
@@ -182,7 +183,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                location == 'null'
+                                location == 'null' || location==null
                                     ? Container()
                                     : Text(
                                         '${location.toString()} ',
@@ -491,7 +492,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
             }
           }
           return const Center(
-            child: CircularProgressIndicator(),
+            child: Loading(),
           );
         });
   }
