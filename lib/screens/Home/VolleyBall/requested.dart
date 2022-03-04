@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 
+import '../../intial_page.dart';
+
 class RequestedVolly extends StatefulWidget {
   const RequestedVolly({Key? key}) : super(key: key);
 
@@ -42,7 +44,7 @@ class _RequestedVollyState extends State<RequestedVolly> {
                       timeOfIssue: reqMembers[index]['timeOfIssue'],
                       noOfBall: reqMembers[index]['noOfBall'].toString(),
                       name: reqMembers[index]['name'],
-                      isAdmin: UserDetails.isAdmin ?? false,
+                      isAdmin: UserDetails.isAdmin ?? false, misId: reqMembers[index]['misId'],
                     )
                   : Container());
         },
@@ -60,9 +62,11 @@ class VVRequest extends StatefulWidget {
   late String uid;
   late String image;
   late bool isReturn;
+  late String misId;
 
   VVRequest({
     Key? key,
+    required this.misId,
     required this.isReturn,
     required this.image,
     required this.uid,
@@ -78,9 +82,17 @@ class VVRequest extends StatefulWidget {
 }
 
 class _VVRequestState extends State<VVRequest> {
-  var hour, minute, gb = 'pm';
-  var rHour, rMinute, rGb = 'pm';
+  dynamic hour, minute, gb = 'pm',rHour, rMinute, rGb = 'pm',day,month,year,day1,month1,year1;
   void cal() {
+    month= widget.timeOfIssue.toDate().month;
+    year= widget.timeOfIssue.toDate().year;
+    day= widget.timeOfIssue.toDate().day;
+
+    month1= widget.timeOfReturn.toDate().month;
+    year1= widget.timeOfReturn.toDate().year;
+    day1== widget.timeOfReturn.toDate().day;
+
+
     hour = widget.timeOfIssue.toDate().hour;
     minute = widget.timeOfIssue.toDate().minute;
     rHour = widget.timeOfReturn.toDate().hour;
@@ -153,6 +165,31 @@ class _VVRequestState extends State<VVRequest> {
                     ),
                   ),
                   Padding(
+                    padding: const EdgeInsets.only(left: 23.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.envelope,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            "MisId:",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            widget.misId.toString(),
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
@@ -193,11 +230,11 @@ class _VVRequestState extends State<VVRequest> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
+                          padding: const EdgeInsets.only(left: 5.0),
                           child: Text(
                             minute < 10
-                                ? '$hour:0$minute $gb'
-                                : '$hour:$minute $gb',
+                                ? '$hour:0$minute $gb, $day/$month/$year'
+                                : '$hour:$minute $gb, $day/$month/$year',
                             style: const TextStyle(fontSize: 16),
                           ),
                         )
@@ -221,11 +258,11 @@ class _VVRequestState extends State<VVRequest> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
+                            padding: const EdgeInsets.only(left: 5.0),
                             child: Text(
                               rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb'
-                                  : '$rHour:$rMinute $rGb',
+                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
+                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
                               style: const TextStyle(fontSize: 16),
                             ),
                           )
@@ -258,6 +295,9 @@ class _VVRequestState extends State<VVRequest> {
                                                 content: Text(
                                           'Request accepted ',
                                         )));
+                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
+                                            IntialScreen.routeName
+                                            , (route) => false):
                                         Navigator.pop(context);
                                       },
                                       text: 'Want to accept the Request',
@@ -292,6 +332,9 @@ class _VVRequestState extends State<VVRequest> {
                                                 content: Text(
                                           'Request rejected',
                                         )));
+                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
+                                            IntialScreen.routeName
+                                            , (route) => false):
                                         Navigator.pop(context);
                                       },
                                       text: 'Want to Reject the Request?',

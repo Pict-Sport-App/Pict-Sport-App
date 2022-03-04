@@ -43,7 +43,7 @@ class _ReturnVollyState extends State<ReturnVolly> {
                       timeOfIssue: reqMembers[index]['timeOfIssue'],
                       noOfBall: reqMembers[index]['noOfBall'],
                       name: reqMembers[index]['name'],
-                      isAdmin: false,)
+                      isAdmin: false, misId: reqMembers[index]['misId'])
                       : Container());
             },
           ),

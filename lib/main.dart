@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
           SixNo.routeName: (ctx) => const SixNo(),
           IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
           Issue.routeName: (ctx) => const Issue(),
+          IntialScreen.routeName: (ctx)=>const IntialScreen(),
         },
       );
     }

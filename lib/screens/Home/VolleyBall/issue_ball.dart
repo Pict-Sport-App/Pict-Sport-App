@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 
+import '../../intial_page.dart';
+
 class Issue extends StatefulWidget {
   const Issue({Key? key}) : super(key: key);
   static const routeName = '/vv';
@@ -64,12 +66,21 @@ class _IssueState extends State<Issue> {
         'url': UserDetails.photourl,
         'uid': UserDetails.uid,
       });
-      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 1),content: Text(
+        'Request have been send',style: TextStyle(
+        color: Colors.green,
+        fontSize: 15,
+      ),
+      )));
+      Navigator.pushNamedAndRemoveUntil(context,
+          IntialScreen.routeName
+          , (route) => false);
     }
   }
 
   bool _isInit = true;
-  var _productId;
+  dynamic _productId;
   @override
   void initState() {
     // TODO: implement initState

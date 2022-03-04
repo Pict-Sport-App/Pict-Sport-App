@@ -41,15 +41,19 @@ class RequestWidget extends StatefulWidget {
 }
 
 class _RequestWidgetState extends State<RequestWidget> {
-  dynamic hour, minute, gb = 'pm',day,month,year;
+  dynamic hour, minute, gb = 'pm',day,month,year,day1,month1,year1;
   dynamic rHour, rMinute, rGb = 'pm';
 
   void cal() {
     hour = widget.time.toDate().hour;
     month= widget.time.toDate().month;
-
     year= widget.time.toDate().year;
     day=widget.time.toDate().day;
+
+    month1= widget.returnTime.toDate().month;
+    year1= widget.returnTime.toDate().year;
+    day1=widget.returnTime.toDate().day;
+
     minute = widget.time.toDate().minute;
     rHour = widget.returnTime.toDate().hour;
     rMinute = widget.returnTime.toDate().minute;
@@ -246,8 +250,8 @@ class _RequestWidgetState extends State<RequestWidget> {
                             padding: const EdgeInsets.only(left: 2),
                             child: Text(
                               rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb, $day/$month/$year'
-                                  : '$rHour:$rMinute $rGb, $day/$month/$year',
+                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
+                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
                               style: const TextStyle(fontSize: 16),
                             ),
                           )

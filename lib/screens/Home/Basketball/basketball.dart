@@ -20,14 +20,11 @@ class BasketBallScreen extends StatefulWidget {
 
 class _BasketBallScreenState extends State<BasketBallScreen> {
   bool _isFirstView = false;
-  var _noOfBallSix;
-  var _size;
+  dynamic _noOfBallSix,_size, _sizeSix, _sizeSeven;
   int _isRequested = 0;
 
   final _totalBallSix = int.parse(Equipment.basketballsix.toString());
   final _totalBallSeven = int.parse(Equipment.basketballseven.toString());
-
-  late var _sizeSix, _sizeSeven;
 
   Future getStatus() async {
     var v = await FirebaseFirestore.instance
