@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/user_details.dart';
-import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
+import 'package:psa/screens/intial_page.dart';
 
 class IssueTheRacket extends StatefulWidget {
   const IssueTheRacket({Key? key}) : super(key: key);
@@ -92,9 +92,16 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           'timeOfReturn': Timestamp.now(),
           'uid': UserDetails.uid,
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const TabletannisScreen();
-        }));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 1),content: Text(
+          'Request have been send',style: TextStyle(
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        )));
+        Navigator.pushNamedAndRemoveUntil(context,
+            IntialScreen.routeName
+            , (route) => false);
       }
     } else if (choosedTable == 'Table 2') {
       var b = int.parse(_t2.toString()) - int.parse(choosedRacket.toString());
@@ -126,14 +133,17 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           'timeOfReturn': Timestamp.now(),
           'uid': UserDetails.uid,
         });
-
-        setState(() {
-          //requested=true;
-        });
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return const TabletannisScreen();
-        }));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(seconds: 1),content: Text(
+          'Request have been send',style: TextStyle(
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        )));
+        Navigator.pushNamedAndRemoveUntil(context,
+            IntialScreen.routeName
+            , (route) => false);
+       // Navigator.of(context).pushReplacementNamed(IntialScreen.routeName);
       }
     } else if (choosedTable == 'Table 3') {
       int h = int.parse(_t3.toString()) - int.parse(choosedRacket.toString());
@@ -165,14 +175,17 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
           'timeOfReturn': Timestamp.now(),
           'uid': UserDetails.uid,
         });
-
-        setState(() {
-          //requested=true;
-        });
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) {
-          return const TabletannisScreen();
-        }));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(seconds: 1),content: Text(
+          'Request have been send',style: TextStyle(
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        )));
+        Navigator.pushNamedAndRemoveUntil(context,
+            IntialScreen.routeName
+            , (route) => false);
+        //Navigator.of(context).pushReplacementNamed(IntialScreen.routeName);
       }
     } else {
       FirebaseFirestore.instance
@@ -191,20 +204,24 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
         'timeOfReturn': Timestamp.now(),
         'uid': UserDetails.uid,
       });
-
-      setState(() {
-        //requested=true;
-      });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return const TabletannisScreen();
-      }));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 1),content: Text(
+        'Request have been send',style: TextStyle(
+        color: Colors.green,
+        fontSize: 15,
+      ),
+      )));
+      Navigator.pushNamedAndRemoveUntil(context,
+          IntialScreen.routeName
+          , (route) => false);
+      //Navigator.of(context).pushReplacementNamed(IntialScreen.routeName);
     }
     return;
   }
 
   bool _isInit = true;
-  var _productId;
-  var _t1, _t2, _t3, _tremain;
+  dynamic _productId;
+  dynamic _t1, _t2, _t3, _tremain;
   @override
   void initState() {
     // TODO: implement initState

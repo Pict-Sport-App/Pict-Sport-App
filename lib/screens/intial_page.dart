@@ -11,6 +11,7 @@ import 'calender/calendar.dart';
 
 class IntialScreen extends StatefulWidget {
   const IntialScreen({Key? key}) : super(key: key);
+  static const routeName = '/initial_screen';
 
   @override
   _IntialScreenState createState() => _IntialScreenState();

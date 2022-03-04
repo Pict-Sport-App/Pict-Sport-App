@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/user_details.dart';
+import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 
+import '../../intial_page.dart';
+
 class RequestWidget extends StatefulWidget {
+
   bool isViewing;
   bool isAdmin;
   late String name;
@@ -36,10 +41,15 @@ class RequestWidget extends StatefulWidget {
 }
 
 class _RequestWidgetState extends State<RequestWidget> {
-  var hour, minute, gb = 'pm';
-  var rHour, rMinute, rGb = 'pm';
+  dynamic hour, minute, gb = 'pm',day,month,year;
+  dynamic rHour, rMinute, rGb = 'pm';
+
   void cal() {
     hour = widget.time.toDate().hour;
+    month= widget.time.toDate().month;
+
+    year= widget.time.toDate().year;
+    day=widget.time.toDate().day;
     minute = widget.time.toDate().minute;
     rHour = widget.returnTime.toDate().hour;
     rMinute = widget.returnTime.toDate().minute;
@@ -116,6 +126,33 @@ class _RequestWidgetState extends State<RequestWidget> {
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         const FaIcon(
+                          FontAwesomeIcons.envelope,
+                          color: Colors.black,
+                          size: 27,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 2.0),
+                          child: Text(
+                            "Mis Id :",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            widget.misId,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        const FaIcon(
                           FontAwesomeIcons.bars,
                           color: Colors.black,
                           size: 27,
@@ -178,11 +215,11 @@ class _RequestWidgetState extends State<RequestWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
+                          padding: const EdgeInsets.only(left: 5.0),
                           child: Text(
                             minute < 10
-                                ? '$hour:0$minute $gb'
-                                : '$hour:$minute $gb',
+                                ? '$hour:0$minute $gb, $day/$month/$year'
+                                : '$hour:$minute $gb, $day/$month/$year',
                             style: const TextStyle(fontSize: 16),
                           ),
                         )
@@ -206,11 +243,11 @@ class _RequestWidgetState extends State<RequestWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
+                            padding: const EdgeInsets.only(left: 2),
                             child: Text(
                               rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb'
-                                  : '$rHour:$rMinute $rGb',
+                                  ? '$rHour:0$rMinute $rGb, $day/$month/$year'
+                                  : '$rHour:$rMinute $rGb, $day/$month/$year',
                               style: const TextStyle(fontSize: 16),
                             ),
                           )
@@ -243,7 +280,10 @@ class _RequestWidgetState extends State<RequestWidget> {
                                                 content: Text(
                                           'Request accepted ',
                                         )));
-                                        Navigator.pop(context);
+                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
+                                            IntialScreen.routeName
+                                            , (route) => false):
+                                       Navigator.pop(context);
                                       },
                                       text: 'Want to accept the Request',
                                     ); //---------
@@ -277,6 +317,9 @@ class _RequestWidgetState extends State<RequestWidget> {
                                                 content: Text(
                                           'Request rejected',
                                         )));
+                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
+                                            IntialScreen.routeName
+                                            , (route) => false):
                                         Navigator.pop(context);
                                       },
                                       text: 'Want to Reject the Request?',
