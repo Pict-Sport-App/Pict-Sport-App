@@ -22,11 +22,11 @@ class TabletannisScreen extends StatefulWidget {
 class _TabletannisScreenState extends State<TabletannisScreen> {
   late int _isRequested = 0;
   bool _isFirstVisit = false;
-  var _table, _noOfRacket;
+  dynamic _table, _noOfRacket;
   int racket1 = 0, racket2 = 0, racket3 = 0;
   var _total1 = 0, _total2 = 0, _total3 = 0, _remain = 0;
 
-  Future TT_Logic() async {
+  Future ttlogic() async {
     _isFirstVisit
         ? Navigator.of(context).pushNamed(
             IssueTheRacket.routeName,
@@ -305,7 +305,7 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                                             )
                                           : Container(),
                           onPressed: () {
-                            TT_Logic();
+                            ttlogic();
                           },
                         ),
                       )

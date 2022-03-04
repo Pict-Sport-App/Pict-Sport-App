@@ -37,7 +37,8 @@ class BBIssued extends StatelessWidget {
                       noOfBall: reqMembers[index]['noOfBall'].toString(),
                       name: reqMembers[index]['name'],
                       isAdmin: false,
-                      ballNumber: reqMembers[index]['size'].toString())
+                      ballNumber: reqMembers[index]['size'].toString(),
+                misId: reqMembers[index]['misId'],)
                   : Container());
         },
       ),

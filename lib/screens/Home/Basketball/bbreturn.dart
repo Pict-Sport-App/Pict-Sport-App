@@ -38,7 +38,8 @@ class BBReturn extends StatelessWidget {
                       noOfBall: reqMembers[index]['noOfBall'],
                       name: reqMembers[index]['name'],
                       isAdmin: false,
-                      ballNumber: reqMembers[index]['size'])
+                      ballNumber: reqMembers[index]['size'],
+                misId: reqMembers[index]['misId'],)
                   : Container());
         },
       ),

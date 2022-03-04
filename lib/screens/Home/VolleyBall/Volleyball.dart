@@ -20,9 +20,9 @@ class VolleyBallScreen extends StatefulWidget {
 
 class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
-  var _noOfBall;
+  dynamic _noOfBall,_n;
   int _isRequested = 0;
-  late var _n;
+
 
   final _totalBall = int.parse(Equipment.vollyball.toString());
 

@@ -4,8 +4,9 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
-import 'package:psa/screens/Home/Basketball/basketball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
+
+import '../../intial_page.dart';
 
 class SixNo extends StatefulWidget {
   const SixNo({Key? key}) : super(key: key);
@@ -89,9 +90,16 @@ class _SixNoState extends State<SixNo> {
           'url': UserDetails.photourl,
           'uid': UserDetails.uid,
         });
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const BasketBallScreen();
-        }));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(seconds: 1),content: Text(
+          'Request have been send',style: TextStyle(
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        )));
+        Navigator.pushNamedAndRemoveUntil(context,
+            IntialScreen.routeName
+            , (route) => false);
       }
     } else if (choisedSize == '7') {
       int f =
@@ -124,7 +132,16 @@ class _SixNoState extends State<SixNo> {
           'url': UserDetails.photourl,
           'uid': UserDetails.uid,
         });
-        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            duration: Duration(seconds: 1),content: Text(
+          'Request have been send',style: TextStyle(
+          color: Colors.green,
+          fontSize: 15,
+        ),
+        )));
+        Navigator.pushNamedAndRemoveUntil(context,
+            IntialScreen.routeName
+            , (route) => false);
       }
     } else {
       await FirebaseFirestore.instance
@@ -142,13 +159,21 @@ class _SixNoState extends State<SixNo> {
         'url': UserDetails.photourl,
         'uid': UserDetails.uid,
       });
-      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 1),content: Text(
+        'Request have been send',style: TextStyle(
+        color: Colors.green,
+        fontSize: 15,
+      ),
+      )));
+      Navigator.pushNamedAndRemoveUntil(context,
+          IntialScreen.routeName
+          , (route) => false);
     }
   }
 
   bool _isInit = true;
-  var _productId;
-  var _leftSix, _leftSeven;
+  dynamic _productId,_leftSix, _leftSeven;
   @override
   void initState() {
     // TODO: implement initState
