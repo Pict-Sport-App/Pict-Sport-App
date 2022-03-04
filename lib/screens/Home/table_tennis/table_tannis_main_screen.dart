@@ -10,6 +10,7 @@ import 'package:psa/screens/Home/table_tennis/requests.dart';
 import 'package:psa/screens/Home/table_tennis/return.dart';
 import 'package:psa/screens/Home/table_tennis/table_status_popup.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
+import 'package:psa/screens/intial_page.dart';
 
 class TabletannisScreen extends StatefulWidget {
   const TabletannisScreen({Key? key}) : super(key: key);
@@ -29,7 +30,8 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
     _isFirstVisit
         ? Navigator.of(context).pushNamed(
             IssueTheRacket.routeName,
-            arguments: [_total1, _total2, _total3, _remain],
+            arguments: [_total1- racket1, _total2-racket2, _total3-racket3,
+              _remain],
           )
         : _isRequested == 1
             ? showDialog(
@@ -77,7 +79,8 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
                     })
                 : Navigator.of(context).pushNamed(
                     IssueTheRacket.routeName,
-                    arguments: [_total1, _total2, _total3, _remain],
+                    arguments: [_total1- racket1, _total2-racket2,
+                      _total3-racket3, _remain],
                   );
   }
 
@@ -142,10 +145,9 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
         appBar: AppBar(
           leading: GestureDetector(
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) {
-                return const HomeScreen();
-              }));
+              Navigator.pushNamedAndRemoveUntil(context,
+                  IntialScreen.routeName
+                  , (route) => false);
             },
             child: const Padding(
               padding: EdgeInsets.only(left: 16.0, top: 12),
@@ -203,118 +205,115 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
             )
           ],
         ),
-        body: RefreshIndicator(
-          onRefresh: () => getStatus(context),
-          child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('TTEquipment')
-                  .snapshots(),
-              builder: (ctx, userSnapshot) {
-                if (userSnapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final usersnap = userSnapshot.data!.docs;
-                racket1 = 0;
-                racket3 = 0;
-                racket2 = 0;
+        body: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('TTEquipment')
+                .snapshots(),
+            builder: (ctx, userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              final usersnap = userSnapshot.data!.docs;
+              racket1 = 0;
+              racket3 = 0;
+              racket2 = 0;
 
-                for (int i = 0; i < usersnap.length; i++) {
-                  if (usersnap[i]['tableNumber'] == 'Table 1') {
-                    if (usersnap[i]['isRequested'] == 2) {
-                      racket1 += int.parse(usersnap[i]['racketNumber']);
-                    }
-                  } else if (usersnap[i]['tableNumber'] == 'Table 2') {
-                    if (usersnap[i]['isRequested'] == 2) {
-                      racket2 += int.parse(usersnap[i]['racketNumber']);
-                    }
-                  } else if (usersnap[i]['tableNumber'] == 'Table 3') {
-                    if (usersnap[i]['isRequested'] == 2) {
-                      racket3 += int.parse(usersnap[i]['racketNumber']);
-                    }
+              for (int i = 0; i < usersnap.length; i++) {
+                if (usersnap[i]['tableNumber'] == 'Table 1') {
+                  if (usersnap[i]['isRequested'] == 2) {
+                    racket1 += int.parse(usersnap[i]['racketNumber']);
+                  }
+                } else if (usersnap[i]['tableNumber'] == 'Table 2') {
+                  if (usersnap[i]['isRequested'] == 2) {
+                    racket2 += int.parse(usersnap[i]['racketNumber']);
+                  }
+                } else if (usersnap[i]['tableNumber'] == 'Table 3') {
+                  if (usersnap[i]['isRequested'] == 2) {
+                    racket3 += int.parse(usersnap[i]['racketNumber']);
                   }
                 }
-                if (racket1 < 0) {
-                  racket1 = 0;
-                }
-                if (racket2 < 0) {
-                  racket2 = 0;
-                }
-                if (racket3 < 0) {
-                  racket3 = 0;
-                }
-                return SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 10, bottom: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const SizedBox(
-                          height: 10,
+              }
+              if (racket1 < 0) {
+                racket1 = 0;
+              }
+              if (racket2 < 0) {
+                racket2 = 0;
+              }
+              if (racket3 < 0) {
+                racket3 = 0;
+              }
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 15, right: 15, top: 10, bottom: 15),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TableImage(
+                        totalseats: _total1,
+                        image: "assets/table_tennis_22.png",
+                        tableNumber: '01',
+                        enrolledSeats: racket1,
+                      ),
+                      TableImage(
+                        totalseats: _total2,
+                        image: "assets/table_tennis_11.png",
+                        tableNumber: '02',
+                        enrolledSeats: racket2,
+                      ),
+                      TableImage(
+                        totalseats: _total3,
+                        image: "assets/table_tennis_22.png",
+                        tableNumber: '03',
+                        enrolledSeats: racket3,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      SizedBox(
+                        width: 200,
+                        height: 60,
+                        // margin: const EdgeInsets.all(12.0),
+                        child: RaisedButton(
+                          splashColor: Colors.lightBlueAccent,
+                          elevation: 10.0,
+                          shape: const StadiumBorder(),
+                          child: _isFirstVisit
+                              ? const Text(
+                                  'Issue the Racked',
+                                  style: TextStyle(fontSize: 16),
+                                )
+                              : _isRequested == 1
+                                  ? const Text(
+                                      'Cancel Request',
+                                      style: TextStyle(fontSize: 16),
+                                    )
+                                  : _isRequested == 2
+                                      ? const Text(
+                                          'Return the Racket',
+                                          style: TextStyle(fontSize: 16),
+                                        )
+                                      : _isRequested == 4
+                                          ? const Text(
+                                              'Issue the Racked',
+                                              style: TextStyle(fontSize: 16),
+                                            )
+                                          : Container(),
+                          onPressed: () {
+                            TT_Logic();
+                          },
                         ),
-                        TableImage(
-                          totalseats: _total1,
-                          image: "assets/table_tennis_22.png",
-                          tableNumber: '01',
-                          enrolledSeats: racket1,
-                        ),
-                        TableImage(
-                          totalseats: _total2,
-                          image: "assets/table_tennis_11.png",
-                          tableNumber: '02',
-                          enrolledSeats: racket2,
-                        ),
-                        TableImage(
-                          totalseats: _total3,
-                          image: "assets/table_tennis_22.png",
-                          tableNumber: '03',
-                          enrolledSeats: racket3,
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        SizedBox(
-                          width: 200,
-                          height: 60,
-                          // margin: const EdgeInsets.all(12.0),
-                          child: RaisedButton(
-                            splashColor: Colors.lightBlueAccent,
-                            elevation: 10.0,
-                            shape: const StadiumBorder(),
-                            child: _isFirstVisit
-                                ? const Text(
-                                    'Issue the Racked',
-                                    style: TextStyle(fontSize: 16),
-                                  )
-                                : _isRequested == 1
-                                    ? const Text(
-                                        'Cancel Request',
-                                        style: TextStyle(fontSize: 16),
-                                      )
-                                    : _isRequested == 2
-                                        ? const Text(
-                                            'Return the Racket',
-                                            style: TextStyle(fontSize: 16),
-                                          )
-                                        : _isRequested == 4
-                                            ? const Text(
-                                                'Issue the Racked',
-                                                style: TextStyle(fontSize: 16),
-                                              )
-                                            : Container(),
-                            onPressed: () {
-                              TT_Logic();
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                );
-              }),
-        ));
+                ),
+              );
+            }));
   }
 
   void onSelected(BuildContext context, int item) {

@@ -12,6 +12,7 @@ import 'Basketball/basketball.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -221,8 +222,8 @@ class _HomeScreenState extends State<HomeScreen>
                               ..translate(width * 0.04, -height * 0.07),
                             child: MyCustomWidget(
                               onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
                                   return const TabletannisScreen();
                                 }));
                               },

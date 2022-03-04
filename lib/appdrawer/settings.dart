@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/settings.dart';
+import 'package:psa/services/get_settings.dart';
 
 class Setting extends StatefulWidget {
   static const routeName = '/sport_setting';
@@ -27,6 +28,7 @@ class _SettingState extends State<Setting> {
           'tabletennis': _tabletennis,
           'vollyball': _vollyball,
         });
+        getequiment();
         Navigator.pop(context);
       }
     } catch (e) {
