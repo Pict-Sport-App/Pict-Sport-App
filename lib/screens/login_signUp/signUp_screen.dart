@@ -4,15 +4,9 @@ import 'package:psa/screens/login_signUp/userInfo_screen.dart';
 import 'package:psa/services/authentication.dart';
 import 'package:psa/services/get_user_data.dart';
 
-class Signup extends StatefulWidget {
+class Signup extends StatelessWidget {
   const Signup({Key? key}) : super(key: key);
 
-  @override
-  _SignupState createState() => _SignupState();
-}
-
-class _SignupState extends State<Signup> {
-  String misId = '';
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -114,7 +108,7 @@ class _SignupState extends State<Signup> {
                           // color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(23),
                           border:
-                              Border.all(color: Colors.blueAccent, width: 3),
+                          Border.all(color: Colors.blueAccent, width: 3),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -153,3 +147,4 @@ class _SignupState extends State<Signup> {
     );
   }
 }
+

@@ -17,6 +17,13 @@ class _SettingState extends State<Setting> {
   int? _bbSizeSeven = Equipment.basketballseven;
   int? _tabletennis = Equipment.tabletennis;
   int? _vollyball = Equipment.vollyball;
+  int? _crixketBall=Equipment.cricketball;
+  int? _cricketBat=Equipment.cricketbat;
+  int? _cricketGloves=Equipment.cricketgloves;
+  int? _cricketHelemt=Equipment.crickethelmet;
+  int? _cricketInnerPad=Equipment.cricketinnerpad;
+  int? _cricketPad=Equipment.cricketpad;
+  int? _football=Equipment.football;
   final formkey = GlobalKey<FormState>();
 
   Future submit() async {
@@ -27,6 +34,13 @@ class _SettingState extends State<Setting> {
           'basketball_Size_Seven': _bbSizeSeven,
           'tabletennis': _tabletennis,
           'vollyball': _vollyball,
+          'cricket_ball':_crixketBall,
+          'cricket_bat':_cricketBat,
+          'cricket_gloves':_cricketGloves,
+          'cricket_pad':_cricketPad,
+          'cricket_innerPad':_cricketInnerPad,
+          'cricket_helmet':_cricketHelemt,
+          'football':_football,
         });
         getequiment();
         Navigator.pop(context);
@@ -66,28 +80,8 @@ class _SettingState extends State<Setting> {
                             },
                             child: const Icon(Icons.backspace_outlined)),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          'BasketBall',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          'Size 6',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
+                      const SportName(name: 'BasketBall', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Size 6', colors: Colors.greenAccent,leftPad: 25,),
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
@@ -116,17 +110,7 @@ class _SettingState extends State<Setting> {
                           },
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          'Size 7',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
+                      const SportName(name: 'Size 7', colors: Colors.greenAccent,leftPad: 25,),
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
@@ -155,17 +139,8 @@ class _SettingState extends State<Setting> {
                           },
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          'TableTennis',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
+                      const SportName(name: 'TableTennis', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Racket', colors: Colors.greenAccent,leftPad: 25,),
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
@@ -194,17 +169,8 @@ class _SettingState extends State<Setting> {
                           },
                         ),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Text(
-                          'VollyBall',
-                          style: TextStyle(
-                            color: Colors.redAccent,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
+                      const SportName(name: 'VolleyBall', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Ball', colors: Colors.greenAccent,leftPad: 25,),
                       Padding(
                         padding: const EdgeInsets.only(left: 30, right: 30),
                         child: TextFormField(
@@ -229,6 +195,211 @@ class _SettingState extends State<Setting> {
                           ),
                           onChanged: (value) {
                             _vollyball = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Cricket', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Ball', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.cricketball.toString(),
+                          onSaved: (input) {
+                            _crixketBall= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _crixketBall = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Bat', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.cricketbat.toString(),
+                          onSaved: (input) {
+                            _cricketBat= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _cricketBat = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Gloves', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.cricketgloves.toString(),
+                          onSaved: (input) {
+                            _cricketGloves= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _cricketGloves = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Pad', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.cricketpad.toString(),
+                          onSaved: (input) {
+                            _cricketPad= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _cricketPad = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'InnerPad', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.cricketinnerpad.toString(),
+                          onSaved: (input) {
+                            _cricketInnerPad= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _cricketInnerPad = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Helmet', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.crickethelmet.toString(),
+                          onSaved: (input) {
+                            _cricketHelemt= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_cricket_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _cricketHelemt = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'FootBall', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Ball', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.football.toString(),
+                          onSaved: (input) {
+                            _football= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_football_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _football = int.parse(value.toString());
                           },
                         ),
                       ),
@@ -262,7 +433,10 @@ class _SettingState extends State<Setting> {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
@@ -272,3 +446,29 @@ class _SettingState extends State<Setting> {
     );
   }
 }
+
+class SportName extends StatelessWidget {
+  final String name;
+  final double leftPad;
+  final Color colors;
+  const SportName({Key? key,
+    required this.colors,
+    required this.name,
+    required this.leftPad}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 12,left: leftPad,bottom: 5,right: 12),
+      child: Text(
+        name,
+        style: TextStyle(
+          color: colors,
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+      ),
+    );
+  }
+}
+
+

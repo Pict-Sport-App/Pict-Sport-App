@@ -216,10 +216,12 @@ class StackContainer2 extends StatelessWidget {
   }
 }
 
+
+
 class EmailORMisId2 extends StatefulWidget {
-  String? mail;
-  String? misid;
-  EmailORMisId2({Key? key, required this.mail, required this.misid})
+  final String? mail;
+  final String? misid;
+  const EmailORMisId2({Key? key, required this.mail, required this.misid})
       : super(key: key);
   @override
   _EmailORMisId2State createState() => _EmailORMisId2State();

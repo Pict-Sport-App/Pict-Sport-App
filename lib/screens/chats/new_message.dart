@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
 class NewMessage extends StatefulWidget {
-  dynamic keyies;
-  NewMessage({Key? key, required this.keyies}) : super(key: key);
+  final dynamic keyies;
+  const NewMessage({Key? key, required this.keyies}) : super(key: key);
   @override
   _NewMessageState createState() => _NewMessageState();
 }

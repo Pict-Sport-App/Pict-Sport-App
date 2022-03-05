@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:swipe_to/swipe_to.dart';
 import 'message_bubble.dart';
 
+
 class Messages extends StatelessWidget {
-  dynamic uniqueValue;
-  Messages({Key? key, required this.uniqueValue}) : super(key: key);
+  final dynamic uniqueValue;
+  const Messages({Key? key, required this.uniqueValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +40,6 @@ class Messages extends StatelessWidget {
                     child: SlideAnimation(
                       verticalOffset: 50.0,
                       child: FadeInAnimation(
-                        child: SwipeTo(
-                          onRightSwipe: () {},
                           child: MessageBubble(
                             chatDocs[index]['text'],
                             chatDocs[index]['createdAt'],
@@ -50,7 +48,6 @@ class Messages extends StatelessWidget {
                             chatDocs[index]['userImage'],
                             key: ValueKey(chatDocs[index].id),
                           ),
-                        ),
                       ),
                     ),
                   ));
