@@ -6,17 +6,17 @@ import 'package:psa/screens/otherUserDetails/helper/top_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AnnouncementPage extends StatefulWidget {
-  late Timestamp date; //
-  late String imageUrl; //
-  late String descrip; //
-  late String link; //
-  late String number1; //
-  late String number2; //
-  late String contactNo1; //
-  late String contactNo2; //
-  late String title; //
-  late String venue; //
-  AnnouncementPage(
+  final Timestamp date; //
+  final String imageUrl; //
+  final String descrip; //
+  final String link; //
+  final String number1; //
+  final String number2; //
+  final String contactNo1; //
+  final String contactNo2; //
+  final String title; //
+  final String venue; //
+  const AnnouncementPage(
       {Key? key,
       required this.descrip,
       required this.imageUrl,

@@ -245,9 +245,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class DifferentPlatformWidget extends StatelessWidget {
-  late String name;
-  VoidCallback onTap;
-  DifferentPlatformWidget({Key? key, required this.name, required this.onTap})
+  final String name;
+  final VoidCallback onTap;
+  const DifferentPlatformWidget({Key? key, required this.name, required this.onTap})
       : super(key: key);
 
   @override

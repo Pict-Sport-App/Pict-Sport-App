@@ -6,14 +6,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/screens/announcements/single_announce_widget.dart';
 
-class AnnouncementScreen extends StatefulWidget {
+class AnnouncementScreen extends StatelessWidget {
   const AnnouncementScreen({Key? key}) : super(key: key);
 
-  @override
-  _AnnouncementScreenState createState() => _AnnouncementScreenState();
-}
-
-class _AnnouncementScreenState extends State<AnnouncementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,3 +94,4 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
             }));
   }
 }
+

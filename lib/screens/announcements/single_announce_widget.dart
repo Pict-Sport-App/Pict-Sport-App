@@ -5,37 +5,33 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/announcements/announcement_page.dart';
 import 'package:psa/screens/announcements/poster.dart';
 
-class SingleAnnouncement extends StatefulWidget {
-  late Timestamp date;
-  late String imageUrl;
-  late String descrip;
-  late String link;
-  late String number1;
-  late String number2;
-  late String contactNo1;
-  late String contactNo2;
-  late String title;
-  late String venue;
+class SingleAnnouncement extends StatelessWidget {
 
-  SingleAnnouncement(
+  final Timestamp date;
+  final String imageUrl;
+  final String descrip;
+  final String link;
+  final String number1;
+  final String number2;
+  final String contactNo1;
+  final String contactNo2;
+  final String title;
+  final String venue;
+
+  const SingleAnnouncement(
       {Key? key,
-      required this.contactNo2,
-      required this.contactNo1,
-      required this.number2,
-      required this.number1,
-      required this.link,
-      required this.imageUrl,
-      required this.title,
-      required this.date,
-      required this.descrip,
-      required this.venue})
+        required this.contactNo2,
+        required this.contactNo1,
+        required this.number2,
+        required this.number1,
+        required this.link,
+        required this.imageUrl,
+        required this.title,
+        required this.date,
+        required this.descrip,
+        required this.venue})
       : super(key: key);
 
-  @override
-  _SingleAnnouncementState createState() => _SingleAnnouncementState();
-}
-
-class _SingleAnnouncementState extends State<SingleAnnouncement> {
   Future share(dynamic link, String title, String msg) async {
     await FlutterShare.share(
         title: title,
@@ -43,6 +39,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
         linkUrl: link,
         chooserTitle: 'Where You want to share');
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,24 +84,24 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => AnnouncementPage(
-                                        descrip: widget.descrip,
-                                        imageUrl: widget.imageUrl,
-                                        venue: widget.venue,
-                                        title: widget.title,
-                                        date: widget.date,
-                                        link: widget.link,
-                                        number1: widget.number1,
-                                        number2: widget.number2,
-                                        contactNo1: widget.contactNo1,
-                                        contactNo2: widget.contactNo2,
-                                      )));
+                                    descrip: descrip,
+                                    imageUrl: imageUrl,
+                                    venue: venue,
+                                    title: title,
+                                    date: date,
+                                    link: link,
+                                    number1: number1,
+                                    number2: number2,
+                                    contactNo1: contactNo1,
+                                    contactNo2: contactNo2,
+                                  )));
                         },
                         child: Container(
                           // width: MediaQuery.,
                           height: MediaQuery.of(context).size.height * 0.28,
                           decoration: BoxDecoration(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
+                              const BorderRadius.all(Radius.circular(20)),
                               boxShadow: const [
                                 BoxShadow(
                                   color: Colors.grey,
@@ -123,7 +120,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                                 ), //BoxShadow
                               ],
                               image: DecorationImage(
-                                  image: NetworkImage(widget.imageUrl),
+                                  image: NetworkImage(imageUrl),
                                   fit: BoxFit.fill)),
                         ),
                       ),
@@ -131,7 +128,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                     Column(
                       children: <Widget>[
                         DescriptionTextWidget(
-                          text: widget.descrip,
+                          text: descrip,
                         ),
                       ],
                     )
@@ -149,8 +146,8 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => Photo(
-                              image: widget.imageUrl,
-                            )));
+                          image:imageUrl,
+                        )));
               },
               child: CircleAvatar(
                 radius: 34,
@@ -163,7 +160,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                         radius: 24,
-                        backgroundImage: NetworkImage(widget.imageUrl)),
+                        backgroundImage: NetworkImage(imageUrl)),
                   ),
                 ),
               ),
@@ -184,7 +181,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
 
                 // await Share.share(widget.descrip);
                 //share(context, 1);
-                share(widget.link, widget.title, widget.descrip);
+                share(link, title, descrip);
               },
               icon: const FaIcon(
                 FontAwesomeIcons.paperPlane,
@@ -201,7 +198,7 @@ class _SingleAnnouncementState extends State<SingleAnnouncement> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0, right: 10),
                 child: Text(
-                  widget.title,
+                  title,
                   style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,

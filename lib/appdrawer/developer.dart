@@ -5,68 +5,62 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mailto/mailto.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Frame1Widget extends StatefulWidget {
+class Frame1Widget extends StatelessWidget {
   const Frame1Widget({Key? key}) : super(key: key);
 
-  @override
-  _Frame1WidgetState createState() => _Frame1WidgetState();
-}
-
-class _Frame1WidgetState extends State<Frame1Widget> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return SafeArea(
         child: Scaffold(
-      body: Container(
-          width: width,
-          height: height,
-          color: Colors.white,
-          child: Column(children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: width * 0.07,
-                  ),
-                  IconButton(
-                      onPressed: () => {Navigator.pop(context)},
-                      icon: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                        size: 30,
-                      )),
-                  SizedBox(
-                    width: width * 0.15,
-                  ),
-                  const Text(
-                    'Developers',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-              height: height * 0.12,
+          body: Container(
               width: width,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(0),
-                    topRight: Radius.circular(0),
-                    bottomLeft: Radius.circular(55),
-                    bottomRight: Radius.circular(55),
+              height: height,
+              color: Colors.white,
+              child: Column(children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: width * 0.07,
+                      ),
+                      IconButton(
+                          onPressed: () => {Navigator.pop(context)},
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 30,
+                          )),
+                      SizedBox(
+                        width: width * 0.15,
+                      ),
+                      const Text(
+                        'Developers',
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ],
                   ),
-                  color: Colors.indigo[400]),
-            ),
-            const Expanded(
-              child: Page(),
-            )
-          ])),
-    ));
+                  height: height * 0.12,
+                  width: width,
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(0),
+                        bottomLeft: Radius.circular(55),
+                        bottomRight: Radius.circular(55),
+                      ),
+                      color: Colors.indigo[400]),
+                ),
+                const Expanded(
+                  child: Page(),
+                )
+              ])),
+        ));
   }
 }
 

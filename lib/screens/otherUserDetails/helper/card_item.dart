@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CardItem extends StatefulWidget {
-  String? inputString2;
-  String? inputString1;
-  String? inputString3;
-  CardItem(
+class CardItem extends StatelessWidget {
+
+ final String? inputString2,inputString1,inputString3;
+  const CardItem(
       {Key? key,
-      required this.inputString1,
-      this.inputString2,
-      this.inputString3})
+        required this.inputString1,
+        this.inputString2,
+        this.inputString3})
       : super(key: key);
 
-  @override
-  State<CardItem> createState() => _CardItemState();
-}
+  final String idname = "Mis Id";
 
-class _CardItemState extends State<CardItem> {
-  String? idname = "Mis Id";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -44,83 +39,83 @@ class _CardItemState extends State<CardItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              widget.inputString1 == 'Achievement'
+              inputString1 == 'Achievement'
                   ? const FaIcon(
-                      FontAwesomeIcons.shieldAlt,
-                      color: Colors.black,
-                      size: 25,
-                    )
-                  /*
+                FontAwesomeIcons.shieldAlt,
+                color: Colors.black,
+                size: 25,
+              )
+              /*
               const FaIcon(
 FontAwesomeIcons.arrowCircleLeft,
 color: Colors.white,
 size: 25,
 ),
                */
-                  : widget.inputString1 == 'About Myself'
-                      ? const FaIcon(
-                          FontAwesomeIcons.addressCard,
-                          color: Colors.black,
-                          size: 25,
-                        )
-                      : widget.inputString1 == 'Sport '
-                          ? const Icon(
-                              Icons.sports_baseball_sharp,
-                              size: 35,
-                            )
-                          : widget.inputString1 == 'Sport '
-                              ? const FaIcon(
-                                  FontAwesomeIcons.baseballBall,
-                                  color: Colors.black,
-                                  size: 25,
-                                )
-                              : widget.inputString1 == 'Date of Birth'
-                                  ? const FaIcon(
-                                      FontAwesomeIcons.birthdayCake,
-                                      size: 27,
-                                    )
-                                  : widget.inputString1 == 'Roll No'
-                                      ? const FaIcon(
-                                          FontAwesomeIcons.listOl,
-                                          color: Colors.black,
-                                          size: 25,
-                                        )
-                                      : const FaIcon(
-                                          FontAwesomeIcons.envelope,
-                                          color: Color(0xFF272D34),
-                                          size: 25,
-                                        ),
+                  : inputString1 == 'About Myself'
+                  ? const FaIcon(
+                FontAwesomeIcons.addressCard,
+                color: Colors.black,
+                size: 25,
+              )
+                  : inputString1 == 'Sport '
+                  ? const Icon(
+                Icons.sports_baseball_sharp,
+                size: 35,
+              )
+                  : inputString1 == 'Sport '
+                  ? const FaIcon(
+                FontAwesomeIcons.baseballBall,
+                color: Colors.black,
+                size: 25,
+              )
+                  : inputString1 == 'Date of Birth'
+                  ? const FaIcon(
+                FontAwesomeIcons.birthdayCake,
+                size: 27,
+              )
+                  : inputString1 == 'Roll No'
+                  ? const FaIcon(
+                FontAwesomeIcons.listOl,
+                color: Colors.black,
+                size: 25,
+              )
+                  : const FaIcon(
+                FontAwesomeIcons.envelope,
+                color: Color(0xFF272D34),
+                size: 25,
+              ),
               const SizedBox(width: 24.0),
-              widget.inputString1 != 'MIS ID'
+              inputString1 != 'MIS ID'
                   ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Text(
-                          widget.inputString1!,
-                          style: const TextStyle(
-                            fontSize: 18.0,
-                          ),
-                        ),
-                        const SizedBox(height: 12.0),
-                        widget.inputString2 != null
-                            ? SizedBox(
-                                width: 250,
-                                child: Text(
-                                  widget.inputString2!,
-                                  style: TextStyle(
-                                    color: Colors.grey[700],
-                                    fontSize: 15.0,
-                                  ),
-                                ),
-                              )
-                            : const SizedBox(),
-                      ],
-                    )
-                  : EmailORMisId(
-                      misid: widget.inputString2,
-                      mail: widget.inputString3,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    inputString1!,
+                    style: const TextStyle(
+                      fontSize: 18.0,
                     ),
+                  ),
+                  const SizedBox(height: 12.0),
+                  inputString2 != null
+                      ? SizedBox(
+                    width: 250,
+                    child: Text(
+                      inputString2!,
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 15.0,
+                      ),
+                    ),
+                  )
+                      : const SizedBox(),
+                ],
+              )
+                  : EmailORMisId(
+                misid: inputString2,
+                mail: inputString3,
+              ),
             ],
           ),
         ),
@@ -128,6 +123,7 @@ size: 25,
     );
   }
 }
+
 
 class EmailORMisId extends StatefulWidget {
   String? mail;

@@ -8,8 +8,8 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OtherUserProfileScreeen extends StatefulWidget {
-  late String uid;
-  OtherUserProfileScreeen({Key? key, required this.uid}) : super(key: key);
+  final String uid;
+  const OtherUserProfileScreeen({Key? key, required this.uid}) : super(key: key);
 
   @override
   State<OtherUserProfileScreeen> createState() =>
@@ -123,7 +123,6 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                         onTap: () {
                           setState(() {
                             _launched = _launchInWebViewOrVC(''
-
                                 /// sending mail isn't implemented yet
                                 'https://www.google.com/search?q=google&oq=google&aqs=chrome.'
                                 '.69i57j46i131i199i433i465i512j69i59l2j0i131i433i512l3j0i433i512j0i131i433i512l2.3272j0j'

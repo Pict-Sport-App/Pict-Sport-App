@@ -3,10 +3,10 @@ import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 import 'top_bar.dart';
 
 class StackContainer extends StatelessWidget {
-  String? imageUrl;
-  String? name;
-  String? misId;
-  StackContainer(
+  final String? imageUrl;
+  final String? name;
+  final String? misId;
+  const StackContainer(
       {Key? key,
       required this.misId,
       required this.imageUrl,

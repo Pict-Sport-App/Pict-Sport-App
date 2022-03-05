@@ -4,14 +4,9 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 
-class AllUsers extends StatefulWidget {
+class AllUsers extends StatelessWidget {
   const AllUsers({Key? key}) : super(key: key);
 
-  @override
-  _AllUsersState createState() => _AllUsersState();
-}
-
-class _AllUsersState extends State<AllUsers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,36 +45,37 @@ class _AllUsersState extends State<AllUsers> {
               physics: const BouncingScrollPhysics(),
               itemCount: usersnap.length,
               itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: const Duration(milliseconds: 905),
-                    child: SlideAnimation(
-                      verticalOffset: 50.0,
-                      child: FadeInAnimation(
-                        child: UserWidget(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
+                position: index,
+                duration: const Duration(milliseconds: 905),
+                child: SlideAnimation(
+                  verticalOffset: 50.0,
+                  child: FadeInAnimation(
+                    child: UserWidget(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
                                 return OtherUserProfileScreeen(
                                   uid: usersnap[index]['uid'],
                                 );
                               }));
-                            },
-                            misId: usersnap[index]['misId'],
-                            name: usersnap[index]['name'],
-                            url: usersnap[index]['photourl']),
-                      ),
-                    ),
-                  ));
+                        },
+                        misId: usersnap[index]['misId'],
+                        name: usersnap[index]['name'],
+                        url: usersnap[index]['photourl']),
+                  ),
+                ),
+              ));
         },
       ),
     );
   }
 }
 
+
 class UserWidget extends StatelessWidget {
-  late String name, misId, url;
-  VoidCallback onTap;
-  UserWidget(
+  final String name, misId, url;
+  final VoidCallback onTap;
+  const UserWidget(
       {Key? key,
       required this.onTap,
       required this.misId,

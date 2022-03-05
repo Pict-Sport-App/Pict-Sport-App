@@ -5,14 +5,9 @@ import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
-  @override
-  _ChatScreenState createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,16 +63,16 @@ class _ChatScreenState extends State<ChatScreen> {
             child: ListView.builder(
                 itemCount: UserDetails.mySportsList!.length,
                 itemBuilder: (ctx, index) => SportGrpNameWidget(
-                      lastMsg: '3:22 PM   ',
-                      onTap: () {
-                        Navigator.of(context).pushNamed(
-                          SportChatScreen.routeName,
-                          arguments: UserDetails.mySportsList![index],
-                        );
-                      },
-                      name: UserDetails.mySportsList![index],
-                      image: UserDetails.mySportEmoji![index],
-                    )),
+                  lastMsg: '3:22 PM   ',
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      SportChatScreen.routeName,
+                      arguments: UserDetails.mySportsList![index],
+                    );
+                  },
+                  name: UserDetails.mySportsList![index],
+                  image: UserDetails.mySportEmoji![index],
+                )),
           ),
         ],
       ),
@@ -85,10 +80,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 }
 
+
 class SportGrpNameWidget extends StatelessWidget {
-  late String name, image, lastMsg;
-  VoidCallback onTap;
-  SportGrpNameWidget(
+  final String name, image, lastMsg;
+  final VoidCallback onTap;
+  const SportGrpNameWidget(
       {Key? key,
       required this.lastMsg,
       required this.onTap,
