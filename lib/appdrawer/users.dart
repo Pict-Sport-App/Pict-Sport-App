@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
+import 'package:psa/widget/constants.dart';
 
 class AllUsers extends StatelessWidget {
   const AllUsers({Key? key}) : super(key: key);
@@ -32,40 +33,50 @@ class AllUsers extends StatelessWidget {
           ),
         ),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('User').snapshots(),
-        builder: (ctx, userSnapshot) {
-          if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final usersnap = userSnapshot.data!.docs;
-          return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: usersnap.length,
-              itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
-                position: index,
-                duration: const Duration(milliseconds: 905),
-                child: SlideAnimation(
-                  verticalOffset: 50.0,
-                  child: FadeInAnimation(
-                    child: UserWidget(
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return OtherUserProfileScreeen(
-                                  uid: usersnap[index]['uid'],
-                                );
-                              }));
-                        },
-                        misId: usersnap[index]['misId'],
-                        name: usersnap[index]['name'],
-                        url: usersnap[index]['photourl']),
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(kkbackgroundImage),
+              fit: BoxFit.cover
+          ),
+        ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('User').snapshots(),
+          builder: (ctx, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final usersnap = userSnapshot.data!.docs;
+            return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: usersnap.length,
+                itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
+                  position: index,
+                  duration: const Duration(milliseconds: 905),
+                  child: SlideAnimation(
+                    verticalOffset: 50.0,
+                    child: FadeInAnimation(
+                      child: UserWidget(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return OtherUserProfileScreeen(
+                                    uid: usersnap[index]['uid'],
+                                  );
+                                }));
+                          },
+                          misId: usersnap[index]['misId'],
+                          name: usersnap[index]['name'],
+                          url: usersnap[index]['photourl']),
+                    ),
                   ),
-                ),
-              ));
-        },
+                ));
+          },
+        ),
       ),
     );
   }

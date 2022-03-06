@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/chats/chat_members.dart';
+import 'package:psa/widget/constants.dart';
 import 'messages.dart';
 import 'new_message.dart';
 
@@ -131,6 +132,10 @@ class _SportChatScreenState extends State<SportChatScreen> {
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
+                  image: DecorationImage(
+                      image: AssetImage(kkbackgroundImage),
+                      fit: BoxFit.cover
+                  ),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),

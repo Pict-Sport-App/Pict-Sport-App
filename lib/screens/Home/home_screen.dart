@@ -15,26 +15,15 @@ class HomeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      //backgroundColor: Colors.blueAccent,
       body: Stack(
         children: [
-          Container(
-            width: width,
-            height: height,
-            constraints: const BoxConstraints.expand(),
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/back.jpg'), fit: BoxFit.cover)),
-          ),
+          Image.asset('assets/back.jpg',height: height,
+          width: width,fit: BoxFit.cover,),
           Transform.rotate(
             angle: 0.82,
-            child: Container(
-              width: width,
-              height: height,
-              constraints: const BoxConstraints.expand(),
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/back.jpg'), fit: BoxFit.cover)),
-            ),
+            child: Image.asset('assets/back.jpg',height: height,
+              width: width,fit: BoxFit.cover,),
           ),
           Padding(
             padding: EdgeInsets.only(
@@ -92,8 +81,8 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return const VolleyBallScreen();
-                                    }));
+                                  return const VolleyBallScreen();
+                                }));
                               },
                               text: 'VolleyBall',
                               image: 'assets/volleyball.jpg',
@@ -124,8 +113,8 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return const BasketBallScreen();
-                                    }));
+                                  return const BasketBallScreen();
+                                }));
                               },
                               text: 'BasketBall',
                               image: 'assets/basketball.jpg',
@@ -197,8 +186,8 @@ class HomeScreen extends StatelessWidget {
                               ..translate(width * 0.04, -height * 0.07),
                             child: MyCustomWidget(
                               onTap: () {
-
-                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
                                   return const TabletannisScreen();
                                 }));
                               },
@@ -268,11 +257,10 @@ class HomeScreen extends StatelessWidget {
                               ..translate(0.0, -height * 0.1),
                             child: MyCustomWidget(
                               onTap: () {
-
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context){
-                                      return const CricketScreen();
-                                    }));
+                                    MaterialPageRoute(builder: (context) {
+                                  return const CricketScreen();
+                                }));
                               },
                               text: 'Cricket',
                               image: 'assets/cricket.jpg',
@@ -315,8 +303,8 @@ class MyCustomWidget extends StatelessWidget {
               width: width * 0.22,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.black12, width: 3),
-                image: DecorationImage(
-                    image: AssetImage(image), fit: BoxFit.fill),
+                image:
+                    DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
                 // color: const Color(0xff8639FB),
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [

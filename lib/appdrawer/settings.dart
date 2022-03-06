@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/services/get_settings.dart';
+import 'package:psa/widget/constants.dart';
 
 class Setting extends StatefulWidget {
   static const routeName = '/sport_setting';
@@ -61,7 +62,13 @@ class _SettingState extends State<Setting> {
         body: Container(
           width: width,
           height: height,
-          color: Colors.white,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+                image: AssetImage(kkbackgroundImage),
+                fit: BoxFit.cover
+            ),
+          ),
           child: Form(
             key: formkey,
             child: SingleChildScrollView(

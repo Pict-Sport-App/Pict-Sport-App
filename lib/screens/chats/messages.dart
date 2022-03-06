@@ -34,23 +34,14 @@ class Messages extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               reverse: true,
               itemCount: chatDocs.length,
-              itemBuilder: (ctx, index) => AnimationConfiguration.staggeredList(
-                    position: index,
-                    duration: const Duration(milliseconds: 905),
-                    child: SlideAnimation(
-                      verticalOffset: 50.0,
-                      child: FadeInAnimation(
-                          child: MessageBubble(
-                            chatDocs[index]['text'],
-                            chatDocs[index]['createdAt'],
-                            chatDocs[index]['userId'] == user?.uid,
-                            chatDocs[index]['username'],
-                            chatDocs[index]['userImage'],
-                            key: ValueKey(chatDocs[index].id),
-                          ),
-                      ),
-                    ),
-                  ));
+              itemBuilder: (ctx, index) => MessageBubble(
+                chatDocs[index]['text'],
+                chatDocs[index]['createdAt'],
+                chatDocs[index]['userId'] == user?.uid,
+                chatDocs[index]['username'],
+                chatDocs[index]['userImage'],
+                key: ValueKey(chatDocs[index].id),
+              ));
         });
   }
 }

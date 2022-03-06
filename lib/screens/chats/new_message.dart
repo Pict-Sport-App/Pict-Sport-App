@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class NewMessage extends StatefulWidget {
   final dynamic keyies;
   const NewMessage({Key? key, required this.keyies}) : super(key: key);
@@ -32,6 +31,7 @@ class _NewMessageState extends State<NewMessage> {
     });
     _controller.clear();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,6 @@ class _NewMessageState extends State<NewMessage> {
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
-
                 });
 
               },

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/announcements/create_annoucement.dart';
+import 'package:psa/widget/constants.dart';
 
 class MainSettings extends StatelessWidget {
   const MainSettings({Key? key}) : super(key: key);
@@ -24,63 +25,83 @@ class MainSettings extends StatelessWidget {
         ),
       ),
       body: UserDetails.isAdmin == true
-          ? Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
+          ? Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage(kkbackgroundImage),
+              fit: BoxFit.cover
+          ),
+        ),
+         child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CreateAnnoucement()));
+                      },
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.handyman),
+                            SizedBox(width: 10),
+                            Text('Create an announcement',
+                                style: TextStyle(fontSize: 18)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          Icon(Icons.handyman),
+                          SizedBox(width: 10),
+                          Text('Edit an announcement',
+                              style: TextStyle(fontSize: 18)),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CreateAnnoucement()));
-                    },
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          Icon(Icons.handyman),
-                          SizedBox(width: 10),
-                          Text('Create an announcement',
-                              style: TextStyle(fontSize: 18)),
-                        ],
+                              builder: (context) => const Setting())),
+                      child: SizedBox(
+                        height: 50,
+                        child: Row(
+                          children: const [
+                            Icon(Icons.handyman),
+                            SizedBox(width: 10),
+                            Text('Edit equipment count',
+                                style: TextStyle(fontSize: 18)),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    height: 50,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.handyman),
-                        SizedBox(width: 10),
-                        Text('Edit an announcement',
-                            style: TextStyle(fontSize: 18)),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Setting())),
-                    child: SizedBox(
-                      height: 50,
-                      child: Row(
-                        children: const [
-                          Icon(Icons.handyman),
-                          SizedBox(width: 10),
-                          Text('Edit equipment count',
-                              style: TextStyle(fontSize: 18)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )
-          : Center(
+          )
+          : Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+              image: AssetImage(kkbackgroundImage),
+              fit: BoxFit.cover
+          ),
+        ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
