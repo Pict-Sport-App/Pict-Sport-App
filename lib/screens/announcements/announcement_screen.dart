@@ -5,6 +5,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/screens/announcements/single_announce_widget.dart';
+import 'package:psa/widget/constants.dart';
 
 class AnnouncementScreen extends StatelessWidget {
   const AnnouncementScreen({Key? key}) : super(key: key);
@@ -54,44 +55,55 @@ class AnnouncementScreen extends StatelessWidget {
             // ),
           ],
         ),
-        body: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('Announcement')
-                .snapshots(),
-            builder: (ctx, AsyncSnapshot userSnapshot) {
-              if (userSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              final usersnap = userSnapshot.data!.docs;
-              return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: usersnap.length,
-                  itemBuilder: (context, index) {
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: const Duration(milliseconds: 905),
-                      child: SlideAnimation(
-                        verticalOffset: 50.0,
-                        child: FadeInAnimation(
-                          child: SingleAnnouncement(
-                            imageUrl: usersnap[index]['imageURL'],
-                            title: usersnap[index]['title'],
-                            date: usersnap[index]['dateTime'],
-                            descrip: usersnap[index]['description'],
-                            venue: usersnap[index]['venue'],
-                            number1: usersnap[index]['number1'],
-                            number2: usersnap[index]['number2'],
-                            contactNo1: usersnap[index]['contact1'],
-                            contactNo2: usersnap[index]['contact2'],
-                            link: usersnap[index]['link'],
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(kkbackgroundImage),
+                fit: BoxFit.cover
+            ),
+          ),
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('Announcement')
+                  .orderBy('dateTime', descending: true)
+                  .snapshots(),
+              builder: (ctx, AsyncSnapshot userSnapshot) {
+                if (userSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                final usersnap = userSnapshot.data!.docs;
+                return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: usersnap.length,
+                    itemBuilder: (context, index) {
+                      return AnimationConfiguration.staggeredList(
+                        position: index,
+                        duration: const Duration(milliseconds: 905),
+                        child: SlideAnimation(
+                          verticalOffset: 50.0,
+                          child: FadeInAnimation(
+                            child: SingleAnnouncement(
+                              imageUrl: usersnap[index]['imageURL'],
+                              title: usersnap[index]['title'],
+                              date: usersnap[index]['dateTime'],
+                              descrip: usersnap[index]['description'],
+                              venue: usersnap[index]['venue'],
+                              number1: usersnap[index]['number1'],
+                              number2: usersnap[index]['number2'],
+                              contactNo1: usersnap[index]['contact1'],
+                              contactNo2: usersnap[index]['contact2'],
+                              link: usersnap[index]['link'],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  });
-            }));
+                      );
+                    });
+              }),
+        ));
   }
 }
 

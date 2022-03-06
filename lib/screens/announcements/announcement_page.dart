@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/announcements/poster.dart';
 import 'package:psa/screens/otherUserDetails/helper/top_bar.dart';
+import 'package:psa/widget/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AnnouncementPage extends StatefulWidget {
@@ -104,240 +105,265 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child:  Stack(
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Photo(
-                                image: widget.imageUrl,
-                              )))
-                    },
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.6,
-                      width: double.infinity,
-                      child: Image(
-                        image: NetworkImage(widget.imageUrl),
-                        fit: BoxFit.fill,
+        child: Container(
+          width: wei,
+          height: hei,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            image: DecorationImage(
+                image: AssetImage(kkbackgroundImage),
+                fit: BoxFit.cover
+            ),
+          ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child:  Stack(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () => {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Photo(
+                                  image: widget.imageUrl,
+                                )))
+                      },
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        width: double.infinity,
+                        child: Image(
+                          image: NetworkImage(widget.imageUrl),
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(7.0),
-                    padding: const EdgeInsets.all(3.0),
-                    child: Text(
-                      widget.title,
-                      style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black54),
+                    const SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(3.0),
-                    color: Colors.grey[100],
-                    child: Container(
+                    Container(
+                      margin: const EdgeInsets.all(7.0),
+                      padding: const EdgeInsets.all(3.0),
+                      child: Text(
+                        widget.title,
+                        style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: const BoxDecoration(
                         color: Colors.white,
-                        margin: const EdgeInsets.all(15.0),
-                        padding: const EdgeInsets.all(3.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            const SizedBox(
-                              height: 20,
+                        image: DecorationImage(
+                          opacity: 0.2,
+                            image: AssetImage(kkbackgroundImage),
+                            fit: BoxFit.cover
+                        ),
+                      ),
+                      child: Container(
+                          //color: Colors.white,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            image: DecorationImage(
+                                image: AssetImage(kkbackgroundImage),
+                                fit: BoxFit.cover
                             ),
-                            Row(
-                              children: const <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.file,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Description',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 46,
+                          ),
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 20,
                               ),
-                              child: Text(
-                                widget.descrip,
-                                style: const TextStyle(
-                                    fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const FaIcon(
-                                  FontAwesomeIcons.calendarDay,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  '$day th $w $year',
-                                  style: const TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 46),
-                              child: Text(
-                                '$hour.$min $gb',
-                                style: const TextStyle(
-                                    fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const FaIcon(
-                                  FontAwesomeIcons.locationArrow,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                widget.venue == ''
-                                    ? Container()
-                                    : const Text(
-                                  'Venue ',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                            widget.venue == ''
-                                ? Container()
-                                : Padding(
-                              padding:
-                              const EdgeInsets.only(left: 46, bottom: 20),
-                              child: Text(
-                                widget.venue,
-                                style: const TextStyle(
-                                    fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                            Row(
-                              children: const <Widget>[
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                FaIcon(
-                                  FontAwesomeIcons.phoneAlt,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Contact',
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                            widget.contactNo1 == ''
-                                ? Container()
-                                : Padding(
-                              padding:
-                              const EdgeInsets.only(left: 46, bottom: 2),
-                              child: Text(
-                                '${widget.contactNo1} :: ${widget.number1}',
-                                style: const TextStyle(
-                                    fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                            widget.contactNo2 == ''
-                                ? Container()
-                                : Padding(
-                              padding:
-                              const EdgeInsets.only(left: 46, bottom: 20),
-                              child: Text(
-                                '${widget.contactNo2} :: ${widget.number2}',
-                                style: const TextStyle(
-                                    fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                            Center(
-                                child: Material(
-                                  color: Colors.purple[400],
-                                  borderRadius:
-                                  const BorderRadius.all(Radius.circular(10.0)),
-                                  child: TextButton(
-                                    onPressed: () => {
-                                      if (widget.link == '')
-                                        {
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                              const SnackBar(
-                                                  duration: Duration(seconds: 1),
-                                                  content: Text(
-                                                      'Link of registration not available'))),
-                                        }
-                                      else
-                                        {
-                                          _launchedInBrowser(widget.link),
-                                        }
-                                    },
-                                    child: const Text(
-                                      'Register',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                              Row(
+                                children: const <Widget>[
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                )),
-                            const SizedBox(
-                              height: 20,
-                            )
-                          ],
-                        )),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: hei*0.03,left: wei*0.03),
-                child: GestureDetector(
-                  onTap: (){Navigator.pop(context);},
-                    child: const TopBar()),
-              )
-            ],
+                                  FaIcon(
+                                    FontAwesomeIcons.file,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Description',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 46,
+                                ),
+                                child: Text(
+                                  widget.descrip,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const FaIcon(
+                                    FontAwesomeIcons.calendarDay,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    '$day th $w $year',
+                                    style: const TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 46),
+                                child: Text(
+                                  '$hour.$min $gb',
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const FaIcon(
+                                    FontAwesomeIcons.locationArrow,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  widget.venue == ''
+                                      ? Container()
+                                      : const Text(
+                                    'Venue ',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              widget.venue == ''
+                                  ? Container()
+                                  : Padding(
+                                padding:
+                                const EdgeInsets.only(left: 46, bottom: 20),
+                                child: Text(
+                                  widget.venue,
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                              Row(
+                                children: const <Widget>[
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.phoneAlt,
+                                    color: Colors.black,
+                                    size: 25,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Contact',
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                              widget.contactNo1 == ''
+                                  ? Container()
+                                  : Padding(
+                                padding:
+                                const EdgeInsets.only(left: 46, bottom: 2),
+                                child: Text(
+                                  '${widget.contactNo1} :: ${widget.number1}',
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                              widget.contactNo2 == ''
+                                  ? Container()
+                                  : Padding(
+                                padding:
+                                const EdgeInsets.only(left: 46, bottom: 20),
+                                child: Text(
+                                  '${widget.contactNo2} :: ${widget.number2}',
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.grey),
+                                ),
+                              ),
+                              Center(
+                                  child: Material(
+                                    color: Colors.purple[400],
+                                    borderRadius:
+                                    const BorderRadius.all(Radius.circular(10.0)),
+                                    child: TextButton(
+                                      onPressed: () => {
+                                        if (widget.link == '')
+                                          {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(
+                                                    duration: Duration(seconds: 1),
+                                                    content: Text(
+                                                        'Link of registration not available'))),
+                                          }
+                                        else
+                                          {
+                                            _launchedInBrowser(widget.link),
+                                          }
+                                      },
+                                      child: const Text(
+                                        'Register',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  )),
+                              const SizedBox(
+                                height: 20,
+                              )
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: hei*0.03,left: wei*0.03),
+                  child: GestureDetector(
+                    onTap: (){Navigator.pop(context);},
+                      child: const TopBar()),
+                )
+              ],
+            ),
           ),
         ),
       ),

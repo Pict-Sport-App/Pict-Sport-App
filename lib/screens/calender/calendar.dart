@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/screens/announcements/single_announce_widget.dart';
+import 'package:psa/widget/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 DateTime selectedDay = DateTime.now();
@@ -72,6 +73,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(kkbackgroundImage),
+                fit: BoxFit.cover
+            ),
             gradient: LinearGradient(
           begin: Alignment.bottomRight,
           end: Alignment.topRight,

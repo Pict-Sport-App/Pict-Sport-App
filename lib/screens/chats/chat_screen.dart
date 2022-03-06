@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
+import 'package:psa/widget/constants.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -54,27 +55,37 @@ class ChatScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: UserDetails.mySportsList!.length,
-                itemBuilder: (ctx, index) => SportGrpNameWidget(
-                  lastMsg: '3:22 PM   ',
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      SportChatScreen.routeName,
-                      arguments: UserDetails.mySportsList![index],
-                    );
-                  },
-                  name: UserDetails.mySportsList![index],
-                  image: UserDetails.mySportEmoji![index],
-                )),
-          ),
-        ],
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(kkbackgroundImage),
+              fit: BoxFit.cover
+            ),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: UserDetails.mySportsList!.length,
+                  itemBuilder: (ctx, index) => SportGrpNameWidget(
+                    lastMsg: '3:22 PM   ',
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        SportChatScreen.routeName,
+                        arguments: UserDetails.mySportsList![index],
+                      );
+                    },
+                    name: UserDetails.mySportsList![index],
+                    image: UserDetails.mySportEmoji![index],
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }

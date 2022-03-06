@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/services/loading.dart';
+import 'package:psa/widget/constants.dart';
 import 'helper/card_item.dart';
 import 'helper/stack_container.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -143,346 +144,356 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                       )
                     ]),
                 body: SafeArea(
-                  child: SingleChildScrollView(
-                    //physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          StackContainer(
-                            imageUrl: photourl,
-                            name: name,
-                            misId: misId,
-                          ),
-                          const SizedBox(
-                            height: 18.0,
-                          ),
-                          if (headline != 'null')
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(kkbackgroundImage),
+                          fit: BoxFit.cover
+                      ),
+                    ),
+                    child: SingleChildScrollView(
+                      //physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            StackContainer(
+                              imageUrl: photourl,
+                              name: name,
+                              misId: misId,
+                            ),
+                            const SizedBox(
+                              height: 18.0,
+                            ),
+                            if (headline != 'null')
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 11.0, top: 2),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    headline == 'null' || headline==null
+                                        ? Container()
+                                        : Text(
+                                            headline.toString(),
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w900,
+                                                fontSize: 20.0,
+                                                color: Colors.black),
+                                          ),
+                                  ],
+                                ),
+                              ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 11.0, top: 2),
+                              padding: const EdgeInsets.only(left: 11.0, top: 2),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  headline == 'null' || headline==null
+                                  location == 'null' || location==null
                                       ? Container()
                                       : Text(
-                                          headline.toString(),
+                                          '${location.toString()} ',
                                           style: const TextStyle(
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 20.0,
-                                              color: Colors.black),
+                                            fontSize: 19.0,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                         ),
                                 ],
                               ),
                             ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 11.0, top: 2),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                location == 'null' || location==null
-                                    ? Container()
-                                    : Text(
-                                        '${location.toString()} ',
-                                        style: const TextStyle(
-                                          fontSize: 19.0,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w600,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                      ),
-                              ],
+                            const SizedBox(
+                              height: 18.0,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 18.0,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.grey),
-                                        child: Container(
-                                          margin: const EdgeInsets.all(5),
+                            Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: Colors.white),
-                                          child: IconButton(
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons.instagram,
-                                                size: 35,
-                                              ),
-                                              onPressed: () {
-                                                if (insta == 'null') {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          duration: Duration(
-                                                              seconds: 2),
-                                                          content: Text(
-                                                              'Oops!! User have not provided Insta Url..')));
-                                                } else {
-                                                  _launchInWebViewOrVC(
-                                                      insta.toString());
-                                                }
-                                              }),
+                                              color: Colors.grey),
+                                          child: Container(
+                                            margin: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white),
+                                            child: IconButton(
+                                                icon: const FaIcon(
+                                                  FontAwesomeIcons.instagram,
+                                                  size: 35,
+                                                ),
+                                                onPressed: () {
+                                                  if (insta == 'null') {
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(const SnackBar(
+                                                            duration: Duration(
+                                                                seconds: 2),
+                                                            content: Text(
+                                                                'Oops!! User have not provided Insta Url..')));
+                                                  } else {
+                                                    _launchInWebViewOrVC(
+                                                        insta.toString());
+                                                  }
+                                                }),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.grey),
-                                        child: Container(
-                                          margin: const EdgeInsets.all(5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.white),
-                                          child: IconButton(
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons.linkedinIn,
-                                                size: 35,
-                                              ),
-                                              onPressed: () {
-                                                if (linkedIn == 'null') {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          duration: Duration(
-                                                              seconds: 2),
-                                                          content: Text(
-                                                              'Oops!! User have not provided LinkedIn Url..')));
-                                                } else {
-                                                  _launchInWebViewOrVC(
-                                                      linkedIn.toString());
-                                                }
-                                              }),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.grey),
-                                        child: Container(
-                                          margin: const EdgeInsets.all(5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.white),
-                                          child: IconButton(
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons.twitter,
-                                                size: 35,
-                                              ),
-                                              onPressed: () {
-                                                if (twitter == 'null') {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          duration: Duration(
-                                                              seconds: 2),
-                                                          content: Text(
-                                                              'Oops!! User have not provided Twitter Url..')));
-                                                } else {
-                                                  _launchInWebViewOrVC(
-                                                      twitter.toString());
-                                                }
-                                              }),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: Colors.grey),
-                                        child: Container(
-                                          margin: const EdgeInsets.all(5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.white),
-                                          child: IconButton(
-                                              icon: const FaIcon(
-                                                FontAwesomeIcons.phoneAlt,
-                                                size: 35,
-                                              ),
-                                              onPressed: () {
-                                                if (whatappNo == 'null') {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(const SnackBar(
-                                                          duration: Duration(
-                                                              seconds: 2),
-                                                          content: Text(
-                                                              'Oops!! User have not provided Mobile Number..')));
-                                                } else {
-                                                  _launchInWebViewOrVC(
-                                                      'tel://$whatappNo');
-                                                }
-                                              }),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                              ],
-                            ),
-                          ),
-                          CardItem(
-                            inputString1: 'MIS ID',
-                            inputString2: misId,
-                            inputString3: email,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 11.0, right: 11, bottom: 15),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  '    Sports Intersected',
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 11, right: 11),
-                                  child: Container(
-                                    height: 75,
-                                    padding: const EdgeInsets.only(
-                                      left: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black,
-                                          blurRadius: 2.0,
-                                          spreadRadius: 0.0,
-                                          offset: Offset(1.0,
-                                              1.0), // shadow direction: bottom right
-                                        )
                                       ],
                                     ),
-                                    child: ListView.builder(
-                                      physics: const BouncingScrollPhysics(),
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: selectedSportEmoji.length,
-                                      itemBuilder: (ctx, index) => Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 10, top: 15, bottom: 10),
-                                        child: Text(
-                                          selectedSportEmoji[index],
-                                          style: const TextStyle(
-                                            fontSize: 30,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey),
+                                          child: Container(
+                                            margin: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white),
+                                            child: IconButton(
+                                                icon: const FaIcon(
+                                                  FontAwesomeIcons.linkedinIn,
+                                                  size: 35,
+                                                ),
+                                                onPressed: () {
+                                                  if (linkedIn == 'null') {
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(const SnackBar(
+                                                            duration: Duration(
+                                                                seconds: 2),
+                                                            content: Text(
+                                                                'Oops!! User have not provided LinkedIn Url..')));
+                                                  } else {
+                                                    _launchInWebViewOrVC(
+                                                        linkedIn.toString());
+                                                  }
+                                                }),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey),
+                                          child: Container(
+                                            margin: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white),
+                                            child: IconButton(
+                                                icon: const FaIcon(
+                                                  FontAwesomeIcons.twitter,
+                                                  size: 35,
+                                                ),
+                                                onPressed: () {
+                                                  if (twitter == 'null') {
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(const SnackBar(
+                                                            duration: Duration(
+                                                                seconds: 2),
+                                                            content: Text(
+                                                                'Oops!! User have not provided Twitter Url..')));
+                                                  } else {
+                                                    _launchInWebViewOrVC(
+                                                        twitter.toString());
+                                                  }
+                                                }),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Colors.grey),
+                                          child: Container(
+                                            margin: const EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.white),
+                                            child: IconButton(
+                                                icon: const FaIcon(
+                                                  FontAwesomeIcons.phoneAlt,
+                                                  size: 35,
+                                                ),
+                                                onPressed: () {
+                                                  if (whatappNo == 'null') {
+                                                    ScaffoldMessenger.of(context)
+                                                        .showSnackBar(const SnackBar(
+                                                            duration: Duration(
+                                                                seconds: 2),
+                                                            content: Text(
+                                                                'Oops!! User have not provided Mobile Number..')));
+                                                  } else {
+                                                    _launchInWebViewOrVC(
+                                                        'tel://$whatappNo');
+                                                  }
+                                                }),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            CardItem(
+                              inputString1: 'MIS ID',
+                              inputString2: misId,
+                              inputString3: email,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 11.0, right: 11, bottom: 15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '    Sports Intersected',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 11, right: 11),
+                                    child: Container(
+                                      height: 75,
+                                      padding: const EdgeInsets.only(
+                                        left: 10,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.white,
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.black,
+                                            blurRadius: 2.0,
+                                            spreadRadius: 0.0,
+                                            offset: Offset(1.0,
+                                                1.0), // shadow direction: bottom right
+                                          )
+                                        ],
+                                      ),
+                                      child: ListView.builder(
+                                        physics: const BouncingScrollPhysics(),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: selectedSportEmoji.length,
+                                        itemBuilder: (ctx, index) => Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, top: 15, bottom: 10),
+                                          child: Text(
+                                            selectedSportEmoji[index],
+                                            style: const TextStyle(
+                                              fontSize: 30,
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          _showData == false
-                              ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 15),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        _showData = true;
-                                      });
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Text(
-                                          "More Info",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Colors.white),
+                            _showData == false
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25, vertical: 15),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          _showData = true;
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        child: const Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "More Info",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              :
+                                  )
+                                :
 
-                              /// && roll_no != null;
-                              rollNo == 'null'
+                                /// && roll_no != null;
+                                rollNo == 'null'
+                                    ? Container()
+                                    : CardItem(
+                                        inputString1: 'Roll No',
+                                        inputString2: rollNo),
+                            if (_showData == true)
+
+                              /// &&  dob != null;
+                              dob == 'null'
                                   ? Container()
                                   : CardItem(
-                                      inputString1: 'Roll No',
-                                      inputString2: rollNo),
-                          if (_showData == true)
+                                      inputString1: 'Date of Birth',
+                                      inputString2: dob),
+                            if (_showData == true)
 
-                            /// &&  dob != null;
-                            dob == 'null'
-                                ? Container()
-                                : CardItem(
-                                    inputString1: 'Date of Birth',
-                                    inputString2: dob),
-                          if (_showData == true)
+                              /// &&  about_my_self != null;
+                              aboutMe == 'null'
+                                  ? Container()
+                                  : CardItem(
+                                      inputString1: 'About Myself',
+                                      inputString2: aboutMe),
+                            if (_showData == true)
 
-                            /// &&  about_my_self != null;
-                            aboutMe == 'null'
-                                ? Container()
-                                : CardItem(
-                                    inputString1: 'About Myself',
-                                    inputString2: aboutMe),
-                          if (_showData == true)
-
-                            /// &&  about_my_self != null;
-                            achivement == 'null'
-                                ? Container()
-                                : CardItem(
-                                    inputString1: 'Achievement',
-                                    inputString2: achivement),
-                        ],
+                              /// &&  about_my_self != null;
+                              achivement == 'null'
+                                  ? Container()
+                                  : CardItem(
+                                      inputString1: 'Achievement',
+                                      inputString2: achivement),
+                          ],
+                        ),
                       ),
                     ),
                   ),

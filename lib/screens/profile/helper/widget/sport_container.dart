@@ -37,7 +37,7 @@ $headline ''',
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  '$discription}',
+                  '$discription',
                   style:
                   TextStyle(fontSize: fondSize,
                       fontFamily: "Poppins"),

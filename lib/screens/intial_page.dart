@@ -70,15 +70,8 @@ class _IntialScreenState extends State<IntialScreen> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: defaultBackgrdColor,
+
       drawer: const CollapsingNavigationDrawer(),
-      /*appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xFF9C27B0),
-        title: const Text(
-          'PICT SPORT APP',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),*/
       bottomNavigationBar: SnakeNavigationBar.color(
         behaviour: snakeBarStyle,
         snakeShape: snakeShape,
@@ -155,87 +148,6 @@ class _IntialScreenState extends State<IntialScreen> {
                 color: defaultBackgrdColor,
                 child: buildpageconnector(),
               ),
-              /*Container(
-                height: 70,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    // bottomLeft: Radius.circular(30),
-                    // bottomRight: Radius.circular(30),
-                  ),
-                  color: Color(0xFF9C27B0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        const SizedBox(width: 16),
-                        InkWell(
-                          onTap: () {
-                            Scaffold.of(context).openDrawer();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(deviceWidth * 0.025),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                             /* boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(0, 10),
-                                  blurRadius: 7,
-                                ),
-                              ],*/
-                            ),
-                            child: Icon(
-                              Icons.notes,
-                              size: deviceWidth * 0.05,
-                              color: Colors.purple,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Text(
-                      "PICT SPORTS APP",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        wordSpacing: 2,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(deviceWidth * 0.025),
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              /*boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(0, 10),
-                                  blurRadius: 7,
-                                ),
-                              ],*/
-                            ),
-                            child: Icon(
-                              Icons.leaderboard_sharp,
-                              size: deviceWidth * 0.05,
-                              color: Colors.purple,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                      ],
-                    ),
-                  ],
-                ),
-              ),*/
             ],
           ),
         ),

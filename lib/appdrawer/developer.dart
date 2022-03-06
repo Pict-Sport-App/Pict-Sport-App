@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mailto/mailto.dart';
+import 'package:psa/widget/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Frame1Widget extends StatelessWidget {
@@ -17,7 +18,13 @@ class Frame1Widget extends StatelessWidget {
           body: Container(
               width: width,
               height: height,
-              color: Colors.white,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                image: DecorationImage(
+                    image: AssetImage(kkbackgroundImage),
+                    fit: BoxFit.cover
+                ),
+              ),
               child: Column(children: <Widget>[
                 Container(
                   alignment: Alignment.center,
