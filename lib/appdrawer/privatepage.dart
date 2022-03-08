@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/widget/constants.dart';
 
 class PrivatePage extends StatefulWidget {
@@ -95,7 +96,35 @@ class _PrivatePageState extends State<PrivatePage> {
                    usersnap[index]['isAdmin']?
                        AdminWidget(misId: usersnap[index]['misId'],
                            name: usersnap[index]['name'],
-                           url: usersnap[index]['photourl']):Container());
+                           url: usersnap[index]['photourl']
+                         , onTap: ()async {
+                         if (UserDetails.uid==usersnap[index]['uid']){
+                           ScaffoldMessenger.of(context).showSnackBar(
+                               const SnackBar(content:
+                           Text(
+                               'You cannot remove yourself from admin'
+                           )));
+                         }else{
+                           await FirebaseFirestore.instance
+                               .collection('User')
+                               .doc(usersnap[index]['uid'])
+                               .update({
+                             'isAdmin':false,
+                           });
+                           await FirebaseFirestore.instance
+                               .collection('AdminRequest')
+                               .doc(usersnap[index]['uid'])
+                               .update({
+                             'accept':false,
+                           });
+                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:
+                           Text(
+                               '${usersnap[index]['name']} having misId ${usersnap[index]['misId']} '
+                                   'has been removed from Admin successfully'
+                           )));
+                           Navigator.pop(context);
+                         }
+                         },):Container());
                  },
                ),
               StreamBuilder<QuerySnapshot>(
@@ -152,14 +181,16 @@ class _PrivatePageState extends State<PrivatePage> {
 
 class AdminWidget extends StatelessWidget {
   final String name,url,misId;
-  const AdminWidget({Key? key,required this.misId,
+  final VoidCallback onTap;
+  const AdminWidget({Key? key,
+  required this.onTap,required this.misId,
   required this.name,
   required this.url}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
-    double height=MediaQuery.of(context).size.height;
+    //double height=MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -189,6 +220,11 @@ class AdminWidget extends StatelessWidget {
                   child: Text(misId,style: const TextStyle(
                       fontSize: 15
                   )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RaisedButton(onPressed: onTap,
+                    child: const Text('Remove from Admin'),),
                 ),
               ],
             )

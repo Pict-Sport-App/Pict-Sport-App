@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/user_details.dart';
-import 'package:psa/screens/Home/home_screen.dart';
 import 'package:psa/screens/Home/table_tennis/playing.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/Home/table_tennis/requests.dart';
