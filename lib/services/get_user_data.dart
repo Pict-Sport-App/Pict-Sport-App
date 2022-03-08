@@ -37,6 +37,7 @@ class GetUserData extends StatelessWidget {
             UserDetails.photourl = data['photourl'].toString();
             UserDetails.uid = data['uid'].toString();
             UserDetails.isAdmin = data['isAdmin'];
+            UserDetails.isDeveloper=data['isDeveloper'];
             UserDetails.sportList =
                 Map<String, bool?>.from(data['SportList']).cast<String, bool>();
             checkmysportlist();

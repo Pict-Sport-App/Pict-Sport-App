@@ -531,6 +531,7 @@ class _UserInfoState extends State<UserInfo> {
                           'misId': misId,
                           'SportList': m,
                           'isAdmin': false,
+                          'isDeveloper':false,
                         });
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {

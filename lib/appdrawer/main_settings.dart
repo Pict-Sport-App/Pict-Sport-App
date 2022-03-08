@@ -1,3 +1,5 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/settings.dart';
@@ -7,6 +9,24 @@ import 'package:psa/widget/constants.dart';
 
 class MainSettings extends StatelessWidget {
   const MainSettings({Key? key}) : super(key: key);
+
+
+  Future adminRequest(BuildContext ctx)async{
+    await FirebaseFirestore.instance
+        .collection('AdminRequest')
+        .doc(UserDetails.uid).set({
+      'accept': false,
+      'name': UserDetails.name,
+      'misId': UserDetails.misId,
+      'whatappnumber':UserDetails.whatAppNo,
+      'photoUrl': UserDetails.photourl,
+      'uid':UserDetails.uid,
+    });
+    ScaffoldMessenger.of(ctx).showSnackBar(const SnackBar(content: Text(
+      'Request has been send',
+    )));
+    Navigator.pop(ctx);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +148,9 @@ class MainSettings extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      adminRequest(context);
+                    },
                     child: const Text('Request for Admin access'),
                   )
                 ],

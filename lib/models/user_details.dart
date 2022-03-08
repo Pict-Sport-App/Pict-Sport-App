@@ -27,5 +27,6 @@ class UserDetails{
   static String? twitterUrl;
   static String? linkedInUrl;
   static String? whatAppNo;
+  static bool? isDeveloper;
 }
 

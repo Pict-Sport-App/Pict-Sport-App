@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mailto/mailto.dart';
+import 'package:psa/appdrawer/privatepage.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/widget/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -177,7 +179,18 @@ class _PageState extends State<Page> {
                                     {_launchURL(devList[index].linkedinurl)},
                                 icon: const Icon(FontAwesomeIcons.linkedin)),
                           ],
-                        )
+                        ),
+                        SizedBox(height: height*0.03,),
+                        UserDetails.isDeveloper==true?
+                        RaisedButton(onPressed: (){
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context){
+                            return const PrivatePage();
+                          }));
+                        },
+                        child: const Text(
+                          'Manage App Admin'
+                        ),):Container(),
                       ],
                     ),
                   ),
