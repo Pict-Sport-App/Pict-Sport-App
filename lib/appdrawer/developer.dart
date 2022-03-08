@@ -180,7 +180,7 @@ class _PageState extends State<Page> {
                                 icon: const Icon(FontAwesomeIcons.linkedin)),
                           ],
                         ),
-                        SizedBox(height: height*0.03,),
+                        const SizedBox(height: 10,),
                         UserDetails.isDeveloper==true?
                         RaisedButton(onPressed: (){
                           Navigator.push(context,
