@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:psa/screens/Home/Cricket/issueEquiment.dart';
-import 'package:psa/screens/Home/Cricket/playing.dart';
-import 'package:psa/screens/Home/Cricket/requested.dart';
-import 'package:psa/screens/Home/Cricket/returned.dart';
+import 'package:psa/screens/Home/Football/issueEuiment.dart';
+import 'package:psa/screens/Home/Football/palyingScreen.dart';
+import 'package:psa/screens/Home/Football/requestedScreen.dart';
+import 'package:psa/screens/Home/Football/returnedScreen.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
-class CricketScreen extends StatefulWidget {
-  const CricketScreen({Key? key}) : super(key: key);
+class FootBallScreen extends StatefulWidget {
+  const FootBallScreen({Key? key}) : super(key: key);
 
   @override
-  _CricketScreenState createState() => _CricketScreenState();
+  _FootBallScreenState createState() => _FootBallScreenState();
 }
 
-class _CricketScreenState extends State<CricketScreen> {
+class _FootBallScreenState extends State<FootBallScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -22,14 +22,14 @@ class _CricketScreenState extends State<CricketScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const UpperCricket(),
+          const FootBallUpper(),
           RaisedButton(onPressed: (){
             Navigator.push(context,
-            MaterialPageRoute(builder: (context){
-              return const CricketIssue();
-            }));
+                MaterialPageRoute(builder: (context){
+                  return const FootBallIssue();
+                }));
           },
-          child: const Text('Issue'),)
+            child: const Text('Issue'),)
         ],
       ),
     );
@@ -37,19 +37,19 @@ class _CricketScreenState extends State<CricketScreen> {
 }
 
 
-class UpperCricket extends StatefulWidget {
-  const UpperCricket({Key? key}) : super(key: key);
+class FootBallUpper extends StatefulWidget {
+  const FootBallUpper({Key? key}) : super(key: key);
 
   @override
-  _UpperCricketState createState() => _UpperCricketState();
+  _FootBallUpperState createState() => _FootBallUpperState();
 }
 
-class _UpperCricketState extends State<UpperCricket> {
+class _FootBallUpperState extends State<FootBallUpper> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SizedBox(
+    return  SizedBox(
       height: 390.0,
       child: Stack(
         children: <Widget>[
@@ -58,7 +58,7 @@ class _UpperCricketState extends State<UpperCricket> {
             child: Container(
               height: 350.0,
               width: double.infinity,
-              child: Lottie.asset('assets/cricket_lofy.json'),
+              child: Lottie.asset('assets/ff_loty.json'),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -126,19 +126,19 @@ class _UpperCricketState extends State<UpperCricket> {
       case 0:
       // print("First button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const RequestedCricket();
+          return const RequestedFootball();
         }));
         break;
       case 1:
       // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const PlayingCricket();
+          return const PlayingFootBall();
         }));
         break;
       case 2:
       // print("second button is pressed");
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const ReturnedCricket();
+          return const ReturnedFootball();
         }));
         break;
     }

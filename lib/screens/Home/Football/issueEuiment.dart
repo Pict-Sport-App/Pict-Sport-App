@@ -1,65 +1,42 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
-
 import '../../intial_page.dart';
 
-class CricketIssue extends StatefulWidget {
-  const CricketIssue({Key? key}) : super(key: key);
+class FootBallIssue extends StatefulWidget {
+  const FootBallIssue({Key? key}) : super(key: key);
 
   @override
-  _CricketIssueState createState() => _CricketIssueState();
+  _FootBallIssueState createState() => _FootBallIssueState();
 }
 
-class _CricketIssueState extends State<CricketIssue> {
+class _FootBallIssueState extends State<FootBallIssue> {
 
   final formatYMDHM = DateFormat("yyyy-MM-dd HH:mm");
   DateTime? eventDate = DateTime.now();
   TimeOfDay time = TimeOfDay.now();
 
-  String? chossedBall,
-      chossedBat,chossedGloves,
-      chossedPad,chossedInnerPad,
-      chossedHelmet;
-
+  String? chossedBall;
   void _selectedBall(String ball)=>chossedBall=ball;
-  void _selectedBat(String bat)=>chossedBat=bat;
-  void _selectedGloves(String gloves)=>chossedGloves=gloves;
-  void _selectedPad(String pad)=>chossedPad=pad;
-  void _selectedInnerPad(String innerPad)=>chossedInnerPad=innerPad;
-  void _selectedHelmet(String hel)=>chossedHelmet=hel;
 
   Future _submit()async{
-    if (chossedHelmet==null
-    &&chossedInnerPad==null
-    && chossedPad==null&&
-    chossedGloves==null
-    &&chossedBat==null
-    &&chossedBall==null){
+    if (chossedBall==null){
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        duration: Duration(seconds: 2),
-        content: Text(
-          'Please select at least one field',
-          style: TextStyle(
-            color: Colors.red,
-            fontSize: 15,
-          ),
-        ),
-      ));
+          duration: Duration(seconds: 1),content: Text(
+        'Please enter the number of ball',style: TextStyle(
+        color: Colors.green,
+        fontSize: 15,
+      ),
+      )));
     }else{
-      FirebaseFirestore.instance.collection('CREquipment')
+      FirebaseFirestore.instance
+          .collection('FFEquiment')
           .doc(UserDetails.uid).set({
-        'bat': chossedBat,
-        'ball':chossedBall,
-        'gloves':chossedGloves,
-        'pad':chossedPad,
-        'innerPad':chossedInnerPad,
-        'helmet':chossedHelmet,
+        'noOfBall': chossedBall,
         'timeOfIssue': Timestamp.now(),
         'timeOfReturn': Timestamp.now(),
         'isRequested': 1,
@@ -84,23 +61,24 @@ class _CricketIssueState extends State<CricketIssue> {
 
   @override
   Widget build(BuildContext context) {
-   // double hei = MediaQuery.of(context).size.height;
-    double wei = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         height: double.infinity,
+        width: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/cricket.jpg'),
+              image: AssetImage('assets/football.jpg'),
               fit: BoxFit.fill,
               opacity: 20,
             )),
-        width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              width: width * 0.8,
+              height: height * 0.5,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   blurRadius: 24,
@@ -116,20 +94,20 @@ class _CricketIssueState extends State<CricketIssue> {
                     sigmaX: 16,
                   ),
                   child: Container(
-                    //height: hei * 0.5,
-                    width: wei * 0.9,
+                    height: height * 0.5,
+                    width: width * 0.9,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
-                          image: AssetImage('assets/cricket.jpg'), fit: BoxFit.fill),
+                          image: AssetImage('assets/football.jpg'), fit: BoxFit.fill),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 10,),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
@@ -140,99 +118,9 @@ class _CricketIssueState extends State<CricketIssue> {
                                   fontSize: 20),
                             ),
                             DropDown(
-                                itemList: const ['1','2','3','4','5','6'],
+                                itemList: const ['1', '2','3','4','5'],
                                 item1: 'Ball',
                                 submitFn: _selectedBall),
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of Bat',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Bat',
-                                submitFn: _selectedBat),
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of Gloves',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Gloves',
-                                submitFn: _selectedGloves),
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of Pad',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Pad',
-                                submitFn: _selectedPad),
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of InnerPad',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'InnerPad',
-                                submitFn: _selectedInnerPad),
-                          ],
-                        ),
-                        const SizedBox(height: 10,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of Helmet',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Helmet',
-                                submitFn: _selectedHelmet),
                           ],
                         ),
                         const SizedBox(
@@ -311,7 +199,6 @@ class _CricketIssueState extends State<CricketIssue> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
                       ],
                     ),
                   ),

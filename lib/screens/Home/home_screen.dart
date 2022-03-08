@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/screens/Home/Cricket/cricket_screen.dart';
+import 'package:psa/screens/Home/Football/football_screen.dart';
 import 'package:psa/screens/Home/VolleyBall/volleyball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 import 'Basketball/basketball.dart';
@@ -232,7 +233,13 @@ class HomeScreen extends StatelessWidget {
                             transform: Matrix4.identity()
                               ..translate(width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+                                print('football');
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return const FootBallScreen();
+                                    }));
+                              },
                               text: 'Football',
                               image: 'assets/football.jpg',
                             ),
@@ -257,6 +264,7 @@ class HomeScreen extends StatelessWidget {
                               ..translate(0.0, -height * 0.1),
                             child: MyCustomWidget(
                               onTap: () {
+                                print('euu');
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return const CricketScreen();
