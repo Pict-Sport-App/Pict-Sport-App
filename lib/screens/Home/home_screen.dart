@@ -7,6 +7,7 @@ import 'package:psa/screens/Home/Football/football_screen.dart';
 import 'package:psa/screens/Home/VolleyBall/volleyball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
 import 'Basketball/basketball.dart';
+import 'Cricket/issueEquiment.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -158,7 +159,13 @@ class HomeScreen extends StatelessWidget {
                             transform: Matrix4.identity()
                               ..translate(-width * 0.04, -height * 0.07),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return const CricketScreen();
+                                    }));
+                              },
                               text: 'Chess',
                               image: 'assets/chess.jpeg',
                             ),
@@ -234,7 +241,6 @@ class HomeScreen extends StatelessWidget {
                               ..translate(width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
                               onTap: () {
-                                print('football');
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return const FootBallScreen();
@@ -264,7 +270,7 @@ class HomeScreen extends StatelessWidget {
                               ..translate(0.0, -height * 0.1),
                             child: MyCustomWidget(
                               onTap: () {
-                                print('euu');
+
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return const CricketScreen();
