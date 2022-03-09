@@ -119,7 +119,8 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot>(
           stream:
-              FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
+              FirebaseFirestore.instance.collection('VVEquipment')
+                  .snapshots(),
           builder: (ctx, userSnapshot) {
             if (userSnapshot.connectionState == ConnectionState.waiting) {
               return const Center(

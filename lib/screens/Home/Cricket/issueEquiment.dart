@@ -1,16 +1,15 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
-
 import '../../intial_page.dart';
 
 class CricketIssue extends StatefulWidget {
   const CricketIssue({Key? key}) : super(key: key);
+  static const routeName = '/cr';
 
   @override
   _CricketIssueState createState() => _CricketIssueState();
@@ -52,6 +51,13 @@ class _CricketIssueState extends State<CricketIssue> {
         ),
       ));
     }else{
+      chossedBall ??= '0';
+      chossedHelmet??='0';
+      chossedBat??='0';
+      chossedGloves??='0';
+      chossedInnerPad??='0';
+      chossedPad??='0';
+
       FirebaseFirestore.instance.collection('CREquipment')
           .doc(UserDetails.uid).set({
         'bat': chossedBat,
@@ -80,6 +86,24 @@ class _CricketIssueState extends State<CricketIssue> {
           IntialScreen.routeName
           , (route) => false);
     }
+  }
+  bool _isInit=true;
+  dynamic _productId,_ball,_bat,_gloves,_innerpad,_pad,_helmet;
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_isInit) {
+      _productId = ModalRoute.of(context)!.settings.arguments as List;
+      _ball=_productId[0];
+      _bat=_productId[1];
+      _gloves=_productId[2];
+      _innerpad=_productId[3];
+      _pad=_productId[4];
+      _helmet=_productId[5];
+    }
+    _isInit = false;
   }
 
   @override
