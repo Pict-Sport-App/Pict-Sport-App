@@ -36,7 +36,6 @@ class _PlayingVollyState extends State<PlayingVolly> {
                   itemCount: reqMembers.length,
                   itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 2
                       ?VVRequest(
-
                       isReturn: reqMembers[index]['isReturn'],
                       image: reqMembers[index]['url'],
                       uid: reqMembers[index]['uid'],

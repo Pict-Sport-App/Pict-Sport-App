@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:psa/screens/Home/Basketball/size_no.dart';
+import 'package:psa/screens/Home/Cricket/issueEquiment.dart';
 import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
           IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
           Issue.routeName: (ctx) => const Issue(),
           IntialScreen.routeName: (ctx)=>const IntialScreen(),
+          CricketIssue.routeName: (ctx)=>const CricketIssue(),
         },
       );
     } else {
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
           IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
           Issue.routeName: (ctx) => const Issue(),
           IntialScreen.routeName: (ctx)=>const IntialScreen(),
+          CricketIssue.routeName: (ctx)=>const CricketIssue(),
         },
       );
     }

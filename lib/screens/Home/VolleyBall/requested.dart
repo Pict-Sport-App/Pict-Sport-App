@@ -54,17 +54,14 @@ class _RequestedVollyState extends State<RequestedVolly> {
 }
 
 class VVRequest extends StatefulWidget {
-  late String name;
-  late String noOfBall;
-  late Timestamp timeOfIssue;
-  late Timestamp timeOfReturn;
-  late bool isAdmin;
-  late String uid;
-  late String image;
-  late bool isReturn;
-  late String misId;
+  final String name, noOfBall;
+  final Timestamp timeOfIssue,timeOfReturn;
+  final bool isAdmin;
+  final String uid, image;
+  final bool isReturn;
+  final String misId;
 
-  VVRequest({
+  const VVRequest({
     Key? key,
     required this.misId,
     required this.isReturn,
@@ -322,7 +319,7 @@ class _VVRequestState extends State<VVRequest> {
                                     return PopUpRequest(
                                       onTap: () async {
                                         await FirebaseFirestore.instance
-                                            .collection('BBEquipment')
+                                            .collection('VVEquipment')
                                             .doc(widget.uid)
                                             .update({
                                           'isRequested': 5,

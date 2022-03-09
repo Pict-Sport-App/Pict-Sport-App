@@ -182,14 +182,27 @@ class _PageState extends State<Page> {
                         ),
                         const SizedBox(height: 10,),
                         UserDetails.isDeveloper==true?
-                        RaisedButton(onPressed: (){
+                        GestureDetector(onTap: (){
                           Navigator.push(context,
                           MaterialPageRoute(builder: (context){
                             return const PrivatePage();
                           }));
                         },
-                        child: const Text(
-                          'Manage App Admin'
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.greenAccent,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Manage App Admin'
+                            ,style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white
+                            ),),
+                          ),
                         ),):Container(),
                       ],
                     ),

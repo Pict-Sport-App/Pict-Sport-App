@@ -201,6 +201,7 @@ class AdminWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
+            const SizedBox(width: 20,),
             CircleAvatar(
               backgroundImage: NetworkImage(url),
               radius: 20,
@@ -223,8 +224,22 @@ class AdminWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(onPressed: onTap,
-                    child: const Text('Remove from Admin'),),
+                  child: GestureDetector(onTap: onTap,
+                    child: Container(
+                      width: 180,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Colors.yellowAccent,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                        child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Remove from Admin'
+                      ,style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                        ),),
+                    )),),
                 ),
               ],
             )
@@ -262,6 +277,7 @@ class AdminRequestWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
+            const SizedBox(width: 15,),
             CircleAvatar(
               backgroundImage: NetworkImage(url),
               radius: 20,
@@ -284,8 +300,24 @@ class AdminRequestWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: RaisedButton(onPressed: onTap,
-                    child: const Text('Accept'),),
+                  child: GestureDetector(onTap: onTap,
+                    child: Container(
+                        width: 90,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: Colors.yellowAccent,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text('Accept'
+                              ,style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                              ),),
+                          ),
+                        )),),
                 ),
               ],
             )
