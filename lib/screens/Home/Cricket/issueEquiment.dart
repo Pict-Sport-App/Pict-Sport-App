@@ -34,6 +34,25 @@ class _CricketIssueState extends State<CricketIssue> {
   void _selectedHelmet(String hel)=>chossedHelmet=hel;
 
   Future _submit()async{
+    var bALL=0,bAT=0,gLOVES=0,iNNERPAD=0,pAD=0,hELMET=0;
+    if (chossedBall!=null){
+      bALL=int.parse(_productId[0].toString()) - int.parse(chossedBall.toString());
+    }else{chossedBall="0";}
+    if (chossedBat!=null){
+      bAT=int.parse(_productId[1].toString()) - int.parse(chossedBat.toString());
+    }else{chossedBat="0";}
+    if (chossedGloves!=null){
+      gLOVES=int.parse(_productId[2].toString()) - int.parse(chossedGloves.toString());
+    }else{chossedGloves="0";}
+    if (chossedInnerPad!=null){
+      iNNERPAD=int.parse(_productId[3].toString()) - int.parse(chossedInnerPad.toString());
+    }else{chossedInnerPad="0";}
+    if (chossedPad!=null){
+      pAD=int.parse(_productId[4].toString()) - int.parse(chossedPad.toString());
+    }else{chossedPad="0";}
+    if (chossedHelmet!=null){
+      hELMET=int.parse(_productId[5].toString()) - int.parse(chossedHelmet.toString());
+    }else{chossedHelmet="0";}
     if (chossedHelmet==null
     &&chossedInnerPad==null
     && chossedPad==null&&
@@ -50,13 +69,79 @@ class _CricketIssueState extends State<CricketIssue> {
           ),
         ),
       ));
-    }else{
-      chossedBall ??= '0';
-      chossedHelmet??='0';
-      chossedBat??='0';
-      chossedGloves??='0';
-      chossedInnerPad??='0';
-      chossedPad??='0';
+    }else if (bALL<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of balls requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (bAT<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of bat requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (gLOVES<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of gloves requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (iNNERPAD<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of inner pad requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (pAD<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of pad requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (hELMET<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of helmet requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    } else{
+     // chossedBall ??= '0';
+      //chossedHelmet??='0';
+      //chossedBat??='0';
+      //chossedGloves??='0';
+      //chossedInnerPad??='0';
+      //chossedPad??='0';
 
       FirebaseFirestore.instance.collection('CREquipment')
           .doc(UserDetails.uid).set({

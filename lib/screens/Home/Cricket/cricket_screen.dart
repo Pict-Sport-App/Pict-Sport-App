@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/user_details.dart';
@@ -20,9 +21,7 @@ class CricketScreen extends StatefulWidget {
 class _CricketScreenState extends State<CricketScreen> {
   bool _isFirstView = false;
   dynamic _ball,_bat,_innerPad,_pad,_gloves,_helmet;
-  dynamic _cball,_cbat,_cinnerPad,_cpad,_cgloves,_chelmet;
   int _isRequested = 0;
-
 
   final _totalBall = int.parse(Equipment.cricketball.toString());
   final _totalBat=int.parse(Equipment.cricketbat.toString());
@@ -35,12 +34,12 @@ class _CricketScreenState extends State<CricketScreen> {
     _isFirstView
         ? Navigator.of(context).pushNamed(
       CricketIssue.routeName,
-      arguments: [_totalBall-_cball,
-      _totalBat-_cbat,
-      _totalGloves-_cgloves,
-      _totalInnerPad-_cinnerPad,
-      _totalPad-_cpad,
-      _totalHelmet-_chelmet],
+      arguments: [_totalBall-_ball,
+      _totalBat-_bat,
+      _totalGloves-_gloves,
+      _totalInnerPad-_innerPad,
+      _totalPad-_pad,
+      _totalHelmet-_helmet],
     )
         : _isRequested == 1
         ? showDialog(
@@ -81,21 +80,21 @@ class _CricketScreenState extends State<CricketScreen> {
               });
               Navigator.pop(context);
             },
-            ball: _ball,
-            bat: _bat,
-            gloves: _gloves, helmet: _helmet,
-            pad: _pad,
-            innerPad: _innerPad,
+            ball: _ball.toString(),
+            bat: _bat.toString(),
+            gloves: _gloves.toString(), helmet: _helmet.toString(),
+            pad: _pad.toString(),
+            innerPad: _innerPad.toString(),
           );
         })
         : Navigator.of(context).pushNamed(
       CricketIssue.routeName,
-      arguments: [_totalBall-_cball,
-        _totalBat-_cbat,
-        _totalGloves-_cgloves,
-        _totalInnerPad-_cinnerPad,
-        _totalPad-_cpad,
-        _totalHelmet-_chelmet],
+      arguments: [_totalBall-_ball,
+        _totalBat-_bat,
+        _totalGloves-_gloves,
+        _totalInnerPad-_innerPad,
+        _totalPad-_pad,
+        _totalHelmet-_helmet],
     );
   }
 
@@ -106,12 +105,12 @@ class _CricketScreenState extends State<CricketScreen> {
         .get();
     if (v.exists) {
       _isRequested = v.get('isRequested');
-      _ball = v.get('ball');
-      _bat=v.get('bat');
-      _gloves=v.get('gloves');
-      _innerPad=v.get('innerPad');
-      _pad=v.get('pad');
-      _helmet=v.get('helmet');
+      _ball = v.get('ball'.toString());
+      _bat=v.get('bat'.toString());
+      _gloves=v.get('gloves'.toString());
+      _innerPad=v.get('innerPad'.toString());
+      _pad=v.get('pad'.toString());
+      _helmet=v.get('helmet'.toString());
       if (_isRequested == 3 || _isRequested == 5) {
         setState(() {
           _isFirstView = true;
@@ -152,72 +151,370 @@ class _CricketScreenState extends State<CricketScreen> {
               );
             }
             final usersnap = userSnapshot.data!.docs;
-            _cball=0;_cbat=0;_cgloves=0;
-            _chelmet=0;_cpad=0;_cinnerPad=0;
+
+            _ball=0;_bat=0;_gloves=0;
+            _helmet=0;_pad=0;_innerPad=0;
+            print('start');
             for (int i = 0; i < usersnap.length; i++) {
               if (usersnap[i]['isRequested'] == 2) {
-                _cball += int.parse(usersnap[i]['ball']);
-                _cbat += int.parse(usersnap[i]['bat']);
-                _chelmet += int.parse(usersnap[i]['helmet']);
-                _cinnerPad += int.parse(usersnap[i]['innerPad']);
-                _cpad += int.parse(usersnap[i]['pad']);
-                _cgloves += int.parse(usersnap[i]['gloves']);
+                _ball += int.parse(usersnap[i]['ball'].toString());
+                _bat += int.parse(usersnap[i]['bat'].toString());
+                _helmet += int.parse(usersnap[i]['helmet'].toString());
+                _innerPad += int.parse(usersnap[i]['innerPad'].toString());
+                _pad += int.parse(usersnap[i]['pad'].toString());
+                _gloves += int.parse(usersnap[i]['gloves'].toString());
               }
             }
-            return Column(
-              children: [
-                const UpperCricket(),
-                RaisedButton(onPressed: (){
-                  logicCR();
-                },
-                  child: Center(
-                    child: _isFirstView
-                        ? const Center(
-                      child: Text(
-                        'Issue Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
+            print('sss');
+            print(_ball);
+           _ball ??= 0;
+            _bat ??= 0;
+            _helmet ??= 0;
+            _gloves ??= 0;
+            _innerPad ??= 0;
+            _pad ??= 0;
+            _helmet ??= 0;
+            print(_totalGloves);
+            print(_gloves);
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  const UpperCricket(),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    )
-                        : _isRequested == 1
-                        ? const Center(
-                      child: Text(
-                        'Cancel Request',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Ball Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalBall.toString())-
+                                int.parse(_ball.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
                       ),
-                    )
-                        : _isRequested == 2
-                        ? const Center(
-                      child: Text(
-                        'Return Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                    )
-                        : _isRequested == 4
-                        ? const Center(
-                      child: Text(
-                        'Issue Ball',
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Bat Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalBat.toString())-int.parse(_bat.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
                       ),
-                    )
-                        : Container(),
-                  ),)
-              ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Gloves Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalGloves.toString())-int.parse(_gloves.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Helmet Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalHelmet.toString())-int.parse(_helmet.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'InnerPad Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalInnerPad.toString())-int.parse(_innerPad.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          //SizedBox(width: weight*0.005,),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              'Pad Left ',
+                              style: TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: width * 0.004,
+                          ),
+                          const FaIcon(
+                            FontAwesomeIcons.arrowAltCircleRight,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                          const Spacer(),
+                          Text(
+                            (int.parse(_totalPad.toString())-int.parse(_pad.toString())).toString(),
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  RaisedButton(onPressed: (){
+                    logicCR();
+                  },
+                    child: Center(
+                      child: _isFirstView
+                          ? const Center(
+                        child: Text(
+                          'Issue Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 1
+                          ? const Center(
+                        child: Text(
+                          'Cancel Request',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 2
+                          ? const Center(
+                        child: Text(
+                          'Return Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 4
+                          ? const Center(
+                        child: Text(
+                          'Issue Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : Container(),
+                    ),)
+                ],
+              ),
             );
           }
       ),
@@ -265,7 +562,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    ball,
+                    ball.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -288,7 +585,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    bat,
+                    bat.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -311,7 +608,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    gloves,
+                    gloves.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -334,7 +631,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    helmet,
+                    helmet.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -357,7 +654,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    pad,
+                    pad.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -380,7 +677,7 @@ class CRReturn extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    innerPad,
+                    innerPad.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
