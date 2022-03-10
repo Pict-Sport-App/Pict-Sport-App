@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:psa/models/settings.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/Football/issueEuiment.dart';
 import 'package:psa/screens/Home/Football/palyingScreen.dart';
 import 'package:psa/screens/Home/Football/requestedScreen.dart';
 import 'package:psa/screens/Home/Football/returnedScreen.dart';
+import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
 
 class FootBallScreen extends StatefulWidget {
@@ -14,23 +20,233 @@ class FootBallScreen extends StatefulWidget {
 }
 
 class _FootBallScreenState extends State<FootBallScreen> {
+
+  bool _isFirstView = false;
+  dynamic _noOfBall,_n;
+  int _isRequested = 0;
+
+  final _totalBall = int.parse(Equipment.football.toString());
+
+  void logicFF() {
+
+    _isFirstView
+        ? Navigator.of(context).pushNamed(
+      FootBallIssue.routeName,
+      arguments: _totalBall - _n,
+    )
+        : _isRequested == 1
+        ? showDialog(
+        context: context,
+        builder: (context) {
+          return PopUpRequest(
+              onTap: () {
+                FirebaseFirestore.instance
+                    .collection('FFEquipment')
+                    .doc(UserDetails.uid)
+                    .update({
+                  'isRequested': 3,
+                });
+                setState(() {
+                  _isFirstView = true;
+                });
+                Navigator.pop(context);
+              },
+              text: 'Want to cancel the request');
+          //---------
+        })
+        : _isRequested == 2
+        ? showDialog(
+        context: context,
+        builder: (context) {
+          return VVReturn(
+            onTap: () async {
+              await FirebaseFirestore.instance
+                  .collection('FFEquipment')
+                  .doc(UserDetails.uid)
+                  .update({
+                'isRequested': 4,
+                'isReturn': true,
+                'timeOfReturn': Timestamp.now(),
+              });
+              setState(() {
+                _isFirstView = true;
+              });
+              Navigator.pop(context);
+            },
+            noOfBall: _noOfBall,
+          );
+        })
+        : Navigator.of(context).pushNamed(
+      FootBallIssue.routeName,
+      arguments: _totalBall - _n,
+    );
+  }
+
+  Future getStatus() async {
+    var v = await FirebaseFirestore.instance
+        .collection('FFEquipment')
+        .doc(UserDetails.uid)
+        .get();
+    if (v.exists) {
+      _isRequested = v.get('isRequested');
+      _noOfBall = v.get('noOfBall');
+      if (_isRequested == 3 || _isRequested == 5) {
+        setState(() {
+          _isFirstView = true;
+        });
+      } else {
+        setState(() {
+          _isFirstView = false;
+        });
+      }
+    } else {
+      setState(() {
+        _isFirstView = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getStatus();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          const FootBallUpper(),
-          RaisedButton(onPressed: (){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context){
-                  return const FootBallIssue();
-                }));
-          },
-            child: const Text('Issue'),)
-        ],
+      body: StreamBuilder<QuerySnapshot>(
+          stream:
+          FirebaseFirestore.instance.collection('FFEquipment')
+              .snapshots(),
+          builder: (ctx, userSnapshot){
+            if (userSnapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            final usersnap = userSnapshot.data!.docs;
+            _n = 0;
+            for (int i = 0; i < usersnap.length; i++) {
+              if (usersnap[i]['isRequested'] == 2) {
+                _n += int.parse(usersnap[i]['noOfBall']);
+              }
+            }
+
+            return Column(
+              children: [
+                const FootBallUpper(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        //SizedBox(width: weight*0.005,),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Ball Left ',
+                            style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w900,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: width * 0.004,
+                        ),
+                        const FaIcon(
+                          FontAwesomeIcons.arrowAltCircleRight,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        const Spacer(),
+                        Text(
+                          (_totalBall - _n).toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: width * 0.4,
+                  //color: Colors.red,
+                  child: RaisedButton(
+                    onPressed: () {
+                      logicFF();
+                    },
+                    child: Center(
+                      child: _isFirstView
+                          ? const Center(
+                        child: Text(
+                          'Issue Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 1
+                          ? const Center(
+                        child: Text(
+                          'Cancel Request',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 2
+                          ? const Center(
+                        child: Text(
+                          'Return Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : _isRequested == 4
+                          ? const Center(
+                        child: Text(
+                          'Issue Ball',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      )
+                          : Container(),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
       ),
     );
   }

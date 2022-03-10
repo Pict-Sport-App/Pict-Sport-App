@@ -9,6 +9,7 @@ import '../../intial_page.dart';
 
 class FootBallIssue extends StatefulWidget {
   const FootBallIssue({Key? key}) : super(key: key);
+  static const routeName = '/ff';
 
   @override
   _FootBallIssueState createState() => _FootBallIssueState();
@@ -24,6 +25,11 @@ class _FootBallIssueState extends State<FootBallIssue> {
   void _selectedBall(String ball)=>chossedBall=ball;
 
   Future _submit()async{
+    var v = 0;
+    if (chossedBall != null) {
+      v = int.parse(_productId.toString()) - int.parse(chossedBall.toString());
+    }
+
     if (chossedBall==null){
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 1),content: Text(
@@ -32,9 +38,21 @@ class _FootBallIssueState extends State<FootBallIssue> {
         fontSize: 15,
       ),
       )));
-    }else{
+    }else if (v<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of balls requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    } else{
+      print('eee');
       FirebaseFirestore.instance
-          .collection('FFEquiment')
+          .collection('FFEquipment')
           .doc(UserDetails.uid).set({
         'noOfBall': chossedBall,
         'timeOfIssue': Timestamp.now(),
@@ -57,6 +75,18 @@ class _FootBallIssueState extends State<FootBallIssue> {
           IntialScreen.routeName
           , (route) => false);
     }
+  }
+
+  bool _isInit=true;
+  dynamic _productId;
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_isInit) {
+      _productId = ModalRoute.of(context)!.settings.arguments as int;
+    }
+    _isInit = false;
   }
 
   @override

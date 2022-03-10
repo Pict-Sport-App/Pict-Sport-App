@@ -163,7 +163,7 @@ class HomeScreen extends StatelessWidget {
 
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                      return const CricketScreen();
+                                      return const FootBallScreen();
                                     }));
                               },
                               text: 'Chess',
