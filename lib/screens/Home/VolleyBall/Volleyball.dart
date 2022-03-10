@@ -153,7 +153,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                         const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
-                            'Ball Left of Size Six ',
+                            'Ball Left  ',
                             style: TextStyle(
                               fontSize: 17,
                               color: Colors.black,

@@ -20,7 +20,7 @@ class _RequestedVollyState extends State<RequestedVolly> {
         child: Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Volleyball Requests'),
+        title: const Text('Requests'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream:
