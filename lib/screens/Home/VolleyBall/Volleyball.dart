@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lottie/lottie.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
@@ -9,7 +8,10 @@ import 'package:psa/screens/Home/VolleyBall/playing.dart';
 import 'package:psa/screens/Home/VolleyBall/requested.dart';
 import 'package:psa/screens/Home/VolleyBall/returned.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
-import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
+import 'package:psa/widget/IssueEquimentButton.dart';
+import 'package:psa/widget/commonSportText.dart';
+import 'package:psa/widget/middlewidget.dart';
+import 'package:psa/widget/topcurve.dart';
 
 class VolleyBallScreen extends StatefulWidget {
   const VolleyBallScreen({Key? key}) : super(key: key);
@@ -22,8 +24,6 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
   dynamic _noOfBall,_n;
   int _isRequested = 0;
-
-
   final _totalBall = int.parse(Equipment.vollyball.toString());
 
   void logicVV() {
@@ -135,227 +135,109 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                 _n += int.parse(usersnap[i]['noOfBall']);
               }
             }
-            return Column(
-              children: [
-                const UpperVolly(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                  child: Container(
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      children: [
-                        //SizedBox(width: weight*0.005,),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            'Ball Left  ',
-                            style: TextStyle(
-                              fontSize: 17,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w900,
-                            ),
+            return SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    color: Colors.lightGreen,
+                    width: MediaQuery.of(context).size.width,
+                    height: height*0.4,//320,
+                    child: Stack(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: CustomPaint(
+                            size: Size(width, 340), //2
+                            painter: LogoPainter(), //3
                           ),
                         ),
-                        SizedBox(
-                          width: width * 0.004,
-                        ),
-                        const FaIcon(
-                          FontAwesomeIcons.arrowAltCircleRight,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                        const Spacer(),
-                        Text(
-                          (_totalBall - _n).toString(),
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        )
+                        const Pop(),
+                        const TopName(name: 'VolleyBall',
+                        image: 'assets/volleyball.jpg',),
+                        TextCommon(onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return const RequestedVolly();
+                          }));
+                        },
+                            right: width/1.89,
+                            bottom: 80,
+                            name: 'Requested',
+                            count: '2'),
+                        TextCommon(onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return const PlayingVolly();
+                          }));
+                        },
+                            right: width/3.22,
+                            bottom: 80,
+                            name: 'Issued',
+                            count: '45'),
+                        TextCommon(onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return const ReturnVolly();
+                          }));
+                        },
+                            right: width/40,
+                            bottom: 80,
+                            name: 'Returned',
+                            count: '6'),
                       ],
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: width * 0.4,
-                  //color: Colors.red,
-                  child: RaisedButton(
-                    onPressed: () {
-                      logicVV();
-                    },
-                    child: Center(
-                      child: _isFirstView
-                          ? const Center(
-                              child: Text(
-                                'Issue Ball',
-                                style: TextStyle(
-                                  color: Colors.redAccent,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                ),
+                  Container(
+                    height: height * 0.61236,
+                    // color: Colors.blue,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xffbd274f2),
+                            Color(0xff9507c4),
+                          ]),
+                    ),
+                    child: Stack(
+                      children: [
+                        const Constan(),
+                        Positioned(
+                          top: 12,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 28.0),
+                            child: SizedBox(
+                              // color: Colors.red,
+                              height: height * 0.4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  MiddleWidget(number: (_totalBall-_n).toString(),
+                                      text1: 'Ball Left')
+
+                                ],
                               ),
-                            )
-                          : _isRequested == 1
-                              ? const Center(
-                                  child: Text(
-                                    'Cancel Request',
-                                    style: TextStyle(
-                                      color: Colors.redAccent,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                )
-                              : _isRequested == 2
-                                  ? const Center(
-                                      child: Text(
-                                        'Return Ball',
-                                        style: TextStyle(
-                                          color: Colors.redAccent,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                    )
-                                  : _isRequested == 4
-                                      ? const Center(
-                                          child: Text(
-                                            'Issue Ball',
-                                            style: TextStyle(
-                                              color: Colors.redAccent,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 17,
-                                            ),
-                                          ),
-                                        )
-                                      : Container(),
+                            ),
+                          ),
+                        ),
+                        IssueEquimentWidget(
+                            name:  _isFirstView?
+                            const Button(name: 'Issue')
+                            :_isRequested==1?
+                            const Button(name: 'Cancel Request'):
+                            _isRequested == 2?
+                            const Button(name: 'Return Ball'):
+                            _isRequested==4?
+                            const Button(name: 'Issue'):Container(),
+                            onTap: (){
+                          logicVV();
+                        })
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  // assets/bottom2.jpg
+                ],
+              ),
             );
           }),
     );
-  }
-}
-
-class UpperVolly extends StatefulWidget {
-  const UpperVolly({Key? key}) : super(key: key);
-
-  @override
-  _UpperVollyState createState() => _UpperVollyState();
-}
-
-class _UpperVollyState extends State<UpperVolly> {
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return SizedBox(
-      height: 390.0,
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: MyCustomClipper(),
-            child: Container(
-              height: 350.0,
-              width: double.infinity,
-              child: Lottie.asset('assets/vollyLofy.json'),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(6, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: height * 0.06,
-            right: width * 0.06,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Center(
-                  child: PopupMenuButton<int>(
-                      color: Colors.indigo,
-                      onSelected: (item) => onSelected(context, item),
-                      itemBuilder: (context) => [
-                            const PopupMenuItem<int>(
-                              value: 0,
-                              child: Text(
-                                "Requested",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const PopupMenuDivider(),
-                            const PopupMenuItem<int>(
-                              value: 1,
-                              child: Text(
-                                "Issued",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const PopupMenuDivider(),
-                            const PopupMenuItem<int>(
-                              value: 2,
-                              child: Text(
-                                " Returned ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ]),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  onSelected(BuildContext context, int item) {
-    switch (item) {
-      case 0:
-        // print("First button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const RequestedVolly();
-        }));
-        break;
-      case 1:
-        // print("second button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const PlayingVolly();
-        }));
-        break;
-      case 2:
-        // print("second button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const ReturnVolly();
-        }));
-        break;
-    }
   }
 }
 

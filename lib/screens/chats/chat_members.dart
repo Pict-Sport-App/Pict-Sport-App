@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:psa/appdrawer/users.dart';
+import 'package:psa/screens/otherUserDetails/userprofilescreen.dart';
 import 'package:psa/widget/constants.dart';
 
 class ChatMembers extends StatefulWidget {
@@ -129,7 +130,14 @@ class _ChatMembersState extends State<ChatMembers> {
                                   verticalOffset: 50.0,
                                   child: FadeInAnimation(
                                     child: UserWidget(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder: (context) {
+                                                return OtherUserProfileScreeen(
+                                                  uid: grpMembers[index]['uid'],
+                                                );
+                                              }));
+                                        },
                                         misId: grpMembers[index]['misId'],
                                         name: grpMembers[index]['name'],
                                         url: grpMembers[index]['photourl']),
