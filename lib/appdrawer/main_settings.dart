@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/appdrawer/officialSport/officialSportGrpRequest.dart';
 import 'package:psa/appdrawer/settings.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/announcements/create_annoucement.dart';
@@ -129,6 +130,24 @@ class _MainSettingsState extends State<MainSettings> {
                       Icon(Icons.handyman),
                       SizedBox(width: 10),
                       Text('Edit equipment count',
+                          style: TextStyle(fontSize: 18)),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              GestureDetector(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const OfficialSportGrpReq())),
+                child: SizedBox(
+                  height: 50,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.handyman),
+                      SizedBox(width: 10),
+                      Text('Official Sport Group Request',
                           style: TextStyle(fontSize: 18)),
                     ],
                   ),

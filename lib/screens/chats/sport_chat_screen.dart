@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/widget/constants.dart';
 import 'messages.dart';
@@ -45,6 +46,22 @@ class _SportChatScreenState extends State<SportChatScreen> {
         _key = 'CH';
       } else if (_productId == 'Gym') {
         _key = 'GY';
+      }else if (_productId=='Official BasketBall'){
+        _key='OFBB';
+      }else if (_productId=='Official VolleyBall'){
+        _key='OFVV';
+      }else if (_productId=='Official TableTennis'){
+        _key='OFTT';
+      }else if (_productId=='Official Badminton'){
+        _key='OFBD';
+      }else if (_productId=='Official Cricket'){
+        _key='OFCR';
+      }else if (_productId=='Official FootBall'){
+        _key='OFFB';
+      }else if (_productId=='Official Chess'){
+        _key='OFCH';
+      }else if (_productId=='Official Gym'){
+        _key='OFGY';
       }
     }
     _isInit = false;
@@ -70,17 +87,6 @@ class _SportChatScreenState extends State<SportChatScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          /*
-                          IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const FaIcon(
-            FontAwesomeIcons.arrowCircleLeft,
-            color: Colors.white,
-            size: 25,
-          ),
-                           */
                           padding: const EdgeInsets.all(15.0),
                           child: GestureDetector(
                             onTap: () {
@@ -106,9 +112,6 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         ),
                       ],
                     ),
-                    /*
-
-                     */
                     Padding(
                       padding: const EdgeInsets.only(right: 25.0),
                       child: GestureDetector(
@@ -146,9 +149,9 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         child: Messages(
                       uniqueValue: _key,
                     )),
-                    NewMessage(
+                    UserDetails.isAdmin==true? NewMessage(
                       keyies: _key,
-                    ),
+                    ):Container(),
                   ],
                 ),
               ),

@@ -103,8 +103,60 @@ class _ChatMembersState extends State<ChatMembers> {
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
                           itemCount: grpMembers.length,
-                          itemBuilder: (ctx, index) => grpMembers[index]
-                                  ['SportList'][_productId]
+                          itemBuilder: (ctx, index) =>
+                              _productId[0]=='O'?
+                              grpMembers[index]['Official SportList'][_productId]==2?
+                              AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: const Duration(milliseconds: 905),
+                                child: SlideAnimation(
+                                  verticalOffset: 50.0,
+                                  child: FadeInAnimation(
+                                    child: UserWidget(
+                                        onTap: () {},
+                                        misId: grpMembers[index]['misId'],
+                                        name: grpMembers[index]['name'],
+                                        url: grpMembers[index]['photourl']),
+                                  ),
+                                ),
+                              ):
+                                  Container():grpMembers[index]
+                              ['SportList'][_productId]==true
+                                  ? AnimationConfiguration.staggeredList(
+                                position: index,
+                                duration: const Duration(milliseconds: 905),
+                                child: SlideAnimation(
+                                  verticalOffset: 50.0,
+                                  child: FadeInAnimation(
+                                    child: UserWidget(
+                                        onTap: () {},
+                                        misId: grpMembers[index]['misId'],
+                                        name: grpMembers[index]['name'],
+                                        url: grpMembers[index]['photourl']),
+                                  ),
+                                ),
+                              )
+                                  : Container()
+
+
+                        /* _productId[0]=='O'?
+                          grpMembers[index]['Official SportList'][_productId]==2?
+                          AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 905),
+                            child: SlideAnimation(
+                              verticalOffset: 50.0,
+                              child: FadeInAnimation(
+                                child: UserWidget(
+                                    onTap: () {},
+                                    misId: grpMembers[index]['misId'],
+                                    name: grpMembers[index]['name'],
+                                    url: grpMembers[index]['photourl']),
+                              ),
+                            ),
+                          ):
+                              _productId[0]!='0'? grpMembers[index]
+                                  ['SportList'][_productId]==true
                               ? AnimationConfiguration.staggeredList(
                             position: index,
                             duration: const Duration(milliseconds: 905),
@@ -119,7 +171,8 @@ class _ChatMembersState extends State<ChatMembers> {
                                   ),
                                 ),
                               )
-                              : Container()),
+                              : Container():Container():Container()*/
+                      )
                     ),
                   ],
                 );

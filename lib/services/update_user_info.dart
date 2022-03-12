@@ -8,6 +8,39 @@ void checkmysportlist() {
       UserDetails.mySportsList?.add(entire.key);
     }
   }
+  UserDetails.myOfficialSportsList!.clear();
+  UserDetails.myOfficialSportEmoji!.clear();
+  for(var entre in UserDetails.officialsportMap!.entries){
+    if (entre.value==2){
+      UserDetails.myOfficialSportsList?.add(entre.key);
+    }
+  }
+  for(int i=0;i<UserDetails.myOfficialSportsList!.length;i++){
+    if (UserDetails.myOfficialSportsList![i] == 'Official BasketBall') {
+      UserDetails.myOfficialSportEmoji!.add('🏀');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official VolleyBall') {
+      UserDetails.myOfficialSportEmoji!.add('🏐');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official TableTennis') {
+      UserDetails.myOfficialSportEmoji!.add('🎾');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official Badminton') {
+      UserDetails.myOfficialSportEmoji!.add('🏸');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official Cricket') {
+      UserDetails.myOfficialSportEmoji!.add('🏏');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official FootBall') {
+      UserDetails.myOfficialSportEmoji!.add('⚽');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official Gym') {
+      UserDetails.myOfficialSportEmoji!.add('💪');
+    }
+    if (UserDetails.myOfficialSportsList![i] == 'Official Chess') {
+      UserDetails.myOfficialSportEmoji!.add('♟');
+    }
+  }
 
   for (int i = 0; i < UserDetails.mySportsList!.length; i++) {
     if (UserDetails.mySportsList![i] == 'BasketBall') {
@@ -35,4 +68,5 @@ void checkmysportlist() {
       UserDetails.mySportEmoji!.add('♟');
     }
   }
+
 }

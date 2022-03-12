@@ -32,6 +32,16 @@ class _UserInfoState extends State<UserInfo> {
     'Chess': false, //♟ CH
     'Gym': false, //💪 GY
   };
+  Map<String,int>? mp={
+    'Official BasketBall': 0, //🏀 BB
+    'Official VolleyBall': 0, //🏐 VB
+    'Official TableTennis': 0, //🎾 TT
+    'Official Badminton': 0, //🏸  BT
+    'Official Cricket': 0, //🏏  CR
+    'Official FootBall': 0, //⚽ FB
+    'Official Chess': 0, //♟ CH
+    'Official Gym': 0, //💪 GY
+  };
 
   Widget onClick(bool onp) {
     return onp
@@ -482,7 +492,7 @@ class _UserInfoState extends State<UserInfo> {
                 ),
                 SizedBox(
                   height: 70,
-                  child: RaisedButton(
+                  child: FlatButton(
                     onPressed: () {
                       if (misId.length < 23) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -496,27 +506,43 @@ class _UserInfoState extends State<UserInfo> {
                         //print(UserDetails.sportList?.update(key, (value) => false));
                         if (_basketball) {
                           m?.update('BasketBall', (value) => true);
+                        }else{
+                          mp?.update('Official BasketBall', (value) => -1);
                         }
                         if (_football) {
                           m?.update('FootBall', (value) => true);
+                        }else{
+                          mp?.update('Official FootBall', (value) => -1);
                         }
                         if (_volleyball) {
                           m?.update('VolleyBall', (value) => true);
+                        }else{
+                          mp?.update('Official VolleyBall', (value) => -1);
                         }
                         if (_cricket) {
                           m?.update('Cricket', (value) => true);
+                        }else{
+                          mp?.update('Official Cricket', (value) => -1);
                         }
                         if (_chess) {
                           m?.update('Chess', (value) => true);
+                        }else{
+                          mp?.update('Official Chess', (value) => -1);
                         }
                         if (_gym) {
                           m?.update('Gym', (value) => true);
+                        }else{
+                          mp?.update('Official Gym', (value) => -1);
                         }
                         if (_tabletennis) {
                           m?.update('TableTennis', (value) => true);
+                        }else{
+                          mp?.update('Official TableTennis', (value) => -1);
                         }
                         if (_badminton) {
                           m?.update('Badminton', (value) => true);
+                        }else{
+                          mp?.update('Official Badminton', (value) => -1);
                         }
                         User? user = FirebaseAuth.instance.currentUser;
                         var uid = user?.uid;
@@ -532,6 +558,7 @@ class _UserInfoState extends State<UserInfo> {
                           'SportList': m,
                           'isAdmin': false,
                           'isDeveloper':false,
+                          'Official SportList':mp,
                         });
                         Navigator.pushReplacement(context,
                             MaterialPageRoute(builder: (context) {
