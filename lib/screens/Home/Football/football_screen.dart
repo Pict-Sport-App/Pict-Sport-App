@@ -191,7 +191,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                 SizedBox(
                   width: width * 0.4,
                   //color: Colors.red,
-                  child: RaisedButton(
+                  child: FlatButton(
                     onPressed: () {
                       logicFF();
                     },

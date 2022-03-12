@@ -136,9 +136,9 @@ class _MessageBubbleState extends State<MessageBubble> {
 }
 
 class MessageTile extends StatelessWidget {
-  MessageTile({Key? key, required this.message, required this.isSendByMe})
+  const MessageTile({Key? key, required this.message, required this.isSendByMe})
       : super(key: key);
-  dynamic message;
+  final String  message;
   final bool isSendByMe;
   @override
   Widget build(BuildContext context) {

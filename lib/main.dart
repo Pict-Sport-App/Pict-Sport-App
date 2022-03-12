@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:psa/appdrawer/officialSport/bbOfficial.dart';
 import 'package:psa/screens/Home/Basketball/size_no.dart';
 import 'package:psa/screens/Home/Cricket/issueEquiment.dart';
 import 'package:psa/screens/Home/Football/issueEuiment.dart';
@@ -42,11 +43,13 @@ class MyApp extends StatelessWidget {
           IntialScreen.routeName: (ctx)=>const IntialScreen(),
           CricketIssue.routeName: (ctx)=>const CricketIssue(),
           FootBallIssue.routeName: (ctx)=>const FootBallIssue(),
+          Official.routeName: (ctx)=>const Official(),
         },
       );
     } else {
       return MaterialApp(
         title: 'Pict Sports App',
+
         debugShowCheckedModeBanner: false,
         home: const Signup(),
         routes: {
@@ -58,6 +61,7 @@ class MyApp extends StatelessWidget {
           IntialScreen.routeName: (ctx)=>const IntialScreen(),
           CricketIssue.routeName: (ctx)=>const CricketIssue(),
           FootBallIssue.routeName: (ctx)=>const FootBallIssue(),
+          Official.routeName: (ctx)=>const Official(),
         },
       );
     }

@@ -6,9 +6,46 @@ import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
 import 'package:psa/widget/constants.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  List? mergedList=[];
+  List? mergedListEmoji=[];
+
+  void merge(){
+
+    mergedList?.clear();
+    mergedListEmoji?.clear();
+    int i=0;
+
+    for(i=0;i<UserDetails.myOfficialSportsList!.length;i++){
+      mergedList?.add(UserDetails.myOfficialSportsList![i]);
+    }
+    for(i=0;i<(UserDetails.mySportsList!.length);i++){
+      mergedList?.add(UserDetails.mySportsList![i]);
+    }
+
+    int j=0;
+
+    for(j=0;j<UserDetails.myOfficialSportEmoji!.length;j++){
+      mergedListEmoji?.add(UserDetails.myOfficialSportEmoji![j]);
+    }
+    for(j=0;j<(UserDetails.mySportEmoji!.length);j++){
+      mergedListEmoji?.add(UserDetails.mySportEmoji![j]);
+    }
+
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    merge();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +96,10 @@ class ChatScreen extends StatelessWidget {
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(kkbackgroundImage),
+          image: DecorationImage(
+              image: AssetImage(kkbackgroundImage),
               fit: BoxFit.cover
-            ),
+          ),
         ),
         child: Column(
           children: [
@@ -71,17 +108,17 @@ class ChatScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: UserDetails.mySportsList!.length,
+                  itemCount: mergedList!.length,
                   itemBuilder: (ctx, index) => SportGrpNameWidget(
                     lastMsg: '3:22 PM   ',
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         SportChatScreen.routeName,
-                        arguments: UserDetails.mySportsList![index],
+                        arguments: mergedList![index],
                       );
                     },
-                    name: UserDetails.mySportsList![index],
-                    image: UserDetails.mySportEmoji![index],
+                    name: mergedList![index],
+                    image: mergedListEmoji![index],
                   )),
             ),
           ],
@@ -90,6 +127,7 @@ class ChatScreen extends StatelessWidget {
     );
   }
 }
+
 
 
 class SportGrpNameWidget extends StatelessWidget {

@@ -55,41 +55,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           mobile = null;
         }
 
-        Map<String, bool>? m = {
-          'BasketBall': false, //🏀 BB
-          'VolleyBall': false, //🏐 VB
-          'TableTennis': false, //🎾 TT
-          'Badminton': false, //🏸  BT
-          'Cricket': false, //🏏  CR
-          'FootBall': false, //⚽ FB
-          'Chess': false, //♟️ CH
-          'Gym': false, //💪 GY
+        Map<String, int?>? m = {
+          'Official BasketBall': bb, //🏀 BB
+          'Official VolleyBall': vv, //🏐 VB
+          'Official TableTennis': tt, //🎾 TT
+          'Official Badminton': bd, //🏸  BT
+          'Official Cricket': cr, //🏏  CR
+          'Official FootBall': fb, //⚽ FB
+          'Official Chess': ch, //♟️ CH
+          'Official Gym': gy, //💪 GY
         };
-
-        if (bb) {
-          m.update('BasketBall', (value) => true);
-        }
-        if (fb) {
-          m.update('FootBall', (value) => true);
-        }
-        if (vv) {
-          m.update('VolleyBall', (value) => true);
-        }
-        if (cr) {
-          m.update('Cricket', (value) => true);
-        }
-        if (ch) {
-          m.update('Chess', (value) => true);
-        }
-        if (gy) {
-          m.update('Gym', (value) => true);
-        }
-        if (tt) {
-          m.update('TableTennis', (value) => true);
-        }
-        if (bd) {
-          m.update('Badminton', (value) => true);
-        }
 
         FirebaseFirestore.instance
             .collection('User')
@@ -105,7 +80,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           'twitter': twit,
           'whatAppNo': mobile,
           'dob': UserDetails.birthday,
-          'SportList': m,
+          'Official SportList': m,
         });
 
         Navigator.pushReplacement(context,
@@ -124,35 +99,78 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
-  bool bb = false,
-      vv = false,
-      tt = false,
-      bd = false,
-      cr = false,
-      fb = false,
-      ch = false,
-      gy = false;
+  int? bb = 0,
+      vv = 0,
+      tt = 0,
+      bd = 0,
+      cr = 0,
+      fb = 0,
+      ch = 0,
+      gy = 0;
 
   void c() {
-    for (var i = 0; i < UserDetails.mySportsList!.length; i++) {
-      if (UserDetails.mySportsList![i] == 'BasketBall') {
-        bb = true;
-      } else if (UserDetails.mySportsList![i] == 'FootBall') {
-        fb = true;
-      } else if (UserDetails.mySportsList![i] == 'VolleyBall') {
-        vv = true;
-      } else if (UserDetails.mySportsList![i] == 'TableTennis') {
-        tt = true;
-      } else if (UserDetails.mySportsList![i] == 'Badminton') {
-        bd = true;
-      } else if (UserDetails.mySportsList![i] == 'Cricket') {
-        cr = true;
-      } else if (UserDetails.mySportsList![i] == 'Chess') {
-        ch = true;
-      } else if (UserDetails.mySportsList![i] == 'Gym') {
-        gy = true;
-      }
-    }
+    bb=UserDetails.officialsportMap!['Official BasketBall'];
+    vv=UserDetails.officialsportMap!['Official VolleyBall'];
+    tt=UserDetails.officialsportMap!['Official TableTennis'];
+    bd=UserDetails.officialsportMap!['Official Badminton'];
+    cr=UserDetails.officialsportMap!['Official Cricket'];
+    fb=UserDetails.officialsportMap!['Official FootBall'];
+    ch=UserDetails.officialsportMap!['Official Chess'];
+    gy=UserDetails.officialsportMap!['Official Gym'];
+  }
+
+  Widget onClick(int b){
+    return b==0?Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Make Request',style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+            fontSize: 15
+          ),),
+        ),
+      ),
+    ):b==1?
+    Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Requested',style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 15
+          ),),
+        ),
+      ),
+    ):b==2?
+    Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('Official Member',style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: 15
+          ),),
+        ),
+      ),
+    ):Container();
   }
 
   @override
@@ -527,208 +545,195 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    'Sports Interested',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                  const Center(
+                    child: Text(
+                      'Make Request If You are a part of\n '
+                          'any Official Group Sports',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
+                  bb!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'BasketBall',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: bb,
-                        onChanged: (value) {
+                      GestureDetector(
+                        onTap: (){
                           setState(() {
-                            bb = value;
+                            if (bb==0){
+                              bb=1;
+                            }
                           });
                         },
-                      ),
+                          child: onClick(bb!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  vv!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'VolleyBall',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: vv,
-                        onChanged: (value) {
-                          setState(() {
-                            vv = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (vv==0){
+                                vv=1;
+                              }
+                            });
+                          },
+                          child: onClick(vv!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  tt!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'TableTennis',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: tt,
-                        onChanged: (value) {
-                          setState(() {
-                            tt = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (tt==0){
+                                tt=1;
+                              }
+                            });
+                          },
+                          child: onClick(tt!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  bd!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Badminton',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: bd,
-                        onChanged: (value) {
-                          setState(() {
-                            bd = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (bd==0){
+                                bd=1;
+                              }
+                            });
+                          },
+                          child: onClick(bd!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  cr!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Cricket',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: cr,
-                        onChanged: (value) {
-                          setState(() {
-                            cr = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (cr==0){
+                                cr=1;
+                              }
+                            });
+                          },
+                          child: onClick(cr!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  fb!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'FootBall',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: fb,
-                        onChanged: (value) {
-                          setState(() {
-                            fb = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (fb==0){
+                                fb=1;
+                              }
+                            });
+                          },
+                          child: onClick(fb!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  ch!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Chess',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: ch,
-                        onChanged: (value) {
-                          setState(() {
-                            ch = value;
-                          });
-                        },
-                      ),
+              GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      if (ch==0){
+                        ch=1;
+                      }
+                    });
+                  },
+                  child: onClick(bb!)),
                     ],
-                  ),
-                  Row(
+                  ):Container(),
+                  gy!=-1? Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         'Gym',
                         style: TextStyle(
                           color: Color(0xFFAFB42B),
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Switch(
-                        splashRadius: 30,
-                        activeColor: Colors.green,
-                        inactiveThumbColor: Colors.red,
-                        value: gy,
-                        onChanged: (value) {
-                          setState(() {
-                            gy = value;
-                          });
-                        },
-                      ),
+                      GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              if (ch==0){
+                                ch=1;
+                              }
+                            });
+                          },
+                          child: onClick(ch!)),
                     ],
-                  ),
+                  ):Container(),
                 ],
               ),
             ),
@@ -738,17 +743,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget onClick(bool onp) {
-    return onp
-        ? const Icon(
-            Icons.check_circle,
-            color: Colors.green,
-            size: 30,
-          )
-        : const Icon(
-            Icons.cancel,
-            color: Colors.red,
-            size: 30,
-          );
-  }
 }
