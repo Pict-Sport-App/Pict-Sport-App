@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/widget/commonSportText.dart';
-
 import '../../intial_page.dart';
 
 class Issue extends StatefulWidget {
@@ -102,15 +101,8 @@ class _IssueState extends State<Issue> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("***  App Name  ***",style: TextStyle(color: Colors.blue),),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.transparent, // remove color from appbar
-      //
-      // ),
       body: Container(
         height: double.infinity,
         width: double.infinity,

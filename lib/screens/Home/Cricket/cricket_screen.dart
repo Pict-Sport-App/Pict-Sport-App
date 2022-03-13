@@ -167,7 +167,6 @@ class _CricketScreenState extends State<CricketScreen> {
             _helmet = 0;
             _pad = 0;
             _innerPad = 0;
-            print('start');
             for (int i = 0; i < usersnap.length; i++) {
               if (usersnap[i]['isRequested'] == 2) {
                 _ball += int.parse(usersnap[i]['ball'].toString());
@@ -178,8 +177,7 @@ class _CricketScreenState extends State<CricketScreen> {
                 _gloves += int.parse(usersnap[i]['gloves'].toString());
               }
             }
-            print('sss');
-            print(_ball);
+
             _ball ??= 0;
             _bat ??= 0;
             _helmet ??= 0;
@@ -187,16 +185,14 @@ class _CricketScreenState extends State<CricketScreen> {
             _innerPad ??= 0;
             _pad ??= 0;
             _helmet ??= 0;
-            print(_totalGloves);
-            print(_gloves);
+
             return SizedBox(
               width: width,
               height: height,
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      // color: Colors.lightGreen,
+                    SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: height * 0.4, //320,
                       child: Stack(
@@ -266,7 +262,7 @@ class _CricketScreenState extends State<CricketScreen> {
                       ),
                       child: Stack(
                         children: [
-                          Constan(),
+                          const Constan(),
                           Positioned(
                             top: 12,
                             child: Padding(
@@ -376,171 +372,6 @@ class _CricketScreenState extends State<CricketScreen> {
                     ),
                   ],
                 ),
-                /*child: Column(
-                  children: [
-                    // const UpperCricket(),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'Ball Left ',
-                          ball: (int.parse(_totalBall.toString()) -
-                                  int.parse(_ball.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'Ball Left ',
-                          ball: (int.parse(_totalBat.toString()) -
-                                  int.parse(_bat.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 22, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'Gloves Left',
-                          ball: (int.parse(_totalGloves.toString()) -
-                                  int.parse(_gloves.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 22, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'Helmet Left ',
-                          ball: (int.parse(_totalHelmet.toString()) -
-                                  int.parse(_helmet.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 22, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'InnerPad Left ',
-                          ball: (int.parse(_totalInnerPad.toString()) -
-                                  int.parse(_innerPad.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, top: 10),
-                      child: Container(
-                        width: double.infinity,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[100],
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: RowInfo(
-                          ball_size: 'Pad Left ',
-                          ball: (int.parse(_totalPad.toString()) -
-                                  int.parse(_pad.toString()))
-                              .toString(),
-                        ),
-                      ),
-                    ),
-                 /*   RaisedButton(
-                      onPressed: () {
-                        logicCR();
-                      },
-                      child: Center(
-                        child: _isFirstView
-                            ? const Center(
-                                child: Text(
-                                  'Issue Ball',
-                                  style: TextStyle(
-                                    color: Colors.redAccent,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              )
-                            : _isRequested == 1
-                                ? const Center(
-                                    child: Text(
-                                      'Cancel Request',
-                                      style: TextStyle(
-                                        color: Colors.redAccent,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  )
-                                : _isRequested == 2
-                                    ? const Center(
-                                        child: Text(
-                                          'Return Ball',
-                                          style: TextStyle(
-                                            color: Colors.redAccent,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 17,
-                                          ),
-                                        ),
-                                      )
-                                    : _isRequested == 4
-                                        ? const Center(
-                                            child: Text(
-                                              'Issue Ball',
-                                              style: TextStyle(
-                                                color: Colors.redAccent,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17,
-                                              ),
-                                            ),
-                                          )
-                                        : Container(),
-                      ),
-                    )*/
-                  ],
-                ),*/
               ),
             );
           }),
@@ -581,7 +412,7 @@ class CRReturn extends StatelessWidget {
               child: SizedBox(
                 child: Text(
                   "Returning",
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -590,7 +421,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
              Padding(
-              padding: EdgeInsets.only(top: 22, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 22, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${ball.toString()}\t\t\t\t\t\tBall ",
@@ -603,7 +434,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 15, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${bat.toString()}\t\t\t\t\t\tBat ",
@@ -616,7 +447,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 15, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${gloves.toString()}\t\t\t\t\t\tGloves ",
@@ -629,7 +460,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 15, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${helmet.toString()}\t\t\t\t\t\Helmet ",
@@ -642,7 +473,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 15, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${pad.toString()}\t\t\t\t\t\Pad ",
@@ -655,7 +486,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 15, right: 25, left: 10),
               child: SizedBox(
                 child: Text(
                   " ${innerPad.toString()}\t\t\t\t\t\InnerPad ",
@@ -667,146 +498,8 @@ class CRReturn extends StatelessWidget {
                 ),
               ),
             ),
-            /* Padding(
-              padding: EdgeInsets.only(top: 35, right: 10, left: 40),
-              child: Row(
-                children: [
-                  const Text(
-                    'Returning',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    ball.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'no. Of Bat',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    bat.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of Gloves',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    gloves.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of Helmet',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    helmet.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of Pad',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    pad.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of InnerPad',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    innerPad.toString(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),*/
-            Padding(
-              padding: EdgeInsets.only(top: 20, right: 25, left: 10),
+              padding: const EdgeInsets.only(top: 20, right: 25, left: 10),
               child: SizedBox(
                 height: 0.80,
                 child: Container(
@@ -819,7 +512,7 @@ class CRReturn extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20, right: 5, left: 10),
+              padding: const EdgeInsets.only(top: 20, right: 5, left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -845,29 +538,6 @@ class CRReturn extends StatelessWidget {
                 ],
               ),
             )
-            /* Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: onTap,
-                  child: const Icon(
-                    Icons.check_circle,
-                    size: 40,
-                    color: Colors.black,
-                  ),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child:
-                      const Icon(Icons.cancel, size: 40, color: Colors.white),
-                )
-              ],
-            )*/
           ],
         ),
       ),
@@ -885,8 +555,6 @@ class UpperCricket extends StatefulWidget {
 class _UpperCricketState extends State<UpperCricket> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SizedBox(
       height: 390.0,
       child: Stack(

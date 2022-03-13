@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
@@ -138,7 +137,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
             return SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     // color: Colors.lightGreen,
                     width: MediaQuery.of(context).size.width,
                     height: height * 0.4, //320,
@@ -227,8 +226,6 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                                       size: 80,
                                     ),
                                   ),
-                                  // MiddleWidget(number: (_totalBall-_n).toString(),
-                                  //     text1: 'Ball Left')
                                 ],
                               ),
                             ),
@@ -263,9 +260,9 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
 }
 
 class VVReturn extends StatelessWidget {
-  late String noOfBall;
-  late VoidCallback onTap;
-  VVReturn({Key? key, required this.noOfBall, required this.onTap})
+  final String noOfBall;
+  final VoidCallback onTap;
+  const VVReturn({Key? key, required this.noOfBall, required this.onTap})
       : super(key: key);
 
   @override
@@ -286,19 +283,19 @@ class VVReturn extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(top: 35, right: 10, left: 40),
+                  padding: const EdgeInsets.only(top: 35, right: 10, left: 40),
                   child: Row(
                     children: [
                       const Text(
                         'Returning ',
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
                       Text(
-                        "${noOfBall} ball",
+                        "$noOfBall ball",
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -309,7 +306,7 @@ class VVReturn extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 45, right: 25, left: 10),
+                  padding: const EdgeInsets.only(top: 45, right: 25, left: 10),
                   child: SizedBox(
                     height: 0.80,
                     child: Container(
@@ -322,7 +319,7 @@ class VVReturn extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 25, right: 5, left: 10),
+                  padding: const EdgeInsets.only(top: 25, right: 5, left: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -343,34 +340,10 @@ class VVReturn extends StatelessWidget {
                             color: Colors.redAccent,
                             size: 40,
                           )
-                          // const Icon(Icons.cancel, size: 40, color: Colors.white),
                           )
                     ],
                   ),
                 )
-                /*  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: onTap,
-                      child: const Icon(
-                        Icons.check_circle,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child:
-                          const Icon(Icons.cancel, size: 40, color: Colors.white),
-                    )
-                  ],
-                )*/
               ],
             ),
           ),

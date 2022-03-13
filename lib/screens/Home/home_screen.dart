@@ -4,10 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/screens/Home/Cricket/cricket_screen.dart';
 import 'package:psa/screens/Home/Football/football_screen.dart';
-import 'package:psa/screens/Home/VolleyBall/volleyball.dart';
-import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
-import 'Basketball/basketball.dart';
-import 'Cricket/issueEquiment.dart';
+import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -82,8 +79,8 @@ class HomeScreen extends StatelessWidget {
                             child: MyCustomWidget(
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return const BasketBallScreen();
+                                MaterialPageRoute(builder: (context){
+                                  return const VolleyBallScreen();
                                 }));
                               },
                               text: 'VolleyBall',

@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/user_details.dart';
-import 'package:psa/screens/Home/Basketball/basketball.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
-
 import '../../intial_page.dart';
 
 class Requested extends StatefulWidget {
@@ -67,18 +65,14 @@ class _RequestedState extends State<Requested> {
 }
 
 class BBRequest extends StatefulWidget {
-  late String name;
-  late String ballNumber;
-  late String noOfBall;
-  late Timestamp timeOfIssue;
-  late Timestamp timeOfReturn;
-  late bool isAdmin;
-  late String uid;
-  late String image;
-  late bool isReturn;
-  late String misId;
+  final String name,ballNumber,noOfBall;
+  final Timestamp timeOfIssue,timeOfReturn;
+  final bool isAdmin;
+  final String uid,image;
+  final bool isReturn;
+  final String misId;
 
-  BBRequest(
+  const BBRequest(
       {Key? key,
         required this.misId,
       required this.isReturn,
@@ -283,7 +277,7 @@ class _BBRequestState extends State<BBRequest> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 18.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 25,
                             width: MediaQuery.of(context).size.width*0.3,
                             child: SingleChildScrollView(
@@ -344,62 +338,6 @@ class _BBRequestState extends State<BBRequest> {
                         ],
                       ),
                     ),
-                /*  Padding(
-                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                    child: Row(
-                      children: <Widget>[
-                        const FaIcon(
-                          FontAwesomeIcons.hourglassStart,
-                          size: 26,
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 18.0),
-                          child: Text(
-                            "Issuing Time :",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            minute < 10
-                                ? '$hour:0$minute $gb, $day/$month/$year'
-                                : '$hour:$minute $gb, $day/$month/$year',
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  if (widget.isReturn)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
-                      child: Row(
-                        children: <Widget>[
-                          const FaIcon(
-                            FontAwesomeIcons.hourglassEnd,
-                            size: 26,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              "Returning Time  : ",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 2.0),
-                            child: Text(
-                              rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
-                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  if (widget.isAdmin)*/
                   if (widget.isAdmin)
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, bottom: 15),

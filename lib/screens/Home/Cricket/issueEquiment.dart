@@ -37,6 +37,7 @@ class _CricketIssueState extends State<CricketIssue> {
 
   Future _submit()async{
     var bALL=0,bAT=0,gLOVES=0,iNNERPAD=0,pAD=0,hELMET=0;
+
     if (chossedBall!=null){
       bALL=int.parse(_productId[0].toString()) - int.parse(chossedBall.toString());
     }else{chossedBall="0";}
@@ -56,11 +57,12 @@ class _CricketIssueState extends State<CricketIssue> {
       hELMET=int.parse(_productId[5].toString()) - int.parse(chossedHelmet.toString());
     }else{chossedHelmet="0";}
     if (chossedHelmet==null
-    &&chossedInnerPad==null
-    && chossedPad==null&&
+    && chossedInnerPad==null
+    && chossedPad==null &&
     chossedGloves==null
-    &&chossedBat==null
-    &&chossedBall==null){
+    && chossedBat==null
+    && chossedBall==null){
+
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
@@ -138,13 +140,6 @@ class _CricketIssueState extends State<CricketIssue> {
         ),
       ));
     } else{
-     // chossedBall ??= '0';
-      //chossedHelmet??='0';
-      //chossedBat??='0';
-      //chossedGloves??='0';
-      //chossedInnerPad??='0';
-      //chossedPad??='0';
-
       FirebaseFirestore.instance.collection('CREquipment')
           .doc(UserDetails.uid).set({
         'bat': chossedBat,
@@ -175,7 +170,7 @@ class _CricketIssueState extends State<CricketIssue> {
     }
   }
   bool _isInit=true;
-  dynamic _productId,_ball,_bat,_gloves,_innerpad,_pad,_helmet;
+  dynamic _productId;
 
   @override
   void didChangeDependencies() {
@@ -183,19 +178,12 @@ class _CricketIssueState extends State<CricketIssue> {
     super.didChangeDependencies();
     if (_isInit) {
       _productId = ModalRoute.of(context)!.settings.arguments as List;
-      _ball=_productId[0];
-      _bat=_productId[1];
-      _gloves=_productId[2];
-      _innerpad=_productId[3];
-      _pad=_productId[4];
-      _helmet=_productId[5];
     }
     _isInit = false;
   }
 
   @override
   Widget build(BuildContext context) {
-   // double hei = MediaQuery.of(context).size.height;
     double wei = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
