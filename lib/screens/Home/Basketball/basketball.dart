@@ -10,6 +10,10 @@ import 'package:psa/screens/Home/Basketball/bbreturn.dart';
 import 'package:psa/screens/Home/Basketball/size_no.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/screens/otherUserDetails/helper/custom_clipper.dart';
+import 'package:psa/widget/IssueEquimentButton.dart';
+import 'package:psa/widget/commonSportText.dart';
+import 'package:psa/widget/middlewidget.dart';
+import 'package:psa/widget/topcurve.dart';
 
 class BasketBallScreen extends StatefulWidget {
   const BasketBallScreen({Key? key}) : super(key: key);
@@ -20,7 +24,7 @@ class BasketBallScreen extends StatefulWidget {
 
 class _BasketBallScreenState extends State<BasketBallScreen> {
   bool _isFirstView = false;
-  dynamic _noOfBallSix,_size, _sizeSix, _sizeSeven;
+  dynamic _noOfBallSix, _size, _sizeSix, _sizeSeven;
   int _isRequested = 0;
 
   final _totalBallSix = int.parse(Equipment.basketballsix.toString());
@@ -78,7 +82,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                         });
                         Navigator.pop(context);
                       },
-                      text: 'Want to cancel the request');
+                      text: 'Cancel the request');
                   //---------
                 })
             : _isRequested == 2
@@ -119,7 +123,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double weight = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -148,14 +152,135 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
               }
             }
             return SizedBox(
-              width: weight,
+              width: width,
               height: height,
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const StackContainer(),
-                    Column(
+                  // crossAxisAlignment: CrossAxisAlignment.start
+                  children: <Widget>[
+                    Container(
+                      // color: Colors.lightGreen,
+                      width: MediaQuery.of(context).size.width,
+                      height: height * 0.4, //320,
+                      child: Stack(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: CustomPaint(
+                              size: Size(width, 340), //2
+                              painter: LogoPainter(), //3
+                            ),
+                          ),
+                          const Pop(),
+                          const TopName(
+                            name: 'BasketBall',
+                            image: 'assets/basketball.jpg',
+                          ),
+                          TextCommon(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const Requested();
+                                }));
+                              },
+                              right: width / 1.89,
+                              bottom: 80,
+                              name: 'Requested',
+                              count: '2'),
+                          TextCommon(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const BBIssued();
+                                }));
+                              },
+                              right: width / 3.22,
+                              bottom: 80,
+                              name: 'Issued',
+                              count: '45'),
+                          TextCommon(
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const BBReturn();
+                                }));
+                              },
+                              right: width / 40,
+                              bottom: 80,
+                              name: 'Returned',
+                              count: '6'),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: height * 0.61236,
+                      // color: Colors.blue,
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Color(0xffbd274f2),
+                              Color(0xff9507c4),
+                            ]),
+                      ),
+                      child: Stack(
+                        children: [
+                          const Constan(),
+                          Positioned(
+                            top: 12,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 0.0, right: 12),
+                              child: SizedBox(
+                                height: height * 0.4,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18.0, vertical: 25),
+                                      child: RowInfo(
+                                        ball: (_totalBallSeven - _sizeSix)
+                                            .toString(),
+                                        ball_size: 'Ball Left of Size six',
+                                        size: 70,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18.0, vertical: 25),
+                                      child: RowInfo(
+                                        ball: (_totalBallSeven - _sizeSeven)
+                                            .toString(),
+                                        ball_size: 'Ball Left of Size seven',
+                                        size: 70,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          IssueEquimentWidget(
+                              name: _isFirstView
+                                  ? const Button(name: 'Issue')
+                                  : _isRequested == 1
+                                      ? const Button(name: 'Cancel Request')
+                                      : _isRequested == 2
+                                          ? const Button(name: 'Return Ball')
+                                          : _isRequested == 4
+                                              ? const Button(name: 'Issue')
+                                              : Container(),
+                              onTap: () {
+                                bbSixLogic(
+                                    (_totalBallSix - _sizeSix).toString(),
+                                    (_totalBallSeven - _sizeSeven).toString());
+                              })
+                        ],
+                      ),
+                    ),
+                    /* Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(
@@ -168,8 +293,8 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        Column(
+                        ),  /// no use
+                    Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(
@@ -196,7 +321,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: weight * 0.004,
+                                      width: width * 0.004,
                                     ),
                                     const FaIcon(
                                       FontAwesomeIcons.arrowAltCircleRight,
@@ -244,7 +369,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                       ),
                                     ),
                                     SizedBox(
-                                      width: weight * 0.004,
+                                      width: width * 0.004,
                                     ),
                                     const FaIcon(
                                       FontAwesomeIcons.arrowAltCircleRight,
@@ -268,12 +393,10 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               ),
                             ),
                           ],
-                        )
-                      ],
-                    ),
-                    const SizedBox(
+                        )   /// ball info
+                    ,const SizedBox(
                       height: 20,
-                    ),
+                    ), /// no use
                     const Padding(
                       padding: EdgeInsets.only(left: 20),
                       child: Text(
@@ -284,19 +407,19 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                    ),   /// no use
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 60,
-                        width: weight,
+                        width: width,
                         decoration: BoxDecoration(
                           color: Colors.yellow[100],
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(
-                          children: [
-                            const Padding(
+                          children: const [
+                            Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
                                 'Click to issue Ball',
@@ -306,8 +429,8 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                     fontSize: 20),
                               ),
                             ),
-                            const Spacer(),
-                            RaisedButton(
+                            Spacer(),
+                         /*   RaisedButton(
                               color: Colors.red.withOpacity(0.9),
                               splashColor: Colors.red.withOpacity(0.5),
                               elevation: 10.0,
@@ -363,16 +486,20 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                                   ),
                                                 )
                                               : Container(),
-                            ),
+                            ),*/ /// button
                           ],
                         ),
                       ),
-                    ),
-                    Padding(
+                    ),///  no use
+
+
+                  ],
+                ),*/
+                    /* Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         height: 60,
-                        width: weight,
+                        width: width,
                         decoration: BoxDecoration(
                           color: Colors.yellow[100],
                           borderRadius: BorderRadius.circular(20),
@@ -389,7 +516,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                     fontSize: 20),
                               ),
                             ),
-                            const Spacer(),
+                            // const Spacer(),
                             RaisedButton(
                               color: Colors.red.withOpacity(0.9),
                               splashColor: Colors.red.withOpacity(0.5),
@@ -398,7 +525,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               onPressed: () {},
                               child: const Center(
                                 child: Text(
-                                  'Score Tracker',
+                                  'Score ',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -409,7 +536,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                           ],
                         ),
                       ),
-                    ),
+                    ), */ /// info
                   ],
                 ),
               ),
@@ -419,111 +546,111 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
   }
 }
 
-class StackContainer extends StatelessWidget {
-  const StackContainer({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return SizedBox(
-      height: 390.0,
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: MyCustomClipper(),
-            child: Container(
-              height: 300.0,
-              width: double.infinity,
-              child: Lottie.asset('assets/bb_lotty.json'),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(6, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            top: height * 0.06,
-            right: width * 0.06,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const Requested();
-                }));
-              },
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Center(
-                  child: PopupMenuButton<int>(
-                      color: Colors.indigo,
-                      onSelected: (item) => onSelected(context, item),
-                      itemBuilder: (context) => [
-                            const PopupMenuItem<int>(
-                              value: 0,
-                              child: Text(
-                                "Requested",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const PopupMenuDivider(),
-                            const PopupMenuItem<int>(
-                              value: 1,
-                              child: Text(
-                                "Issued",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            const PopupMenuDivider(),
-                            const PopupMenuItem<int>(
-                              value: 2,
-                              child: Text(
-                                " Returned ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ]),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  onSelected(BuildContext context, int item) {
-    switch (item) {
-      case 0:
-        // print("First button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const Requested();
-        }));
-        break;
-      case 1:
-        // print("second button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const BBIssued();
-        }));
-        break;
-      case 2:
-        // print("second button is pressed");
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return const BBReturn();
-        }));
-        break;
-    }
-  }
-}
+// class StackContainer extends StatelessWidget {
+//   const StackContainer({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     double height = MediaQuery.of(context).size.height;
+//     double width = MediaQuery.of(context).size.width;
+//     return SizedBox(
+//       height: 390.0,
+//       child: Stack(
+//         children: <Widget>[
+//           ClipPath(
+//             clipper: MyCustomClipper(),
+//             child: Container(
+//               height: 300.0,
+//               width: double.infinity,
+//               child: Lottie.asset('assets/bb_lotty.json'),
+//               decoration: BoxDecoration(
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.blue.withOpacity(0.5),
+//                     spreadRadius: 5,
+//                     blurRadius: 7,
+//                     offset: const Offset(6, 3), // changes position of shadow
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//           // Positioned(
+//           //   top: height * 0.06,
+//           //   right: width * 0.06,
+//           //   child: GestureDetector(
+//           //     onTap: () {
+//           //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+//           //         return const Requested();
+//           //       }));
+//           //     },
+//           //     child: Container(
+//           //       height: 50,
+//           //       width: 50,
+//           //       decoration: const BoxDecoration(
+//           //         color: Colors.white,
+//           //         borderRadius: BorderRadius.all(Radius.circular(20)),
+//           //       ),
+//           //       child: Center(
+//           //         child: PopupMenuButton<int>(
+//           //             color: Colors.indigo,
+//           //             onSelected: (item) => onSelected(context, item),
+//           //             itemBuilder: (context) => [
+//           //                   const PopupMenuItem<int>(
+//           //                     value: 0,
+//           //                     child: Text(
+//           //                       "Requested",
+//           //                       style: TextStyle(color: Colors.white),
+//           //                     ),
+//           //                   ),
+//           //                   const PopupMenuDivider(),
+//           //                   const PopupMenuItem<int>(
+//           //                     value: 1,
+//           //                     child: Text(
+//           //                       "Issued",
+//           //                       style: TextStyle(color: Colors.white),
+//           //                     ),
+//           //                   ),
+//           //                   const PopupMenuDivider(),
+//           //                   const PopupMenuItem<int>(
+//           //                     value: 2,
+//           //                     child: Text(
+//           //                       " Returned ",
+//           //                       style: TextStyle(color: Colors.white),
+//           //                     ),
+//           //                   ),
+//           //                 ]),
+//           //       ),
+//           //     ),
+//           //   ),
+//           // ),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   // onSelected(BuildContext context, int item) {
+//   //   switch (item) {
+//   //     case 0:
+//   //       // print("First button is pressed");
+//   //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+//   //         return const Requested();
+//   //       }));
+//   //       break;
+//   //     case 1:
+//   //       // print("second button is pressed");
+//   //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+//   //         return const BBIssued();
+//   //       }));
+//   //       break;
+//   //     case 2:
+//   //       // print("second button is pressed");
+//   //       Navigator.push(context, MaterialPageRoute(builder: (context) {
+//   //         return const BBReturn();
+//   //       }));
+//   //       break;
+//   //   }
+//   // }
+// }
 
 class BBSixReturn extends StatelessWidget {
   String size;
@@ -541,85 +668,97 @@ class BBSixReturn extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       backgroundColor: Colors.transparent,
-      child: Container(
-        height: 150,
-        width: 150,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Ball Size',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
+        child: Container(
+          height: 220,
+          width: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 35, right: 10, left: 40),
+                child: Row(
+                  children: [
+                    Text(
+                      'Returning ${noOfBall} ball \n\t\t\t\t\t\tof size ${size}',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  Text(
-                    size,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of Ball',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    noOfBall,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: onTap,
-                  child: const Icon(
-                    Icons.check_circle,
-                    size: 40,
-                    color: Colors.white,
+              Padding(
+                padding: EdgeInsets.only(top: 20,right: 25, left: 10),
+                child: SizedBox(
+                  height: 0.80,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    margin: const EdgeInsetsDirectional.only(
+                        start: 1.0, end: 2.0),
+                    height: 2.0,
+                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(
-                  width: 30,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 25, right: 5, left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: onTap,
+                      child: const FaIcon(
+                        FontAwesomeIcons.checkCircle,
+                        color: Colors.lightGreen,
+                        size: 40,
+                      ),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const FaIcon(
+                          FontAwesomeIcons.timesCircle,
+                          color: Colors.redAccent,
+                          size: 40,
+                        )
+                      // const Icon(Icons.cancel, size: 40, color: Colors.white),
+                    )
+                  ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child:
-                      const Icon(Icons.cancel, size: 40, color: Colors.white),
-                )
-              ],
-            )
-          ],
+              )
+             /* Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: onTap,
+                    child: const Icon(
+                      Icons.check_circle,
+                      size: 40,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child:
+                        const Icon(Icons.cancel, size: 40, color: Colors.white),
+                  )
+                ],
+              )*/
+            ],
+          ),
         ),
       ),
     );

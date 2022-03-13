@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NewMessage extends StatefulWidget {
   final dynamic keyies;
@@ -79,8 +80,11 @@ class _NewMessageState extends State<NewMessage> {
                 shape: BoxShape.circle,
                 color: Colors.blue,
               ),
-              child: const Icon(Icons.send, color: Colors.white),
-            ),
+              child: const FaIcon(
+                FontAwesomeIcons.paperPlane,
+                color: Colors.white,
+                size: 40,
+              ),            ),
           ),
         ],
       ),

@@ -18,7 +18,17 @@ class _RequestedVollyState extends State<RequestedVolly> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
+          appBar: AppBar(
+            leading:  IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.arrowCircleLeft,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
         centerTitle: true,
         title: const Text('Requests'),
       ),
@@ -162,7 +172,7 @@ class _VVRequestState extends State<VVRequest> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 23.0, bottom: 15),
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
                         const FaIcon(
@@ -170,22 +180,34 @@ class _VVRequestState extends State<VVRequest> {
                           size: 26,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 5.0),
+                          padding: EdgeInsets.only(left: 18.0),
                           child: Text(
                             "MisId:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            widget.misId.toString(),
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width*0.45,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    widget.misId.toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
@@ -211,7 +233,7 @@ class _VVRequestState extends State<VVRequest> {
                       ],
                     ),
                   ),
-                  Padding(
+                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
@@ -222,17 +244,28 @@ class _VVRequestState extends State<VVRequest> {
                         const Padding(
                           padding: EdgeInsets.only(left: 18.0),
                           child: Text(
-                            "Issuing Time :",
+                            "Issuing Time:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            minute < 10
-                                ? '$hour:0$minute $gb, $day/$month/$year'
-                                : '$hour:$minute $gb, $day/$month/$year',
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width*0.3,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    minute < 10
+                                        ? '$hour:0$minute $gb, $day/$month/$year'
+                                        : '$hour:$minute $gb, $day/$month/$year',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -250,23 +283,37 @@ class _VVRequestState extends State<VVRequest> {
                           const Padding(
                             padding: EdgeInsets.only(left: 18.0),
                             child: Text(
-                              "Returning Time  : ",
+
+                              "Returning Time:",
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
-                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
-                              style: const TextStyle(fontSize: 16),
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Container(
+                              height: 25,
+                              width: MediaQuery.of(context).size.width*0.28,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      rMinute < 10
+                                          ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
+                                          : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                         ],
                       ),
                     ),
+
                   if (widget.isAdmin)
+
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                       child: Row(
@@ -297,7 +344,7 @@ class _VVRequestState extends State<VVRequest> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to accept the Request',
+                                      text: 'Accept the Request !!',
                                     ); //---------
                                   });
                             },
@@ -334,7 +381,7 @@ class _VVRequestState extends State<VVRequest> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to Reject the Request?',
+                                      text: 'Reject the Request !!',
                                     ); //---------
                                   });
                             },

@@ -18,7 +18,7 @@ class Pop extends StatelessWidget {
             icon: const FaIcon(
               FontAwesomeIcons.arrowCircleLeft,
               color: Colors.white,
-              size: 28,
+              size: 30,
             ),
           ),
         ],
@@ -42,27 +42,27 @@ class TopName extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 10.0),
         child: Row(
           children: <Widget>[
-            const SizedBox(
-              width: 25,
+             SizedBox(
+              width: MediaQuery.of(context).size.width*.03,
             ),
             CircleAvatar(
-              radius: 40,
+              radius: 44,
               backgroundColor: Colors.white,
               child: CircleAvatar(
-                radius: 38,
+                radius: 43,
                 backgroundColor: const Color(0xffb46eea),
                 child: CircleAvatar(
-                  radius: 37,
+                  radius: 42,
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
-                    radius: 33,
+                    radius: 40,
                     backgroundImage: AssetImage(image),
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              width: 55,
+             SizedBox(
+              width: MediaQuery.of(context).size.width*.13,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -15,56 +15,67 @@ class RequestedFootball extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text('Requests'),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 30,
           ),
-          body: StreamBuilder<QuerySnapshot>(
-            stream:
+        ),
+        centerTitle: true,
+        title: const Text('Requests'),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream:
             FirebaseFirestore.instance.collection('FFEquipment').snapshots(),
-            builder: (ctx, equimentSnapshot) {
-              if (equimentSnapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              final reqMembers = equimentSnapshot.data!.docs;
-              return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: reqMembers.length,
-                  itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
-                      ? FFRequest(
-                    isReturn: reqMembers[index]['isReturn'],
-                    image: reqMembers[index]['url'],
-                    uid: reqMembers[index]['uid'],
-                    timeOfReturn: reqMembers[index]['timeOfReturn'],
-                    timeOfIssue: reqMembers[index]['timeOfIssue'],
-                    noOfBall: reqMembers[index]['noOfBall'].toString(),
-                    name: reqMembers[index]['name'],
-                    isAdmin: UserDetails.isAdmin ?? false,
-                    misId: reqMembers[index]['misId'],
-                  )
-                      : Center(
-                    child:  Column(
-                      children: [
-                        const SizedBox(height: 50,),
-                        SizedBox(
-                          height: 200,
-                        width: 200,
-                        child: Lottie.asset('assets/nofound.json')),
-                      ],
-                    ),
-                  ));
-            },
-          ),
-        ));
+        builder: (ctx, equimentSnapshot) {
+          if (equimentSnapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final reqMembers = equimentSnapshot.data!.docs;
+          return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: reqMembers.length,
+              itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
+                  ? FFRequest(
+                      isReturn: reqMembers[index]['isReturn'],
+                      image: reqMembers[index]['url'],
+                      uid: reqMembers[index]['uid'],
+                      timeOfReturn: reqMembers[index]['timeOfReturn'],
+                      timeOfIssue: reqMembers[index]['timeOfIssue'],
+                      noOfBall: reqMembers[index]['noOfBall'].toString(),
+                      name: reqMembers[index]['name'],
+                      isAdmin: UserDetails.isAdmin ?? false,
+                      misId: reqMembers[index]['misId'],
+                    )
+                  : Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          SizedBox(
+                              height: 200,
+                              width: 200,
+                              child: Lottie.asset('assets/nofound.json')),
+                        ],
+                      ),
+                    ));
+        },
+      ),
+    ));
   }
 }
 
-
 class FFRequest extends StatefulWidget {
   final String name, noOfBall;
-  final Timestamp timeOfIssue,timeOfReturn;
+  final Timestamp timeOfIssue, timeOfReturn;
   final bool isAdmin;
   final String uid, image;
   final bool isReturn;
@@ -88,16 +99,26 @@ class FFRequest extends StatefulWidget {
 }
 
 class _FFRequestState extends State<FFRequest> {
-  dynamic hour, minute, gb = 'pm',rHour, rMinute, rGb = 'pm',day,month,year,day1,month1,year1;
+  dynamic hour,
+      minute,
+      gb = 'pm',
+      rHour,
+      rMinute,
+      rGb = 'pm',
+      day,
+      month,
+      year,
+      day1,
+      month1,
+      year1;
   void cal() {
-    month= widget.timeOfIssue.toDate().month;
-    year= widget.timeOfIssue.toDate().year;
-    day= widget.timeOfIssue.toDate().day;
+    month = widget.timeOfIssue.toDate().month;
+    year = widget.timeOfIssue.toDate().year;
+    day = widget.timeOfIssue.toDate().day;
 
-    month1= widget.timeOfReturn.toDate().month;
-    year1= widget.timeOfReturn.toDate().year;
-    day1== widget.timeOfReturn.toDate().day;
-
+    month1 = widget.timeOfReturn.toDate().month;
+    year1 = widget.timeOfReturn.toDate().year;
+    day1 == widget.timeOfReturn.toDate().day;
 
     hour = widget.timeOfIssue.toDate().hour;
     minute = widget.timeOfIssue.toDate().minute;
@@ -164,14 +185,14 @@ class _FFRequestState extends State<FFRequest> {
                 children: <Widget>[
                   Padding(
                     padding:
-                    const EdgeInsets.only(left: 98.0, top: 12, bottom: 17),
+                        const EdgeInsets.only(left: 98.0, top: 12, bottom: 17),
                     child: Text(
                       widget.name,
                       style: const TextStyle(fontSize: 19),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 23.0, bottom: 15),
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
                         const FaIcon(
@@ -179,17 +200,28 @@ class _FFRequestState extends State<FFRequest> {
                           size: 26,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 5.0),
+                          padding: EdgeInsets.only(left: 18.0),
                           child: Text(
                             "MisId:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            widget.misId.toString(),
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    widget.misId.toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -231,17 +263,28 @@ class _FFRequestState extends State<FFRequest> {
                         const Padding(
                           padding: EdgeInsets.only(left: 18.0),
                           child: Text(
-                            "Issuing Time :",
+                            "Issuing Time:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            minute < 10
-                                ? '$hour:0$minute $gb, $day/$month/$year'
-                                : '$hour:$minute $gb, $day/$month/$year',
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width * 0.3,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    minute < 10
+                                        ? '$hour:0$minute $gb, $day/$month/$year'
+                                        : '$hour:$minute $gb, $day/$month/$year',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -259,17 +302,28 @@ class _FFRequestState extends State<FFRequest> {
                           const Padding(
                             padding: EdgeInsets.only(left: 18.0),
                             child: Text(
-                              "Returning Time  : ",
+                              "Returning Time:",
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 5.0),
-                            child: Text(
-                              rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
-                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
-                              style: const TextStyle(fontSize: 16),
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Container(
+                              height: 25,
+                              width: MediaQuery.of(context).size.width * 0.28,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      rMinute < 10
+                                          ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
+                                          : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                         ],
@@ -298,15 +352,17 @@ class _FFRequestState extends State<FFRequest> {
                                         });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
-                                            content: Text(
-                                              'Request accepted ',
-                                            )));
-                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
-                                            IntialScreen.routeName
-                                            , (route) => false):
-                                        Navigator.pop(context);
+                                                content: Text(
+                                          'Request accepted ',
+                                        )));
+                                        widget.uid == UserDetails.uid
+                                            ? Navigator.pushNamedAndRemoveUntil(
+                                                context,
+                                                IntialScreen.routeName,
+                                                (route) => false)
+                                            : Navigator.pop(context);
                                       },
-                                      text: 'Want to accept the Request',
+                                      text: 'accept the Request',
                                     ); //---------
                                   });
                             },
@@ -335,15 +391,17 @@ class _FFRequestState extends State<FFRequest> {
                                         });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(const SnackBar(
-                                            content: Text(
-                                              'Request rejected',
-                                            )));
-                                        widget.uid==UserDetails.uid?Navigator.pushNamedAndRemoveUntil(context,
-                                            IntialScreen.routeName
-                                            , (route) => false):
-                                        Navigator.pop(context);
+                                                content: Text(
+                                          'Request rejected',
+                                        )));
+                                        widget.uid == UserDetails.uid
+                                            ? Navigator.pushNamedAndRemoveUntil(
+                                                context,
+                                                IntialScreen.routeName,
+                                                (route) => false)
+                                            : Navigator.pop(context);
                                       },
-                                      text: 'Want to Reject the Request?',
+                                      text: 'Reject the Request?',
                                     ); //---------
                                   });
                             },
@@ -390,4 +448,3 @@ class _FFRequestState extends State<FFRequest> {
     );
   }
 }
-

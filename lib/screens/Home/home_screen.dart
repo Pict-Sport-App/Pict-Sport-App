@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const VolleyBallScreen();
+                                  return const BasketBallScreen();
                                 }));
                               },
                               text: 'VolleyBall',
@@ -115,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const BasketBallScreen();
+                                  return const FootBallScreen();
                                 }));
                               },
                               text: 'BasketBall',
@@ -196,7 +196,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const TabletannisScreen();
+                                  return const CricketScreen();
                                 }));
                               },
                               text: 'Tabletennis',
@@ -241,6 +241,7 @@ class HomeScreen extends StatelessWidget {
                               ..translate(width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
                               onTap: () {
+                                print("Football");
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return const FootBallScreen();
@@ -270,7 +271,6 @@ class HomeScreen extends StatelessWidget {
                               ..translate(0.0, -height * 0.1),
                             child: MyCustomWidget(
                               onTap: () {
-
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                   return const CricketScreen();
@@ -312,32 +312,35 @@ class MyCustomWidget extends StatelessWidget {
         onTap: onTap,
         child: Column(
           children: [
-            Container(
-              height: height * 0.1,
-              width: width * 0.22,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12, width: 3),
-                image:
-                    DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
-                // color: const Color(0xff8639FB),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    offset: Offset(
-                      0,
-                      0,
-                    ),
-                    blurRadius: 10.0,
-                    spreadRadius: 3.0,
-                  ), //BoxShadow
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: Offset(0.0, 0.0),
-                    blurRadius: 0.0,
-                    spreadRadius: 0.0,
-                  ), //BoxShadow
-                ],
+            GestureDetector(
+              onTap: onTap,
+              child: Container(
+                height: height * 0.1,
+                width: width * 0.22,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black12, width: 3),
+                  image:
+                      DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
+                  // color: const Color(0xff8639FB),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(
+                        0,
+                        0,
+                      ),
+                      blurRadius: 10.0,
+                      spreadRadius: 3.0,
+                    ), //BoxShadow
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(0.0, 0.0),
+                      blurRadius: 0.0,
+                      spreadRadius: 0.0,
+                    ), //BoxShadow
+                  ],
+                ),
               ),
             ),
             Center(

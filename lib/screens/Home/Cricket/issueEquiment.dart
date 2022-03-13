@@ -2,9 +2,11 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
+import 'package:psa/widget/commonSportText.dart';
 import '../../intial_page.dart';
 
 class CricketIssue extends StatefulWidget {
@@ -201,14 +203,18 @@ class _CricketIssueState extends State<CricketIssue> {
         height: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/cricket.jpg'),
-              fit: BoxFit.fill,
+              image: AssetImage('assets/cricketbatball.jpg'),
+              fit: BoxFit.fitHeight,
               opacity: 20,
             )),
         width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 18.0,top: 20),
+              child: Pop(),
+            ),
             Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
@@ -230,19 +236,19 @@ class _CricketIssueState extends State<CricketIssue> {
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
-                          image: AssetImage('assets/cricket.jpg'), fit: BoxFit.fill),
+                          image: AssetImage('assets/cricketbatball.jpg'), fit: BoxFit.fill),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 25,),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of Balls',
+                              'Number of \nBalls',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -254,13 +260,13 @@ class _CricketIssueState extends State<CricketIssue> {
                                 submitFn: _selectedBall),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 15,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of Bat',
+                              'Number of \nBat',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -272,13 +278,13 @@ class _CricketIssueState extends State<CricketIssue> {
                                 submitFn: _selectedBat),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 15,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of Gloves',
+                              'Number of \nGloves',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -290,13 +296,13 @@ class _CricketIssueState extends State<CricketIssue> {
                                 submitFn: _selectedGloves),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 15,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of Pad',
+                              'Number of \nPad',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -308,13 +314,13 @@ class _CricketIssueState extends State<CricketIssue> {
                                 submitFn: _selectedPad),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 15,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of InnerPad',
+                              'Number of \nInnerPad',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -326,13 +332,13 @@ class _CricketIssueState extends State<CricketIssue> {
                                 submitFn: _selectedInnerPad),
                           ],
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 15,),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Text(
-                              'Number of Helmet',
+                              'Number of \nHelmet',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -378,10 +384,10 @@ class _CricketIssueState extends State<CricketIssue> {
                                       fontWeight: FontWeight.bold),
                                   enabled: true,
                                   enableInteractiveSelection: true,
-                                  decoration: const InputDecoration(
-                                    icon: Icon(
-                                      Icons.date_range_outlined,
-                                      color: Colors.white,
+                                  decoration:  const InputDecoration(
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.calendarDay,
+                                      color: Colors.redAccent,
                                       size: 35,
                                     ),
                                     border: OutlineInputBorder(
@@ -420,7 +426,7 @@ class _CricketIssueState extends State<CricketIssue> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 25,),
                       ],
                     ),
                   ),

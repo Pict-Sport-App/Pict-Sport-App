@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
@@ -22,7 +23,7 @@ class VolleyBallScreen extends StatefulWidget {
 
 class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
-  dynamic _noOfBall,_n;
+  dynamic _noOfBall, _n;
   int _isRequested = 0;
   final _totalBall = int.parse(Equipment.vollyball.toString());
 
@@ -49,7 +50,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                         });
                         Navigator.pop(context);
                       },
-                      text: 'Want to cancel the request');
+                      text: 'Cancel the request');
                   //---------
                 })
             : _isRequested == 2
@@ -119,8 +120,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot>(
           stream:
-              FirebaseFirestore.instance.collection('VVEquipment')
-                  .snapshots(),
+              FirebaseFirestore.instance.collection('VVEquipment').snapshots(),
           builder: (ctx, userSnapshot) {
             if (userSnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -139,9 +139,9 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    color: Colors.lightGreen,
+                    // color: Colors.lightGreen,
                     width: MediaQuery.of(context).size.width,
-                    height: height*0.4,//320,
+                    height: height * 0.4, //320,
                     child: Stack(
                       children: <Widget>[
                         Padding(
@@ -152,32 +152,40 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                           ),
                         ),
                         const Pop(),
-                        const TopName(name: 'VolleyBall',
-                        image: 'assets/volleyball.jpg',),
-                        TextCommon(onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return const RequestedVolly();
-                          }));
-                        },
-                            right: width/1.89,
+                        const TopName(
+                          name: 'VolleyBall',
+                          image: 'assets/volleyball.jpg',
+                        ),
+                        TextCommon(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const RequestedVolly();
+                              }));
+                            },
+                            right: width / 1.89,
                             bottom: 80,
                             name: 'Requested',
                             count: '2'),
-                        TextCommon(onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return const PlayingVolly();
-                          }));
-                        },
-                            right: width/3.22,
+                        TextCommon(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const PlayingVolly();
+                              }));
+                            },
+                            right: width / 3.22,
                             bottom: 80,
                             name: 'Issued',
                             count: '45'),
-                        TextCommon(onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return const ReturnVolly();
-                          }));
-                        },
-                            right: width/40,
+                        TextCommon(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return const ReturnVolly();
+                              }));
+                            },
+                            right: width / 40,
                             bottom: 80,
                             name: 'Returned',
                             count: '6'),
@@ -202,33 +210,46 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                         Positioned(
                           top: 12,
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 28.0),
+                            padding: const EdgeInsets.only(left: 0.0),
                             child: SizedBox(
-                              // color: Colors.red,
                               height: height * 0.4,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
-                                  MiddleWidget(number: (_totalBall-_n).toString(),
-                                      text1: 'Ball Left')
-
+                                  // Text(" 'Ball Left")
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 18.0, vertical: 8),
+                                    child: RowInfo(
+                                      ball_size: 'Ball Left',
+                                      ball: (_totalBall - _n).toString(),
+                                      size: 80,
+                                    ),
+                                  ),
+                                  // MiddleWidget(number: (_totalBall-_n).toString(),
+                                  //     text1: 'Ball Left')
                                 ],
                               ),
                             ),
                           ),
                         ),
-                        IssueEquimentWidget(
-                            name:  _isFirstView?
-                            const Button(name: 'Issue')
-                            :_isRequested==1?
-                            const Button(name: 'Cancel Request'):
-                            _isRequested == 2?
-                            const Button(name: 'Return Ball'):
-                            _isRequested==4?
-                            const Button(name: 'Issue'):Container(),
-                            onTap: (){
-                          logicVV();
-                        })
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 18.0),
+                          child: IssueEquimentWidget(
+                              name: _isFirstView
+                                  ? const Button(name: 'Issue')
+                                  : _isRequested == 1
+                                      ? const Button(name: 'Cancel Request')
+                                      : _isRequested == 2
+                                          ? const Button(name: 'Return Ball')
+                                          : _isRequested == 4
+                                              ? const Button(name: 'Issue')
+                                              : Container(),
+                              onTap: () {
+                                logicVV();
+                              }),
+                        )
                       ],
                     ),
                   ),
@@ -252,62 +273,107 @@ class VVReturn extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       backgroundColor: Colors.transparent,
-      child: Container(
-        height: 150,
-        width: 150,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Number Of Ball',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    noOfBall,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: onTap,
-                  child: const Icon(
-                    Icons.check_circle,
-                    size: 40,
-                    color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
+        child: Container(
+          height: 200,
+          width: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Expanded(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(top: 35, right: 10, left: 40),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Returning ',
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "${noOfBall} ball",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  width: 30,
+                Padding(
+                  padding: EdgeInsets.only(top: 45, right: 25, left: 10),
+                  child: SizedBox(
+                    height: 0.80,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * .9,
+                      margin: const EdgeInsetsDirectional.only(
+                          start: 1.0, end: 2.0),
+                      height: 2.0,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child:
-                      const Icon(Icons.cancel, size: 40, color: Colors.white),
+                Padding(
+                  padding: EdgeInsets.only(top: 25, right: 5, left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: onTap,
+                        child: const FaIcon(
+                          FontAwesomeIcons.checkCircle,
+                          color: Colors.lightGreen,
+                          size: 40,
+                        ),
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.timesCircle,
+                            color: Colors.redAccent,
+                            size: 40,
+                          )
+                          // const Icon(Icons.cancel, size: 40, color: Colors.white),
+                          )
+                    ],
+                  ),
                 )
+                /*  Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: onTap,
+                      child: const Icon(
+                        Icons.check_circle,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child:
+                          const Icon(Icons.cancel, size: 40, color: Colors.white),
+                    )
+                  ],
+                )*/
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

@@ -12,7 +12,7 @@ class IssueEquimentWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomLeft,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 28.0, left: 20),
+        padding: const EdgeInsets.only(bottom: 12.0, left: 17),
         child: SizedBox(
           height: 70,
           child: Padding(

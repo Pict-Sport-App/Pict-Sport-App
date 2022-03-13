@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/screens/Home/Basketball/bbrequested.dart';
 
 class BBIssued extends StatelessWidget {
@@ -11,6 +12,16 @@ class BBIssued extends StatelessWidget {
         child: Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading:  IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
         centerTitle: true,
         title: const Text('Ball Issued'),
       ),
