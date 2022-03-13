@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/models/user_details.dart';
-import 'package:psa/screens/Home/VolleyBall/requested.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
-
 import '../../intial_page.dart';
 
 class RequestedFootball extends StatelessWidget {
@@ -208,7 +206,7 @@ class _FFRequestState extends State<FFRequest> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 18.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 25,
                             width: MediaQuery.of(context).size.width * 0.45,
                             child: SingleChildScrollView(
@@ -308,7 +306,7 @@ class _FFRequestState extends State<FFRequest> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0),
-                            child: Container(
+                            child: SizedBox(
                               height: 25,
                               width: MediaQuery.of(context).size.width * 0.28,
                               child: SingleChildScrollView(
