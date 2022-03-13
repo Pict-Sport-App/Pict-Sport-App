@@ -40,6 +40,29 @@ class Constan extends StatelessWidget {
     );
   }
 }
+class Constan2 extends StatelessWidget {
+  const Constan2({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double width=MediaQuery.of(context).size.width;
+    return Align(
+      alignment: Alignment.topRight,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height:  MediaQuery.of(context).size.height*9,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: CustomPaint(
+            size:
+            Size(width, 340),
+            painter: LogoPainter3(),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 
 class LogoPainter extends CustomPainter {
@@ -108,7 +131,7 @@ class LogoPainter2 extends CustomPainter {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Colors.lightGreen,Colors.lightGreen
+        Colors.white,Colors.white
       ],
     ).createShader(rect);
     var path = Path();
@@ -116,6 +139,35 @@ class LogoPainter2 extends CustomPainter {
     path.lineTo(size.width / 1.3, size.height - 19);
     path.relativeQuadraticBezierTo(33, 4.2, 58, -22);
     path.lineTo(size.width, size.height - size.height / 5.8);
+    path.lineTo(size.width, 0);
+    path.close();
+    canvas.drawShadow(path, const Color(0xffb08cca), 6.0, false);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+}
+class LogoPainter3 extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint();
+    var rect = Offset.zero & size;
+    paint.shader = const LinearGradient(
+      /// how LinearGradient is used in custom painter ?
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Colors.white,Colors.white
+      ],
+    ).createShader(rect);
+    var path = Path();
+    path.lineTo(0, size.height - size.height / 5.5);
+    path.lineTo(size.width / 1.3, size.height - 55);
+    path.relativeQuadraticBezierTo(33, 4.2, 58, -30);
+    path.lineTo(size.width, size.height - size.height / 5.0);
     path.lineTo(size.width, 0);
     path.close();
     canvas.drawShadow(path, const Color(0xffb08cca), 6.0, false);

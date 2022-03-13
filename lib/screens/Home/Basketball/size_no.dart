@@ -2,9 +2,11 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
+import 'package:psa/widget/commonSportText.dart';
 import '../../intial_page.dart';
 
 class SixNo extends StatefulWidget {
@@ -90,15 +92,16 @@ class _SixNoState extends State<SixNo> {
           'uid': UserDetails.uid,
         });
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            duration: Duration(seconds: 1),content: Text(
-          'Request have been send',style: TextStyle(
-          color: Colors.green,
-          fontSize: 15,
-        ),
-        )));
-        Navigator.pushNamedAndRemoveUntil(context,
-            IntialScreen.routeName
-            , (route) => false);
+            duration: Duration(seconds: 1),
+            content: Text(
+              'Request have been send',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 15,
+              ),
+            )));
+        Navigator.pushNamedAndRemoveUntil(
+            context, IntialScreen.routeName, (route) => false);
       }
     } else if (choisedSize == '7') {
       int f =
@@ -132,15 +135,16 @@ class _SixNoState extends State<SixNo> {
           'uid': UserDetails.uid,
         });
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            duration: Duration(seconds: 1),content: Text(
-          'Request have been send',style: TextStyle(
-          color: Colors.green,
-          fontSize: 15,
-        ),
-        )));
-        Navigator.pushNamedAndRemoveUntil(context,
-            IntialScreen.routeName
-            , (route) => false);
+            duration: Duration(seconds: 1),
+            content: Text(
+              'Request have been send',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 15,
+              ),
+            )));
+        Navigator.pushNamedAndRemoveUntil(
+            context, IntialScreen.routeName, (route) => false);
       }
     } else {
       await FirebaseFirestore.instance
@@ -159,20 +163,21 @@ class _SixNoState extends State<SixNo> {
         'uid': UserDetails.uid,
       });
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          duration: Duration(seconds: 1),content: Text(
-        'Request have been send',style: TextStyle(
-        color: Colors.green,
-        fontSize: 15,
-      ),
-      )));
-      Navigator.pushNamedAndRemoveUntil(context,
-          IntialScreen.routeName
-          , (route) => false);
+          duration: Duration(seconds: 1),
+          content: Text(
+            'Request have been send',
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 15,
+            ),
+          )));
+      Navigator.pushNamedAndRemoveUntil(
+          context, IntialScreen.routeName, (route) => false);
     }
   }
 
   bool _isInit = true;
-  dynamic _productId,_leftSix, _leftSeven;
+  dynamic _productId, _leftSix, _leftSeven;
   @override
   void initState() {
     // TODO: implement initState
@@ -204,13 +209,17 @@ class _SixNoState extends State<SixNo> {
         decoration: const BoxDecoration(
             image: DecorationImage(
           image: AssetImage('assets/bn.jpg'),
-          fit: BoxFit.fill,
+          fit: BoxFit.fitHeight,
           opacity: 20,
         )),
         width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            const Padding(
+              padding: EdgeInsets.only(left: 18.0),
+              child: Pop(),
+            ),
             Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
@@ -232,48 +241,54 @@ class _SixNoState extends State<SixNo> {
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       image: DecorationImage(
-                          image: AssetImage('assets/bn.jpg'), fit: BoxFit.fill),
+                          image: AssetImage('assets/bn.jpg'), fit: BoxFit.fitHeight),
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Ball Size',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['6', '7'],
-                                item1: 'Size',
-                                submitFn: _selectedSize),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Ball Size',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                              DropDown(
+                                  itemList: const ['6', '7'],
+                                  item1: 'Size',
+                                  submitFn: _selectedSize),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of Balls',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2'],
-                                item1: 'Ball',
-                                submitFn: _selectedBall),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Number of Balls',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                              DropDown(
+                                  itemList: const ['1', '2'],
+                                  item1: 'Ball',
+                                  submitFn: _selectedBall),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -285,9 +300,9 @@ class _SixNoState extends State<SixNo> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Padding(
-                                padding: EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(0.0),
                                 child: Text(
-                                  'Time Of Issuement',
+                                  '\nTime Of Issuement',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -295,13 +310,13 @@ class _SixNoState extends State<SixNo> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: 25,
                               ),
                               Center(
                                 child: DateTimeField(
                                   resetIcon: const Icon(
                                     Icons.close,
-                                    color: Colors.white,
+                                    color: Colors.redAccent,
                                   ),
                                   initialValue: DateTime.now(),
                                   style: const TextStyle(
@@ -310,16 +325,16 @@ class _SixNoState extends State<SixNo> {
                                   enabled: true,
                                   enableInteractiveSelection: true,
                                   decoration: const InputDecoration(
-                                    icon: Icon(
-                                      Icons.date_range_outlined,
-                                      color: Colors.white,
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.calendarDay,
+                                      color: Colors.redAccent,
                                       size: 35,
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(20)),
                                       borderSide: BorderSide(
-                                          color: Colors.white, width: 2),
+                                          color: Colors.redAccent, width: 2),
                                     ),
                                   ),
                                   format: formatYMDHM,

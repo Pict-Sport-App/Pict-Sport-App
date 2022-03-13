@@ -46,22 +46,22 @@ class _SportChatScreenState extends State<SportChatScreen> {
         _key = 'CH';
       } else if (_productId == 'Gym') {
         _key = 'GY';
-      }else if (_productId=='Official BasketBall'){
-        _key='OFBB';
-      }else if (_productId=='Official VolleyBall'){
-        _key='OFVV';
-      }else if (_productId=='Official TableTennis'){
-        _key='OFTT';
-      }else if (_productId=='Official Badminton'){
-        _key='OFBD';
-      }else if (_productId=='Official Cricket'){
-        _key='OFCR';
-      }else if (_productId=='Official FootBall'){
-        _key='OFFB';
-      }else if (_productId=='Official Chess'){
-        _key='OFCH';
-      }else if (_productId=='Official Gym'){
-        _key='OFGY';
+      } else if (_productId == 'Official BasketBall') {
+        _key = 'OFBB';
+      } else if (_productId == 'Official VolleyBall') {
+        _key = 'OFVV';
+      } else if (_productId == 'Official TableTennis') {
+        _key = 'OFTT';
+      } else if (_productId == 'Official Badminton') {
+        _key = 'OFBD';
+      } else if (_productId == 'Official Cricket') {
+        _key = 'OFCR';
+      } else if (_productId == 'Official FootBall') {
+        _key = 'OFFB';
+      } else if (_productId == 'Official Chess') {
+        _key = 'OFCH';
+      } else if (_productId == 'Official Gym') {
+        _key = 'OFGY';
       }
     }
     _isInit = false;
@@ -136,9 +136,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                      image: AssetImage(kkbackgroundImage),
-                      fit: BoxFit.cover
-                  ),
+                      image: AssetImage(kkbackgroundImage), fit: BoxFit.cover),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       topLeft: Radius.circular(20)),
@@ -149,9 +147,39 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         child: Messages(
                       uniqueValue: _key,
                     )),
-                    UserDetails.isAdmin==true? NewMessage(
-                      keyies: _key,
-                    ):Container(),
+                    UserDetails.isAdmin == true
+                        ? NewMessage(
+                            keyies: _key,
+                          )
+                        : Padding(
+                            padding:
+                                const EdgeInsets.only(bottom: 0.0, top: 12),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 50,
+                              color: const Color(0xff2e3c44),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  const Text(
+                                    "Only ",
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: const Text(
+                                      " Admins  ",
+                                      style: TextStyle(color: Colors.lightBlue),
+                                    ),
+                                  ),
+                                  const Text(
+                                    "can send messages",
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                   ],
                 ),
               ),

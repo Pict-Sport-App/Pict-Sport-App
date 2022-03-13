@@ -19,7 +19,18 @@ class _RequestedState extends State<Requested> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+
       appBar: AppBar(
+        leading:  IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const FaIcon(
+            FontAwesomeIcons.arrowCircleLeft,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
         centerTitle: true,
         title: const Text('BasketBall Requests'),
       ),
@@ -172,9 +183,9 @@ class _BBRequestState extends State<BBRequest> {
                     child: Row(
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const Icon(
-                          Icons.menu,
-                          size: 27,
+                        const FaIcon(
+                          FontAwesomeIcons.listOl,
+                          size: 26,
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 18.0),
@@ -193,28 +204,38 @@ class _BBRequestState extends State<BBRequest> {
                       ],
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                    const FaIcon(
-                    FontAwesomeIcons.envelope,
-                      color: Colors.black,
-                      size: 27,
-                    ),
+                        const FaIcon(
+                          FontAwesomeIcons.envelope,
+                          size: 26,
+                        ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 5.0),
+                          padding: EdgeInsets.only(left: 18.0),
                           child: Text(
-                            "Mis Id :",
+                            "MisId:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            widget.misId,
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width*0.45,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    widget.misId.toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -246,6 +267,84 @@ class _BBRequestState extends State<BBRequest> {
                     ),
                   ),
                   Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.hourglassStart,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            "Issuing Time:",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width*0.3,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    minute < 10
+                                        ? '$hour:0$minute $gb, $day/$month/$year'
+                                        : '$hour:$minute $gb, $day/$month/$year',
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  if (widget.isReturn)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                      child: Row(
+                        children: <Widget>[
+                          const FaIcon(
+                            FontAwesomeIcons.hourglassEnd,
+                            size: 26,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 18.0),
+                            child: Text(
+
+                              "Returning Time:",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Container(
+                              height: 25,
+                              width: MediaQuery.of(context).size.width*0.28,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      rMinute < 10
+                                          ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
+                                          : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                /*  Padding(
                     padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
@@ -300,6 +399,7 @@ class _BBRequestState extends State<BBRequest> {
                         ],
                       ),
                     ),
+                  if (widget.isAdmin)*/
                   if (widget.isAdmin)
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, bottom: 15),
@@ -331,7 +431,7 @@ class _BBRequestState extends State<BBRequest> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to accept the Request',
+                                      text: 'Accept the Request !!',
                                     ); //---------
                                   });
                             },
@@ -368,7 +468,7 @@ class _BBRequestState extends State<BBRequest> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to Reject the Request?',
+                                      text: 'Reject the Request !!',
                                     ); //---------
                                   });
                             },

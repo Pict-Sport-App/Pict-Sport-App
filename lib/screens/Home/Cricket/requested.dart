@@ -15,6 +15,16 @@ class RequestedCricket extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+          leading:  IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const FaIcon(
+                FontAwesomeIcons.arrowCircleLeft,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
             centerTitle: true,
             title: const Text('Requests'),
           ),
@@ -171,8 +181,9 @@ class _CRWidgetState extends State<CRWidget> {
                       style: const TextStyle(fontSize: 19),
                     ),
                   ),
+
                   Padding(
-                    padding: const EdgeInsets.only(left: 23.0, bottom: 15),
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
                     child: Row(
                       children: <Widget>[
                         const FaIcon(
@@ -180,17 +191,28 @@ class _CRWidgetState extends State<CRWidget> {
                           size: 26,
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(left: 5.0),
+                          padding: EdgeInsets.only(left: 18.0),
                           child: Text(
                             "MisId:",
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Text(
-                            widget.misId.toString(),
-                            style: const TextStyle(fontSize: 16),
+                          padding: const EdgeInsets.only(left: 18.0),
+                          child: Container(
+                            height: 25,
+                            width: MediaQuery.of(context).size.width*0.45,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    widget.misId.toString(),
+                                    style: const TextStyle(fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         )
                       ],
@@ -365,8 +387,35 @@ class _CRWidgetState extends State<CRWidget> {
                           padding: const EdgeInsets.only(left: 5.0),
                           child: Text(
                             minute < 10
-                                ? '$hour:0$minute $gb, $day/$month/$year'
-                                : '$hour:$minute $gb, $day/$month/$year',
+                                ? '$hour:0$minute $gb'
+                                : '$hour:$minute $gb',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.hourglassStart,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            "Issuing Date :",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            minute < 10
+                                ? '$day/$month/$year'
+                                : '$day/$month/$year',
                             style: const TextStyle(fontSize: 16),
                           ),
                         )
@@ -393,14 +442,41 @@ class _CRWidgetState extends State<CRWidget> {
                             padding: const EdgeInsets.only(left: 5.0),
                             child: Text(
                               rMinute < 10
-                                  ? '$rHour:0$rMinute $rGb, $day1/$month1/$year1'
-                                  : '$rHour:$rMinute $rGb, $day1/$month1/$year1',
+                                  ? '$rHour:0$rMinute $rGb'
+                                  : '$rHour:$rMinute $rGb',
                               style: const TextStyle(fontSize: 16),
                             ),
                           )
                         ],
                       ),
                     ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30.0, bottom: 15),
+                    child: Row(
+                      children: <Widget>[
+                        const FaIcon(
+                          FontAwesomeIcons.hourglassEnd,
+                          size: 26,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0),
+                          child: Text(
+                            "Returning date  : ",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            rMinute < 10
+                                ? '$day1/$month1/$year1'
+                                : '$day1/$month1/$year1',
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   if (widget.isAdmin)
                     Padding(
                       padding: const EdgeInsets.only(left: 30.0, bottom: 15),
@@ -432,7 +508,7 @@ class _CRWidgetState extends State<CRWidget> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to accept the Request',
+                                      text: 'Accept the Request !!',
                                     ); //---------
                                   });
                             },
@@ -469,7 +545,7 @@ class _CRWidgetState extends State<CRWidget> {
                                             , (route) => false):
                                         Navigator.pop(context);
                                       },
-                                      text: 'Want to Reject the Request?',
+                                      text: 'Reject the Request !!',
                                     ); //---------
                                   });
                             },
