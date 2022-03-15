@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:psa/screens/Home/Badminton/badminton_screen.dart';
 import 'package:psa/screens/Home/Cricket/cricket_screen.dart';
 import 'package:psa/screens/Home/Football/football_screen.dart';
 import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
@@ -132,7 +133,11 @@ class HomeScreen extends StatelessWidget {
                             transform: Matrix4.identity()
                               ..translate(width * 0.01, -height * 0.06),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return BadmintonScreen();
+                                }));
+                              },
                               text: 'Badminton',
                               image: 'assets/badminton.jpg',
                             ),

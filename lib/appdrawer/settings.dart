@@ -25,12 +25,15 @@ class _SettingState extends State<Setting> {
   int? _cricketInnerPad=Equipment.cricketinnerpad;
   int? _cricketPad=Equipment.cricketpad;
   int? _football=Equipment.football;
+  int? _badmintonRacket=Equipment.badmintonRacket;
+  int? _badmintonCock=Equipment.badmintonCock;
   final formkey = GlobalKey<FormState>();
 
   Future submit() async {
     try {
       if (formkey.currentState!.validate()) {
-        await FirebaseFirestore.instance.collection('Settings').doc('xx').set({
+        await FirebaseFirestore.instance.collection('Settings').
+        doc('xx').set({
           'basketball_Size_Six': _bbSizeSix,
           'basketball_Size_Seven': _bbSizeSeven,
           'tabletennis': _tabletennis,
@@ -42,6 +45,8 @@ class _SettingState extends State<Setting> {
           'cricket_innerPad':_cricketInnerPad,
           'cricket_helmet':_cricketHelemt,
           'football':_football,
+          'badmintonRacket':_badmintonRacket,
+          'badmintonCock':_badmintonCock,
         });
         getequiment();
         Navigator.pop(context);
@@ -407,6 +412,65 @@ class _SettingState extends State<Setting> {
                           ),
                           onChanged: (value) {
                             _football = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Badminton', colors: Colors.redAccent,leftPad: 12,),
+                      const SportName(name: 'Racket', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.badmintonRacket.toString(),
+                          onSaved: (input) {
+                            _badmintonRacket= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_football_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _badmintonRacket = int.parse(value.toString());
+                          },
+                        ),
+                      ),
+                      const SportName(name: 'Shuttle Cock', colors: Colors.greenAccent,leftPad: 25,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: TextFormField(
+                          initialValue: Equipment.badmintonCock.toString(),
+                          onSaved: (input) {
+                            _badmintonCock= int.parse(input.toString());
+                          },
+                          keyboardType: TextInputType.number,
+                          validator: (val) {},
+                          //obscureText: true,
+                          decoration: const InputDecoration(
+                            prefixIcon: Icon(Icons.sports_football_outlined),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                BorderSide(color: Color(0xFF1A237E))),
+                          ),
+                          onChanged: (value) {
+                            _badmintonCock = int.parse(value.toString());
                           },
                         ),
                       ),
