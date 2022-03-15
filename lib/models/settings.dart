@@ -11,4 +11,6 @@ class Equipment
   static int? crickethelmet;
   static int? cricketinnerpad;
   static int? football;
+  static int? badmintonRacket;
+  static int? badmintonCock;
 }

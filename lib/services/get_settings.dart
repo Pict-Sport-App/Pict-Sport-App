@@ -18,6 +18,8 @@ Future getequiment()async{
     Equipment.cricketpad=v.get('cricket_pad');
     Equipment.cricketgloves=v.get('cricket_gloves');
     Equipment.football=v.get('football');
+    Equipment.badmintonRacket=v.get('badmintonRacket');
+    Equipment.badmintonCock=v.get('badmintonCock');
   }else{
     return const CircularProgressIndicator();
   }
