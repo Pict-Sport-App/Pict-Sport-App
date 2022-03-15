@@ -5,7 +5,8 @@ class IssueEquimentWidget extends StatelessWidget {
   final VoidCallback onTap;
   const IssueEquimentWidget({Key? key,
   required this.name,
-  required this.onTap}) : super(key: key);
+  required this.onTap}) :
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

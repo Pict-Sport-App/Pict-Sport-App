@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/settings.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/Badminton/issue.dart';
 import 'package:psa/screens/Home/Badminton/playing.dart';
 import 'package:psa/screens/Home/Badminton/requested.dart';
 import 'package:psa/screens/Home/Badminton/return.dart';
-import 'package:psa/screens/Home/Football/palyingScreen.dart';
+import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
 import 'package:psa/widget/IssueEquimentButton.dart';
 import 'package:psa/widget/commonSportText.dart';
+import 'package:psa/widget/middlewidget.dart';
 import 'package:psa/widget/topcurve.dart';
 
 class BadmintonScreen extends StatefulWidget {
@@ -20,16 +22,16 @@ class BadmintonScreen extends StatefulWidget {
 
 class _BadmintonScreenState extends State<BadmintonScreen> {
   bool _isFirstView = false;
-  dynamic _noOfBall, _n;
+  dynamic _noOfRacket, _noOfCock;
   int _isRequested = 0;
   final _totalRacket = int.parse(Equipment.badmintonRacket.toString());
   final _totalCock=int.parse(Equipment.badmintonCock.toString());
 
-  /*void logicVV() {
+  void logicBT() {
     _isFirstView
         ? Navigator.of(context).pushNamed(
-      Issue.routeName,
-      arguments: _totalBall - _n,
+      BadmintonIssue.routeName,
+      arguments: [_totalRacket-_noOfRacket,_totalCock-_noOfCock],
     )
         : _isRequested == 1
         ? showDialog(
@@ -38,7 +40,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
           return PopUpRequest(
               onTap: () {
                 FirebaseFirestore.instance
-                    .collection('VVEquipment')
+                    .collection('BTEquipment')
                     .doc(UserDetails.uid)
                     .update({
                   'isRequested': 3,
@@ -55,29 +57,28 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
         ? showDialog(
         context: context,
         builder: (context) {
-          return VVReturn(
-            onTap: () async {
-              await FirebaseFirestore.instance
-                  .collection('VVEquipment')
-                  .doc(UserDetails.uid)
-                  .update({
-                'isRequested': 4,
-                'isReturn': true,
-                'timeOfReturn': Timestamp.now(),
+          return BTRe(noOfCock: _noOfCock.toString(),
+              noOfRacket: _noOfRacket.toString(),
+              onTap: ()async{
+                await FirebaseFirestore.instance
+                    .collection('BTEquipment')
+                    .doc(UserDetails.uid)
+                    .update({
+                  'isRequested': 4,
+                  'isReturn': true,
+                  'timeOfReturn': Timestamp.now(),
+                });
+                setState(() {
+                  _isFirstView = true;
+                });
+                Navigator.pop(context);
               });
-              setState(() {
-                _isFirstView = true;
-              });
-              Navigator.pop(context);
-            },
-            noOfBall: _noOfBall,
-          );
         })
         : Navigator.of(context).pushNamed(
-      Issue.routeName,
-      arguments: _totalBall - _n,
+      BadmintonIssue.routeName,
+      arguments: [_totalRacket-_noOfRacket,_totalCock-_noOfCock],
     );
-  }*/
+  }
 
   Future getStatus() async {
     var v = await FirebaseFirestore.instance
@@ -86,7 +87,8 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
         .get();
     if (v.exists) {
       _isRequested = v.get('isRequested');
-      _noOfBall = v.get('noOfBall');
+      _noOfRacket = v.get('noOfRacket');
+      _noOfCock=v.get('noOfCock');
       if (_isRequested == 3 || _isRequested == 5) {
         setState(() {
           _isFirstView = true;
@@ -107,7 +109,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //getStatus();
+    getStatus();
   }
   @override
   Widget build(BuildContext context) {
@@ -124,14 +126,14 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
               child: CircularProgressIndicator(),
             );
           }
-
           final usersnap = userSnapshot.data!.docs;
-          /*_n = 0;
+          _noOfRacket=0;_noOfCock=0;
           for (int i = 0; i < usersnap.length; i++) {
             if (usersnap[i]['isRequested'] == 2) {
-              _n += int.parse(usersnap[i]['noOfBall']);
+              _noOfCock += int.parse(usersnap[i]['noOfCock']);
+              _noOfRacket+=int.parse(usersnap[i]['noOfRacket']);
             }
-          }*/
+          }
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -213,17 +215,26 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                             child: Column(
                               mainAxisAlignment:
                               MainAxisAlignment.spaceAround,
-                              children: const <Widget>[
+                              children:  <Widget>[
                                 // Text(" 'Ball Left")
-                                /*Padding(
+                                Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 18.0, vertical: 8),
                                   child: RowInfo(
-                                    ball_size: 'Ball Left',
-                                    ball: (_totalBall - _n).toString(),
+                                    ball_size: 'Racket Left',
+                                    ball: (_totalRacket - _noOfRacket).toString(),
                                     size: 80,
                                   ),
-                                ),*/
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 18.0, vertical: 8),
+                                  child: RowInfo(
+                                    ball_size: 'Shuttle Cock Left',
+                                    ball: (_totalCock - _noOfCock).toString(),
+                                    size: 80,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -242,11 +253,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                                 ? const Button(name: 'Issue')
                                 : Container(),
                             onTap: () {
-                              Navigator.push(context,
-                              MaterialPageRoute(builder: (context){
-                                return BadmintonIssue();
-                              }));
-                             // logicVV();
+                              logicBT();
                             }),
                       )
                     ],
@@ -257,6 +264,126 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class BTRe extends StatelessWidget {
+  final String noOfRacket,noOfCock;
+  final VoidCallback onTap;
+  const BTRe({Key? key,
+    required this.noOfCock,
+    required this.noOfRacket,
+    required this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      backgroundColor: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 1.0, vertical: 10),
+        child: Container(
+          height: 250,
+          width: 200,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Expanded(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 35, right: 10, left: 40),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Returning ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "$noOfRacket Racket",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 35, right: 10, left: 40),
+                  child: Row(
+                    children: [
+                      const Text(
+                        'Returning ',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "$noOfCock Cock",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 45, right: 25, left: 10),
+                  child: SizedBox(
+                    height: 0.80,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * .9,
+                      margin: const EdgeInsetsDirectional.only(
+                          start: 1.0, end: 2.0),
+                      height: 2.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25, right: 5, left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        onTap: onTap,
+                        child: const FaIcon(
+                          FontAwesomeIcons.checkCircle,
+                          color: Colors.lightGreen,
+                          size: 40,
+                        ),
+                      ),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const FaIcon(
+                            FontAwesomeIcons.timesCircle,
+                            color: Colors.redAccent,
+                            size: 40,
+                          )
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

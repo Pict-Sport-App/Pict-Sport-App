@@ -3,9 +3,13 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:psa/screens/Home/Badminton/badminton_screen.dart';
+import 'package:psa/screens/Home/Basketball/basketball.dart';
 import 'package:psa/screens/Home/Cricket/cricket_screen.dart';
 import 'package:psa/screens/Home/Football/football_screen.dart';
 import 'package:psa/screens/Home/VolleyBall/Volleyball.dart';
+import 'package:psa/screens/Home/otherscreen/commingsoon.dart';
+import 'package:psa/screens/Home/table_tennis/table_tannis_main_screen.dart';
+import 'gym/gymScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -113,7 +117,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const FootBallScreen();
+                                  return const BasketBallScreen();
                                 }));
                               },
                               text: 'BasketBall',
@@ -135,7 +139,7 @@ class HomeScreen extends StatelessWidget {
                             child: MyCustomWidget(
                               onTap: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context){
-                                  return BadmintonScreen();
+                                  return const BadmintonScreen();
                                 }));
                               },
                               text: 'Badminton',
@@ -162,11 +166,11 @@ class HomeScreen extends StatelessWidget {
                               ..translate(-width * 0.04, -height * 0.07),
                             child: MyCustomWidget(
                               onTap: () {
-
+                                //comming soon
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return const FootBallScreen();
-                                    }));
+                                MaterialPageRoute(builder: (context){
+                                  return const CommingSoon();
+                                }));
                               },
                               text: 'Chess',
                               image: 'assets/chess.jpeg',
@@ -178,11 +182,13 @@ class HomeScreen extends StatelessWidget {
                     Transform(
                         transform: Matrix4.identity()
                           ..translate(0.0, -height * 0.07),
-                        child: SizedBox(
+                        child: Container(
                           height: 160,
                           width: 100,
-                          child: Lottie.asset(
-                            'assets/sport.json',
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/logo.png',),
+                            ),
                           ),
                         )),
                     AnimationConfiguration.staggeredList(
@@ -198,7 +204,7 @@ class HomeScreen extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const CricketScreen();
+                                  return const TabletannisScreen();
                                 }));
                               },
                               text: 'Tabletennis',
@@ -224,7 +230,12 @@ class HomeScreen extends StatelessWidget {
                             transform: Matrix4.identity()
                               ..translate(-width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context,
+                                MaterialPageRoute(builder: (context){
+                                  return const GymScreen();
+                                }));
+                              },
                               text: 'Gym',
                               image: 'assets/gym.jpg',
                             ),
@@ -243,7 +254,6 @@ class HomeScreen extends StatelessWidget {
                               ..translate(width * 0.01, -height * 0.09),
                             child: MyCustomWidget(
                               onTap: () {
-                                print("Football");
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
                                       return const FootBallScreen();

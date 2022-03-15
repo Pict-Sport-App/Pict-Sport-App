@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:psa/appdrawer/officialSport/bbOfficial.dart';
+import 'package:psa/screens/Home/Badminton/issue.dart';
 import 'package:psa/screens/Home/Basketball/size_no.dart';
 import 'package:psa/screens/Home/Cricket/issueEquiment.dart';
 import 'package:psa/screens/Home/Football/issueEuiment.dart';
 import 'package:psa/screens/Home/VolleyBall/issue_ball.dart';
+import 'package:psa/screens/Home/otherscreen/splashscreen.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
 import 'package:psa/screens/chats/chat_members.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         title: 'Pict Sports App',
         debugShowCheckedModeBanner: false,
-        home: GetUserData(),
+        home: const splash_screen(),
         routes: {
           SportChatScreen.routeName: (ctx) => const SportChatScreen(),
           ChatMembers.routeName: (ctx) => const ChatMembers(),
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
           IssueTheRacket.routeName: (ctx) => const IssueTheRacket(),
           Issue.routeName: (ctx) => const Issue(),
           IntialScreen.routeName: (ctx)=>const IntialScreen(),
-          //hi
+          BadmintonIssue.routeName: (ctx)=> const BadmintonIssue(),
           CricketIssue.routeName: (ctx)=>const CricketIssue(),
           FootBallIssue.routeName: (ctx)=>const FootBallIssue(),
           Official.routeName: (ctx)=>const Official(),
@@ -50,7 +52,6 @@ class MyApp extends StatelessWidget {
     } else {
       return MaterialApp(
         title: 'Pict Sports App',
-
         debugShowCheckedModeBanner: false,
         home: const Signup(),
         routes: {
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
           CricketIssue.routeName: (ctx)=>const CricketIssue(),
           FootBallIssue.routeName: (ctx)=>const FootBallIssue(),
           Official.routeName: (ctx)=>const Official(),
+          BadmintonIssue.routeName: (ctx)=> const BadmintonIssue(),
         },
       );
     }
