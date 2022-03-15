@@ -7,11 +7,11 @@ import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/widget/commonSportText.dart';
-
 import '../../intial_page.dart';
 
 class BadmintonIssue extends StatefulWidget {
   const BadmintonIssue({Key? key}) : super(key: key);
+  static const routeName = '/bd';
 
   @override
   _BadmintonIssueState createState() => _BadmintonIssueState();
@@ -27,6 +27,51 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
   void _selectedCock(String b)=> chossedCock=b;
 
   Future _submit() async {
+    var vracket = 0;
+    if (chossedRacket != null) {
+      vracket = int.parse(_productId[0].toString()) - int.parse(chossedRacket.toString());
+    }
+    var vcock = 0;
+    if (chossedCock != null) {
+      vcock = int.parse(_productId[1].toString()) - int.parse(chossedCock.toString());
+    }
+
+    if (chossedRacket==null && chossedCock==null){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Please enter the Number of rackets and shuttle cock you want to issue',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (vracket<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of rackets requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }else if (vcock<0){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text(
+          'Oops!!! The number of Cock requested are not available',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 15,
+          ),
+        ),
+      ));
+    }
+    else if (chossedRacket==null){
+      chossedRacket='0';
       await FirebaseFirestore.instance
           .collection('BTEquipment')
           .doc(UserDetails.uid)
@@ -55,6 +100,54 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
           context, IntialScreen.routeName,
               (route) => false);
 
+    }else if (chossedCock==null){
+      chossedCock='0';
+      await FirebaseFirestore.instance
+          .collection('BTEquipment')
+          .doc(UserDetails.uid)
+          .set({
+        'noOfRacket': chossedRacket,
+        'noOfCock':chossedCock,
+        'timeOfIssue': Timestamp.now(),
+        'timeOfReturn': Timestamp.now(),
+        'isRequested': 1,
+        'isReturn': false,
+        'name': UserDetails.name,
+        'misId': UserDetails.misId,
+        'url': UserDetails.photourl,
+        'uid': UserDetails.uid,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          duration: Duration(seconds: 1),
+          content: Text(
+            'Request have been send',
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 15,
+            ),
+          )));
+      Navigator.pushNamedAndRemoveUntil(
+          context, IntialScreen.routeName,
+              (route) => false);
+
+    }
+  }
+  bool _isInit = true;
+  dynamic _productId;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    if (_isInit) {
+      _productId = ModalRoute.of(context)!.settings.arguments as List;
+    }
+    _isInit = false;
   }
 
 

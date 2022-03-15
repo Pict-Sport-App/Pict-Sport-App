@@ -68,7 +68,7 @@ class Signup extends StatelessWidget {
                   width: height * 0.34,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/logo1.png'),
+                      image: AssetImage('assets/logoname.png'),
                     ),
                   ),
                 ),
