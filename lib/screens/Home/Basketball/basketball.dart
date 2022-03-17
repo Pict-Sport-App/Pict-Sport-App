@@ -172,6 +172,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                           const Pop(),
                           const TopName(
                             name: 'BasketBall',
+                            tag: 'bb',
                             image: 'assets/basketball.jpg',
                           ),
                           TextCommon(

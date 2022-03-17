@@ -29,8 +29,8 @@ class Pop extends StatelessWidget {
 
 
 class TopName extends StatelessWidget {
-  final String image,name;
-  const TopName({Key? key,required this.name,
+  final String image,name,tag;
+  const TopName({Key? key,required this.tag,required this.name,
   required this.image}) : super(key: key);
 
   @override
@@ -54,9 +54,12 @@ class TopName extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 42,
                   backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage(image),
+                  child: Hero(
+                    tag: tag,
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage(image),
+                    ),
                   ),
                 ),
               ),

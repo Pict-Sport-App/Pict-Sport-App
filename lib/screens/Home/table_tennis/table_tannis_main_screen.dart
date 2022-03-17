@@ -10,6 +10,7 @@ import 'package:psa/screens/Home/table_tennis/return.dart';
 import 'package:psa/screens/Home/table_tennis/table_status_popup.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
 import 'package:psa/screens/intial_page.dart';
+import 'package:psa/widget/constants.dart';
 
 class TabletannisScreen extends StatefulWidget {
   const TabletannisScreen({Key? key}) : super(key: key);
@@ -140,6 +141,8 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double w=MediaQuery.of(context).size.width;
+    double h=MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           leading: GestureDetector(
@@ -243,73 +246,77 @@ class _TabletannisScreenState extends State<TabletannisScreen> {
               if (racket3 < 0) {
                 racket3 = 0;
               }
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, top: 10, bottom: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TableImage(
-                        totalseats: _total1,
-                        image: "assets/table_tennis_22.png",
-                        tableNumber: '01',
-                        enrolledSeats: racket1,
-                      ),
-                      TableImage(
-                        totalseats: _total2,
-                        image: "assets/table_tennis_11.png",
-                        tableNumber: '02',
-                        enrolledSeats: racket2,
-                      ),
-                      TableImage(
-                        totalseats: _total3,
-                        image: "assets/table_tennis_22.png",
-                        tableNumber: '03',
-                        enrolledSeats: racket3,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      SizedBox(
-                        width: 200,
-                        height: 60,
-                        // margin: const EdgeInsets.all(12.0),
-                        child: RaisedButton(
-                          splashColor: Colors.lightBlueAccent,
-                          elevation: 10.0,
-                          shape: const StadiumBorder(),
-                          child: _isFirstVisit
-                              ? const Text(
-                                  'Issue the Racked',
-                                  style: TextStyle(fontSize: 16),
-                                )
-                              : _isRequested == 1
-                                  ? const Text(
-                                      'Cancel Request',
-                                      style: TextStyle(fontSize: 16),
-                                    )
-                                  : _isRequested == 2
-                                      ? const Text(
-                                          'Return the Racket',
-                                          style: TextStyle(fontSize: 16),
-                                        )
-                                      : _isRequested == 4
-                                          ? const Text(
-                                              'Issue the Racked',
-                                              style: TextStyle(fontSize: 16),
-                                            )
-                                          : Container(),
-                          onPressed: () {
-                            ttlogic();
-                          },
-                        ),
-                      )
-                    ],
+              return Container(
+                width: w,
+                height: h,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image:  AssetImage(kkbackgroundImage),
+                    fit: BoxFit.cover
                   ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TableImage(
+                      totalseats: _total1,
+                      image: "assets/table_tenis_1.jpg",
+                      tableNumber: '01',
+                      enrolledSeats: racket1,
+                    ),
+                    TableImage(
+                      totalseats: _total2,
+                      image: "assets/table_tenis_1.jpg",
+                      tableNumber: '02',
+                      enrolledSeats: racket2,
+                    ),
+                    TableImage(
+                      totalseats: _total3,
+                      image: "assets/table_tenis_1.jpg",
+                      tableNumber: '03',
+                      enrolledSeats: racket3,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    SizedBox(
+                      width: 200,
+                      height: h*0.08,
+                      // margin: const EdgeInsets.all(12.0),
+                      child: RaisedButton(
+                        splashColor: Colors.lightBlueAccent,
+                        elevation: 10.0,
+                        shape: const StadiumBorder(),
+                        child: _isFirstVisit
+                            ? const Text(
+                                'Issue the Racked',
+                                style: TextStyle(fontSize: 16),
+                              )
+                            : _isRequested == 1
+                                ? const Text(
+                                    'Cancel Request',
+                                    style: TextStyle(fontSize: 16),
+                                  )
+                                : _isRequested == 2
+                                    ? const Text(
+                                        'Return the Racket',
+                                        style: TextStyle(fontSize: 16),
+                                      )
+                                    : _isRequested == 4
+                                        ? const Text(
+                                            'Issue the Racked',
+                                            style: TextStyle(fontSize: 16),
+                                          )
+                                        : Container(),
+                        onPressed: () {
+                          ttlogic();
+                        },
+                      ),
+                    )
+                  ],
                 ),
               );
             }));
@@ -394,7 +401,9 @@ class TableImage extends StatelessWidget {
                 child: Text(
                   "TABLE NO $tableNumber",
                   style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),

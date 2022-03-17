@@ -107,13 +107,23 @@ class _FootBallIssueState extends State<FootBallIssue> {
             )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(left: 18.0),
-              child: Pop(),
+            Padding(
+              padding: const EdgeInsets.only(left: 30,top: 20,bottom: 20),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const FaIcon(
+                  FontAwesomeIcons.arrowCircleLeft,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 35.0),
+              padding: const EdgeInsets.only(top: 35.0,left: 15),
               child: Container(
                 width: width * 0.89,
                 height: height * 0.48,
@@ -247,22 +257,24 @@ class _FootBallIssueState extends State<FootBallIssue> {
             const SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: () {
-                _submit();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(20)),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  _submit();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

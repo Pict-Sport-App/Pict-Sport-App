@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -245,184 +247,212 @@ class _IssueTheRacketState extends State<IssueTheRacket> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff48d683),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 150.0),
-                    child: Lottie.network(
-                        'https://assets7.lottiefiles.com/packages/lf20_xj6d5ul8.json'),
+        //backgroundColor: const Color(0xff48d683),
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/TT.png'),
+                fit: BoxFit.fitHeight,
+                opacity: 20,
+              )),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 30,top: 20,bottom: 20),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.arrowCircleLeft,
+                    color: Colors.white,
+                    size: 30,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "  Hi $_name, \n  Let's Issue the racket",
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaY: 16,
+                      sigmaX: 16,
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                      alignment: Alignment.bottomCenter,
-                      padding: const EdgeInsets.only(bottom: 30, top: 30),
-                      // width: ,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(25.0),
-                          topRight: Radius.circular(25.0),
-                          bottomRight: Radius.circular(22.0),
-                          bottomLeft: Radius.circular(22.0),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              const Text("Select The Table"),
-                              DropDown(
-                                itemList: const [
-                                  'Table 1',
-                                  'Table 2',
-                                  'Table 3',
-                                ],
-                                item1: 'Table',
-                                submitFn: _selectedTable,
+                    child: Container(
+                        height: MediaQuery.of(context).size.height
+                            * 0.5,
+                        // width: width * 0.9,
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black,
+                              offset: Offset(
+                                0,
+                                0,
                               ),
-                            ],
+                              blurRadius: 10.0,
+                              spreadRadius: 3.0,
+                            ), //BoxShadow
+                            BoxShadow(
+                              color: Colors.white,
+                              offset: Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ), //BoxShadow
+                          ],
+                          image: DecorationImage(
+                              image: AssetImage('assets/TT.png'),
+                              fit: BoxFit.fitHeight),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        /*alignment: Alignment.bottomCenter,
+                        padding: const EdgeInsets.only(bottom: 30, top: 30),
+                        // width: ,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25.0),
+                            topRight: Radius.circular(25.0),
+                            bottomRight: Radius.circular(22.0),
+                            bottomLeft: Radius.circular(22.0),
                           ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              const Text("No. of Racket  "),
-                              DropDown(
-                                  itemList: const ['1', '2', '3', '4'],
-                                  item1: 'Racket',
-                                  submitFn: _selectedRacket),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20.0,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 10, right: 10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Text('Time Of Issuement',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                      )),
-                                ),
-                                Center(
-                                  child: DateTimeField(
-                                    resetIcon: const Icon(
-                                      Icons.close,
-                                      color: Colors.blue,
-                                      size: 35,
-                                    ),
-                                    initialValue: DateTime.now(),
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                    enabled: true,
-                                    enableInteractiveSelection: true,
-                                    decoration: const InputDecoration(
-                                      icon: Padding(
-                                        padding: EdgeInsets.only(left: 6.0),
-                                        child: FaIcon(
-                                          FontAwesomeIcons.calendar,
-                                          color: Colors.redAccent,
-                                          size: 35,
-                                        ),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20)),
-                                        borderSide: BorderSide(
-                                            color: Colors.black12, width: 2),
-                                      ),
-                                    ),
-                                    format: formatYMDHM,
-                                    onShowPicker:
-                                        (context, currentValue) async {
-                                      final date = await showDatePicker(
-                                        context: context,
-                                        firstDate: DateTime.now(),
-                                        initialDate:
-                                            currentValue ?? DateTime.now(),
-                                        lastDate: DateTime(2100),
-                                      );
-                                      if (date != null) {
-                                        final time = await showTimePicker(
-                                          context: context,
-                                          initialTime: TimeOfDay.fromDateTime(
-                                            currentValue ?? DateTime.now(),
-                                          ),
-                                        );
-                                        eventDate =
-                                            DateTimeField.combine(date, time);
-                                        return DateTimeField.combine(
-                                            date, time);
-                                      } else {
-                                        eventDate = currentValue;
-                                        return currentValue;
-                                      }
-                                    },
-                                  ),
+                        ),*/
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                const Text("Select The Table"),
+                                DropDown(
+                                  itemList: const [
+                                    'Table 1',
+                                    'Table 2',
+                                    'Table 3',
+                                  ],
+                                  item1: 'Table',
+                                  submitFn: _selectedTable,
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      )),
-                ),
-                const SizedBox(
-                  height: 9.0,
-                ),
-                Center(
-                  child: RaisedButton(
-                    onPressed: () {
-                      submit(context);
-                    },
-                    color: Colors.white,
-                    splashColor: Colors.lightBlueAccent,
-                    elevation: 10.0,
-                    shape: const StadiumBorder(),
-                    child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                        child: Text('SEND THE REQUEST')),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                const Text("No. of Racket  "),
+                                DropDown(
+                                    itemList: const ['1', '2', '3', '4'],
+                                    item1: 'Racket',
+                                    submitFn: _selectedRacket),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20.0,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10, right: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text('Time Of Issuement',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                        )),
+                                  ),
+                                  Center(
+                                    child: DateTimeField(
+                                      resetIcon: const Icon(
+                                        Icons.close,
+                                        color: Colors.blue,
+                                        size: 35,
+                                      ),
+                                      initialValue: DateTime.now(),
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                      enabled: true,
+                                      enableInteractiveSelection: true,
+                                      decoration: const InputDecoration(
+                                        icon: Padding(
+                                          padding: EdgeInsets.only(left: 6.0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.calendar,
+                                            color: Colors.redAccent,
+                                            size: 35,
+                                          ),
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
+                                          borderSide: BorderSide(
+                                              color: Colors.black12, width: 2),
+                                        ),
+                                      ),
+                                      format: formatYMDHM,
+                                      onShowPicker:
+                                          (context, currentValue) async {
+                                        final date = await showDatePicker(
+                                          context: context,
+                                          firstDate: DateTime.now(),
+                                          initialDate:
+                                              currentValue ?? DateTime.now(),
+                                          lastDate: DateTime(2100),
+                                        );
+                                        if (date != null) {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.fromDateTime(
+                                              currentValue ?? DateTime.now(),
+                                            ),
+                                          );
+                                          eventDate =
+                                              DateTimeField.combine(date, time);
+                                          return DateTimeField.combine(
+                                              date, time);
+                                        } else {
+                                          eventDate = currentValue;
+                                          return currentValue;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
                   ),
                 ),
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  // child: Text(
-                  //   // 'Note: Your request has been sent,\nThe Racket will be issued after accepting the request',
-                  //   style: TextStyle(fontSize: 15, color: Colors.white),
-                  // ),
-                )
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 9.0,
+              ),
+              Center(
+                child: RaisedButton(
+                  onPressed: () {
+                    submit(context);
+                  },
+                  color: Colors.white,
+                  splashColor: Colors.lightBlueAccent,
+                  elevation: 10.0,
+                  shape: const StadiumBorder(),
+                  child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                      child: Text('SEND THE REQUEST')),
+                ),
+              ),
+            ],
           ),
         ));
   }

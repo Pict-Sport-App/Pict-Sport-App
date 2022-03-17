@@ -21,6 +21,7 @@ class _splash_screenState extends State<splash_screen> {
         context, MaterialPageRoute(builder:
         (context) => GetUserData()));//place your page here
   }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
