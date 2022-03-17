@@ -16,22 +16,23 @@ class CreateAnnoucement extends StatefulWidget {
 
 class _CreateAnnoucementState extends State<CreateAnnoucement> {
   final _formKey = GlobalKey<FormState>();
-  Timestamp? dateTime=Timestamp.now();
+  Timestamp? dateTime = Timestamp.now();
 
   bool inputLink = false;
   bool getImage = false;
   bool isImageAdded = false;
+  bool isLoading = false;
 
   String link = '';
   String title = '';
   String description = '';
   String venue = '';
   String number1 = '';
-  String number2='';
+  String number2 = '';
   File? _imageFile;
   String? _uploadedFileURL;
-  String _contactName1='';
-  String _contactName2='';
+  String _contactName1 = '';
+  String _contactName2 = '';
 
   Future getImageFromStorage() async {
     final picker = ImagePicker();
@@ -66,11 +67,14 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
         'venue': venue,
         'number1': number1,
         'number2': number2,
-        'contact1':_contactName1,
-        'contact2':_contactName2,
+        'contact1': _contactName1,
+        'contact2': _contactName2,
         'link': link,
         'dateTime': dateTime,
         'imageURL': _uploadedFileURL,
+      });
+      setState(() {
+        isLoading = false;
       });
 
       Navigator.pop(context);
@@ -89,9 +93,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
         decoration: const BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-              image: AssetImage(kkbackgroundImage),
-              fit: BoxFit.cover
-          ),
+              image: AssetImage(kkbackgroundImage), fit: BoxFit.cover),
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -192,7 +194,8 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                             currentValue ?? DateTime.now(),
                           ),
                         );
-                        dateTime = DateTimeField.combine(date, time) as Timestamp?;
+                        dateTime =
+                            DateTimeField.combine(date, time) as Timestamp?;
                         return DateTimeField.combine(date, time);
                       } else {
                         dateTime = currentValue as Timestamp?;
@@ -379,9 +382,14 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                       ),
                       ElevatedButton(
                         onPressed: () {
+                          setState(() {
+                            isLoading = true;
+                          });
                           _submit();
                         },
-                        child: const Text('Submit'),
+                        child: isLoading
+                            ? const CircularProgressIndicator()
+                            : const Text('Submit'),
                       ),
                       const SizedBox(
                         width: 15,
