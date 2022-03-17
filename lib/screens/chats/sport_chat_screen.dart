@@ -147,39 +147,56 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         child: Messages(
                       uniqueValue: _key,
                     )),
-                    UserDetails.isAdmin == true
-                        ? NewMessage(
-                            keyies: _key,
-                          )
-                        : Padding(
-                            padding:
-                                const EdgeInsets.only(bottom: 0.0, top: 12),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 50,
-                              color: const Color(0xff2e3c44),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  const Text(
-                                    "Only ",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: const Text(
-                                      " Admins  ",
-                                      style: TextStyle(color: Colors.lightBlue),
-                                    ),
-                                  ),
-                                  const Text(
-                                    "can send messages",
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ],
+                    if (UserDetails.isAdmin == true)
+                      NewMessage(
+                        keyies: _key,
+                      )
+                    else
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 0.0, top: 12),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          color: const Color(0xff2e3c44),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Text(
+                                "Only ",
+                                style: const TextStyle(color: Colors.white),
                               ),
-                            ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (builder) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 40.0),
+                                          child: Column(
+                                            children: const <Widget>[
+                                              Text("Dhiraj"),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  });
+                                },
+                                child: const Text(
+                                  " Admins  ",
+                                  style: TextStyle(color: Colors.lightBlue),
+                                ),
+                              ),
+                              const Text(
+                                "can send messages",
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
                           ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -187,6 +204,17 @@ class _SportChatScreenState extends State<SportChatScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class childWidget extends StatelessWidget {
+  const childWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text("Dhiraj"),
     );
   }
 }
