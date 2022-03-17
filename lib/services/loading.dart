@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rive/rive.dart';
 
 class Loading extends StatelessWidget {
   const Loading({Key? key}) : super(key: key);
@@ -11,9 +11,8 @@ class Loading extends StatelessWidget {
           color: Colors.white,
           width: double.infinity,
           height: double.infinity,
-          child: const SpinKitRotatingPlain(
-            color: Colors.red,
-          )),
+          child: const RiveAnimation.asset(''
+              'assets/loader.riv')),
     );
   }
 }

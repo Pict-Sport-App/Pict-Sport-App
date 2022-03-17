@@ -52,19 +52,7 @@ class RequestedFootball extends StatelessWidget {
                       isAdmin: UserDetails.isAdmin ?? false,
                       misId: reqMembers[index]['misId'],
                     )
-                  : Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          SizedBox(
-                              height: 200,
-                              width: 200,
-                              child: Lottie.asset('assets/nofound.json')),
-                        ],
-                      ),
-                    ));
+                  : Container());
         },
       ),
     ));

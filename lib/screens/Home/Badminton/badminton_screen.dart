@@ -153,6 +153,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                       const Pop(),
                       const TopName(
                         name: 'Badminton',
+                        tag: 'bd',
                         image: 'assets/badminton.jpg',
                       ),
                       TextCommon(
@@ -259,7 +260,6 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                     ],
                   ),
                 ),
-                // assets/bottom2.jpg
               ],
             ),
           );

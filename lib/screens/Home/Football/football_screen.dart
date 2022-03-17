@@ -158,6 +158,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                         ),
                         const Pop(),
                         const TopName(name: 'Footaball',
+                          tag: 'fb',
                           image: 'assets/football.jpg',),
                         TextCommon(onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) {

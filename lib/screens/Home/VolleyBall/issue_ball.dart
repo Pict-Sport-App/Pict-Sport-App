@@ -108,20 +108,31 @@ class _IssueState extends State<Issue> {
         width: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('assets/vv.jpg'),
+          image: AssetImage('assets/volleyball.jpg'),
           fit: BoxFit.fitHeight,
           opacity: 20,
         )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(left: 18.0),
-              child: Pop(),
+            Padding(
+              padding: const EdgeInsets.only(left: 30,top: 20,bottom: 20),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const FaIcon(
+                  FontAwesomeIcons.arrowCircleLeft,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12),
+                  const EdgeInsets.symmetric(vertical: 12.0,
+                      horizontal: 12),
               child: Container(
                 // width: width * 0.8,
                 height: height * 0.5,
@@ -163,7 +174,7 @@ class _IssueState extends State<Issue> {
                         ],
                         image: DecorationImage(
 
-                            image: AssetImage('assets/vv.jpg'),
+                            image: AssetImage('assets/volleyball.jpg'),
                             fit: BoxFit.fitHeight),
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
@@ -274,24 +285,26 @@ class _IssueState extends State<Issue> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                _submit();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(20)),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+            Center(
+              child: GestureDetector(
+                onTap: () {
+                  _submit();
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      'Submit',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
