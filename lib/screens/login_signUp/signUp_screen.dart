@@ -62,13 +62,13 @@ class Signup extends StatelessWidget {
               ),
               Positioned(
                 top: height * 0.15,
-                left: width * 0.15,
+                left: width * 0.05,
                 child: Container(
                   height: height * 0.50,
-                  width: height * 0.34,
+                  width: height * 0.45,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/logoname.png'),
+                      image: AssetImage('assets/logoname.png',),
                     ),
                   ),
                 ),

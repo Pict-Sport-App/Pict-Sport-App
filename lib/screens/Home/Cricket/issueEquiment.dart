@@ -191,261 +191,279 @@ class _CricketIssueState extends State<CricketIssue> {
         height: double.infinity,
         decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/cricketbatball.jpg'),
+              image: AssetImage('assets/cricket.jpg'),
               fit: BoxFit.fitHeight,
               opacity: 20,
             )),
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 18.0,top: 20),
-              child: Pop(),
-            ),
-            Container(
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
-                  blurRadius: 24,
-                  spreadRadius: 16,
-                  color: const Color(0XFF4527A0).withOpacity(0.2),
-                )
-              ]),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaY: 16,
-                    sigmaX: 16,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 30,top: 20,bottom: 20),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.arrowCircleLeft,
+                    color: Colors.white,
+                    size: 30,
                   ),
-                  child: Container(
-                    //height: hei * 0.5,
-                    width: wei * 0.9,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      image: DecorationImage(
-                          image: AssetImage('assets/cricketbatball.jpg'), fit: BoxFit.fill),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 25,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12),
+                child: Container(
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                      blurRadius: 24,
+                      spreadRadius: 16,
+                      color: const Color(0XFF4527A0).withOpacity(0.2),
+                    )
+                  ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaY: 16,
+                        sigmaX: 16,
+                      ),
+                      child: Container(
+                        //height: hei * 0.5,
+                        width: wei * 0.9,
+                        decoration: const BoxDecoration(
+                          color: Colors.blue,
+                          image: DecorationImage(
+                              image: AssetImage('assets/cricket.jpg'),
+                              fit: BoxFit.fill),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Number of \nBalls',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1','2','3','4','5','6'],
-                                item1: 'Ball',
-                                submitFn: _selectedBall),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of \nBat',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Bat',
-                                submitFn: _selectedBat),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of \nGloves',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Gloves',
-                                submitFn: _selectedGloves),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of \nPad',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Pad',
-                                submitFn: _selectedPad),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of \nInnerPad',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'InnerPad',
-                                submitFn: _selectedInnerPad),
-                          ],
-                        ),
-                        const SizedBox(height: 15,),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              'Number of \nHelmet',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            ),
-                            DropDown(
-                                itemList: const ['1', '2','3','4','5'],
-                                item1: 'Helmet',
-                                submitFn: _selectedHelmet),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 10, right: 10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Time Of Issuement',
+                            const SizedBox(height: 25,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nBalls',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Center(
-                                child: DateTimeField(
-                                  resetIcon: const Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                  ),
-                                  initialValue: DateTime.now(),
-                                  style: const TextStyle(
+                                DropDown(
+                                    itemList: const ['1','2','3','4','5','6'],
+                                    item1: 'Ball',
+                                    submitFn: _selectedBall),
+                              ],
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nBat',
+                                  style: TextStyle(
                                       color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                  enabled: true,
-                                  enableInteractiveSelection: true,
-                                  decoration:  const InputDecoration(
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.calendarDay,
-                                      color: Colors.redAccent,
-                                      size: 35,
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 2),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                DropDown(
+                                    itemList: const ['1', '2','3','4','5'],
+                                    item1: 'Bat',
+                                    submitFn: _selectedBat),
+                              ],
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nGloves',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                DropDown(
+                                    itemList: const ['1', '2','3','4','5'],
+                                    item1: 'Gloves',
+                                    submitFn: _selectedGloves),
+                              ],
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nPad',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                DropDown(
+                                    itemList: const ['1', '2','3','4','5'],
+                                    item1: 'Pad',
+                                    submitFn: _selectedPad),
+                              ],
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nInnerPad',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                DropDown(
+                                    itemList: const ['1', '2','3','4','5'],
+                                    item1: 'InnerPad',
+                                    submitFn: _selectedInnerPad),
+                              ],
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                const Text(
+                                  'Number of \nHelmet',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                DropDown(
+                                    itemList: const ['1', '2','3','4','5'],
+                                    item1: 'Helmet',
+                                    submitFn: _selectedHelmet),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10, right: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Time Of Issuement',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20),
                                     ),
                                   ),
-                                  format: formatYMDHM,
-                                  onShowPicker: (context, currentValue) async {
-                                    final date = await showDatePicker(
-                                      context: context,
-                                      firstDate: DateTime.now(),
-                                      initialDate:
-                                      currentValue ?? DateTime.now(),
-                                      lastDate: DateTime(2100),
-                                    );
-                                    if (date != null) {
-                                      final time = await showTimePicker(
-                                        context: context,
-                                        initialTime: TimeOfDay.fromDateTime(
-                                          currentValue ?? DateTime.now(),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Center(
+                                    child: DateTimeField(
+                                      resetIcon: const Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                      ),
+                                      initialValue: DateTime.now(),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                      enabled: true,
+                                      enableInteractiveSelection: true,
+                                      decoration:  const InputDecoration(
+                                        icon: FaIcon(
+                                          FontAwesomeIcons.calendarDay,
+                                          color: Colors.redAccent,
+                                          size: 35,
                                         ),
-                                      );
-                                      eventDate =
-                                          DateTimeField.combine(date, time);
-                                      return DateTimeField.combine(date, time);
-                                    } else {
-                                      eventDate = currentValue;
-                                      return currentValue;
-                                    }
-                                  },
-                                ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(20)),
+                                          borderSide: BorderSide(
+                                              color: Colors.white, width: 2),
+                                        ),
+                                      ),
+                                      format: formatYMDHM,
+                                      onShowPicker: (context, currentValue) async {
+                                        final date = await showDatePicker(
+                                          context: context,
+                                          firstDate: DateTime.now(),
+                                          initialDate:
+                                          currentValue ?? DateTime.now(),
+                                          lastDate: DateTime(2100),
+                                        );
+                                        if (date != null) {
+                                          final time = await showTimePicker(
+                                            context: context,
+                                            initialTime: TimeOfDay.fromDateTime(
+                                              currentValue ?? DateTime.now(),
+                                            ),
+                                          );
+                                          eventDate =
+                                              DateTimeField.combine(date, time);
+                                          return DateTimeField.combine(date, time);
+                                        } else {
+                                          eventDate = currentValue;
+                                          return currentValue;
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 25,),
+                          ],
                         ),
-                        const SizedBox(height: 25,),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            GestureDetector(
-              onTap: () {
-                _submit();
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.redAccent,
-                    borderRadius: BorderRadius.circular(20)),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+              const SizedBox(
+                height: 5,
+              ),
+              Center(
+                child: GestureDetector(
+                  onTap: () {
+                    _submit();
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

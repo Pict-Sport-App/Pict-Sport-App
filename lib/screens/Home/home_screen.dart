@@ -83,12 +83,13 @@ class HomeScreen extends StatelessWidget {
                               ),
                             child: MyCustomWidget(
                               onTap: () {
-                                Navigator.push(context,
-                                MaterialPageRoute(builder: (context){
-                                  return const VolleyBallScreen();
-                                }));
+                                 Navigator.push(context,
+                                 MaterialPageRoute(builder: (context){
+                                   return const VolleyBallScreen();
+                                 }));
                               },
                               text: 'VolleyBall',
+                              tag: 'vv',
                               image: 'assets/volleyball.jpg',
                             ),
                           ),
@@ -121,6 +122,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'BasketBall',
+                              tag: 'bb',
                               image: 'assets/basketball.jpg',
                             ),
                           ),
@@ -143,6 +145,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'Badminton',
+                              tag: 'bd',
                               image: 'assets/badminton.jpg',
                             ),
                           ),
@@ -173,6 +176,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'Chess',
+                              tag: 'ch',
                               image: 'assets/chess.jpeg',
                             ),
                           ),
@@ -208,6 +212,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'Tabletennis',
+                              tag: 'tt',
                               image: 'assets/TT.png',
                             ),
                           ),
@@ -237,6 +242,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'Gym',
+                              tag: 'gy',
                               image: 'assets/gym.jpg',
                             ),
                           ),
@@ -260,6 +266,7 @@ class HomeScreen extends StatelessWidget {
                                     }));
                               },
                               text: 'Football',
+                              tag: 'fb',
                               image: 'assets/football.jpg',
                             ),
                           ),
@@ -289,6 +296,7 @@ class HomeScreen extends StatelessWidget {
                                 }));
                               },
                               text: 'Cricket',
+                              tag: 'cr',
                               image: 'assets/cricket.jpg',
                             ),
                           ),
@@ -308,10 +316,14 @@ class HomeScreen extends StatelessWidget {
 
 class MyCustomWidget extends StatelessWidget {
   final String image;
-  final String text;
+  final String text,tag;
   final VoidCallback onTap;
+
   const MyCustomWidget(
-      {Key? key, required this.onTap, required this.image, required this.text})
+      {Key? key, required this.tag,
+        required this.onTap,
+        required this.image,
+        required this.text})
       : super(key: key);
 
   @override
@@ -326,32 +338,36 @@ class MyCustomWidget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: onTap,
-              child: Container(
-                height: height * 0.1,
-                width: width * 0.22,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black12, width: 3),
-                  image:
-                      DecorationImage(image: AssetImage(image), fit: BoxFit.fill),
-                  // color: const Color(0xff8639FB),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      offset: Offset(
-                        0,
-                        0,
-                      ),
-                      blurRadius: 10.0,
-                      spreadRadius: 3.0,
-                    ), //BoxShadow
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(0.0, 0.0),
-                      blurRadius: 0.0,
-                      spreadRadius: 0.0,
-                    ), //BoxShadow
-                  ],
+              child: Hero(
+                tag: tag,
+                child: Container(
+                  height: height * 0.1,
+                  width: width * 0.22,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black12, width: 3),
+                    image:
+                        DecorationImage(
+                            image: AssetImage(image), fit: BoxFit.fill),
+                    // color: const Color(0xff8639FB),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.grey,
+                        offset: Offset(
+                          0,
+                          0,
+                        ),
+                        blurRadius: 10.0,
+                        spreadRadius: 3.0,
+                      ), //BoxShadow
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ), //BoxShadow
+                    ],
+                  ),
                 ),
               ),
             ),
