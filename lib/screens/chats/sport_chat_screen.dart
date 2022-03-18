@@ -147,7 +147,14 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         child: Messages(
                       uniqueValue: _key,
                     )),
-                    if (UserDetails.isAdmin == true)
+                    if (_key=='OFBB'
+                    || _key=='OFVV'
+                    || _key=='OFTT'
+                    || _key=='OFBD'
+                    || _key=='OFCR'
+                    || _key=='OFFB'
+                    || _key=='OFCH'
+                    || _key=='OFGY')
                       NewMessage(
                         keyies: _key,
                       )
@@ -163,11 +170,11 @@ class _SportChatScreenState extends State<SportChatScreen> {
                             children: <Widget>[
                               const Text(
                                 "Only ",
-                                style: const TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.white),
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  setState(() {
+                                  /*setState(() {
                                     showModalBottomSheet(
                                       context: context,
                                       builder: (builder) {
@@ -182,7 +189,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
                                         );
                                       },
                                     );
-                                  });
+                                  });*/
                                 },
                                 child: const Text(
                                   " Admins  ",
@@ -191,7 +198,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
                               ),
                               const Text(
                                 "can send messages",
-                                style: const TextStyle(color: Colors.white),
+                                style: TextStyle(color: Colors.white),
                               ),
                             ],
                           ),

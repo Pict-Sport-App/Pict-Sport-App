@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:psa/widget/constants.dart';
 
 class GymScreen extends StatelessWidget {
   const GymScreen({Key? key}) : super(key: key);
@@ -9,13 +10,12 @@ class GymScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.grey[300]!.withOpacity(0.2),
+          backgroundColor: Colors.white,
           body: Container(
             decoration: const BoxDecoration(image:
-            DecorationImage(image: AssetImage('assets/bg.jpg'),
+            DecorationImage(image: AssetImage(kkbackgroundImage),
                 fit:BoxFit.fitHeight)),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10,sigmaY: 10),
@@ -52,7 +52,8 @@ class GymScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text('Timings :  ☀ 8 am - 4 pm \t |  🌙 7 pm - 9 pm',
+                  Text(
+                      'Timings :  ☀ 8 am - 4 pm \t |  🌙 7 pm - 9 pm',
                       style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: 18,
@@ -68,7 +69,6 @@ class GymScreen extends StatelessWidget {
                   Flexible(
                     fit: FlexFit.tight,
                     child: Container(
-
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -84,19 +84,30 @@ class GymScreen extends StatelessWidget {
 
                           //child:SvgPicture.asset('assets/ellipse7.svg',color: Colors.green,height: 10,width: 25,)
 
-                          child: ListView(children: <Widget>[
-                            Rightile('pull', 'push', 'weight.jpg'),
+                          child: ListView(
+                            physics: const BouncingScrollPhysics(),
+                              children: <Widget>[
+
+                            const Rightile('Treadmill',
+                                'A large wheel turned by the weight of pe'
+                                    'ople or animals treading on steps fitted i'
+                                    'nto its inner surface, formerly used to'
+                                    ' drive machinery.', 'https://rukminim2.flixcart.com/image/612/612/kt8zb0w0/treadmill/1/r/8/majesty-s1-treadmill-with-massager-2hp-peak-multipurpose-original-imag6n4ghnsgmump.jpeg?q=70'),
                             const SizedBox(height: 60),
-                            Left_tile('pull', 'push', 'weight.jpg'),
+                            Left_tile('Weights', 'Weight training can help you ton'
+                                'e your muscles, improve your appearance and fight'
+                                ' age-related muscle loss', 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1554130528-51Fv11O8HZL.jpg?crop=1.00xw:0.948xh;0,0.00200xh&resize=480:*'),
                             const SizedBox(height: 60),
-                            Rightile('pull', 'push', 'weight.jpg'),
-                            const SizedBox(height: 60),
-                            Left_tile('pull', 'push', 'weight.jpg'),
-                            const SizedBox(height: 60),
-                            Rightile('pull', 'push', 'weight.jpg'),
-                            const SizedBox(height: 60),
-                            Left_tile('pull', 'push', 'weight.jpg'),
-                            const SizedBox(height: 60),
+                                const Rightile('Treadmill',
+                                    'A large wheel turned by the weight of pe'
+                                        'ople or animals treading on steps fitted i'
+                                        'nto its inner surface, formerly used to'
+                                        ' drive machinery.', 'https://rukminim2.flixcart.com/image/612/612/kt8zb0w0/treadmill/1/r/8/majesty-s1-treadmill-with-massager-2hp-peak-multipurpose-original-imag6n4ghnsgmump.jpeg?q=70'),
+                                const SizedBox(height: 60),
+                                Left_tile('Weights', 'Weight training can help you ton'
+                                    'e your muscles, improve your appearance and fight'
+                                    ' age-related muscle loss', 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1554130528-51Fv11O8HZL.jpg?crop=1.00xw:0.948xh;0,0.00200xh&resize=480:*'),
+                                const SizedBox(height: 60),
                           ]), //*/
                         )),
                   ),
@@ -109,7 +120,9 @@ class GymScreen extends StatelessWidget {
 }
 
 class Rightile extends StatelessWidget {
-  const Rightile( this.name, this.description, this.img);
+  const Rightile( this.name,
+      this.description,
+      this.img);
   final String name,description,img;
   @override
   Widget build(BuildContext context) {
@@ -120,7 +133,7 @@ class Rightile extends StatelessWidget {
       width: width * 0.6,
       decoration: BoxDecoration(
           color: Colors.grey[600]!.withOpacity(0.5),
-          borderRadius: BorderRadius.all(const Radius.circular(150))),
+          borderRadius: const BorderRadius.all(Radius.circular(150))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -134,12 +147,11 @@ class Rightile extends StatelessWidget {
           Stack(
               alignment: Alignment.center,
               children:<Widget>[
-                CircleAvatar(radius: 75,backgroundColor: Colors.grey[800],),
-
+                CircleAvatar(radius: 70
+                  ,backgroundColor: Colors.grey[800],),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage('assets/$img'),
-
+                  backgroundImage: NetworkImage(img),
                 ),
               ])
         ],
@@ -171,13 +183,11 @@ class Left_tile extends StatelessWidget {
               alignment: Alignment.center,
               clipBehavior: Clip.hardEdge,
               children:<Widget>[
-
-
                 CircleAvatar(
                   radius: 75,
                   backgroundColor: Colors.deepPurple[600],
                 ),
-                CircleAvatar(radius: 60,backgroundImage: AssetImage('assets/$img') ,)]
+                CircleAvatar(radius: 60,backgroundImage: NetworkImage(img) ,)]
           ),
           const SizedBox(
             width: 10,
@@ -207,12 +217,16 @@ class equipments extends StatelessWidget {
           Center(
               child: Text(
                 name,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               )),
           const SizedBox(height: 10),
           Text(
             description,
-            style: const TextStyle(fontSize: 20,fontFamily:'Righteous'),
+            style: const TextStyle(fontSize: 15,
+
+                fontFamily:'Righteous'),
           )
         ],
       ),

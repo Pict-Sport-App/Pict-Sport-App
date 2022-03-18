@@ -24,7 +24,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
 
   bool _isFirstView = false;
   dynamic _noOfBall,_n;
-  int _isRequested = 0;
+  int _isRequested = 0,countRequested=0,countPlaying=0,countReturn=0;
 
   final _totalBall = int.parse(Equipment.football.toString());
 
@@ -134,8 +134,18 @@ class _FootBallScreenState extends State<FootBallScreen> {
 
             final usersnap = userSnapshot.data!.docs;
             _n = 0;
+            countRequested=0;
+            countPlaying=0;
+            countReturn=0;
             for (int i = 0; i < usersnap.length; i++) {
+              if (usersnap[i]['isReuested']==1){
+                countRequested+=1;
+              }
+              if (usersnap[i]['isReturn']==true){
+                countReturn+=1;
+              }
               if (usersnap[i]['isRequested'] == 2) {
+                countPlaying+=1;
                 _n += int.parse(usersnap[i]['noOfBall']);
               }
             }
@@ -168,7 +178,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                             right: width/1.89,
                             bottom: 80,
                             name: 'Requested',
-                            count: '2'),
+                            count: countRequested.toString()),
                         TextCommon(onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) {
                             return const PlayingFootBall();
@@ -177,7 +187,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                             right: width/3.22,
                             bottom: 80,
                             name: 'Issued',
-                            count: '45'),
+                            count: countPlaying.toString()),
                         TextCommon(onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context) {
                             return const ReturnedFootball();
@@ -186,7 +196,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                             right: width/40,
                             bottom: 80,
                             name: 'Returned',
-                            count: '6'),
+                            count: countReturn.toString()),
                       ],
                     ),
                   ),

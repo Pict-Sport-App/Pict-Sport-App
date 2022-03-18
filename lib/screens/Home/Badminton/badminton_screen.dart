@@ -26,6 +26,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
   int _isRequested = 0;
   final _totalRacket = int.parse(Equipment.badmintonRacket.toString());
   final _totalCock=int.parse(Equipment.badmintonCock.toString());
+   int countRequested=0,countPlaying=0,countReturned=0;
 
   void logicBT() {
     _isFirstView
@@ -128,12 +129,22 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
           }
           final usersnap = userSnapshot.data!.docs;
           _noOfRacket=0;_noOfCock=0;
+          countPlaying=0;countRequested=0;countReturned=0;
           for (int i = 0; i < usersnap.length; i++) {
+            if (usersnap[i]['isRequested'] == 1) {
+              countRequested+=1;
+            }
+
+            if (usersnap[i]['isReturn']==true){
+              countReturned+=1;
+            }
             if (usersnap[i]['isRequested'] == 2) {
+              countPlaying+=1;
               _noOfCock += int.parse(usersnap[i]['noOfCock']);
               _noOfRacket+=int.parse(usersnap[i]['noOfRacket']);
             }
           }
+
           return SingleChildScrollView(
             child: Column(
               children: <Widget>[
@@ -166,7 +177,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                           right: width / 1.89,
                           bottom: 80,
                           name: 'Requested',
-                          count: '2'),
+                          count: countRequested.toString()),
                       TextCommon(
                           onTap: () {
                             Navigator.push(context,
@@ -177,7 +188,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                           right: width / 3.22,
                           bottom: 80,
                           name: 'Issued',
-                          count: '45'),
+                          count: countPlaying.toString()),
                       TextCommon(
                           onTap: () {
                             Navigator.push(context,
@@ -188,7 +199,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                           right: width / 40,
                           bottom: 80,
                           name: 'Returned',
-                          count: '6'),
+                          count: countReturned.toString()),
                     ],
                   ),
                 ),

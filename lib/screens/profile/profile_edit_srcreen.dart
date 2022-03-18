@@ -709,7 +709,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       }
                     });
                   },
-                  child: onClick(bb!)),
+                  child: onClick(ch!)),
                     ],
                   ):Container(),
                   gy!=-1? Row(
@@ -726,12 +726,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       GestureDetector(
                           onTap: (){
                             setState(() {
-                              if (ch==0){
-                                ch=1;
+                              if (gy==0){
+                                gy=1;
                               }
                             });
                           },
-                          child: onClick(ch!)),
+                          child: onClick(gy!)),
                     ],
                   ):Container(),
                 ],

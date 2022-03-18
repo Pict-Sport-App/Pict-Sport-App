@@ -23,7 +23,7 @@ class CricketScreen extends StatefulWidget {
 class _CricketScreenState extends State<CricketScreen> {
   bool _isFirstView = false;
   dynamic _ball, _bat, _innerPad, _pad, _gloves, _helmet;
-  int _isRequested = 0;
+  int _isRequested = 0,countRequested=0,countPlaying=0,countReturn=0;
 
   final _totalBall = int.parse(Equipment.cricketball.toString());
   final _totalBat = int.parse(Equipment.cricketbat.toString());
@@ -164,8 +164,16 @@ class _CricketScreenState extends State<CricketScreen> {
             _helmet = 0;
             _pad = 0;
             _innerPad = 0;
+            countPlaying=0;countReturn=0;countRequested=0;
             for (int i = 0; i < usersnap.length; i++) {
+              if (usersnap[i]['isRequested'] == 1){
+                countRequested+=1;
+              }
+              if (usersnap[i]['isReturn']==true){
+                countReturn+=1;
+              }
               if (usersnap[i]['isRequested'] == 2) {
+                countPlaying+=1;
                 _ball += int.parse(usersnap[i]['ball'].toString());
                 _bat += int.parse(usersnap[i]['bat'].toString());
                 _helmet += int.parse(usersnap[i]['helmet'].toString());
@@ -217,7 +225,7 @@ class _CricketScreenState extends State<CricketScreen> {
                               right: width / 1.89,
                               bottom: 80,
                               name: 'Requested',
-                              count: '2'),
+                              count: countRequested.toString()),
                           TextCommon(
                               onTap: () {
                                // Vibration.vibrate(duration: 1000);
@@ -230,7 +238,7 @@ class _CricketScreenState extends State<CricketScreen> {
                               right: width / 3.22,
                               bottom: 80,
                               name: 'Issued',
-                              count: '45'),
+                              count: countPlaying.toString()),
                           TextCommon(
                               onTap: () {
                                 //Vibration.vibrate(duration: 1000);
@@ -242,7 +250,7 @@ class _CricketScreenState extends State<CricketScreen> {
                               right: width / 40,
                               bottom: 80,
                               name: 'Returned',
-                              count: '5'),
+                              count: countReturn.toString()),
                         ],
                       ),
                     ),

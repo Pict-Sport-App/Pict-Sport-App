@@ -23,7 +23,7 @@ class VolleyBallScreen extends StatefulWidget {
 class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
   dynamic _noOfBall, _n;
-  int _isRequested = 0;
+  int _isRequested = 0,countRequested=0,countPlaying=0,countReturn=0;
   final _totalBall = int.parse(Equipment.vollyball.toString());
 
   void logicVV() {
@@ -129,8 +129,18 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
 
             final usersnap = userSnapshot.data!.docs;
             _n = 0;
+            countReturn=0;
+            countPlaying=0;
+            countRequested=0;
             for (int i = 0; i < usersnap.length; i++) {
-              if (usersnap[i]['isRequested'] == 2) {
+              if (usersnap[i]['isRequested'] == 1){
+                countRequested+=1;
+              }
+              if (usersnap[i]['isReturn'] == true){
+                countReturn+=1;
+              }
+                if (usersnap[i]['isRequested'] == 2) {
+                  countPlaying+=1;
                 _n += int.parse(usersnap[i]['noOfBall']);
               }
             }
@@ -166,7 +176,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                             right: width / 1.89,
                             bottom: 80,
                             name: 'Requested',
-                            count: '2'),
+                            count: countRequested.toString()),
                         TextCommon(
                             onTap: () {
                               Navigator.push(context,
@@ -177,7 +187,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                             right: width / 3.22,
                             bottom: 80,
                             name: 'Issued',
-                            count: '45'),
+                            count: countPlaying.toString()),
                         TextCommon(
                             onTap: () {
                               Navigator.push(context,
@@ -188,7 +198,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                             right: width / 40,
                             bottom: 80,
                             name: 'Returned',
-                            count: '6'),
+                            count: countReturn.toString()),
                       ],
                     ),
                   ),
@@ -280,73 +290,71 @@ class VVReturn extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Expanded(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 35, right: 10, left: 40),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Returning ',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 35, right: 10, left: 40),
+                child: Row(
+                  children: [
+                    const Text(
+                      'Returning ',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
-                      Text(
-                        "$noOfBall ball",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 45, right: 25, left: 10),
-                  child: SizedBox(
-                    height: 0.80,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * .9,
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 1.0, end: 2.0),
-                      height: 2.0,
-                      color: Colors.black,
                     ),
+                    Text(
+                      "$noOfBall ball",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 45, right: 25, left: 10),
+                child: SizedBox(
+                  height: 0.80,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    margin: const EdgeInsetsDirectional.only(
+                        start: 1.0, end: 2.0),
+                    height: 2.0,
+                    color: Colors.black,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 25, right: 5, left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: onTap,
-                        child: const FaIcon(
-                          FontAwesomeIcons.checkCircle,
-                          color: Colors.lightGreen,
-                          size: 40,
-                        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 25, right: 5, left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: onTap,
+                      child: const FaIcon(
+                        FontAwesomeIcons.checkCircle,
+                        color: Colors.lightGreen,
+                        size: 40,
                       ),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: const FaIcon(
-                            FontAwesomeIcons.timesCircle,
-                            color: Colors.redAccent,
-                            size: 40,
-                          )
-                          )
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const FaIcon(
+                          FontAwesomeIcons.timesCircle,
+                          color: Colors.redAccent,
+                          size: 40,
+                        )
+                        )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),

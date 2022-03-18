@@ -19,7 +19,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
   Timestamp? dateTime = Timestamp.now();
 
   bool inputLink = false;
-  bool getImage = false;
+  // bool getImage = false;
   bool isImageAdded = false;
   bool isLoading = false;
 
@@ -30,6 +30,11 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
   String number1 = '';
   String number2 = '';
   File? _imageFile;
+  final _defaultFileUrl = FirebaseStorage.instance
+      .ref()
+      .child('announcements')
+      .child('logo.png')
+      .getDownloadURL();
   String? _uploadedFileURL;
   String _contactName1 = '';
   String _contactName2 = '';
@@ -71,7 +76,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
         'contact2': _contactName2,
         'link': link,
         'dateTime': dateTime,
-        'imageURL': _uploadedFileURL,
+        'imageURL': _uploadedFileURL ?? _defaultFileUrl,
       });
       setState(() {
         isLoading = false;
@@ -247,43 +252,31 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                       },
                     ),
                   Row(
-                    children: [
-                      const Text('Add an image'),
-                      Switch(
-                        value: getImage,
-                        onChanged: (value) {
-                          setState(() {
-                            getImage = value;
-                          });
-                        },
-                      ),
+                    children: const [
+                      Text('Add an image'),
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  if (getImage)
-                    TextButton(
-                      onPressed: getImageFromStorage,
-                      child: Row(
-                        children: const [
-                          Expanded(
-                            child: SizedBox(),
-                          ),
-                          Icon(Icons.upload_rounded),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Text('Upload an Image'),
-                        ],
-                      ),
+                  TextButton(
+                    onPressed: getImageFromStorage,
+                    child: Row(
+                      children: const [
+                        Expanded(
+                          child: SizedBox(),
+                        ),
+                        Icon(Icons.upload_rounded),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text('Upload an Image'),
+                      ],
                     ),
-                  getImage
-                      ? isImageAdded
+                  ),
+                  isImageAdded
                       ? Image.file(_imageFile!)
-                      : Image.network(
-                      'https://source.unsplash.com/user/c_v_r/1900x800') //TODO add default image link
-                      : const SizedBox(),
+                      : Image.asset('logo.png'),
                   const SizedBox(
                     height: 10,
                   ),

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/services/get_user_data.dart';
+import 'package:psa/widget/constants.dart';
 
 class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
@@ -67,7 +68,19 @@ class _UserInfoState extends State<UserInfo> {
         body: Container(
           height: height,
           width: width,
-          color: Colors.white,
+          decoration: const BoxDecoration(
+            gradient: // LinearGradient(colors: [Color(0xFF4b6cb7), Color(0xFF182848)])),
+            LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Color(0xFFFFE0B2),
+                  //Color(0xFFCE93D8),
+                  Color(0xFFFFA726),
+                  Color(0xFFF57C00),
+                  Color(0xFFE65100),
+                ]),
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -113,7 +126,8 @@ class _UserInfoState extends State<UserInfo> {
                         keyboardType: TextInputType.emailAddress,
                         validator: (val) {
                           if (val!.length < 23) {
-                            return "MIS ID cannot be too short";
+                            return "MIS ID cannot be too short "
+                                "mis id should end with @mis.pict.edu";
                           } else if (val.length > 23) {
                             return "MIS ID cannot be that long";
                           } else if (!val.endsWith('@ms.pict.edu')) {
@@ -163,16 +177,16 @@ class _UserInfoState extends State<UserInfo> {
                         const Text(
                           'Select the Sports ',
                           style: TextStyle(
-                            color: Color(0xFFFF9800),
-                            fontSize: 24,
+                            color: Colors.black,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const Text(
                           'You are Intersected in ',
                           style: TextStyle(
-                            color: Color(0xFFFF9800),
-                            fontSize: 24,
+                            color: Colors.black,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -187,7 +201,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'BasketBall',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -225,7 +239,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Table Tennis',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -263,7 +277,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Cricket',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -301,7 +315,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Badminton',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -339,7 +353,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'VolleyBall',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -377,7 +391,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Chess',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -415,7 +429,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Gym',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -453,7 +467,7 @@ class _UserInfoState extends State<UserInfo> {
                               const Text(
                                 'Football',
                                 style: TextStyle(
-                                  color: Color(0xFFAFB42B),
+                                  color: Colors.white,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -497,7 +511,7 @@ class _UserInfoState extends State<UserInfo> {
                       if (misId.length < 23) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                                content: Text('MIS ID cannot be that small')));
+                                content: Text('MIS ID cannot be that small .Mis Id should end with @mis.pict.edu')));
                       } else if (misId.length > 23) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

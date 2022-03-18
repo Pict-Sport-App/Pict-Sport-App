@@ -56,13 +56,19 @@ class _CricketIssueState extends State<CricketIssue> {
     if (chossedHelmet!=null){
       hELMET=int.parse(_productId[5].toString()) - int.parse(chossedHelmet.toString());
     }else{chossedHelmet="0";}
+    print(chossedBat);
+    print(chossedGloves);
+    print(chossedInnerPad);
+    print(chossedPad);
+    print(chossedHelmet);
+    print(chossedBall);
+    print('hello');
     if (chossedHelmet==null
     && chossedInnerPad==null
     && chossedPad==null &&
     chossedGloves==null
     && chossedBat==null
     && chossedBall==null){
-
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(

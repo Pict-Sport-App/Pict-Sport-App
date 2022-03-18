@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/pop_up_widget.dart';
-
 import '../../intial_page.dart';
 
 class BadmintonRequested extends StatelessWidget {
@@ -40,7 +39,8 @@ class BadmintonRequested extends StatelessWidget {
               return ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   itemCount: reqMembers.length,
-                  itemBuilder: (ctx, index) => reqMembers[index]['isRequested'] == 1
+                  itemBuilder: (ctx, index) =>
+                  reqMembers[index]['isRequested'] == 1
                       ? BTReturn(
                     isReturn: reqMembers[index]['isReturn'],
                     image: reqMembers[index]['url'],
@@ -50,7 +50,8 @@ class BadmintonRequested extends StatelessWidget {
                     noOfRacket: reqMembers[index]['noOfRacket'].toString(),
                     noOfCock: reqMembers[index]['noOfCock'].toString(),
                     name: reqMembers[index]['name'],
-                    isAdmin: UserDetails.isAdmin ?? false, misId: reqMembers[index]['misId'],
+                    isAdmin: UserDetails.isAdmin ?? false,
+                    misId: reqMembers[index]['misId'],
                   )
                       : Container());
             },

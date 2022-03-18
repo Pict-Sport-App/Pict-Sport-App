@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PopUpRequest extends StatelessWidget {
-  late VoidCallback onTap;
-  late String text;
-  PopUpRequest({Key? key, required this.onTap, required this.text})
+  final VoidCallback onTap;
+  final String text;
+  const PopUpRequest({Key? key, required this.onTap, required this.text})
       : super(key: key);
 
   @override
@@ -22,67 +22,63 @@ class PopUpRequest extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Expanded(
-            child: Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-
-                Padding(
-                  padding: EdgeInsets.only(top:35,right: 10,left: 10),
-                  child: Text(
-                    text,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top:35,right: 10,left: 10),
+                child: Text(
+                  text,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top:45,right: 25,left: 10),
-                  child: SizedBox(
-                    height: 0.80,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * .9,
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 1.0, end: 2.0),
-                      height: 2.0,
-                      color: Colors.black,
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top:45,right: 25,left: 10),
+                child: SizedBox(
+                  height: 0.80,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * .9,
+                    margin: const EdgeInsetsDirectional.only(
+                        start: 1.0, end: 2.0),
+                    height: 2.0,
+                    color: Colors.black,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top:25,right: 5,left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: onTap,
-                        child:const FaIcon(
-                          FontAwesomeIcons
-                              .checkCircle,
-                          color: Colors.lightGreen,
-                          size: 40,
-                        ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top:25,right: 5,left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: onTap,
+                      child:const FaIcon(
+                        FontAwesomeIcons
+                            .checkCircle,
+                        color: Colors.lightGreen,
+                        size: 40,
                       ),
+                    ),
 
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child:const FaIcon(
-                          FontAwesomeIcons
-                              .timesCircle,
-                          color: Colors.redAccent,
-                          size: 40,
-                        )
-                            // const Icon(Icons.cancel, size: 40, color: Colors.white),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child:const FaIcon(
+                        FontAwesomeIcons
+                            .timesCircle,
+                        color: Colors.redAccent,
+                        size: 40,
                       )
-                    ],
-                  ),
-                )
-              ],
-            ),
+                          // const Icon(Icons.cancel, size: 40, color: Colors.white),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -91,10 +87,10 @@ class PopUpRequest extends StatelessWidget {
 }
 
 class ReturnPopUpWidget extends StatelessWidget {
-  late String table;
-  late String noOfRacket;
-  VoidCallback onTap;
-  ReturnPopUpWidget(
+  final String table;
+  final String noOfRacket;
+  final VoidCallback onTap;
+  const ReturnPopUpWidget(
       {Key? key,
       required this.noOfRacket,
       required this.table,

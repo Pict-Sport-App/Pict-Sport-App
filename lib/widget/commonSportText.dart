@@ -115,19 +115,45 @@ class TextCommon extends StatelessWidget {
       right: right,
       child: GestureDetector(
         onTap: onTap,
-        child: Column(
-          children: [
-            Text(
-              count,
-              style: const TextStyle(color: Colors.white,
-                  fontSize: 19),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFEF6C00),
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(
+                  0,
+                  0,
+                ),
+                blurRadius: 10.0,
+                spreadRadius: 3.0,
+              ), //BoxShadow
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  count,
+                  style: const TextStyle(color: Colors.white,
+                      fontSize: 19),
+                ),
+                Text(
+                 name,
+                  style: const TextStyle(color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 19),)
+              ],
             ),
-            Text(
-             name,
-              style: const TextStyle(color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 19),)
-          ],
+          ),
         ),
       ),
     );

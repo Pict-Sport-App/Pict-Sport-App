@@ -80,26 +80,17 @@ class AnnouncementScreen extends StatelessWidget {
                     physics: const BouncingScrollPhysics(),
                     itemCount: usersnap.length,
                     itemBuilder: (context, index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 905),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: SingleAnnouncement(
-                              imageUrl: usersnap[index]['imageURL'],
-                              title: usersnap[index]['title'],
-                              date: usersnap[index]['dateTime'],
-                              descrip: usersnap[index]['description'],
-                              venue: usersnap[index]['venue'],
-                              number1: usersnap[index]['number1'],
-                              number2: usersnap[index]['number2'],
-                              contactNo1: usersnap[index]['contact1'],
-                              contactNo2: usersnap[index]['contact2'],
-                              link: usersnap[index]['link'],
-                            ),
-                          ),
-                        ),
+                      return SingleAnnouncement(
+                        imageUrl: usersnap[index]['imageURL'],
+                        title: usersnap[index]['title'],
+                        date: usersnap[index]['dateTime'],
+                        descrip: usersnap[index]['description'],
+                        venue: usersnap[index]['venue'],
+                        number1: usersnap[index]['number1'],
+                        number2: usersnap[index]['number2'],
+                        contactNo1: usersnap[index]['contact1'],
+                        contactNo2: usersnap[index]['contact2'],
+                        link: usersnap[index]['link'],
                       );
                     });
               }),
