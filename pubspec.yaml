@@ -43,10 +43,8 @@ dependencies:
   google_fonts: ^2.3.0
   mailto: ^2.0.0
   flutter_share: ^2.0.0
-  #share_plus: ^3.1.0
   http: ^0.13.4
   rive: ^0.8.1
-  #firebase_messaging: ^11.2.8
 
 #  material_design_icons_flutter: 5.0.6595
 

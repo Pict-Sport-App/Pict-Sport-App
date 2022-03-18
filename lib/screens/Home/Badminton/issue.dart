@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/Home/table_tennis/table_tennis_issue_screen.dart';
-import 'package:psa/widget/commonSportText.dart';
 import '../../intial_page.dart';
 
 class BadmintonIssue extends StatefulWidget {
@@ -37,6 +36,7 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
     }
 
     if (chossedRacket==null && chossedCock==null){
+      //showToast('Please enter the Number of rackets and shuttle cock you want to issue');
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
@@ -48,6 +48,7 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
         ),
       ));
     }else if (vracket<0){
+      //showToast('Oops!!! The number of rackets requested are not available');
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
@@ -59,6 +60,7 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
         ),
       ));
     }else if (vcock<0){
+      //showToast('Oops!!! The number of Cock requested are not available');
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         duration: Duration(seconds: 2),
         content: Text(
@@ -87,6 +89,7 @@ class _BadmintonIssueState extends State<BadmintonIssue> {
         'url': UserDetails.photourl,
         'uid': UserDetails.uid,
       });
+      //showToast('Request have been send');
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           duration: Duration(seconds: 1),
           content: Text(
