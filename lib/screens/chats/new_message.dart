@@ -83,7 +83,7 @@ class _NewMessageState extends State<NewMessage> {
               child: const FaIcon(
                 FontAwesomeIcons.paperPlane,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),            ),
           ),
         ],

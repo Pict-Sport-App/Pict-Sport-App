@@ -23,7 +23,7 @@ class BasketBallScreen extends StatefulWidget {
 class _BasketBallScreenState extends State<BasketBallScreen> {
   bool _isFirstView = false;
   dynamic _noOfBallSix, _size, _sizeSix, _sizeSeven;
-  int _isRequested = 0;
+  int _isRequested = 0,countRequest=0,countPlaying=0,countReturn=0;
 
   final _totalBallSix = int.parse(Equipment.basketballsix.toString());
   final _totalBallSeven = int.parse(Equipment.basketballseven.toString());
@@ -136,8 +136,18 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
             }
             final usersnap = userSnapshot.data!.docs;
             _sizeSix = 0;
+            countReturn=0;countPlaying=0;countRequest=0;
             _sizeSeven = 0;
             for (int i = 0; i < usersnap.length; i++) {
+              if (usersnap[i]['isRequested'] == 1) {
+                countRequest+=1;
+              }
+              if (usersnap[i]['isRequested'] == 2) {
+                countPlaying+=1;
+              }
+              if (usersnap[i]['isReturn']==true){
+                countReturn+=1;
+              }
               if (usersnap[i]['size'] == "6") {
                 if (usersnap[i]['isRequested'] == 2) {
                   _sizeSix += int.parse(usersnap[i]['noOfBall']);
@@ -185,7 +195,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               right: width / 1.89,
                               bottom: 80,
                               name: 'Requested',
-                              count: '2'),
+                              count: countRequest.toString()),
                           TextCommon(
                               onTap: () {
                                 Navigator.push(context,
@@ -196,7 +206,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               right: width / 3.22,
                               bottom: 80,
                               name: 'Issued',
-                              count: '45'),
+                              count: countPlaying.toString()),
                           TextCommon(
                               onTap: () {
                                 Navigator.push(context,
@@ -207,7 +217,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                               right: width / 40,
                               bottom: 80,
                               name: 'Returned',
-                              count: '6'),
+                              count: countReturn.toString()),
                         ],
                       ),
                     ),
