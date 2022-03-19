@@ -106,18 +106,6 @@ class _MainSettingsState extends State<MainSettings> {
                 ),
               ),
               const SizedBox(height: 12),
-              SizedBox(
-                height: 50,
-                child: Row(
-                  children: const [
-                    Icon(Icons.handyman),
-                    SizedBox(width: 10),
-                    Text('Edit an announcement',
-                        style: TextStyle(fontSize: 18)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
               GestureDetector(
                 onTap: () => Navigator.push(
                     context,

@@ -30,11 +30,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
   String number1 = '';
   String number2 = '';
   File? _imageFile;
-  final _defaultFileUrl = FirebaseStorage.instance
-      .ref()
-      .child('announcements')
-      .child('logo.png')
-      .getDownloadURL();
+  final _defaultFileUrl = const AssetImage('assets/logo.png');
   String? _uploadedFileURL;
   String _contactName1 = '';
   String _contactName2 = '';
@@ -276,7 +272,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                   ),
                   isImageAdded
                       ? Image.file(_imageFile!)
-                      : Image.asset('logo.png'),
+                      : Image.asset('assets/logo.png'),
                   const SizedBox(
                     height: 10,
                   ),

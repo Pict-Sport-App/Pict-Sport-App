@@ -332,7 +332,7 @@ class MyCustomWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
+      child: InkWell(
         onTap: onTap,
         child: Column(
           children: [

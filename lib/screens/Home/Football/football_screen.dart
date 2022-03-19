@@ -138,7 +138,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
             countPlaying=0;
             countReturn=0;
             for (int i = 0; i < usersnap.length; i++) {
-              if (usersnap[i]['isReuested']==1){
+              if (usersnap[i]['isRequested']==1){
                 countRequested+=1;
               }
               if (usersnap[i]['isReturn']==true){
