@@ -76,7 +76,8 @@ class Signup extends StatelessWidget {
               Positioned(
                   top: height * 0.61,
                   left: width * 0.19,
-                  child: InkWell(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.translucent,
                     onTap: () async {
                       await Authentication()
                           .signInWithGoogle(context)
@@ -113,11 +114,17 @@ class Signup extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            SizedBox(
-                              height: 80,
-                              width: 90,
-                              child: Lottie.network(
-                                  'https://assets4.lottiefiles.com/private_files/lf30_29gwi53x.json'),
+                            Container(
+                              height: height*0.1,
+                              width: width*0.3,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage('https://is1-ssl.mzstatic.com/image/thumb/'
+                                      'Purple116/v4/f5/2c/ca/f52ccac1-7c4a-9534-8729-a4bba97d7107/'
+                                      'logo_gsa_ios_color-0-1x_U007emarketing-0-0-0-6-0-0-0-85-220'
+                                      '-0.png/1200x600wa.png')
+                              ),
+                              ),
                             ),
                             const Text(
                               "SIGN IN",

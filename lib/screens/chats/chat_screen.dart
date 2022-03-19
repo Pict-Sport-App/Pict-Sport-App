@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:psa/appdrawer/commans/collaps_navigation_bar.dart';
 import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/sport_chat_screen.dart';
+import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:psa/widget/constants.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -107,10 +108,11 @@ class _ChatScreenState extends State<ChatScreen> {
               height: 10,
             ),
             Expanded(
+              flex: 10,
               child: ListView.builder(
                   itemCount: mergedList!.length,
                   itemBuilder: (ctx, index) => SportGrpNameWidget(
-                    lastMsg: '3:22 PM   ',
+                    lastMsg: '   ',
                     onTap: () {
                       Navigator.of(context).pushNamed(
                         SportChatScreen.routeName,
@@ -121,6 +123,30 @@ class _ChatScreenState extends State<ChatScreen> {
                     image: mergedListEmoji![index],
                   )),
             ),
+            Expanded(child: InkWell(
+              onTap: (){
+                Navigator.push(context,
+                MaterialPageRoute(builder: (context){
+                  return const EditProfileScreen();
+                }));
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(20),
+                  topLeft: Radius.circular(20))
+                ),
+                child: const Center(
+                  child: Text('Want to be part of official Sports'
+                      ' Group of any sport',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15
+                  ),),
+                ),
+              ),
+            ))
           ],
         ),
       ),

@@ -116,33 +116,7 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
             if (i.hasData) {
               return Scaffold(
                 backgroundColor: Colors.white,
-                floatingActionButton: SpeedDial(
-                    animatedIcon: AnimatedIcons.menu_close,
-                    backgroundColor: const Color(0xff0d4d11),
-                    children: [
-                      SpeedDialChild(
-                        onTap: () {
-                          setState(() {
-                            _launched = _launchInWebViewOrVC(''
-                                /// sending mail isn't implemented yet
-                                'https://www.google.com/search?q=google&oq=google&aqs=chrome.'
-                                '.69i57j46i131i199i433i465i512j69i59l2j0i131i433i512l3j0i433i512j0i131i433i512l2.3272j0j'
-                                '15&sourceid=chrome&ie=UTF-8');
-                          });
-                        },
-                        backgroundColor: Colors.green,
-                        labelBackgroundColor: Colors.green,
-                        child: const Icon(Icons.mail),
-                        label: 'mail',
-                      ),
-                      SpeedDialChild(
-                        onTap: () {},
-                        backgroundColor: Colors.green,
-                        labelBackgroundColor: Colors.green,
-                        child: const Icon(Icons.message),
-                        label: 'message',
-                      )
-                    ]),
+
                 body: SafeArea(
                   child: Container(
                     height: double.infinity,
