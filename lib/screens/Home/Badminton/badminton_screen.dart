@@ -25,60 +25,64 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
   dynamic _noOfRacket, _noOfCock;
   int _isRequested = 0;
   final _totalRacket = int.parse(Equipment.badmintonRacket.toString());
-  final _totalCock=int.parse(Equipment.badmintonCock.toString());
-   int countRequested=0,countPlaying=0,countReturned=0;
+  final _totalCock = int.parse(Equipment.badmintonCock.toString());
+  int countRequested = 0, countPlaying = 0, countReturned = 0;
 
   void logicBT() {
     _isFirstView
         ? Navigator.of(context).pushNamed(
-      BadmintonIssue.routeName,
-      arguments: [_totalRacket-_noOfRacket,_totalCock-_noOfCock],
-    )
+            BadmintonIssue.routeName,
+            arguments: [_totalRacket - _noOfRacket, _totalCock - _noOfCock],
+          )
         : _isRequested == 1
-        ? showDialog(
-        context: context,
-        builder: (context) {
-          return PopUpRequest(
-              onTap: () {
-                FirebaseFirestore.instance
-                    .collection('BTEquipment')
-                    .doc(UserDetails.uid)
-                    .update({
-                  'isRequested': 3,
-                });
-                setState(() {
-                  _isFirstView = true;
-                });
-                Navigator.pop(context);
-              },
-              text: 'Cancel the request');
-          //---------
-        })
-        : _isRequested == 2
-        ? showDialog(
-        context: context,
-        builder: (context) {
-          return BTRe(noOfCock: _noOfCock.toString(),
-              noOfRacket: _noOfRacket.toString(),
-              onTap: ()async{
-                await FirebaseFirestore.instance
-                    .collection('BTEquipment')
-                    .doc(UserDetails.uid)
-                    .update({
-                  'isRequested': 4,
-                  'isReturn': true,
-                  'timeOfReturn': Timestamp.now(),
-                });
-                setState(() {
-                  _isFirstView = true;
-                });
-                Navigator.pop(context);
-              });
-        })
-        : Navigator.of(context).pushNamed(
-      BadmintonIssue.routeName,
-      arguments: [_totalRacket-_noOfRacket,_totalCock-_noOfCock],
-    );
+            ? showDialog(
+                context: context,
+                builder: (context) {
+                  return PopUpRequest(
+                      onTap: () {
+                        FirebaseFirestore.instance
+                            .collection('BTEquipment')
+                            .doc(UserDetails.uid)
+                            .update({
+                          'isRequested': 3,
+                        });
+                        setState(() {
+                          _isFirstView = true;
+                        });
+                        Navigator.pop(context);
+                      },
+                      text: 'Cancel the request');
+                  //---------
+                })
+            : _isRequested == 2
+                ? showDialog(
+                    context: context,
+                    builder: (context) {
+                      return BTRe(
+                          noOfCock: _noOfCock.toString(),
+                          noOfRacket: _noOfRacket.toString(),
+                          onTap: () async {
+                            await FirebaseFirestore.instance
+                                .collection('BTEquipment')
+                                .doc(UserDetails.uid)
+                                .update({
+                              'isRequested': 4,
+                              'isReturn': true,
+                              'timeOfReturn': Timestamp.now(),
+                            });
+                            setState(() {
+                              _isFirstView = true;
+                            });
+                            Navigator.pop(context);
+                          });
+                    })
+                : Navigator.of(context).pushNamed(
+                    BadmintonIssue.routeName,
+                    arguments: [
+                      _totalRacket - _noOfRacket,
+                      _totalCock - _noOfCock
+                    ],
+                  );
   }
 
   Future getStatus() async {
@@ -89,7 +93,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
     if (v.exists) {
       _isRequested = v.get('isRequested');
       _noOfRacket = v.get('noOfRacket');
-      _noOfCock=v.get('noOfCock');
+      _noOfCock = v.get('noOfCock');
       if (_isRequested == 3 || _isRequested == 5) {
         setState(() {
           _isFirstView = true;
@@ -112,6 +116,7 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
     super.initState();
     getStatus();
   }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -119,29 +124,32 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('BTEquipment')
-            .snapshots(),
-        builder: (ctx, userSnapshot){
+        stream:
+            FirebaseFirestore.instance.collection('BTEquipment').snapshots(),
+        builder: (ctx, userSnapshot) {
           if (userSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
           final usersnap = userSnapshot.data!.docs;
-          _noOfRacket=0;_noOfCock=0;
-          countPlaying=0;countRequested=0;countReturned=0;
+          _noOfRacket = 0;
+          _noOfCock = 0;
+          countPlaying = 0;
+          countRequested = 0;
+          countReturned = 0;
           for (int i = 0; i < usersnap.length; i++) {
             if (usersnap[i]['isRequested'] == 1) {
-              countRequested+=1;
+              countRequested += 1;
             }
 
-            if (usersnap[i]['isReturn']==true){
-              countReturned+=1;
+            if (usersnap[i]['isReturn'] == true) {
+              countReturned += 1;
             }
             if (usersnap[i]['isRequested'] == 2) {
-              countPlaying+=1;
+              countPlaying += 1;
               _noOfCock += int.parse(usersnap[i]['noOfCock']);
-              _noOfRacket+=int.parse(usersnap[i]['noOfRacket']);
+              _noOfRacket += int.parse(usersnap[i]['noOfRacket']);
             }
           }
 
@@ -171,33 +179,33 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return const BadmintonRequested();
-                                }));
+                              return const BadmintonRequested();
+                            }));
                           },
                           right: width / 1.89,
-                          bottom: 80,
+                          bottom: height * 0.08,
                           name: 'Requested',
                           count: countRequested.toString()),
                       TextCommon(
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return const BadmintonPlaying();
-                                }));
+                              return const BadmintonPlaying();
+                            }));
                           },
                           right: width / 3.22,
-                          bottom: 80,
+                          bottom: height * 0.08,
                           name: 'Issued',
                           count: countPlaying.toString()),
                       TextCommon(
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return const BadmintonReturn();
-                                }));
+                              return const BadmintonReturn();
+                            }));
                           },
                           right: width / 40,
-                          bottom: 80,
+                          bottom: height * 0.08,
                           name: 'Returned',
                           count: countReturned.toString()),
                     ],
@@ -225,16 +233,16 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                           child: SizedBox(
                             height: height * 0.4,
                             child: Column(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceAround,
-                              children:  <Widget>[
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
                                 // Text(" 'Ball Left")
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 18.0, vertical: 8),
                                   child: RowInfo(
                                     ball_size: 'Racket Left',
-                                    ball: (_totalRacket - _noOfRacket).toString(),
+                                    ball:
+                                        (_totalRacket - _noOfRacket).toString(),
                                     size: 80,
                                   ),
                                 ),
@@ -258,12 +266,12 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
                             name: _isFirstView
                                 ? const Button(name: 'Issue')
                                 : _isRequested == 1
-                                ? const Button(name: 'Cancel Request')
-                                : _isRequested == 2
-                                ? const Button(name: 'Return Ball')
-                                : _isRequested == 4
-                                ? const Button(name: 'Issue')
-                                : Container(),
+                                    ? const Button(name: 'Cancel Request')
+                                    : _isRequested == 2
+                                        ? const Button(name: 'Return Ball')
+                                        : _isRequested == 4
+                                            ? const Button(name: 'Issue')
+                                            : Container(),
                             onTap: () {
                               logicBT();
                             }),
@@ -281,12 +289,13 @@ class _BadmintonScreenState extends State<BadmintonScreen> {
 }
 
 class BTRe extends StatelessWidget {
-  final String noOfRacket,noOfCock;
+  final String noOfRacket, noOfCock;
   final VoidCallback onTap;
-  const BTRe({Key? key,
-    required this.noOfCock,
-    required this.noOfRacket,
-    required this.onTap})
+  const BTRe(
+      {Key? key,
+      required this.noOfCock,
+      required this.noOfRacket,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -386,8 +395,7 @@ class BTRe extends StatelessWidget {
                             FontAwesomeIcons.timesCircle,
                             color: Colors.redAccent,
                             size: 40,
-                          )
-                      )
+                          ))
                     ],
                   ),
                 )

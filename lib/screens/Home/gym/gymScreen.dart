@@ -78,7 +78,7 @@ class GymScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.fromLTRB(0, 10, 5, 0),
                           width: double.infinity,
-                          height: height * 0.60,
+                          // height: height * 0.60,
                           decoration: const BoxDecoration(
                               borderRadius: BorderRadius.all(Radius.circular(25))),
 
@@ -129,7 +129,7 @@ class Rightile extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
-      height: height * 0.222,
+      // height: height * 0.222,
       width: width * 0.6,
       decoration: BoxDecoration(
           color: Colors.grey[600]!.withOpacity(0.5),
@@ -208,8 +208,8 @@ class equipments extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SizedBox(
-      height: height * 0.198,
+    return Container(
+      // height: height * 0.198,
       width: width * 0.47,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -224,8 +224,7 @@ class equipments extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             description,
-            style: const TextStyle(fontSize: 15,
-
+            style: const TextStyle(fontSize:15,
                 fontFamily:'Righteous'),
           )
         ],

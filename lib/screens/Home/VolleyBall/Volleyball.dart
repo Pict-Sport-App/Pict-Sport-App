@@ -23,7 +23,7 @@ class VolleyBallScreen extends StatefulWidget {
 class _VolleyBallScreenState extends State<VolleyBallScreen> {
   bool _isFirstView = false;
   dynamic _noOfBall, _n;
-  int _isRequested = 0,countRequested=0,countPlaying=0,countReturn=0;
+  int _isRequested = 0, countRequested = 0, countPlaying = 0, countReturn = 0;
   final _totalBall = int.parse(Equipment.vollyball.toString());
 
   void logicVV() {
@@ -129,18 +129,18 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
 
             final usersnap = userSnapshot.data!.docs;
             _n = 0;
-            countReturn=0;
-            countPlaying=0;
-            countRequested=0;
+            countReturn = 0;
+            countPlaying = 0;
+            countRequested = 0;
             for (int i = 0; i < usersnap.length; i++) {
-              if (usersnap[i]['isRequested'] == 1){
-                countRequested+=1;
+              if (usersnap[i]['isRequested'] == 1) {
+                countRequested += 1;
               }
-              if (usersnap[i]['isReturn'] == true){
-                countReturn+=1;
+              if (usersnap[i]['isReturn'] == true) {
+                countReturn += 1;
               }
-                if (usersnap[i]['isRequested'] == 2) {
-                  countPlaying+=1;
+              if (usersnap[i]['isRequested'] == 2) {
+                countPlaying += 1;
                 _n += int.parse(usersnap[i]['noOfBall']);
               }
             }
@@ -174,7 +174,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                               }));
                             },
                             right: width / 1.89,
-                            bottom: 80,
+                            bottom: height * 0.08,
                             name: 'Requested',
                             count: countRequested.toString()),
                         TextCommon(
@@ -185,7 +185,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                               }));
                             },
                             right: width / 3.22,
-                            bottom: 80,
+                            bottom: height * 0.08,
                             name: 'Issued',
                             count: countPlaying.toString()),
                         TextCommon(
@@ -196,7 +196,7 @@ class _VolleyBallScreenState extends State<VolleyBallScreen> {
                               }));
                             },
                             right: width / 40,
-                            bottom: 80,
+                            bottom: height * 0.08,
                             name: 'Returned',
                             count: countReturn.toString()),
                       ],
@@ -321,8 +321,8 @@ class VVReturn extends StatelessWidget {
                   height: 0.80,
                   child: Container(
                     width: MediaQuery.of(context).size.width * .9,
-                    margin: const EdgeInsetsDirectional.only(
-                        start: 1.0, end: 2.0),
+                    margin:
+                        const EdgeInsetsDirectional.only(start: 1.0, end: 2.0),
                     height: 2.0,
                     color: Colors.black,
                   ),
@@ -349,8 +349,7 @@ class VVReturn extends StatelessWidget {
                           FontAwesomeIcons.timesCircle,
                           color: Colors.redAccent,
                           size: 40,
-                        )
-                        )
+                        ))
                   ],
                 ),
               )

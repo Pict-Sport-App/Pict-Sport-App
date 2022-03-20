@@ -80,10 +80,10 @@ class LogoPainter extends CustomPainter {
       ],
     ).createShader(rect);
     var path = Path();
-    path.lineTo(0, size.height - size.height / 5);
+    path.lineTo(0, size.height - size.height / 6);
     path.lineTo(size.width / 1.3, size.height - 19);
     path.relativeQuadraticBezierTo(35, 4, 58, -13);
-    path.lineTo(size.width, size.height - size.height / 5);
+    path.lineTo(size.width, size.height - size.height / 6);
     path.lineTo(size.width, 0);
     path.close();
     canvas.drawShadow(path, const Color(0xffb08cca), 6.0, false);

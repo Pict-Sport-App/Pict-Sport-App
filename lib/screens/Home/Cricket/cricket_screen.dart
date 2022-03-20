@@ -223,7 +223,7 @@ class _CricketScreenState extends State<CricketScreen> {
                                 }));
                               },
                               right: width / 1.89,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Requested',
                               count: countRequested.toString()),
                           TextCommon(
@@ -236,7 +236,7 @@ class _CricketScreenState extends State<CricketScreen> {
                                 }));
                               },
                               right: width / 3.22,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Issued',
                               count: countPlaying.toString()),
                           TextCommon(
@@ -248,7 +248,7 @@ class _CricketScreenState extends State<CricketScreen> {
                                 }));
                               },
                               right: width / 40,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Returned',
                               count: countReturn.toString()),
                         ],

@@ -103,8 +103,8 @@ class Signup extends StatelessWidget {
                       });
                     },
                     child: Container(
-                        height: height * 0.15,
-                        width: height * 0.30,
+                        // height: height * 0.15,
+                        // width: height * 0.30,
                         decoration: BoxDecoration(
                           // color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(23),
@@ -112,26 +112,29 @@ class Signup extends StatelessWidget {
                           Border.all(color: Colors.blueAccent, width: 3),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            Container(
-                              height: height*0.1,
-                              width: width*0.3,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage('https://is1-ssl.mzstatic.com/image/thumb/'
-                                      'Purple116/v4/f5/2c/ca/f52ccac1-7c4a-9534-8729-a4bba97d7107/'
-                                      'logo_gsa_ios_color-0-1x_U007emarketing-0-0-0-6-0-0-0-85-220'
-                                      '-0.png/1200x600wa.png')
-                              ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5.0,horizontal: 10),
+                              child: Container(
+                                height: height*0.092,
+                                width: width*0.14,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/google.png')
+                                ),
+                                ),
                               ),
                             ),
-                            const Text(
-                              "SIGN IN",
-                              style: TextStyle(
-                                color: Colors.lightBlue,
-                                fontSize: 27,
-                                fontWeight: FontWeight.w600,
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 10),
+                              child: Text(
+                                "SIGN IN",
+                                style: TextStyle(
+                                  color: Colors.lightBlue,
+                                  fontSize: 27,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             )
                           ],

@@ -147,14 +147,14 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         child: Messages(
                       uniqueValue: _key,
                     )),
-                    if (_key=='OFBB'
-                    || _key=='OFVV'
-                    || _key=='OFTT'
-                    || _key=='OFBD'
-                    || _key=='OFCR'
-                    || _key=='OFFB'
-                    || _key=='OFCH'
-                    || _key=='OFGY')
+                    if (_key == 'OFBB' ||
+                        _key == 'OFVV' ||
+                        _key == 'OFTT' ||
+                        _key == 'OFBD' ||
+                        _key == 'OFCR' ||
+                        _key == 'OFFB' ||
+                        _key == 'OFCH' ||
+                        _key == 'OFGY')
                       NewMessage(
                         keyies: _key,
                       )
@@ -174,22 +174,24 @@ class _SportChatScreenState extends State<SportChatScreen> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  /*setState(() {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      builder: (builder) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 40.0),
-                                          child: Column(
-                                            children: const <Widget>[
-                                              Text("Dhiraj"),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  });*/
+                                  setState(
+                                    () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        builder: (builder) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 40.0),
+                                            child: Column(
+                                              children: const <Widget>[
+                                                Text("Dhiraj"),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
                                 },
                                 child: const Text(
                                   " Admins  ",

@@ -138,48 +138,22 @@ class _OtherUserProfileScreeenState extends State<OtherUserProfileScreeen> {
                               imageUrl: photourl,
                               name: name,
                               misId: misId,
+                              headline: headline,
                             ),
-                            const SizedBox(
-                              height: 18.0,
-                            ),
-                            if (headline != 'null')
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 11.0, top: 2),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    headline == 'null' || headline==null
-                                        ? Container()
-                                        : Text(
-                                            headline.toString(),
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20.0,
-                                                color: Colors.black),
-                                          ),
-                                  ],
+                            location == 'null' || location==null
+                                ? Container()
+                                : Padding(
+                              padding: const EdgeInsets.only(left: 10 ,top: 12),
+                                  child: Text(
+                                      '${location.toString()} ',
+                                      style: const TextStyle(
+                                        fontSize: 19.0,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
                                 ),
-                              ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 11.0, top: 2),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  location == 'null' || location==null
-                                      ? Container()
-                                      : Text(
-                                          '${location.toString()} ',
-                                          style: const TextStyle(
-                                            fontSize: 19.0,
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.w600,
-                                            fontStyle: FontStyle.italic,
-                                          ),
-                                        ),
-                                ],
-                              ),
-                            ),
                             const SizedBox(
                               height: 18.0,
                             ),

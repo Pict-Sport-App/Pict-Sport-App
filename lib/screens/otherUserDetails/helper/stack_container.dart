@@ -6,16 +6,17 @@ class StackContainer extends StatelessWidget {
   final String? imageUrl;
   final String? name;
   final String? misId;
+  final String? headline;
   const StackContainer(
       {Key? key,
       required this.misId,
       required this.imageUrl,
-      required this.name})
+      required this.name,this.headline})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 390.0,
+      height: 430.0,
       child: Stack(
         children: <Widget>[
           ClipPath(
@@ -46,12 +47,6 @@ class StackContainer extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                // CircularProfileAvatar(
-                //   imageUrl!,
-                //   borderWidth: 4.0,
-                //   borderColor: Colors.lightBlueAccent,
-                //   radius: 70.0,
-                // ),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Align(
@@ -79,13 +74,18 @@ class StackContainer extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Text(
-                  "PICT, PUNE",
-                  style: TextStyle(fontSize: 12.0, color: Colors.black),
+                 headline==null || headline=='null'?Container(): Text(
+                  headline!,
+                  style: const TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
+
                 misId![0].toString() == 'C' || misId![0].toString() == 'c'
                     ? const Text(
-                        'Computer Department',
+                        'Computer Department(PICT, PUNE)',
                         style: TextStyle(
                           fontSize: 14.0,
                           color: Colors.grey,
@@ -94,7 +94,7 @@ class StackContainer extends StatelessWidget {
                       )
                     : misId![0] == 'I' || misId![0] == 'i'
                         ? const Text(
-                            'Information Technology',
+                            'Information Technology(PICT, PUNE)',
                             style: TextStyle(
                               fontSize: 14.0,
                               color: Colors.grey,
@@ -103,7 +103,7 @@ class StackContainer extends StatelessWidget {
                           )
                         : misId![0] == 'E' || misId![0] == 'e'
                             ? const Text(
-                                'Electronics Department',
+                                'Electronics Department(PICT, PUNE)',
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: Colors.grey,

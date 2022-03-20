@@ -176,7 +176,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                           }));
                         },
                             right: width/1.89,
-                            bottom: 80,
+                            bottom: height*0.08,
                             name: 'Requested',
                             count: countRequested.toString()),
                         TextCommon(onTap: (){
@@ -185,7 +185,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                           }));
                         },
                             right: width/3.22,
-                            bottom: 80,
+                            bottom: height*0.08,
                             name: 'Issued',
                             count: countPlaying.toString()),
                         TextCommon(onTap: (){
@@ -194,7 +194,7 @@ class _FootBallScreenState extends State<FootBallScreen> {
                           }));
                         },
                             right: width/40,
-                            bottom: 80,
+                            bottom: height*0.08,
                             name: 'Returned',
                             count: countReturn.toString()),
                       ],
