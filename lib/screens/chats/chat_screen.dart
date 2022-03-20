@@ -15,38 +15,38 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  List? mergedList=[];
-  List? mergedListEmoji=[];
+  List? mergedList = [];
+  List? mergedListEmoji = [];
 
-  void merge(){
-
+  void merge() {
     mergedList?.clear();
     mergedListEmoji?.clear();
-    int i=0;
+    int i = 0;
 
-    for(i=0;i<UserDetails.myOfficialSportsList!.length;i++){
+    for (i = 0; i < UserDetails.myOfficialSportsList!.length; i++) {
       mergedList?.add(UserDetails.myOfficialSportsList![i]);
     }
-    for(i=0;i<(UserDetails.mySportsList!.length);i++){
+    for (i = 0; i < (UserDetails.mySportsList!.length); i++) {
       mergedList?.add(UserDetails.mySportsList![i]);
     }
 
-    int j=0;
+    int j = 0;
 
-    for(j=0;j<UserDetails.myOfficialSportEmoji!.length;j++){
+    for (j = 0; j < UserDetails.myOfficialSportEmoji!.length; j++) {
       mergedListEmoji?.add(UserDetails.myOfficialSportEmoji![j]);
     }
-    for(j=0;j<(UserDetails.mySportEmoji!.length);j++){
+    for (j = 0; j < (UserDetails.mySportEmoji!.length); j++) {
       mergedListEmoji?.add(UserDetails.mySportEmoji![j]);
     }
-
   }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     merge();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,9 +98,7 @@ class _ChatScreenState extends State<ChatScreen> {
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(kkbackgroundImage),
-              fit: BoxFit.cover
-          ),
+              image: AssetImage(kkbackgroundImage), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -112,38 +110,40 @@ class _ChatScreenState extends State<ChatScreen> {
               child: ListView.builder(
                   itemCount: mergedList!.length,
                   itemBuilder: (ctx, index) => SportGrpNameWidget(
-                    lastMsg: '   ',
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                        SportChatScreen.routeName,
-                        arguments: mergedList![index],
-                      );
-                    },
-                    name: mergedList![index],
-                    image: mergedListEmoji![index],
-                  )),
+                        lastMsg: '   ',
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            SportChatScreen.routeName,
+                            arguments: mergedList![index],
+                          );
+                        },
+                        name: mergedList![index],
+                        image: mergedListEmoji![index],
+                      )),
             ),
-            Expanded(child: InkWell(
-              onTap: (){
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context){
+            Expanded(
+                child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const EditProfileScreen();
                 }));
               },
               child: Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.only(topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20))
-                ),
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20))),
                 child: const Center(
-                  child: Text('Want to be part of official Sports'
-                      ' Group of any sport',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15
-                  ),),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Click here to be part of Official Sports'
+                      ' Group ',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ),
                 ),
               ),
             ))
@@ -153,8 +153,6 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
-
 
 class SportGrpNameWidget extends StatelessWidget {
   final String name, image, lastMsg;

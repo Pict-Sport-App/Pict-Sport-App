@@ -23,7 +23,7 @@ class BasketBallScreen extends StatefulWidget {
 class _BasketBallScreenState extends State<BasketBallScreen> {
   bool _isFirstView = false;
   dynamic _noOfBallSix, _size, _sizeSix, _sizeSeven;
-  int _isRequested = 0,countRequest=0,countPlaying=0,countReturn=0;
+  int _isRequested = 0, countRequest = 0, countPlaying = 0, countReturn = 0;
 
   final _totalBallSix = int.parse(Equipment.basketballsix.toString());
   final _totalBallSeven = int.parse(Equipment.basketballseven.toString());
@@ -136,17 +136,19 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
             }
             final usersnap = userSnapshot.data!.docs;
             _sizeSix = 0;
-            countReturn=0;countPlaying=0;countRequest=0;
+            countReturn = 0;
+            countPlaying = 0;
+            countRequest = 0;
             _sizeSeven = 0;
             for (int i = 0; i < usersnap.length; i++) {
               if (usersnap[i]['isRequested'] == 1) {
-                countRequest+=1;
+                countRequest += 1;
               }
               if (usersnap[i]['isRequested'] == 2) {
-                countPlaying+=1;
+                countPlaying += 1;
               }
-              if (usersnap[i]['isReturn']==true){
-                countReturn+=1;
+              if (usersnap[i]['isReturn'] == true) {
+                countReturn += 1;
               }
               if (usersnap[i]['size'] == "6") {
                 if (usersnap[i]['isRequested'] == 2) {
@@ -167,15 +169,14 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.start
                   children: <Widget>[
                     SizedBox(
-                      // color: Colors.lightGreen,
-                      width: MediaQuery.of(context).size.width,
+                      width: width,
                       height: height * 0.4, //320,
                       child: Stack(
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(bottom: 8.0),
                             child: CustomPaint(
-                              size: Size(width, 340), //2
+                              size: Size(width, height * 0.5), //2
                               painter: LogoPainter(), //3
                             ),
                           ),
@@ -185,6 +186,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                             tag: 'bb',
                             image: 'assets/basketball.jpg',
                           ),
+
                           TextCommon(
                               onTap: () {
                                 Navigator.push(context,
@@ -193,7 +195,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                 }));
                               },
                               right: width / 1.89,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Requested',
                               count: countRequest.toString()),
                           TextCommon(
@@ -204,7 +206,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                 }));
                               },
                               right: width / 3.22,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Issued',
                               count: countPlaying.toString()),
                           TextCommon(
@@ -215,7 +217,7 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
                                 }));
                               },
                               right: width / 40,
-                              bottom: 80,
+                              bottom: height*0.08,
                               name: 'Returned',
                               count: countReturn.toString()),
                         ],
@@ -299,8 +301,8 @@ class _BasketBallScreenState extends State<BasketBallScreen> {
 }
 
 class BBSixReturn extends StatelessWidget {
- final  String size;
- final VoidCallback onTap;
+  final String size;
+  final VoidCallback onTap;
   final String noOfBall;
   const BBSixReturn({
     Key? key,
@@ -341,13 +343,13 @@ class BBSixReturn extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 20,right: 25, left: 10),
+                padding: const EdgeInsets.only(top: 20, right: 25, left: 10),
                 child: SizedBox(
                   height: 0.80,
                   child: Container(
                     width: MediaQuery.of(context).size.width * .9,
-                    margin: const EdgeInsetsDirectional.only(
-                        start: 1.0, end: 2.0),
+                    margin:
+                        const EdgeInsetsDirectional.only(start: 1.0, end: 2.0),
                     height: 2.0,
                     color: Colors.black,
                   ),
@@ -375,8 +377,8 @@ class BBSixReturn extends StatelessWidget {
                           color: Colors.redAccent,
                           size: 40,
                         )
-                      // const Icon(Icons.cancel, size: 40, color: Colors.white),
-                    )
+                        // const Icon(Icons.cancel, size: 40, color: Colors.white),
+                        )
                   ],
                 ),
               )

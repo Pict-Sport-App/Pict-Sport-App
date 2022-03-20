@@ -76,7 +76,7 @@ class TopName extends StatelessWidget {
                   style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 32),
+                      fontSize: 27),
                 ),
                 const Text(
                   "📍Pict,Pune",
@@ -117,7 +117,7 @@ class TextCommon extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFEF6C00),
+            color: Colors.redAccent,
             borderRadius: BorderRadius.circular(20),
             boxShadow: const [
               BoxShadow(
@@ -143,14 +143,14 @@ class TextCommon extends StatelessWidget {
               children: [
                 Text(
                   count,
-                  style: const TextStyle(color: Colors.white,
-                      fontSize: 19),
+                  style: const TextStyle(color: Colors.white,fontWeight: FontWeight.w900,
+                      fontSize: 27),
                 ),
                 Text(
                  name,
                   style: const TextStyle(color: Colors.white,
                       fontWeight: FontWeight.w500,
-                      fontSize: 19),)
+                      fontSize: 15),)
               ],
             ),
           ),
