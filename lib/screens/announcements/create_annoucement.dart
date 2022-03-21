@@ -61,8 +61,10 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
 
       await storageRef.putFile(_imageFile!);
       _uploadedFileURL = await storageRef.getDownloadURL();
-
-      await FirebaseFirestore.instance.collection('Announcement').add({
+      print(_uploadedFileURL);
+      print('kkk');
+      print(_defaultFileUrl);
+     /* await FirebaseFirestore.instance.collection('Announcement').add({
         'title': title,
         'description': description,
         'venue': venue,
@@ -78,15 +80,23 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
         isLoading = false;
       });
 
-      Navigator.pop(context);
+      Navigator.pop(context);*/
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isLoading=false;
+    isImageAdded=false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create an annoucement'),
+        title: const Text('Create an announcement'),
       ),
       body: Container(
         width: double.infinity,
@@ -140,8 +150,8 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     minLines: 5,
                     maxLines: null,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter some description';
+                      if (value!.isEmpty || value.length<10) {
+                        return 'Please enter description of min 10 words';
                       }
                       description = value;
                       return null;
@@ -247,11 +257,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         return null;
                       },
                     ),
-                  Row(
-                    children: const [
-                      Text('Add an image'),
-                    ],
-                  ),
+                  const Text('Add an image'),
                   const SizedBox(
                     height: 10,
                   ),
@@ -288,9 +294,8 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     ),
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      /*if (value!.isNotEmpty) {
-                        return 'Please enter Contact Name of first person';
-                      }*/
+
+
                       _contactName1 = value!;
                       return null;
                     },
@@ -310,8 +315,10 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value!.length != 10 && value.isNotEmpty) {
-                        return 'Please enter a valid phone number';
+                      if (value!.isNotEmpty){
+                        if (value.length!=10){
+                          return 'Please enter number of length 10';
+                        }
                       }
                       number1 = value;
                       return null;
@@ -332,9 +339,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     ),
                     keyboardType: TextInputType.text,
                     validator: (value) {
-                      /*if (value!.isNotEmpty) {
-                        return 'Please enter Contact Name of second person';
-                      }*/
+
                       _contactName2 = value!;
                       return null;
                     },
@@ -354,8 +359,10 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if (value!.length != 10 && value.isNotEmpty) {
-                        return 'Please enter a valid phone number';
+                      if (value!.isNotEmpty){
+                        if (value.length!=10){
+                          return 'Please enter number of length 10';
+                        }
                       }
                       number2 = value;
                       return null;
@@ -370,7 +377,9 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         child: SizedBox(),
                       ),
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: (){_submit();},
+                        child: const Text('Submit'),
+                       /* onPressed: () {
                           setState(() {
                             isLoading = true;
                           });
@@ -378,7 +387,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         },
                         child: isLoading
                             ? const CircularProgressIndicator()
-                            : const Text('Submit'),
+                            : const Text('Submit'),*/
                       ),
                       const SizedBox(
                         width: 15,

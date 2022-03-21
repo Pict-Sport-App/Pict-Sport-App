@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:psa/widget/constants.dart';
 
@@ -126,7 +125,6 @@ class Rightile extends StatelessWidget {
   final String name,description,img;
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
       // height: height * 0.222,
@@ -224,7 +222,7 @@ class equipments extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             description,
-            style: const TextStyle(fontSize:15,
+            style: const TextStyle(fontSize: 15,
                 fontFamily:'Righteous'),
           )
         ],
