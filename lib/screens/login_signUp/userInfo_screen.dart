@@ -74,11 +74,11 @@ class _UserInfoState extends State<UserInfo> {
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
                 colors: [
-                  Color(0xFFFFE0B2),
+                  Color(0xFFF3E5F5),
                   //Color(0xFFCE93D8),
-                  Color(0xFFFFA726),
-                  Color(0xFFF57C00),
-                  Color(0xFFE65100),
+                  Color(0xFFCE93D8),
+                  Color(0xFFBA68C8),
+                  Color(0xFF9C27B0),
                 ]),
           ),
           child: SingleChildScrollView(
@@ -90,7 +90,7 @@ class _UserInfoState extends State<UserInfo> {
                 const Text(
                   'Please Complete The',
                   style: TextStyle(
-                    color: Color(0xFF283593),
+                    color: Color(0xFF880E4F),
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
@@ -98,7 +98,7 @@ class _UserInfoState extends State<UserInfo> {
                 const Text(
                   'SignUp Process',
                   style: TextStyle(
-                    color: Color(0xFF283593),
+                    color: Color(0xFF880E4F),
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
@@ -114,7 +114,7 @@ class _UserInfoState extends State<UserInfo> {
                       child: Text(
                         'MIS-ID',
                         style:
-                            TextStyle(color: Color(0xFF0D47A1), fontSize: 17),
+                            TextStyle(color: Color(0xFF880E4F), fontSize: 17),
                       ),
                     ),
                     const SizedBox(
@@ -132,6 +132,13 @@ class _UserInfoState extends State<UserInfo> {
                             return "MIS ID cannot be that long";
                           } else if (!val.endsWith('@ms.pict.edu')) {
                             return "Please enter valid MIS ID";
+                          }else if (!val.startsWith('C2K') &&!val.startsWith('c2k')
+                          && !val.startsWith('c2K') && !val.startsWith('C2k') &&
+                              !val.startsWith('I2K') &&!val.startsWith('i2k')
+                              && !val.startsWith('i2K') && !val.startsWith('I2k') &&
+                              !val.startsWith('E2K') &&!val.startsWith('e2k')
+                              && !val.startsWith('e2K') && !val.startsWith('E2k')){
+                            return "Enter correct mis id";
                           }
                           return null;
                         },
@@ -142,6 +149,7 @@ class _UserInfoState extends State<UserInfo> {
                                 EdgeInsets.only(left: 10.0, top: 8, bottom: 3),
                             child: FaIcon(
                               FontAwesomeIcons.solidEnvelope,
+                              color: Colors.brown,
                               size: 30,
                             ),
                           ),
@@ -177,7 +185,7 @@ class _UserInfoState extends State<UserInfo> {
                         const Text(
                           'Select the Sports ',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xFF880E4F),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -185,7 +193,7 @@ class _UserInfoState extends State<UserInfo> {
                         const Text(
                           'You are Intersected in ',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Color(0xFF880E4F),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -508,6 +516,7 @@ class _UserInfoState extends State<UserInfo> {
                   height: 70,
                   child: FlatButton(
                     onPressed: () {
+
                       if (misId.length < 23) {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -516,6 +525,15 @@ class _UserInfoState extends State<UserInfo> {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('MIS ID cannot be that long')));
+                      }else if (!misId.startsWith('C2K') &&!misId.startsWith('c2k')
+                          && !misId.startsWith('c2K') && !misId.startsWith('C2k') &&
+                          !misId.startsWith('I2K') &&!misId.startsWith('i2k')
+                          && !misId.startsWith('i2K') && !misId.startsWith('I2k') &&
+                          !misId.startsWith('E2K') &&!misId.startsWith('e2k')
+                          && !misId.startsWith('e2K') && !misId.startsWith('E2k')){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('PLease enter correct email id ')));
                       } else {
                         //print(UserDetails.sportList?.update(key, (value) => false));
                         if (_basketball) {
