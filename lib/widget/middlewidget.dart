@@ -56,7 +56,6 @@ class RowInfo extends StatelessWidget {
       child: Container(
         // width: double.infinity,
         height:size==null? 65 : size,
-
         decoration: BoxDecoration(
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(20),
