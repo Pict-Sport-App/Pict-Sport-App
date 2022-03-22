@@ -46,17 +46,36 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 0.0, top: 15),
+          Padding(
+            padding: const EdgeInsets.only(left: 0.0, top: 15),
             child: Align(
               alignment: Alignment.topCenter,
-              child: Text(
-                "PICT SPORT",
-                style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.white,
-                    fontFamily: 'Lobster',
-                    fontWeight: FontWeight.w400),
+              child: Stack(
+                children: <Widget>[
+                  // Stroked text as border.
+                  Text(
+                    'PICT SPORT',
+                    style: TextStyle(
+                      fontFamily:'Lobster' ,
+                      fontSize: 35,
+                      letterSpacing: 3,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 6
+                        ..color = Colors.indigo,
+                    ),
+                  ),
+                  // Solid text as fill.
+                  const Text(
+                    'PICT SPORT',
+                    style: TextStyle(
+                        fontSize: 35,
+                        fontFamily: 'Lobster',
+                        color: Colors.white,
+                        letterSpacing: 3
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

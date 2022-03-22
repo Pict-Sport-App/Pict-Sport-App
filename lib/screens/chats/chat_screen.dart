@@ -7,6 +7,8 @@ import 'package:psa/screens/chats/sport_chat_screen.dart';
 import 'package:psa/screens/profile/profile_edit_srcreen.dart';
 import 'package:psa/widget/constants.dart';
 
+import 'chat_members.dart';
+
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
@@ -97,6 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
         height: double.infinity,
         width: double.infinity,
         decoration: const BoxDecoration(
+          color: Colors.white,
           image: DecorationImage(
               image: AssetImage(kkbackgroundImage), fit: BoxFit.cover),
         ),
@@ -119,6 +122,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         name: mergedList![index],
                         image: mergedListEmoji![index],
+                    ontapg: (){
+
+                      Navigator.of(context).pushNamed(ChatMembers.routeName,
+                          arguments: mergedList![index]);
+                    },
                       )),
             ),
             Expanded(
@@ -156,11 +164,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
 class SportGrpNameWidget extends StatelessWidget {
   final String name, image, lastMsg;
-  final VoidCallback onTap;
+  final VoidCallback onTap,ontapg;
   const SportGrpNameWidget(
       {Key? key,
       required this.lastMsg,
       required this.onTap,
+        required this.ontapg,
       required this.name,
       required this.image})
       : super(key: key);
@@ -199,13 +208,13 @@ class SportGrpNameWidget extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(),
-                child: Text(
-                  lastMsg,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                padding: const EdgeInsets.only(right: 10),
+                child: GestureDetector(
+                  onTap: ontapg,
+                  child: const FaIcon(
+                    FontAwesomeIcons.users,
                     color: Colors.black,
+                    size: 28,
                   ),
                 ),
               ),
