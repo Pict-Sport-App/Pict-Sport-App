@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:psa/appdrawer/model/navigation_model.dart';
 import 'package:psa/models/user_details.dart';
-import '../thems.dart';
 import 'collapsing_list_tile.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
@@ -41,7 +40,7 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   Widget getWidget(context, widget) {
     return Container(
       width: widthAnimation.value,
-      color: drawerBackgroundColor,
+      color: const Color(0xFF1A237E),
       child: SafeArea(
         child: Column(
           children: <Widget>[
@@ -55,9 +54,17 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 ? Column(
                     children: [
                       CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(UserDetails.photourl.toString()),
-                        radius: 60,
+                        radius: 65,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 62,
+                         // backgroundColor: Colors.brown,
+                          child: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage(UserDetails.photourl.toString()),
+                            radius: 60,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 20,

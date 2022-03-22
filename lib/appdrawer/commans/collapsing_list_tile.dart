@@ -79,7 +79,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
                           : widget.num == 4
                               ? FontAwesomeIcons.arrowAltCircleRight
                               : FontAwesomeIcons.bars,
-              color: Colors.white70,
+              color: Colors.white,
               size: 26,
             ),
             _widthAnimation.value >= 250
