@@ -14,6 +14,75 @@
       },
       "oauth_client": [
         {
+          "client_id": "831748633013-40isqtkjot4oldh2f4al2o59hn19sja8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psa",
+            "certificate_hash": "f1a8dd4ee29cf3abdd195eabd0184d9a8d63d47f"
+          }
+        },
+        {
+          "client_id": "831748633013-eg8mn2rhf4cb40vi62q6h4cio9qgtukv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psa",
+            "certificate_hash": "052ee6bc7b88bcd6908a323b50ccee8203c85376"
+          }
+        },
+        {
+          "client_id": "831748633013-m5ind6ra215p1a4r4vvmv5dtglpu9enp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psa",
+            "certificate_hash": "74c579fcbca308626db2b8426d7a853bda095814"
+          }
+        },
+        {
+          "client_id": "831748633013-mkdrsiobf0on4cvksfhcrkb4656bs3kt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psa",
+            "certificate_hash": "e29f98f8c4818cf7ddfd04c151f7b93fd2c38252"
+          }
+        },
+        {
+          "client_id": "831748633013-p6vqhtlgbrhbrs4f8423s222fernhau4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psa",
+            "certificate_hash": "9ef61dfbd703c50296bb592fb412b6255ca22c77"
+          }
+        },
+        {
+          "client_id": "831748633013-k29vh16abnpshcj1vr15c2tahre7h2b5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjXVUeYk48oZ8tWmOkO9_uV5NHAxaELr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831748633013-k29vh16abnpshcj1vr15c2tahre7h2b5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831748633013:android:f791469dd4d76fa691e9fc",
+        "android_client_info": {
+          "package_name": "com.pictsport.app"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "831748633013-k29vh16abnpshcj1vr15c2tahre7h2b5.apps.googleusercontent.com",
           "client_type": 3
         }

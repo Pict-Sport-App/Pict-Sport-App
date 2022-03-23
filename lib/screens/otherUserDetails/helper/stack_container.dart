@@ -34,9 +34,7 @@ class StackContainer extends StatelessWidget {
                 ],
                 //BoxShadow
                 image: const DecorationImage(
-                  image: NetworkImage(
-                      "https://media.istockphoto.com/photos/sports-equipment"
-                      "-on-green-grass-top-view-picture-id905105146?k=20&m=905105146&s=612x612&w=0&h=c-PRgfs29opGsRl_vOnVxZVGnR5YsZyOJ-RPo_gVW7o="),
+                  image: AssetImage('assets/bj.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
