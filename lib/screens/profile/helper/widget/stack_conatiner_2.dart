@@ -32,8 +32,7 @@ class StackContainer2 extends StatelessWidget {
                     ),
                   ],
                   image: const DecorationImage(
-                    image: NetworkImage(
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9DcR1UKPNaaRtjfAEojtO_lbwggqEPUfgow&usqp=CAU"),
+                    image:AssetImage('assets/bj.jpg'),
                     fit: BoxFit.fill,
                   ),
                 ),

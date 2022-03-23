@@ -64,7 +64,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
       print(_uploadedFileURL);
       print('kkk');
       print(_defaultFileUrl);
-     /* await FirebaseFirestore.instance.collection('Announcement').add({
+      await FirebaseFirestore.instance.collection('Announcement').add({
         'title': title,
         'description': description,
         'venue': venue,
@@ -80,7 +80,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
         isLoading = false;
       });
 
-      Navigator.pop(context);*/
+      Navigator.pop(context);
     }
   }
 
@@ -254,6 +254,7 @@ class _CreateAnnoucementState extends State<CreateAnnoucement> {
                         if (value!.isEmpty) {
                           return 'Please enter a link';
                         }
+                        link=value;
                         return null;
                       },
                     ),

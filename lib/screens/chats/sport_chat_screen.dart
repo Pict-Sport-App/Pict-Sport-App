@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:psa/models/user_details.dart';
 import 'package:psa/screens/chats/chat_members.dart';
 import 'package:psa/widget/constants.dart';
 import 'messages.dart';
@@ -153,7 +154,7 @@ class _SportChatScreenState extends State<SportChatScreen> {
                         _key == 'OFCR' ||
                         _key == 'OFFB' ||
                         _key == 'OFCH' ||
-                        _key == 'OFGY')
+                        _key == 'OFGY' || UserDetails.isAdmin==true)
                       NewMessage(
                         keyies: _key,
                       )
@@ -166,38 +167,16 @@ class _SportChatScreenState extends State<SportChatScreen> {
                           color: const Color(0xff2e3c44),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Text(
+                            children: const <Widget>[
+                              Text(
                                 "Only ",
                                 style: TextStyle(color: Colors.white),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(
-                                    () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        builder: (builder) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 40.0),
-                                            child: Column(
-                                              children: const <Widget>[
-                                                Text("Dhiraj"),
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  " Admins  ",
-                                  style: TextStyle(color: Colors.lightBlue),
-                                ),
+                              Text(
+                                " Admins  ",
+                                style: TextStyle(color: Colors.lightBlue),
                               ),
-                              const Text(
+                              Text(
                                 "can send messages",
                                 style: TextStyle(color: Colors.white),
                               ),
