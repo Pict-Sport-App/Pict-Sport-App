@@ -4,7 +4,7 @@
 
 Features of the app includes:
 1) Sports event related announcements
-2) Table/Kits vacancy/availability status
+2) Equipment vacancy/availability status
 3) Interaction with other users using chat 
-4) Calendar displaying event dates
+4) Calendar displaying event dates and many more
 
