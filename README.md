@@ -1,4 +1,4 @@
-![image](https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/aeaadcd0-883f-4492-a4e2-44c22c8a2064)# PICT SPORT APP
+# PICT SPORT APP
 
 #### This app is made to digitilize the Sport Issuing system process in our college.As we know every college has Sports Department which looks after sports events,sports kits and many more which is very hectic process to do it manually. Most students need to manually visit sports room to check if the equipment kits are vacant or occupied which is very time consuming. Also they need to visit the notice board to keep themselves updated with sports related events. In order to reduce the time and efforts and with aim to digitalize the system of the Sports Department of our college we have launched a mobile application "PICT SPORTS APP". This app is being developed using flutter framework and Firebase. 
 
@@ -15,8 +15,15 @@ Features of the app includes:
 
 ### Messaging Page
 
-<img src="https://user-images.githubusercontent.com/81025973/264333013-07338abe-c803-4ab5-a466-d703412f5042.jpg" width=300 heigth=150>
-<img src="https://user-images.githubusercontent.com/81025973/264333334-2db7f342-1769-417b-9db2-cde391d1ee04.jpg" width=300 heigth=150>
+<img src="https://user-images.githubusercontent.com/81025973/264333013-07338abe-c803-4ab5-a466-d703412f5042.jpg" width=300 heigth=150> &nbsp;
+<img src="https://user-images.githubusercontent.com/81025973/264333334-2db7f342-1769-417b-9db2-cde391d1ee04.jpg" width=300 heigth=150>  &nbsp;
+
+### Announcement Page
+
+<img src="https://user-images.githubusercontent.com/81025973/264334255-d7f1b4cd-fbf2-463b-aadf-b57f2086d10f.jpg" width=300 heigth=150> &nbsp;
+<img src="https://user-images.githubusercontent.com/81025973/264334690-1890332c-8885-4ca7-a62f-04313364bcb3.jpg" width=300 heigth=150>  &nbsp;
+
+
 
 
 https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/9ed798e5-b1f4-47e1-bbf3-7b78db7a98e4
