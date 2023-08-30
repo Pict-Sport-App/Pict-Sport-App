@@ -12,7 +12,10 @@ https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/9ed798e5-b1f4-4
 
 
 
-https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/b10d174b-561d-4a5f-b826-0af892330e01.mp4
+https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/b10d174b-561d-4a5f-b826-0af892330e01
+
+[![Video Thumbnail](https://github.com/Pict-Sport-App/Pict-Sport-App/issues/95#issue-1873462527)](https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/b10d174b-561d-4a5f-b826-0af892330e01)
+
 
 
 
