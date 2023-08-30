@@ -8,3 +8,4 @@ Features of the app includes:
 3) Interaction with other users using chat 
 4) Calendar displaying event dates and many more
 
+https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/9ed798e5-b1f4-47e1-bbf3-7b78db7a98e4
