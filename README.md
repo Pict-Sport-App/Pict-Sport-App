@@ -13,7 +13,10 @@ Features of the app includes:
 
 <img src="https://user-images.githubusercontent.com/81025973/264331995-43ef8076-c078-4ab3-b46c-959569f9d760.jpg" width=300 heigth=150>
 
-![homes](https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/0b303ca2-bcfc-4e48-a5c9-11bc69a7e861)
+### Messaging Page
+
+<img src="https://user-images.githubusercontent.com/81025973/264333013-07338abe-c803-4ab5-a466-d703412f5042.jpg" width=300 heigth=150>
+<img src="https://user-images.githubusercontent.com/81025973/264333334-2db7f342-1769-417b-9db2-cde391d1ee04.jpg" width=300 heigth=150>
 
 
 https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/9ed798e5-b1f4-47e1-bbf3-7b78db7a98e4
