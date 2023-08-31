@@ -9,6 +9,13 @@ Features of the app includes:
 4) Calendar displaying event dates and many more
 
 
+### Demo video
+
+<a href="https://www.youtube.com/watch?v=VrrHTYZmm-c">
+  <img src="https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg" alt="Video Thumbnail" width="400">
+</a>
+
+
 ### Home Page 
 
 <img src="https://user-images.githubusercontent.com/81025973/264331995-43ef8076-c078-4ab3-b46c-959569f9d760.jpg" width=300 heigth=150>
@@ -54,13 +61,6 @@ Features of the app includes:
 <img src="https://user-images.githubusercontent.com/81025973/264339069-aef80df2-cecb-4018-bf0f-183096f6bb3e.jpg" width=300 heigth=150> &nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/81025973/264339194-45d50915-f9a4-4ef3-ae81-cdde9856e4ee.jpg" width=300 heigth=150> &nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/81025973/264339314-e2f8b922-fe7a-4872-84cb-d21de3c55e8f.jpg" width=300 heigth=150> &nbsp;&nbsp;&nbsp;
-
-<a href="https://www.youtube.com/watch?v=VrrHTYZmm-c">
-  <img src="https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg" alt="Video Thumbnail" width="400">
-</a>
-
-
-[![Video Screenshot](https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg)](https://www.youtube.com/watch?v=VrrHTYZmm-c)
 
 
 
