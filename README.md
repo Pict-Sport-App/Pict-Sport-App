@@ -12,7 +12,7 @@ Features of the app includes:
 ### Demo video
 
 <a href="https://www.youtube.com/watch?v=VrrHTYZmm-c">
-  <img src="https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg" alt="Video Thumbnail" width="400">
+  <img src="https://user-images.githubusercontent.com/81025973/264531150-dba0ca55-094e-4dd3-b283-1791ad77f8ae.gif" alt="Video Thumbnail" width="400">
 </a>
 
 
