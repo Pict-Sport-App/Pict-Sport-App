@@ -55,12 +55,13 @@ Features of the app includes:
 <img src="https://user-images.githubusercontent.com/81025973/264339194-45d50915-f9a4-4ef3-ae81-cdde9856e4ee.jpg" width=300 heigth=150> &nbsp;&nbsp;&nbsp;
 <img src="https://user-images.githubusercontent.com/81025973/264339314-e2f8b922-fe7a-4872-84cb-d21de3c55e8f.jpg" width=300 heigth=150> &nbsp;&nbsp;&nbsp;
 
+<a href="https://www.youtube.com/watch?v=VrrHTYZmm-c">
+  <img src="https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg" alt="Video Thumbnail" width="400">
+</a>
 
-[![Video Screenshot](https://user-images.githubusercontent.com/81025973/264339314-e2f8b922-fe7a-4872-84cb-d21de3c55e8f.jpg)](https://www.youtube.com/watch?v=VrrHTYZmm-c)
 
-https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/9ed798e5-b1f4-47e1-bbf3-7b78db7a98e4
+[![Video Screenshot](https://user-images.githubusercontent.com/81025973/264528269-c7ca5067-917f-46b6-b79d-603f9fe1c57a.jpg)](https://www.youtube.com/watch?v=VrrHTYZmm-c)
 
-https://github.com/Pict-Sport-App/Pict-Sport-App/assets/81025973/b10d174b-561d-4a5f-b826-0af892330e01
 
 
 
